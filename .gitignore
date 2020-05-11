@@ -1,11 +1,15 @@
 .idea
 .mvn
 .iml
+
 mvnw
 mvnw.cmd
+help.md
+
 logs/
 target/
-help.md
+
+
 .project
 .settings
 .classpath
