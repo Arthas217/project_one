@@ -1,9 +1,12 @@
-package org.com.zlk.company;
+package org.com.zlk.company.thread;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 共享资源 多线程同步处理
+ */
 public class ShareData {
 
     private int symbo = 1;// 1 A 2 B 3C  标志位
@@ -14,6 +17,9 @@ public class ShareData {
     Condition condition2 = lock.newCondition();
     Condition condition3 = lock.newCondition();
 
+    /**
+     * 线程AA
+     */
     public void print5() {
         lock.lock();
         try {
@@ -26,7 +32,6 @@ public class ShareData {
             }
             symbo = 2;
             condition2.signal();// 唤醒线程
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -34,7 +39,9 @@ public class ShareData {
         }
     }
 
-
+    /**
+     * 线程BB
+     */
     public void print10() {
         lock.lock();
         try {
@@ -46,7 +53,6 @@ public class ShareData {
             }
             symbo = 3;
             condition3.signal();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -54,6 +60,9 @@ public class ShareData {
         }
     }
 
+    /**
+     * 线程CC
+     */
     public void print15() {
         lock.lock();
         try {
@@ -65,7 +74,6 @@ public class ShareData {
             }
             symbo = 1;
             condition1.signal();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

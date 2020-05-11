@@ -1,16 +1,15 @@
-package org.com.zlk.company;
+package org.com.zlk.company.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * 给定一个二叉树，在树的最后一行找到最左边的值。
- *      1
- *    /   \
- *   2     3
- *    \   / \
- *    4  5   6
- *
+ *     1
+ *   /   \
+ *  2     3
+ *  \    / \
+ *   4  5   6
  */
 public class Test513 {
 

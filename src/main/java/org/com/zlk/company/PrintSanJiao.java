@@ -3,7 +3,7 @@ package org.com.zlk.company;
 /**
  * 等腰三角形
  */
-public class Test1 {
+public class PrintSanJiao {
 
     public static void main(String[] args) {
         printValue(5);
@@ -21,5 +21,4 @@ public class Test1 {
             System.out.println();
         }
     }
-
 }
