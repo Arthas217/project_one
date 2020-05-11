@@ -1,24 +1,11 @@
 .idea
 *.iws
 *.iml
-*.ipr
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 .DS_Store
-
-mvnw
-mvnw.cmd
-help.md
 
 logs/
 target/
 
-.apt_generated
 .classpath
-.factorypath
 .project
 .settings
-.springBeans
