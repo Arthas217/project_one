@@ -7,10 +7,12 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义注解
- * 对应DB中student表
+ * student表中属性
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TableZlk {
-    String tableName();
+public @interface StudentFieldAnnotation {
+    String columnName();
+    String type();
+    int length();
 }
