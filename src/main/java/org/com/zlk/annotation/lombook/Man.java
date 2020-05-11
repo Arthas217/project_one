@@ -1,4 +1,4 @@
-package org.com.zlk.model;
+package org.com.zlk.annotation.lombook;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class US extends User {
+public class Man extends Person {
 
     private String name;
     @Builder
-    private US(int age, int id, String name) {
+    private Man(int age, int id, String name) {
         super(id, age);
         this.name = name;
     }

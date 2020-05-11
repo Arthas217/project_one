@@ -1,14 +1,15 @@
 package org.com.zlk;
 
-import org.com.zlk.model.US;
+import org.com.zlk.annotation.lombook.Man;
+import org.com.zlk.offer.Singleton;
 
 /**
  * Hello world!
  */
 public class App {
     public static void main(String[] args) {
-        US.USBuilder zlk = US.builder().id(2).age(31).name("zlk");
-        US us = zlk.build();
-        System.out.println(us.getId() + " " +us.getAge());
+        // 单例
+        Singleton singleton = Singleton.getInstance();
+        System.out.println(singleton);
     }
 }
