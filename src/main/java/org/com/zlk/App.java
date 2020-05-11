@@ -1,6 +1,5 @@
 package org.com.zlk;
 
-import org.com.zlk.annotation.lombook.Man;
 import org.com.zlk.offer.Singleton;
 
 /**
@@ -11,5 +10,6 @@ public class App {
         // 单例
         Singleton singleton = Singleton.getInstance();
         System.out.println(singleton);
+
     }
 }
