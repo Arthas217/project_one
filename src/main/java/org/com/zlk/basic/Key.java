@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Key {
 
+    // hashcod是使用的 Integer类中的方法，所以id为Integer
     private Integer id;
 
     public Integer getId() {
@@ -19,7 +20,6 @@ public class Key {
     public int hashCode() {
         return id.hashCode();
     }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof Key)) {

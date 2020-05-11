@@ -2,6 +2,10 @@ package org.com.zlk.basic;
 
 import java.util.HashMap;
 
+/**
+ * 使用hashmap put操作
+ * 如果key为自定义对象时，需要重写hashcode和equals方法
+ */
 public class HashEqualTest {
 
     public static void main(String[] args) {
@@ -24,8 +28,6 @@ public class HashEqualTest {
         System.out.println("没有重写 Key对象的 equals方法  Object的固有方法是根据两个对象的内存地址来判断，所以 k1和 k2一定不会相等");
         System.out.println("hashCode方法返回的hash值相同的情况下，链地址法来处理冲突, equals方法来判断两者是否相等");
         System.out.println("k2 value:" + hashMap.get(k2));
-
-
 
 
     }
