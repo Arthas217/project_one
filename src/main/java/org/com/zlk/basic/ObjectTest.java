@@ -41,17 +41,30 @@ public class ObjectTest implements Cloneable{
         // 标记接口，如果没有实现，当调用 object.clone()方法，会抛出 CloneNotSupportedException。
         ObjectTest objectTest = new ObjectTest(1,"TEST");
         ObjectTest clone = (ObjectTest) objectTest.clone();
+
         System.out.println(objectTest.equals(clone));
         System.out.println(objectTest.getAge() == clone.getAge());
-        // 引用类型String 两个对象对于name属性 使用了同一个引用（浅拷贝）
+        // clone的对象是一个新的对象；但原对象与 clone对象的 String类型的 name却是同一个引用（浅拷贝）
         System.out.println(objectTest.getName() == clone.getName());
-
-
 
     }
 
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
-       return super.clone();
+        return super.clone();
+    }
+
+    @Override
+    public String toString() {
+        return "ObjectTest{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
     }
 }
