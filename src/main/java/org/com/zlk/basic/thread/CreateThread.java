@@ -17,7 +17,10 @@ public class CreateThread {
         MyThread3 thread3 = new MyThread3();
         FutureTask<Integer> futureTask = new FutureTask<>(thread3);
         Thread thread4 = new Thread(futureTask);
+        // 可以设置守护线程
+        thread4.setDaemon(true);
         thread4.start();
+        System.out.println("守护线程 "+ thread4.isDaemon());
 
         long endTime = System.currentTimeMillis();
         long time = endTime - startTime;
