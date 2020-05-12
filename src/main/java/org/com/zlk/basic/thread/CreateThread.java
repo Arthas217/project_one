@@ -22,7 +22,8 @@ public class CreateThread {
         long endTime = System.currentTimeMillis();
         long time = endTime - startTime;
 
-        Thread.sleep(10000);// 防止主线程退出 得不到最后time结果
+        Thread.sleep(1000);// 防止主线程退出 得不到最后time结果
+        System.out.println("main方法是守护进程： " + Thread.currentThread().isDaemon());
         System.out.println("主线程结束： " + Thread.currentThread().getName() + "花费时间 " + time);
     }
 }
