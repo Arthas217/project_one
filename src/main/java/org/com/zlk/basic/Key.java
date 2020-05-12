@@ -4,8 +4,6 @@ package org.com.zlk.basic;
 import java.util.Objects;
 
 public class Key {
-
-    // hashcod是使用的 Integer类中的方法，所以id为Integer
     private Integer id;
 
     public Integer getId() {
@@ -16,10 +14,17 @@ public class Key {
         this.id = id;
     }
 
+    /**
+     * 自定义的计算方式（值方便看） 建议使用Objects.hash方法
+     */
     @Override
     public int hashCode() {
         return id.hashCode();
     }
+
+    /**
+     * 自定义方式 比价两个对象中的值是否相同
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof Key)) {
