@@ -18,6 +18,7 @@
         <spring.version>5.2.2.RELEASE</spring.version>
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
+        <redission.version>3.3.2</redission.version>
         <log.verison>2.11.0</log.verison>
     </properties>
 
@@ -71,6 +72,13 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log.verison}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>${redission.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
