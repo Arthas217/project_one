@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class LongStrNoDuplacate {
 
-    public static String str = "pwwkew";
+    public static String str = "abcabcbb";
 
     public static void main(String[] args) {
         System.out.println(getLongSND(str));
@@ -27,7 +27,7 @@ public class LongStrNoDuplacate {
                 start = Math.max(map.get(c), start);
             }
             map.put(str.charAt(end), end + 1);
-            ans = Math.max(end - start + 1, start);
+            ans = Math.max(end - start + 1, ans);
         }
         return ans;
     }
