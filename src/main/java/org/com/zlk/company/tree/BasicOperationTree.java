@@ -45,7 +45,11 @@ public class BasicOperationTree {
     public static void preOrder2(TreeNode root) {
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode pNode = root;
+        // 终止条件 节点为null && 栈为空
         while (pNode != null || !stack.isEmpty()) {
+            // 1 当前节点非空，打印值，元素进栈，访问左孩子
+            // 2 如果左孩子非空，继续执行 1
+            // 3 如果左孩子为空，元素出栈、访问右孩子 继续执行 1
             if (pNode != null) {
                 System.out.print(pNode.value + "  ");
                 stack.push(pNode);
@@ -65,6 +69,9 @@ public class BasicOperationTree {
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode pNode = root;
         while (pNode != null || !stack.isEmpty()) {
+            // 1 当前节点非空，元素进栈，访问左孩子
+            // 2 如果左孩子非空，继续执行 1
+            // 3 如果左孩子为空，元素出栈、打印值、访问右孩子 继续执行 1
             if (pNode != null) {
                 stack.push(pNode);
                 pNode = pNode.left;
@@ -76,28 +83,32 @@ public class BasicOperationTree {
         }
     }
 
-
     /**
      * 非递归后序遍历
      */
     public static void postOrder2(TreeNode root) {
         Stack<TreeNode> s = new Stack<>();
-        TreeNode cur;                      //当前结点
-        TreeNode pre = null;               //前一次訪问的结点
+        TreeNode cur;  //当前结点
+        TreeNode pre = null; //上一次访问的结点标记
         s.push(root);
         while (!s.empty()) {
-            cur = s.peek();
-            //假设当前结点没有孩子结点或者孩子节点都已被訪问过
-            Boolean condition = (cur.left == null && cur.right == null) || (pre != null && (pre == cur.left || pre == cur.right));
-            if (condition) {
+            cur = s.peek(); //当前节点始终指向栈顶位置
+            boolean leafNode = (cur.left == null && cur.right == null);
+            boolean isVisit = (pre != null && (pre == cur.left || pre == cur.right));
+            // 如果当前结点没有孩子结点或者孩子节点都已被訪问过
+            if (leafNode || isVisit) {
+                // 打印、出栈、标记pro
                 System.out.print(cur.value + "  ");
                 s.pop();
                 pre = cur;
             } else {
-                if (cur.right != null)
+                // 主要入栈顺序
+                if (cur.right != null) {
                     s.push(cur.right);
-                if (cur.left != null)
+                }
+                if (cur.left != null) {
                     s.push(cur.left);
+                }
             }
         }
     }
@@ -115,8 +126,10 @@ public class BasicOperationTree {
         queue.add(root);
         TreeNode currentNode;
         while (!queue.isEmpty()) {
+            // 元素出队、打印
             currentNode = queue.poll();
             System.out.print(currentNode.value + "  ");
+            // 该元素如果有孩子，那么依次进入队列
             if (currentNode.left != null) {
                 queue.add(currentNode.left);
             }
@@ -141,6 +154,7 @@ public class BasicOperationTree {
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
             System.out.print(node.value + "  ");
+            // 注意入栈顺序和前序顺序
             if (node.right != null) {
                 stack.push(node.right);
             }
