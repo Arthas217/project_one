@@ -1,4 +1,6 @@
-package org.com.zlk.company.tree;
+package org.com.zlk.company.toutiao;
+
+import org.com.zlk.company.tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,19 +14,8 @@ import java.util.Queue;
  *   4  5   6
  */
 public class Test513 {
-
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /**
-     * 方法1：迭代，层序遍历，保存每层左边第一个元素为结果，遍历完成后直接返回结果
+     * 迭代，层序遍历，保存每层左边第一个元素为结果，遍历完成后直接返回结果
      */
     public static int findBottomLeftValue(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -34,7 +25,7 @@ public class Test513 {
             // 队列中个数就是循环次数
             int count = queue.size();
             // 每层第一个节点赋值给res
-            res = queue.peek().val;
+            res = queue.peek().value;
             while (count-- > 0) {
                 TreeNode tmp = queue.poll();
                 if (tmp.left != null) {
