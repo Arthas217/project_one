@@ -11,18 +11,43 @@ import java.util.List;
  */
 public class PermutationTest {
 
-    public static List<LinkedList<Integer>> permutaTion(int[] nums) {
+    public static List<List<Integer>> permutaTion(int[] nums) {
         // 存储一次排列结果
         LinkedList<Integer> list = new LinkedList<>();
         // 所有排列结果
-        List<LinkedList<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
         // 记录访问过元素
-        int[] visited = new int[nums.length];
-        dfsMethod(nums, list, result, visited);
+//        int[] visited = new int[nums.length];
+//        dfsMethod(nums, list, result, visited);
+        dfsMethodSwp(nums, list, result, 0);
         return result;
     }
 
-    public static void dfsMethod(int[] nums, LinkedList<Integer> list, List<LinkedList<Integer>> result, int[] visited) {
+    public static void dfsMethodSwp(int[] nums, LinkedList<Integer> list, List<List<Integer>> result, int pos) {
+        if (nums.length == list.size()) {
+            result.add(new LinkedList<>(list));
+            return;
+        }
+        for (int i = pos; i < nums.length; i++) {
+            // 保证pos后面的数字是没有选中的 pos前面的数据都是选中的
+            // 相当于visited过程
+            list.add(nums[i]);
+            // TODO
+            // swap过程还不是很懂
+            swap(nums, i, pos);
+            dfsMethodSwp(nums, list, result, pos + 1);
+            swap(nums, i, pos);
+            list.removeLast();
+        }
+    }
+
+    public static void swap(int[] nums, int selectNum, int pos) {
+        int temp = nums[selectNum];
+        nums[selectNum] = nums[pos];
+        nums[pos] = temp;
+    }
+
+    public static void dfsMethod(int[] nums, LinkedList<Integer> list, List<List<Integer>> result, int[] visited) {
         if (nums.length == list.size()) {
             result.add(new LinkedList<>(list));
             return;
@@ -50,8 +75,8 @@ public class PermutationTest {
 
     public static void main(String[] args) {
         int[] test = {1, 2, 3};
-        List<LinkedList<Integer>> linkedLists = permutaTion(test);
-        for (LinkedList list : linkedLists) {
+        List<List<Integer>> linkedLists = permutaTion(test);
+        for (List list : linkedLists) {
             System.out.println(list);
         }
     }
