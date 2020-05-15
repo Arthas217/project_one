@@ -17,8 +17,9 @@ public class PermutationTest {
         // 所有排列结果
         List<List<Integer>> result = new ArrayList<>();
         // 记录访问过元素
-//        int[] visited = new int[nums.length];
-//        dfsMethod(nums, list, result, visited);
+        int[] visited = new int[nums.length];
+        dfsMethod(nums, list, result, visited);
+
         dfsMethodSwp(nums, list, result, 0);
         return result;
     }
