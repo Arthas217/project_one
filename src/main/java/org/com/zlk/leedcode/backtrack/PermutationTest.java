@@ -1,4 +1,4 @@
-package org.com.zlk.leedcode.permutation;
+package org.com.zlk.leedcode.backtrack;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
