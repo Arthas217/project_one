@@ -31,6 +31,7 @@ public class CirclePrintMatrix {
     }
 
     private static void direct(int[][] array, int row, int col, int[][] visited, int i, int j, int[] result, int priority) {
+        // 优先以priority值为基本方向
         for (int d = priority; d < 4; d++) {
             // 顺时针
             int d_row = i + dr[d];
@@ -38,12 +39,14 @@ public class CirclePrintMatrix {
             // 判断d方向边界合法性
             if (d_row < 0 || d_row >= row || d_col < 0 || d_col >= col || visited[d_row][d_col] == 1) {
                 if (priority == 3) {
+                    // 如果向上方向寻找失败，则需要回退到原来的位置
                     direct(array, row, col, visited, i, j, result, 0);
                 }
                 continue;
             }
             result[num++] = array[d_row][d_col];
             visited[d_row][d_col] = 1;
+            // 赋值目的 下一次方向的确定是以上一个方向为准。如果此方向合法性失败的话，那么在以d=0方向继续找
             priority = d;
             direct(array, row, col, visited, d_row, d_col, result, priority);
         }
