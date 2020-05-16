@@ -53,10 +53,14 @@ public class CirclePrintMatrix {
     }
 
     public static void main(String[] args) {
-        int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-        int[] value = printMatrix(a);
-//        int[] value1 = printMatrixZLK(a);
-        for (int num : value) {
+
+        int[][] a = {{3}, {2}};
+//        int[][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+//        int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+//        int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+//        int[] value = printMatrix(a);
+        int[] value1 = printMatrixZLK(a);
+        for (int num : value1) {
             System.out.println(num);
         }
     }
@@ -66,30 +70,33 @@ public class CirclePrintMatrix {
      * 参考左程云思路
      */
     private static int[] printMatrixZLK(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
         int row = matrix.length;
         int col = matrix[0].length;
         // 左上角
-        int lu_x = 0;
-        int lu_y = 0;
+        int lx = 0;
+        int ly = 0;
         // 右下角
-        int ru_x = row - 1;
-        int ru_y = col - 1;
+        int rx = row - 1;
+        int ry = col - 1;
         int[] result = new int[row * col];
-        while (lu_x <= ru_x && lu_y < ru_y) {
-            printCircleValue(matrix, lu_x++, lu_y++, ru_x--, ru_y--, result);
+        while (lx <= rx && ly <= ry) {
+            printCircleValue(matrix, lx++, ly++, rx--, ry--, result);
         }
         return result;
     }
 
     private static void printCircleValue(int[][] matrix, int lx, int ly, int rx, int ry, int[] result) {
-        //子矩阵只有一行
         if (lx == rx) {
-            for (int j = rx; j < ry; j++) {
+            //子矩阵只有一行
+            for (int j = ly; j <= ry; j++) {
                 result[num++] = matrix[lx][j];
             }
         } else if (ly == ry) {
             //子矩阵只有一列
-            for (int i = lx; i < ly; i++) {
+            for (int i = lx; i <= rx; i++) {
                 result[num++] = matrix[i][ly];
             }
         } else {
@@ -112,7 +119,7 @@ public class CirclePrintMatrix {
                 result[num++] = matrix[rx][tempy];
                 tempy--;
             }
-            // 打印一圈矩阵的左行
+            // 打印一圈矩阵的左列
             while (tempx != lx) {
                 result[num++] = matrix[tempx][ly];
                 tempx--;
