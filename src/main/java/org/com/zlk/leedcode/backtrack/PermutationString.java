@@ -7,7 +7,7 @@ import java.util.Set;
 public class PermutationString {
 
     public static void main(String[] args) {
-        String[] result = permutation("abc");
+        String[] result = permutation(null);
         for (String ss : result) {
             System.out.println(ss);
         }
@@ -16,7 +16,7 @@ public class PermutationString {
 
     public static String[] permutation(String s) {
         if (s == null) {
-            return new String[]{};// todo
+            return new String[]{};
         }
         Set<String> result = new HashSet<>();
         boolean[] visited = new boolean[s.length()];
