@@ -36,6 +36,10 @@ public class TestImpl {
         //匿名内部类，实现的是ActionListener接口
         new ActionListener() {
             public void onAction() {
+                System.out.println(STATIC_INT);
+                System.out.println(noStaticInt);
+                outer_f3();
+                outer_f4();
                 System.out.println("click action..." + params);
             }
         }.onAction();
