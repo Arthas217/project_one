@@ -17,10 +17,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>5.2.2.RELEASE</spring.version>
         <servlet.version>2.5</servlet.version>
+        <aspectj.version>1.6.11</aspectj.version>
+        <cglib.version>2.1</cglib.version>
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
         <redission.version>3.3.2</redission.version>
         <log.verison>2.11.0</log.verison>
+        <test.version>4.11</test.version>
     </properties>
 
     <dependencies>
@@ -29,11 +32,6 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-core</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
 
         <!-- 引入springmvc -->
         <dependency>
@@ -46,24 +44,45 @@
             <artifactId>servlet-api</artifactId>
             <version>${servlet.version}</version>
         </dependency>
+
+        <!-- AspectJ -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
+
         <!--guava-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${google.guave.version}</version>
         </dependency>
+
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.verison}</version>
         </dependency>
+
         <!--事务-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <!--log-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -86,16 +105,23 @@
             <version>${log.verison}</version>
         </dependency>
 
+        <!-- 分布式锁redission  -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redission.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${test.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
