@@ -32,28 +32,28 @@ public class RedissionTest {
                 .setMasterName("mymaster");
 
         // 返回的是Redisson instance
-        RedissonClient redissonClient = Redisson.create(config);
+        RedissonClient redisson = Redisson.create(config);
 
         // 通过Redisson instance返回RLock对象实例
-        RLock redlock1 = redissonClient.getLock("redlock");
-        RLock redlock2 = redissonClient.getLock("redlock");
-        RLock redlock3 = redissonClient.getLock("redlock");
+        RLock lock1 = redisson.getLock("redlock");
+        RLock lock2 = redisson.getLock("redlock");
+        RLock lock3 = redisson.getLock("redlock");
 
         // RedissonRedLock对象,将多个RLock对象关联为一个红锁
         // 同时加锁：lock1 lock2 lock3
         // 红锁在大部分节点上加锁成功就算成功。
-        RedissonRedLock redLock = new RedissonRedLock (redlock1, redlock2, redlock3);
+        RedissonRedLock redLock = new RedissonRedLock(lock1, lock2, lock3);
 
         boolean isLocked = false;
         try {
 //            redLock.lock(1, TimeUnit.SECONDS);
-            redLock.tryLock(1,10,TimeUnit.MILLISECONDS);
+            redLock.tryLock(1, 10, TimeUnit.MILLISECONDS);
             isLocked = true;
             System.out.println("-------------");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            isLocked =false;
+            isLocked = false;
             redLock.unlock();
             System.out.println("------------------111111111");
         }
