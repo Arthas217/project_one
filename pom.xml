@@ -21,7 +21,7 @@
         <cglib.version>2.1</cglib.version>
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
-        <redission.version>3.3.2</redission.version>
+        <redission.version>3.12.0</redission.version>
         <log.verison>2.11.0</log.verison>
         <test.version>4.11</test.version>
     </properties>

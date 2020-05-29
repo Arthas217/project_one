@@ -12,29 +12,50 @@ public class RedissionTest {
 
     public static void main(String[] args) {
         Config config = new Config();
+
+        // 主从复制
+//        config.useMasterSlaveServers().setMasterAddress("redis://192.168.1.108:6379")
+//                .addSlaveAddress("redis://192.168.1.104:6380")
+//                .addSlaveAddress("redis://192.168.1.103:6381");
+
+        // 集群模式-前提是集群可用
+//        config.useClusterServers().addNodeAddress(
+//                "redis://192.168.1.108:7000","redis://192.168.1.108:7001",
+//                "redis://192.168.1.104:7002","redis://192.168.1.104:7003",
+//                "redis://192.168.1.103:7004","redis://192.168.1.103:7005");
+
+
+        // Redisson在3.9.x版本中的bug
+        // 注意哨兵模式配置中的端口号是26379
         config.useSentinelServers()
-                .addSentinelAddress("127.0.0.1:6369", "127.0.0.1:6379", "127.0.0.1:6389")
-                .setMasterName("masterName")
-                .setPassword("password")
-                .setDatabase(0);
+                .addSentinelAddress("redis://192.168.1.108:26379")
+                .setMasterName("mymaster");
+
+        // 返回的是Redisson instance
         RedissonClient redissonClient = Redisson.create(config);
+
+        // 通过Redisson instance返回RLock对象实例
         RLock redlock1 = redissonClient.getLock("redlock");
         RLock redlock2 = redissonClient.getLock("redlock");
         RLock redlock3 = redissonClient.getLock("redlock");
 
+        // RedissonRedLock对象,将多个RLock对象关联为一个红锁
+        // 同时加锁：lock1 lock2 lock3
+        // 红锁在大部分节点上加锁成功就算成功。
         RedissonRedLock redLock = new RedissonRedLock (redlock1, redlock2, redlock3);
+
         boolean isLocked = false;
         try {
-            redLock.lock(1, TimeUnit.SECONDS);
-            redLock.tryLock(1,TimeUnit.SECONDS);
+//            redLock.lock(1, TimeUnit.SECONDS);
+            redLock.tryLock(1,10,TimeUnit.MILLISECONDS);
             isLocked = true;
+            System.out.println("-------------");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             isLocked =false;
             redLock.unlock();
+            System.out.println("------------------111111111");
         }
-
-
     }
 }
