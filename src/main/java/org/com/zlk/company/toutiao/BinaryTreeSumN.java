@@ -21,7 +21,7 @@ public class BinaryTreeSumN {
             return false;
         }
         // 累计路径上值
-        cur = root.value + cur;
+        cur = root.val + cur;
         // 遍历到叶子节点
         if (root.left == null && root.right == null) {
             return cur == target;

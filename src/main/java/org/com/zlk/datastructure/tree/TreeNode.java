@@ -8,7 +8,7 @@ public class TreeNode {
     /**
      * 节点值
      */
-    public int value;
+    public int val;
     /**
      * 左孩子
      */
@@ -24,6 +24,6 @@ public class TreeNode {
 
 
     public TreeNode(int value) {
-        this.value = value;
+        this.val = value;
     }
 }

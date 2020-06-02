@@ -21,8 +21,8 @@ public class BinaryTreeAllPath {
 
     public static void construct_paths(TreeNode root, String path, LinkedList<String> paths, int target) {
         if (root != null) {
-            path += Integer.toString(root.value);
-            target -= root.value;
+            path += Integer.toString(root.val);
+            target -= root.val;
             // 当前节点是叶子节点
 //            if ((root.left == null) && (root.right == null))  // 返回所有路径
             if ((root.left == null) && (root.right == null) && target == 0)  // 所有路径中值满足target的路径

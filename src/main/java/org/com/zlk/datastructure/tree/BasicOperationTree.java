@@ -10,7 +10,7 @@ public class BasicOperationTree {
      */
     public static void preOrder(TreeNode root) {
         if (root != null) {
-            System.out.print(root.value + "  ");
+            System.out.print(root.val + "  ");
             preOrder(root.left);
             preOrder(root.right);
         }
@@ -22,7 +22,7 @@ public class BasicOperationTree {
     public static void inOrder(TreeNode root) {
         if (root != null) {
             inOrder(root.left);
-            System.out.print(root.value + "  ");
+            System.out.print(root.val + "  ");
             inOrder(root.right);
         }
     }
@@ -34,7 +34,7 @@ public class BasicOperationTree {
         if (root != null) {
             postOrder(root.left);
             postOrder(root.right);
-            System.out.print(root.value + "  ");
+            System.out.print(root.val + "  ");
         }
     }
 
@@ -51,7 +51,7 @@ public class BasicOperationTree {
             // 2 如果左孩子非空，继续执行 1
             // 3 如果左孩子为空，元素出栈、访问右孩子 继续执行 1
             if (pNode != null) {
-                System.out.print(pNode.value + "  ");
+                System.out.print(pNode.val + "  ");
                 stack.push(pNode);
                 pNode = pNode.left;
             } else { //pNode == null && !stack.isEmpty()
@@ -77,7 +77,7 @@ public class BasicOperationTree {
                 pNode = pNode.left;
             } else { //pNode == null && !stack.isEmpty()
                 TreeNode node = stack.pop();
-                System.out.print(node.value + "  ");
+                System.out.print(node.val + "  ");
                 pNode = node.right;
             }
         }
@@ -98,7 +98,7 @@ public class BasicOperationTree {
             // 如果当前结点没有孩子结点或者孩子节点都已被訪问过
             if (leafNode || isVisit) {
                 // 打印、出栈、标记pro
-                System.out.print(cur.value + "  ");
+                System.out.print(cur.val + "  ");
                 s.pop();
                 pre = cur;
             } else {
@@ -128,7 +128,7 @@ public class BasicOperationTree {
         while (!queue.isEmpty()) {
             // 元素出队、打印
             currentNode = queue.poll();
-            System.out.print(currentNode.value + "  ");
+            System.out.print(currentNode.val + "  ");
             // 该元素如果有孩子，那么依次进入队列
             if (currentNode.left != null) {
                 queue.add(currentNode.left);
@@ -153,7 +153,7 @@ public class BasicOperationTree {
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
-            System.out.print(node.value + "  ");
+            System.out.print(node.val + "  ");
             // 注意入栈顺序和前序顺序
             if (node.right != null) {
                 stack.push(node.right);

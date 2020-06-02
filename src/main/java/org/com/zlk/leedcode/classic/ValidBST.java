@@ -14,10 +14,10 @@ public class ValidBST {
         if (root == null) {
             return true;
         }
-        if (root.value >= upper || root.value <= lower) {
+        if (root.val >= upper || root.val <= lower) {
             return false;
         }
-        return help(root.left, lower, (long) root.value) && help(root.right, (long) root.value, upper);
+        return help(root.left, lower, (long) root.val) && help(root.right, (long) root.val, upper);
     }
 
 }

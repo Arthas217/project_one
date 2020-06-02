@@ -25,7 +25,7 @@ public class Test513 {
             // 队列中个数就是循环次数
             int count = queue.size();
             // 每层第一个节点赋值给res
-            res = queue.peek().value;
+            res = queue.peek().val;
             while (count-- > 0) {
                 TreeNode tmp = queue.poll();
                 if (tmp.left != null) {
