@@ -3,7 +3,13 @@ package org.com.zlk.leedcode.easy;
 import org.com.zlk.datastructure.tree.TreeNode;
 
 /**
- * 树的对称
+ *  树的对称
+ *     1
+ *    / \
+ *   2   2
+ *  / \ / \
+ * 3  4 4  3
+ *
  */
 public class SolutionSymmetricTree {
 
