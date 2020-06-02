@@ -1,4 +1,4 @@
-package org.com.zlk.company.tree;
+package org.com.zlk.datastructure.tree;
 
 public class TreeTest {
 
@@ -23,6 +23,11 @@ public class TreeTest {
         BasicOperationTree.laywerTraversal(root);
         System.out.println();
         BasicOperationTree.depthOrderTraverse(root);
+        System.out.println();
+
+        int depth = BasicOperationTree.maxDepth(root);
+        System.out.println("树高度："+depth);
+
 
     }
 

@@ -1,4 +1,4 @@
-package org.com.zlk.company.tree;
+package org.com.zlk.datastructure.tree;
 
 import java.util.LinkedList;
 import java.util.Stack;
@@ -162,5 +162,16 @@ public class BasicOperationTree {
                 stack.push(node.left);
             }
         }
+    }
+
+
+    /**
+     * 递归-树的高度（深度）
+     */
+    public static int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }

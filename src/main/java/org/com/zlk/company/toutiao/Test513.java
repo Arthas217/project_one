@@ -1,6 +1,6 @@
 package org.com.zlk.company.toutiao;
 
-import org.com.zlk.company.tree.TreeNode;
+import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;

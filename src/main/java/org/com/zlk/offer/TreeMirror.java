@@ -1,7 +1,7 @@
 package org.com.zlk.offer;
 
-import org.com.zlk.company.tree.BasicOperationTree;
-import org.com.zlk.company.tree.TreeNode;
+import org.com.zlk.datastructure.tree.BasicOperationTree;
+import org.com.zlk.datastructure.tree.TreeNode;
 
 public class TreeMirror {
 

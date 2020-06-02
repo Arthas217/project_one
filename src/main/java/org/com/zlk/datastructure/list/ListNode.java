@@ -1,4 +1,4 @@
-package org.com.zlk.company.list;
+package org.com.zlk.datastructure.list;
 
 public class ListNode {
 

@@ -1,4 +1,4 @@
-package org.com.zlk.company.tree;
+package org.com.zlk.datastructure.tree;
 
 /**
  * 二叉树节点 基本结构

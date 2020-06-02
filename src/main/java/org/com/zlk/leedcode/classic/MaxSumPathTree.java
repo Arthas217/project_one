@@ -1,6 +1,6 @@
 package org.com.zlk.leedcode.classic;
 
-import org.com.zlk.company.tree.TreeNode;
+import org.com.zlk.datastructure.tree.TreeNode;
 
 public class MaxSumPathTree {
 

@@ -1,7 +1,7 @@
 package org.com.zlk.company.toutiao;
 
-import org.com.zlk.company.tree.InitTreeNoe;
-import org.com.zlk.company.tree.TreeNode;
+import org.com.zlk.datastructure.tree.InitTreeNoe;
+import org.com.zlk.datastructure.tree.TreeNode;
 
 /**
  * 给定一个二叉树和一个数字n，判断二叉树中是否有一个路径上的数字之和等于给定的数字n

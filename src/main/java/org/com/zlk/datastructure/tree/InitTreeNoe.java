@@ -1,4 +1,4 @@
-package org.com.zlk.company.tree;
+package org.com.zlk.datastructure.tree;
 
 public class InitTreeNoe {
 
