@@ -1,5 +1,7 @@
 package org.com.zlk.datastructure.tree;
 
+import org.com.zlk.leedcode.easy.BalancedBinaryTree;
+
 public class TreeTest {
 
     public static void main(String[] args) {
