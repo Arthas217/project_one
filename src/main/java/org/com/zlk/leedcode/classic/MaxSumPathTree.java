@@ -25,7 +25,7 @@ public class MaxSumPathTree {
         int rightMax = Math.max(maxSum(root.right), 0);
         // 最后计算当前树的最大路径和
         max = Math.max(max, leftMax + rightMax + root.value);
-        // 计算根到叶子节点最大路径和
+        // 计算树中每个节点作为根时，根到叶子节点最大路径和
         return root.value + Math.max(leftMax, rightMax);
     }
 

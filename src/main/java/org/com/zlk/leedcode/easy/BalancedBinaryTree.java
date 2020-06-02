@@ -16,7 +16,5 @@ public class BalancedBinaryTree {
         int rDepth = BasicOperationTree.maxDepth(root.right);
         boolean match = Math.abs(lDepth - rDepth) < 2;
         return match && isBalanced(root.left) && isBalanced(root.right);
-
     }
-
 }
