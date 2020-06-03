@@ -15,4 +15,5 @@ public class SolutionInvertTree {
         root.right = invertTree(left);
         return root;
     }
+
 }
