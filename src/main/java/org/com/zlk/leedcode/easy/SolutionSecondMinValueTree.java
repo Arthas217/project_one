@@ -53,6 +53,9 @@ public class SolutionSecondMinValueTree {
     static int first = Integer.MAX_VALUE, second = Integer.MAX_VALUE;
     static int count = 0;
 
+    /**
+     * https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/solution/java-yi-dong-yi-jie-xiao-lu-gao-by-spirit-9-14/
+     */
     public static int findSecondMinimumValue2(TreeNode root) {
         helper(root);
         //如果count 大于0 那么就输出second;
