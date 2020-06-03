@@ -22,7 +22,7 @@ public class SolutionSecondMinValueTree {
 
     /**
      * todo
-     *  根节点肯定是值最小的节点，所以这个问题就是找子树中与根节点不相等的最小值。
+     * 根节点肯定是值最小的节点，所以这个问题就是找子树中与根节点不相等的最小值。
      */
     public static int findSecondMinimumValue(TreeNode root) {
         if (root == null) return -1;
@@ -46,6 +46,34 @@ public class SolutionSecondMinValueTree {
         return rightVal;
     }
 
+
+
+    // 版本2  容易理解版本
+    // 定义两个变量存放第一小和第二小的数字;
+    static int first = Integer.MAX_VALUE, second = Integer.MAX_VALUE;
+    static int count = 0;
+
+    public static int findSecondMinimumValue2(TreeNode root) {
+        helper(root);
+        //如果count 大于0 那么就输出second;
+        return count == 0 ? -1 : second;
+    }
+
+    public static void helper(TreeNode root) {
+        if (root == null)
+            return;
+        // 如果二叉树只有一个数字的话,意味着second没有被赋值,那么count等于0,输出-1
+        if (root.val < first) {
+            second = first;
+            first = root.val;
+        } else if (root.val <= second && root.val > first) {
+            count++;
+            second = root.val;
+        }
+        helper(root.left);
+        helper(root.right);
+    }
+
     public static void main(String[] args) {
         TreeNode treeNode1 =new TreeNode(2);
         TreeNode treeNode2 =new TreeNode(2);
@@ -57,6 +85,7 @@ public class SolutionSecondMinValueTree {
         treeNode3.left = treeNode4;
         treeNode3.right = treeNode5;
         int secondMinimumValue = findSecondMinimumValue(treeNode1);
-        System.out.println(secondMinimumValue);
+        int secondMinimumValue2 = findSecondMinimumValue2(treeNode1);
+        System.out.println(secondMinimumValue2);
     }
 }
