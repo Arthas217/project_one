@@ -63,6 +63,14 @@ class ShareData {
     }
 
     public void addPP() {
+        // 多线程环境下是不安全的
         num++;
     }
+
+    // 解决1
+    public synchronized void addPP1() {
+        num++;
+    }
+
+    
 }
