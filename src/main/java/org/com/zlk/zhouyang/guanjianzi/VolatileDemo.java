@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
  * 2.不保证原子性
  *   2.1 原子性：线程在做某个业务处理时，中间不可以加塞、不可分割  --保证数据一致性
  *   2.2 举例：atomicByVolatile方法
- *   2.3 解决方法 ： 方法前加synchronized    或者 A
+ *   2.3 解决方法 ： 方法前加synchronized 、 AtomicInteger相关
  */
 public class VolatileDemo {
 
     public static void main(String[] args) throws InterruptedException {
 
         //volatile可见性
-//        seeOkByVolatile();
+        seeOkByVolatile();
 
         // volatile原子性(数据操作的一致性)吗？ 不支持
         atomicByVolatile();
@@ -29,6 +29,7 @@ public class VolatileDemo {
         for (int i = 0; i < 20; i++) {
             new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
+                    // 无原子性
                     data.addPP();
                     // 保证原子性
                     data.addAtomic();

@@ -4,8 +4,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShareData {
 
-    //    int num = 0;
-    volatile int num = 0;
+        int num = 0;
+//    volatile int num = 0;
 
     public void addNum() {
         this.num = 60;
@@ -17,12 +17,19 @@ public class ShareData {
         num++;
     }
 
+    /**
+     * solve 1
+     */
     public synchronized void addPP1() {
         num++;
     }
 
 
     AtomicInteger atomicInteger =new AtomicInteger();
+
+    /**
+     * solve 2
+     */
     public void addAtomic(){
         atomicInteger.getAndIncrement();
     }
