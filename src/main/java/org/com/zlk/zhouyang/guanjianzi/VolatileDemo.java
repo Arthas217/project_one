@@ -2,6 +2,16 @@ package org.com.zlk.zhouyang.guanjianzi;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 1.验证volatile可见性
+ *   1.1 ShareData类中 int num =0 无可见性
+ *   1.2 添加volatile可见性
+ *   1.3 举例seeOkByVolatile方法
+ *
+ * 2.不保证原子性
+ *   2.1 原子性：线程在做某个业务处理时，中间不可以加塞、不可分割  --保证数据一致性
+ *   2.2 举例：atomicByVolatile方法
+ */
 public class VolatileDemo {
 
     public static void main(String[] args) throws InterruptedException {

@@ -1,4 +1,4 @@
-package org.com.zlk.basic.thread;
+package org.com.zlk.basic.thread.createthread;
 
 import java.util.concurrent.FutureTask;
 
@@ -16,17 +16,17 @@ public class CreateThread {
 
         MyThread3 thread3 = new MyThread3();
         FutureTask<Integer> futureTask = new FutureTask<>(thread3);
-        Thread thread4 = new Thread(futureTask);
+        Thread thread = new Thread(futureTask);
         // 可以设置守护线程
-        thread4.setDaemon(true);
-        thread4.start();
-        System.out.println("守护线程 "+ thread4.isDaemon());
+        thread.setDaemon(true);
+        thread.start();
+        System.out.println("thread###===" + thread + "  守护线程？" + thread.isDaemon());
 
+
+        Thread.sleep(2000);// 防止主线程退出 得不到最后time结果
+        System.out.println("main方法是守护进程： " + Thread.currentThread().isDaemon());
         long endTime = System.currentTimeMillis();
         long time = endTime - startTime;
-
-        Thread.sleep(1000);// 防止主线程退出 得不到最后time结果
-        System.out.println("main方法是守护进程： " + Thread.currentThread().isDaemon());
-        System.out.println("主线程结束： " + Thread.currentThread().getName() + "花费时间 " + time);
+        System.out.println("主线程结束： " + Thread.currentThread() + "花费时间 " + time);
     }
 }

@@ -1,4 +1,4 @@
-package org.com.zlk.basic.thread;
+package org.com.zlk.basic.thread.createthread;
 
 
 public class MyThread1 extends Thread {

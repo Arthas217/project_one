@@ -1,6 +1,7 @@
 package org.com.zlk.zhouyang.guanjianzi;
 
 public class ShareData {
+
     //    int num = 0;
     volatile int num = 0;
 
