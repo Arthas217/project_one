@@ -10,7 +10,7 @@ public class SpinLockDemo {
 
     private static AtomicReference atomicReference = new AtomicReference();
 
-    private static void myLock() {
+    private static void mySpinLock() {
         Thread thread = Thread.currentThread();
         System.out.println(Thread.currentThread().getName() + "\t  in myLock! ");
         while (!atomicReference.compareAndSet(null, thread)) {
@@ -19,7 +19,7 @@ public class SpinLockDemo {
         System.out.println(Thread.currentThread().getName() + "\t  finish myLock! ");
     }
 
-    private static void UnMyLock() {
+    private static void UnSpinLock() {
         Thread thread = Thread.currentThread();
         System.out.println(Thread.currentThread().getName() + "\t  in UnMyLock! ");
         if (atomicReference.compareAndSet(thread, null)) {
@@ -30,23 +30,23 @@ public class SpinLockDemo {
     public static void main(String[] args) {
 
         new Thread(() -> {
-            myLock();
+            mySpinLock();
             try {
                 TimeUnit.MILLISECONDS.sleep(2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            UnMyLock();
+            UnSpinLock();
         }, "AA").start();
 
         new Thread(() -> {
-            myLock();
+            mySpinLock();
             try {
                 TimeUnit.MILLISECONDS.sleep(1);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            UnMyLock();
+            UnSpinLock();
         }, "BB").start();
 
     }
