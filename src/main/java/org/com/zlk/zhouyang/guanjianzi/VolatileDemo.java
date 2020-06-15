@@ -11,17 +11,60 @@ import java.util.concurrent.TimeUnit;
  * 2.不保证原子性
  *   2.1 原子性：线程在做某个业务处理时，中间不可以加塞、不可分割  --保证数据一致性
  *   2.2 举例：atomicByVolatile方法
- *   2.3 解决方法 ： 方法前加synchronized 、 AtomicInteger相关
+ *   2.3 解决方法 ：方法前加synchronized（太重） 、 AtomicInteger相关
+ *
+ *
+ * 3.禁止指令重排序
+ *   2.1 举例 forbidCommandReSort方法
+ *
  */
 public class VolatileDemo {
+
+    volatile int a = 0;
+    volatile boolean flag = false;
+
+    /**
+     * 多线程环境中线程交替执行，编译器优化重排的存在
+     * 线程中使用的变量a和flag不能保证一致性。
+     */
+    public void method1() {
+        // 下面两个语句没有依赖性,顺序可以调整
+        // 禁止排序  将a和flag都添加volatile关键字
+        a = 1;        //11
+        flag = true;  //22
+    }
+
+    public void method2() {
+        if (flag) {
+            a = a + 5;
+            if (a != 6) {
+                System.out.println("------" + a);
+            }
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException {
 
         //volatile可见性
-        seeOkByVolatile();
+//        seeOkByVolatile();
 
         // volatile原子性(数据操作的一致性)吗？ 不支持
-        atomicByVolatile();
+//        atomicByVolatile();
+
+        //举例 volatile禁止指令重排序
+        forbidCommandReSort();
+    }
+
+    private static void forbidCommandReSort() {
+        VolatileDemo demo = new VolatileDemo();
+        for (int i = 0; i < 2000; i++) {
+            new Thread(() -> {
+                for (int j = 0; j < 1; j++) {
+                    demo.method1();
+                    demo.method2();
+                }
+            }, String.valueOf(i)).start();
+        }
     }
 
     private static void atomicByVolatile() throws InterruptedException {
