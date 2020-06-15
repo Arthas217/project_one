@@ -1,5 +1,7 @@
 package org.com.zlk.zhouyang.guanjianzi;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ShareData {
 
     //    int num = 0;
@@ -15,9 +17,14 @@ public class ShareData {
         num++;
     }
 
-    // 解决1
     public synchronized void addPP1() {
         num++;
+    }
+
+
+    AtomicInteger atomicInteger =new AtomicInteger();
+    public void addAtomic(){
+        atomicInteger.getAndIncrement();
     }
 
 
