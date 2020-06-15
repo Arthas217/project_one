@@ -1,6 +1,6 @@
 package org.com.zlk;
 
-import org.com.zlk.offer.Singleton;
+import org.com.zlk.zhouyang.Singleton;
 
 /**
  * Hello world!
