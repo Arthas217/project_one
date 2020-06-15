@@ -1,4 +1,4 @@
-package org.com.zlk.zhouyang;
+package org.com.zlk.zhouyang.lock;
 
 import org.com.zlk.zhouyang.model.Phone;
 
