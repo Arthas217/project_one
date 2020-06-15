@@ -20,7 +20,7 @@ public class CollectUnsafeDemo {
         // set
         hashset();
 
-        // TODO: 2020/6/15  
+        // TODO: 2020/6/15
         // k,v对
         map();
 
