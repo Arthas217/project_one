@@ -1,7 +1,7 @@
-package org.com.zlk.company.thread;
+package org.com.zlk.zhouyang.lock;
 
 /**
- * ReentrantLock、 await/signal 、Condition
+ * ReentrantLock、 Condition的await/signal
  * 优势 分组唤醒需要唤醒的线程、精确唤醒
  * 按顺序打印 A -> B -> C
  * 线程同步处理
