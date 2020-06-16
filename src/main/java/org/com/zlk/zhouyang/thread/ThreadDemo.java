@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 public class ThreadDemo {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-//        createThread();
-//        createThreadFuture();
+        createThread();
+        createThreadFuture();
         futureAttention();
     }
 
