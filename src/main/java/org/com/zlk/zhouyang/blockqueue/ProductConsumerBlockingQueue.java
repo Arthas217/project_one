@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 生产者/消费者模式  (使用阻塞队列）
- * 版本3 没有使用synchronized lock
+ * 版本3：使用volatile可见性、BlockingQueue解决线程阻塞和唤醒、FLAG开关、atomicInteger数据添加
  * 需求：开关true  开启生产-消费 ；开关false 叫停
  */
 public class ProductConsumerBlockingQueue {
