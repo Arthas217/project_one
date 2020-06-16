@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 资源类
+ * 功能：添加1、减去1
  * 多线程、高并发、高内聚低耦合口诀：
  * 1）线程 加锁操作 资源类
  * 2）判断、干活、通知
