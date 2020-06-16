@@ -28,7 +28,8 @@ public class KongTiao {
         lock.lock();
         // 生产
         try {
-            // 判断
+            // 判断(注意多线程的判断一定要用while
+            // 如果使用if的话ProductConsumerTraditional类中如果是大于2个线程的话，结果是不对的）
             while (num != 0) {
                 // 等待不能生产
                 condition.await();

@@ -14,12 +14,22 @@ public class ProductConsumerTraditional {
             for (int i = 0; i < 5; i++) {
                 kongTiao.incrValue();
             }
-        }, "AA").start();
+        }, "AA-Product").start();
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                kongTiao.incrValue();
+            }
+        }, "CC-Product").start();
 
         new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 kongTiao.decrValue();
             }
-        }, "BB").start();
+        }, "BB--Consumer").start();
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                kongTiao.decrValue();
+            }
+        }, "DD--Consumer").start();
     }
 }
