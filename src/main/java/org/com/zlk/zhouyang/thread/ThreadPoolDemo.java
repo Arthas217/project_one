@@ -8,8 +8,6 @@ import java.util.concurrent.*;
 public class ThreadPoolDemo {
 
     public static void main(String[] args) {
-        // cpu核数
-//        System.out.println(Runtime.getRuntime().availableProcessors());
 
         // 获取使用java多线程的方式，线程池ThreadPoolExecutor类
 
@@ -53,7 +51,7 @@ public class ThreadPoolDemo {
      */
     private static void handleTask(ExecutorService threadPool) {
         try {
-            for (int i = 1; i <= 8; i++) {
+            for (int i = 1; i <= 10; i++) {
                 // execute参数是runnable接口
                 // execute参数是runnable接口
                 // submit参数可以是runnble、callable等 且都是有返回值
@@ -71,8 +69,11 @@ public class ThreadPoolDemo {
 
     /**
      * ExecutorService方式 自定义线程池
+     * 以下我举例的各种抛弃策略出现的现象是不有一定出现的，根据实际情况会有稍微的不同
      */
     private static void customThreadPool() {
+        // cpu核数
+        System.out.println("cpu 核数：" + Runtime.getRuntime().availableProcessors());
         ExecutorService customThreadPool = new ThreadPoolExecutor(
                 2,
                 5,
@@ -80,10 +81,10 @@ public class ThreadPoolDemo {
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(3),
                 Executors.defaultThreadFactory(),
-//                new ThreadPoolExecutor.AbortPolicy());
-                new ThreadPoolExecutor.CallerRunsPolicy());
-//                new ThreadPoolExecutor.DiscardOldestPolicy());
-//                new ThreadPoolExecutor.DiscardPolicy());
+//                new ThreadPoolExecutor.AbortPolicy());  // 9号顾客办理不了业务，程序报异常 RejectedExecutionException，直接退出
+//                new ThreadPoolExecutor.CallerRunsPolicy()); // 9号顾客办理业务，线程池处理不过来，将请求返回给调用者main线程了
+                new ThreadPoolExecutor.DiscardOldestPolicy()); // 10号顾客办理业务 ，抛弃之前任务，即前面的某号顾客没有得到业务办理情况
+//                new ThreadPoolExecutor.DiscardPolicy()); // 10号办理业务，抛弃策略，即最近小于10号的9号顾客没有得到业务办理的情况
         handleTask(customThreadPool);
     }
 
