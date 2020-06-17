@@ -74,6 +74,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.verison}</version>
+            <optional>true</optional>
         </dependency>
 
         <!--事务-->

@@ -49,16 +49,17 @@ public class ThreadPoolDemo {
     }
 
     /**
-     *  10个用户来办理业务，每个用户对应一个请求任务
+     * 10个用户来办理业务，每个用户对应一个请求任务
      */
     private static void handleTask(ExecutorService threadPool) {
         try {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 1; i <= 8; i++) {
                 // execute参数是runnable接口
                 // execute参数是runnable接口
                 // submit参数可以是runnble、callable等 且都是有返回值
-                threadPool.execute(() ->
-                        System.out.println(Thread.currentThread().getName() + "\t 处理业务员"));
+                int temp = i;
+                threadPool.execute(() -> System.out.println(Thread.currentThread().getName() +
+                        "号窗口" + "\t 处理业务员" + "服务顾客" + temp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,11 +74,11 @@ public class ThreadPoolDemo {
      */
     private static void customThreadPool() {
         ExecutorService customThreadPool = new ThreadPoolExecutor(
-                1,
                 2,
-                1L,
+                5,
+                100L,
                 TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(1),
+                new LinkedBlockingQueue<>(3),
                 Executors.defaultThreadFactory(),
 //                new ThreadPoolExecutor.AbortPolicy());
                 new ThreadPoolExecutor.CallerRunsPolicy());
