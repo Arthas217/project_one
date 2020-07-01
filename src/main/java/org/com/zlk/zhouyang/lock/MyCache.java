@@ -3,8 +3,6 @@ package org.com.zlk.zhouyang.lock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -16,7 +14,7 @@ public class MyCache {
     private static volatile Map<String, Object> map = new HashMap<>();
 
     // 独占锁  同一时间只能读、或者写  并发性弱
-    private static Lock lock = new ReentrantLock();
+//    private static Lock lock = new ReentrantLock();
 
     // 读写锁  同一时间满足多个读  （适合缓存场景） 且可重入
     private static ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -25,7 +23,7 @@ public class MyCache {
      * 写操作(原子操作、独占不可中断）
      */
     public static void putOperation(String key, Object value) {
-
+//        lock.lock();
         readWriteLock.writeLock().lock();
         try {
             System.out.println(Thread.currentThread().getName() + "\t 正在写入 " + key);
@@ -34,6 +32,7 @@ public class MyCache {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+//            lock.unlock();
             readWriteLock.writeLock().unlock();
         }
 
@@ -43,6 +42,7 @@ public class MyCache {
      * 读操作
      */
     public static void getOperation(String key) {
+//        lock.lock();
         readWriteLock.readLock().lock();
         try {
             System.out.println(Thread.currentThread().getName() + "\t 正在读入 " + key);
@@ -54,6 +54,7 @@ public class MyCache {
             map.get(key);
             System.out.println(Thread.currentThread().getName() + "\t 读入完成 " + key);
         } finally {
+//            lock.unlock();
             readWriteLock.readLock().unlock();
         }
     }

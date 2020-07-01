@@ -13,11 +13,10 @@ public class MyResource {
 
     // 开关：默认开启生产-消费动作的处理，线程间需要可见性
     private volatile boolean FLAG = true;
-    // create data
+    // 需要添加的数据
     AtomicInteger atomicInteger = new AtomicInteger();
     // 阻塞队列
     BlockingQueue<String> blockingQueue;
-
     // 参数传接口
     public MyResource(BlockingQueue<String> blockingQueue) {
         System.out.println(blockingQueue.getClass().getName() + "------------------");

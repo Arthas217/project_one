@@ -1,11 +1,8 @@
 package org.com.zlk.zhouyang.lock;
 
-import java.lang.reflect.Array;
-import java.util.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Handler;
 
 /**
  * 共享资源
