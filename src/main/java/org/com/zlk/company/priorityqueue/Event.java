@@ -2,7 +2,7 @@ package org.com.zlk.company.priorityqueue;
 
 /**
  * 添加进PriorityBlockingQueue的元素必须实现Comparable接口
- *
+ * 实现Comparable接口的类支持排序
  * @Author zc217
  * @Date 2020/7/1
  */

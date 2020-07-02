@@ -22,7 +22,13 @@ public class PriorityQueueTest {
         System.out.println(minHeap.poll());
 
 
-        PriorityQueue<Integer> maxHeap = new PriorityQueue((Comparator<Integer>) (o1, o2) -> o2 - o1);
+        // 建立一个“该类的比较器”来进行排序,这个“比较器”只需要实现Comparator接口即可,然后通过该比较器对类进行排序
+        PriorityQueue<Integer> maxHeap = new PriorityQueue(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
         maxHeap.add(4);
         maxHeap.add(1);
         maxHeap.add(3);
