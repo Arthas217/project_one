@@ -37,6 +37,10 @@ public class WordCount {
             // 线程礼让，让其他线程执行
             Thread.yield();
         }
+        System.out.println(getWordCount("10"));
+
+
+        System.out.println("-------------------");
         // 输出keyword和频次
         Set<Map.Entry<String, Long>> entries = map.entrySet();
         for (Map.Entry<String, Long> entry : entries) {
@@ -44,11 +48,9 @@ public class WordCount {
         }
 
         System.out.println("------------------");
-
+        // 次数降序排序
         SortMap(map);
 
-        System.out.println("-------------------");
-        System.out.println(getWordCount("10"));
 
     }
 
@@ -62,7 +64,6 @@ public class WordCount {
         });
 
         for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i).getKey() + ": " + list.get(i).getValue());
             System.out.println(list.get(i).getKey() + ": " + list.get(i).getValue());
         }
     }
