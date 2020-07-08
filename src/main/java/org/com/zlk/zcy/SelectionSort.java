@@ -6,6 +6,7 @@ package org.com.zlk.zcy;
  * 第二次 1到n-1上选择一个最小的值，放到第1的位置
  * ...
  *
+ * 时间复杂度o(n*n)
  * @Author zc217
  * @Date 2020/7/8
  */
