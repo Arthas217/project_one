@@ -12,9 +12,7 @@ package org.com.zlk.zcy;
 public class SelectionSort {
 
     public static void selectionSort(int[] arr) {
-        if (arr == null || arr.length < 2) {
-            return;
-        }
+        ZcyUtil.arrValid(arr);
         // 遍历的次数从0到n-1
         for (int i = 0; i < arr.length - 1; i++) {
             // 初始默认i位置是最小值的下标
@@ -23,7 +21,7 @@ public class SelectionSort {
                 // 找最小数及保存此时数值下标
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            zcyUtil.swap(arr, i, minIndex);
+            ZcyUtil.swap(arr, i, minIndex);
         }
     }
 }
