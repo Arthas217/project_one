@@ -106,6 +106,7 @@ public class Code1 {
                 dp[i][j] += j - arr[i] >= 0 ? dp[i][j - arr[i]] : 0;
             }
         }
+        // 返回的最终目标是右下角
         return dp[arr.length - 1][aim];
     }
 
