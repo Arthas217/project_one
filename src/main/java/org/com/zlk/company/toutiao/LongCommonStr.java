@@ -74,6 +74,7 @@ public class LongCommonStr {
         int[][] dp = getDp(char1, char2);
         int end = 0;
         int max = 0;
+        // 找dp[i][j]最大值，并保留值 保留值在s1所在的位置
         for (int i = 0; i < s1.length(); i++) {
             for (int j = 0; j < s2.length(); j++) {
                 if (dp[i][j] > max) {
