@@ -7,7 +7,7 @@ import java.util.Stack;
  * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
  * 栈结构
  */
-public class Five {
+public class ReversePrintList4Array {
 
     class ListNode {
         int val;
