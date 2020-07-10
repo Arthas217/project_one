@@ -13,7 +13,7 @@ import java.util.Queue;
  *  \    / \
  *   4  5   6
  */
-public class Test513 {
+public class TreeLeafLeft {
     /**
      * 迭代，层序遍历，保存每层左边第一个元素为结果，遍历完成后直接返回结果
      */

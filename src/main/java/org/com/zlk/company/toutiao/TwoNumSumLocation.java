@@ -1,14 +1,13 @@
 package org.com.zlk.company.toutiao;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 两个数之和
+ * 求满足两个数之和为n的数组下标值
  * 哈希存储 kv(值，下标)
  */
-public class TwoSum {
+public class TwoNumSumLocation {
 
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -25,7 +24,9 @@ public class TwoSum {
     public static void main(String[] args) {
         int[] n = {2, 7, 11, 15};
         int[] result = twoSum(n, 9);
-        Arrays.stream(result).forEach(System.out::println);
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i]+"\t");
+        }
     }
 
 }
