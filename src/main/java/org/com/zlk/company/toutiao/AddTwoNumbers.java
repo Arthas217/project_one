@@ -3,10 +3,12 @@ package org.com.zlk.company.toutiao;
 /**
  * 输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
  * 输出：7 -> 0 -> 8
- * 原因：342 + 465 = 807
  */
 public class AddTwoNumbers {
 
+    /**
+     * 链表节点定义
+     */
     public static class ListNode {
         int val;
         ListNode next;
@@ -59,8 +61,9 @@ public class AddTwoNumbers {
 
 
         ListNode result = addTwoNumbers(l1, l4);
-        System.out.println(result.val);
-        System.out.println(result.next.val);
-        System.out.println(result.next.next.val);
+        while (result != null) {
+            System.out.print(result.val + "\t");
+            result = result.next;
+        }
     }
 }
