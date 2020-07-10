@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @Author zc217
  * @Date 2020/7/9
  */
-public class Code1 {
+public class CoinNum {
 
 
     private static HashMap<String, Integer> map = new HashMap<>();
