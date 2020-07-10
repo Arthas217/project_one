@@ -37,7 +37,7 @@ public class BinaryTreeAllPath {
 
     public static void main(String[] args) {
         TreeNode treeNode = InitTreeNoe.init1();
-        List<String> paths = binaryTreeAllPathsTarget(treeNode, 0);
+        List<String> paths = binaryTreeAllPathsTarget(treeNode, 22);
         for (String value : paths) {
             System.out.println(value);
         }

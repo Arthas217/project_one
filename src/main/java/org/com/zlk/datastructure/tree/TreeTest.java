@@ -1,6 +1,5 @@
 package org.com.zlk.datastructure.tree;
 
-import org.com.zlk.leedcode.easy.BalancedBinaryTree;
 
 public class TreeTest {
 
@@ -9,20 +8,20 @@ public class TreeTest {
         // 前中后遍历--递归
         BasicOperationTree.preOrder(root);
         System.out.println();
-        BasicOperationTree.inOrder(root);
+//        BasicOperationTree.inOrder(root);
         System.out.println();
-        BasicOperationTree.postOrder(root);
+//        BasicOperationTree.postOrder(root);
 
         // 前中后遍历--非递归
         System.out.println();
         BasicOperationTree.preOrder2(root);
         System.out.println();
-        BasicOperationTree.inOrder2(root);
+//        BasicOperationTree.inOrder2(root);
         System.out.println();
-        BasicOperationTree.postOrder2(root);
+//        BasicOperationTree.postOrder2(root);
 
         System.out.println();
-        BasicOperationTree.laywerTraversal(root);
+//        BasicOperationTree.laywerTraversal(root);
         System.out.println();
         BasicOperationTree.depthOrderTraverse(root);
         System.out.println();
@@ -33,6 +32,11 @@ public class TreeTest {
 
     }
 
+    /**
+     *         1
+     *      2    3
+     *    4  5  6
+     */
     private static TreeNode initTreeNode() {
         // 6个节点
         TreeNode treeNode1 = new TreeNode(1);

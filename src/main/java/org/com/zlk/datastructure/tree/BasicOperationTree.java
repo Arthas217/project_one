@@ -40,9 +40,10 @@ public class BasicOperationTree {
 
 
     /**
-     * 先序遍历非递归
+     * 先序遍历非递归（ DFS)  需要使用栈
      */
     public static void preOrder2(TreeNode root) {
+        // LinkedList是一个双向链表
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode pNode = root;
         // 终止条件 节点为null && 栈为空
