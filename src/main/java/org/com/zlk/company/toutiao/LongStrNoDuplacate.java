@@ -16,9 +16,11 @@ public class LongStrNoDuplacate {
 
     private static int getLongSND(String str) {
         int len = str.length();
-        int ans = 0;
+        int windowValue = 0;
+        int max = 0;
+        int index = 0;
         Map<Character, Integer> map = new HashMap<>();
-        // 滑动窗口机制 ans保持最大窗口值
+        // 滑动窗口机制 windowValue保持最大窗口值
         for (int end = 0, start = 0; end < len; end++) {
             char c = str.charAt(end);
             // 重复元素
@@ -27,8 +29,15 @@ public class LongStrNoDuplacate {
                 start = Math.max(map.get(c), start);
             }
             map.put(str.charAt(end), end + 1);
-            ans = Math.max(end - start + 1, ans);
+            windowValue = Math.max(end - start + 1, windowValue);
+
+            // 记录windowValue最大值和位置
+            if (windowValue > max) {
+                max = windowValue;
+                index = end;
+            }
         }
-        return ans;
+        System.out.println(str.substring(index - max + 1, index + 1));
+        return windowValue;
     }
 }
