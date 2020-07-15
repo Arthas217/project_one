@@ -1,7 +1,8 @@
 package org.com.zlk.zcy;
 
 /**
- * 数组中元素都是整数，求子数组中和为sum的最长子数组的长度
+ * 数组中元素都是正整数，求子数组中和为sum>0的最长子数组的长度
+ * 时间复杂度O(N)
  *
  * @Author zc217
  * @Date 2020/7/15
@@ -12,7 +13,7 @@ public class LongesSubArraySumInPositiveArray {
         if (arr == null || arr.length == 0 || k <= 0) {
             return 0;
         }
-        // 使用双指针
+        // 使用双指针（单调性， 窗口扩大一定增加，窗口缩小一定减少
         int L = 0;
         int R = 0;
         // 累加值
