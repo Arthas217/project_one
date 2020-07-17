@@ -143,6 +143,7 @@ public class BinaryTree {
         return ret;
     }
 
+    // 145. 二叉树的后序遍历 pre指针方法
     public static List<Integer> postorder2(TreeNode root) {
         List<Integer> ret = new ArrayList<>();
         Stack<TreeNode> s = new Stack<>();
