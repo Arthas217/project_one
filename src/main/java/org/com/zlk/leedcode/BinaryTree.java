@@ -221,14 +221,44 @@ public class BinaryTree {
     }
 
 
+    // 173. 二叉搜索树迭代器 二叉搜索树特点参见  98.验证二叉搜索树 中序遍历是有序的
+    // next()和hasNext()操作的时间复杂度是O(1)，并使用O(h) 内存，其中h是树的高度。
+    // 构造函数名称主要体现了BSTIterator二叉搜索树迭代器含义，名称为了和类名一致
+    public static Stack<TreeNode> nodeStack = null;
+    public BinaryTree(TreeNode root) {
+        nodeStack = new Stack<>();
+        while (root != null) {
+            nodeStack.push(root);
+            root = root.left;
+        }
+    }
+    // 用一个栈缓存从根节点到叶子节点的路径上所经过的且还没有输出的节点，相当于保存了上下文环境
+    // 调用next()将返回二叉搜索树中的下一个最小的数
+    /** @return the next smallest number */
+    public static int next() {
+        // 左下部分子树全部访问之后,根据栈内的节点继续访问右上部分的子树
+        TreeNode peek = nodeStack.peek();
+        nodeStack.pop(); // 必须在while之前，否则temp加入节点后，此时peek节点还在栈中，不符合逻辑。
+        TreeNode temp = peek.right;
+        while (temp != null) {
+            nodeStack.push(temp);
+            temp = temp.left;
+        }
+        return peek.val;
+
+    }
+    /** @return whether we have a next smallest number */
+    public static boolean hasNext() {
+        return !nodeStack.isEmpty();
+    }
+
+
     public static void main(String[] args) {
         TreeNode treeNode1 = new TreeNode(1);
         TreeNode treeNode2 = new TreeNode(2);
         TreeNode treeNode3 = new TreeNode(3);
         treeNode1.right = treeNode2;
-        treeNode1.left = null;
         treeNode2.left = treeNode3;
-        treeNode2.right = null;
         List<Integer> ret = inorderTraversal(treeNode1);
         List<Integer> ret1 = inorder(treeNode1);
         List<Integer> postorder = postorder(treeNode1);
@@ -239,6 +269,21 @@ public class BinaryTree {
 
         boolean validBST = isValidBST(treeNode1);
         boolean validBST1 = isValidBST1(treeNode1);
+
+        System.out.println();
+        TreeNode t1 = new TreeNode(7);
+        TreeNode t2 = new TreeNode(3);
+        TreeNode t3 = new TreeNode(15);
+        TreeNode t4 = new TreeNode(9);
+        TreeNode t5 = new TreeNode(20);
+        t1.left =t2;
+        t1.right=t3;
+        t3.left =t4;
+        t3.right=t5;
+        BinaryTree bstIterator = new BinaryTree(t1);
+        while (bstIterator.hasNext()){
+            System.out.println(bstIterator.next());
+        }
 
     }
 }
