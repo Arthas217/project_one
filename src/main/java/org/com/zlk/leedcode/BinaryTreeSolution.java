@@ -9,12 +9,12 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
- * 二叉树
+ * LeetCode 二叉树专题
  *
  * @Author zc217
  * @Date 2020/7/16
  */
-public class BinaryTree {
+public class BinaryTreeSolution {
 
     // 94-中序遍历-递归
     public static List<Integer> inorderTraversal(TreeNode root) {
@@ -179,7 +179,8 @@ public class BinaryTree {
     }
 
 
-    // 98.验证二叉搜索树（节点的左子树只包含小于当前节点的数。节点的右子树只包含大于当前节点的数。 所有左子树和右子树自身必须也是二叉搜索树）
+    // 98.验证二叉搜索树   面试题 04.05. 合法二叉搜索树
+    // 节点的左子树只包含小于当前节点的数。节点的右子树只包含大于当前节点的数。 所有左子树和右子树自身必须也是二叉搜索树
     public static boolean isValidBST(TreeNode root) {
         // 函数表示考虑以 root 为根的子树，判断子树中所有节点的值是否都在 (l,r) 的范围内
         return help(root, Long.MIN_VALUE, Long.MAX_VALUE);
@@ -226,7 +227,7 @@ public class BinaryTree {
     // next()和hasNext()操作的时间复杂度是O(1)，并使用O(h) 内存，其中h是树的高度。
     // 构造函数名称主要体现了BSTIterator二叉搜索树迭代器含义，名称为了和类名一致
     public static Stack<TreeNode> nodeStack = null;
-    public BinaryTree(TreeNode root) {
+    public BinaryTreeSolution(TreeNode root) {
         nodeStack = new Stack<>();
         while (root != null) {
             nodeStack.push(root);
