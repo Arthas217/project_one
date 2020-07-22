@@ -341,6 +341,40 @@ public class BinaryTree {
         return lson || rson || root.val == p.val || root.val == q.val;
     }
 
+
+    // 235. 二叉搜索树的最近公共祖先
+    public TreeNode lowestCommonAncestorBST(TreeNode root, TreeNode p, TreeNode q) {
+        //根结点比两个结点都大 就在左子树找
+        //根结点比两个结点都小 就在右子树找
+        //否则就返回根结点
+        if (root.val > p.val && root.val > q.val) return lowestCommonAncestorBST(root.left, p, q);
+        if (root.val < p.val && root.val < q.val) return lowestCommonAncestorBST(root.right, p, q);
+        return root;
+    }
+
+    // 230. 二叉搜索树中第K小的元素，假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数
+    public static int kthSmallestBST(TreeNode root, int k) {
+        // 中序遍历 时间复杂度：O(N) 空间复杂度：O(N)
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        TreeNode temp = root;
+        while (temp != null || !stack.isEmpty()) {
+            if (temp != null) {
+                stack.push(temp);
+                temp = temp.left;
+            } else {
+                TreeNode node = stack.pop();
+                list.add(node.val);
+                temp = node.right;
+            }
+            if (list.size() == k) {
+                return list.get(k - 1);
+            }
+        }
+        return -1;
+    }
+
+
     public static void main(String[] args) {
 //        TreeNode treeNode1 = new TreeNode(1);
 //        TreeNode treeNode2 = new TreeNode(2);
@@ -388,26 +422,36 @@ public class BinaryTree {
 //        System.out.println(lists.stream().collect(Collectors.toList()));
 //        System.out.println(lists2.stream().collect(Collectors.toList()));
 
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(5);
-        TreeNode t3 = new TreeNode(1);
-        TreeNode t4 = new TreeNode(6);
-        TreeNode t5 = new TreeNode(2);
-        TreeNode t6 = new TreeNode(0);
-        TreeNode t7 = new TreeNode(8);
-        TreeNode t8 = new TreeNode(7);
-        TreeNode t9 = new TreeNode(4);
-        t1.left=t2;
-        t1.right=t3;
-        t2.left=t4;
-        t2.right=t5;
-        t3.left=t6;
-        t3.right=t7;
-        t5.left=t8;
-        t5.right=t9;
-        TreeNode res = lowestCommonAncestor(t1, t7, t9);
-        System.out.println(res.val);
+//        TreeNode t1 = new TreeNode(3);
+//        TreeNode t2 = new TreeNode(5);
+//        TreeNode t3 = new TreeNode(1);
+//        TreeNode t4 = new TreeNode(6);
+//        TreeNode t5 = new TreeNode(2);
+//        TreeNode t6 = new TreeNode(0);
+//        TreeNode t7 = new TreeNode(8);
+//        TreeNode t8 = new TreeNode(7);
+//        TreeNode t9 = new TreeNode(4);
+//        t1.left=t2;
+//        t1.right=t3;
+//        t2.left=t4;
+//        t2.right=t5;
+//        t3.left=t6;
+//        t3.right=t7;
+//        t5.left=t8;
+//        t5.right=t9;
+//        TreeNode res = lowestCommonAncestor(t1, t7, t9);
+//        System.out.println(res.val);
 
+
+        TreeNode t1 = new TreeNode(3);
+        TreeNode t2 = new TreeNode(1);
+        TreeNode t3 = new TreeNode(4);
+        TreeNode t4 = new TreeNode(2);
+        t1.left = t2;
+        t1.right = t3;
+        t3.right = t2;
+        int kthSmallestBST = kthSmallestBST(t1, 1);
+        System.out.println(kthSmallestBST);
 
     }
 }
