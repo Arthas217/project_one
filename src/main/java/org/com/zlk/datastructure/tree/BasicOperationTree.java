@@ -142,9 +142,7 @@ public class BasicOperationTree {
 
 
     /**
-     * 深度遍历 DFS
-     * 事实上深度遍历就是上面的前序、中序和后序。可是为了保证与广度优先遍历相照顾，也写在这。
-     * 代码也比較好理解，事实上就是前序遍历
+     * 深度遍历 DFS 事实上就是前序遍历  非递归
      */
     public static void depthOrderTraverse(TreeNode root) {
         if (root == null) {
@@ -163,6 +161,18 @@ public class BasicOperationTree {
                 stack.push(node.left);
             }
         }
+    }
+
+    /**
+     * 深度遍历DFS 递归
+     */
+    public static void depthOrderTraverse1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.val + "  ");
+        depthOrderTraverse1(root.left);
+        depthOrderTraverse1(root.right);
     }
 
 

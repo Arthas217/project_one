@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * 二叉树
@@ -253,37 +254,111 @@ public class BinaryTree {
     }
 
 
+    // 102. 二叉树的层序遍历 BFS  迭代实现
+    // 时间复杂度： O(n) 空间复杂度：O(n)
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        // 结果集合
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        // 使用队列
+        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        // 根节点入队
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            List<Integer> temp = new LinkedList<>();
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                TreeNode treeNode = queue.poll();
+                temp.add(treeNode.val);
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+            }
+            res.add(temp);
+        }
+        return res;
+    }
+
+    // 102. 二叉树的层序遍历-DFS递归
+    public static List<List<Integer>> levelOrder2(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<List<Integer>>();
+        }
+        //用来存放最终结果
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        levelOrderDFS(1, root, res);
+        return res;
+    }
+
+    private static void levelOrderDFS(int index, TreeNode root, List<List<Integer>> res) {
+        // 插入一个空list放到res中
+        if (index > res.size()) {
+            res.add(new ArrayList<Integer>());
+        }
+        // 将当前节点的值加入到res中,index代表当前层  空间复杂度：O(h)，h 是树的高度
+        res.get(index - 1).add(root.val);
+        // 递归的处理左子树，右子树，同时将层数index+1
+        if (root.left != null) {
+            levelOrderDFS(index + 1, root.left, res);
+        }
+        if (root.right != null) {
+            levelOrderDFS(index + 1, root.right, res);
+        }
+    }
+
+
     public static void main(String[] args) {
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode3 = new TreeNode(3);
-        treeNode1.right = treeNode2;
-        treeNode2.left = treeNode3;
-        List<Integer> ret = inorderTraversal(treeNode1);
-        List<Integer> ret1 = inorder(treeNode1);
-        List<Integer> postorder = postorder(treeNode1);
-        List<Integer> postorder2 = postorder2(treeNode1);
-        for (Integer num : postorder2) {
-            System.out.print(num + "\t");
-        }
+//        TreeNode treeNode1 = new TreeNode(1);
+//        TreeNode treeNode2 = new TreeNode(2);
+//        TreeNode treeNode3 = new TreeNode(3);
+//        treeNode1.right = treeNode2;
+//        treeNode2.left = treeNode3;
+//        List<Integer> ret = inorderTraversal(treeNode1);
+//        List<Integer> ret1 = inorder(treeNode1);
+//        List<Integer> postorder = postorder(treeNode1);
+//        List<Integer> postorder2 = postorder2(treeNode1);
+//        for (Integer num : postorder2) {
+//            System.out.print(num + "\t");
+//        }
+//
+//        boolean validBST = isValidBST(treeNode1);
+//        boolean validBST1 = isValidBST1(treeNode1);
+//
+//        System.out.println();
+//        TreeNode t1 = new TreeNode(7);
+//        TreeNode t2 = new TreeNode(3);
+//        TreeNode t3 = new TreeNode(15);
+//        TreeNode t4 = new TreeNode(9);
+//        TreeNode t5 = new TreeNode(20);
+//        t1.left =t2;
+//        t1.right=t3;
+//        t3.left =t4;
+//        t3.right=t5;
+//        BinaryTree bstIterator = new BinaryTree(t1);
+//        while (bstIterator.hasNext()){
+//            System.out.println(bstIterator.next());
+//        }
 
-        boolean validBST = isValidBST(treeNode1);
-        boolean validBST1 = isValidBST1(treeNode1);
 
-        System.out.println();
-        TreeNode t1 = new TreeNode(7);
-        TreeNode t2 = new TreeNode(3);
-        TreeNode t3 = new TreeNode(15);
-        TreeNode t4 = new TreeNode(9);
-        TreeNode t5 = new TreeNode(20);
-        t1.left =t2;
+        TreeNode t1 = new TreeNode(3);
+        TreeNode t2 = new TreeNode(9);
+        TreeNode t3 = new TreeNode(20);
+        TreeNode t4 = new TreeNode(15);
+        TreeNode t5 = new TreeNode(7);
+        t1.left=t2;
         t1.right=t3;
-        t3.left =t4;
+        t3.left=t4;
         t3.right=t5;
-        BinaryTree bstIterator = new BinaryTree(t1);
-        while (bstIterator.hasNext()){
-            System.out.println(bstIterator.next());
-        }
+        List<List<Integer>> lists = levelOrder(t1);
+        List<List<Integer>> lists2 = levelOrder2(t1);
+        System.out.println(lists.stream().collect(Collectors.toList()));
+        System.out.println(lists2.stream().collect(Collectors.toList()));
+
 
     }
 }
