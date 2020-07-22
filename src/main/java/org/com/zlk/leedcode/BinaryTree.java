@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * 二叉树
@@ -374,6 +375,43 @@ public class BinaryTree {
         return -1;
     }
 
+    // 103. 二叉树的锯齿形层次遍历
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        // 结果集合
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        //递归实现DFS ，双端队列保存同一层的所有节点，并交替插入方向（从首部插入或从尾部插入）得到需要的输出顺序。
+        zigzagLevelOrderDFS(root, 1, res);
+        return res;
+    }
+
+    private static void zigzagLevelOrderDFS(TreeNode root, int index, List<List<Integer>> res) {
+        if (index > res.size()) {
+            // 每层创建一个双端队列
+            LinkedList<Integer> queue = new LinkedList<Integer>();
+            queue.add(root.val);
+            res.add(queue);
+        }else {
+            // 将遍历的节点值加入到对应queue中
+            if (index % 2 != 0) {
+                // 尾插入
+                res.get(index-1).add(root.val);
+            } else {
+                // 头插入
+                res.get(index-1).add(0, root.val);
+            }
+        }
+        // 递归DFS
+        if (root.left != null) {
+            zigzagLevelOrderDFS(root.left, index + 1, res);
+        }
+        if (root.right != null) {
+            zigzagLevelOrderDFS(root.right, index + 1, res);
+        }
+    }
+
 
     public static void main(String[] args) {
 //        TreeNode treeNode1 = new TreeNode(1);
@@ -408,19 +446,20 @@ public class BinaryTree {
 //        }
 
 
-//        TreeNode t1 = new TreeNode(3);
-//        TreeNode t2 = new TreeNode(9);
-//        TreeNode t3 = new TreeNode(20);
-//        TreeNode t4 = new TreeNode(15);
-//        TreeNode t5 = new TreeNode(7);
-//        t1.left=t2;
-//        t1.right=t3;
-//        t3.left=t4;
-//        t3.right=t5;
-//        List<List<Integer>> lists = levelOrder(t1);
-//        List<List<Integer>> lists2 = levelOrder2(t1);
-//        System.out.println(lists.stream().collect(Collectors.toList()));
-//        System.out.println(lists2.stream().collect(Collectors.toList()));
+        TreeNode t1 = new TreeNode(3);
+        TreeNode t2 = new TreeNode(9);
+        TreeNode t3 = new TreeNode(20);
+        TreeNode t4 = new TreeNode(15);
+        TreeNode t5 = new TreeNode(7);
+        t1.left=t2;
+        t1.right=t3;
+        t3.left=t4;
+        t3.right=t5;
+        List<List<Integer>> lists = levelOrder(t1);
+        List<List<Integer>> lists2 = levelOrder2(t1);
+        System.out.println(lists.stream().collect(Collectors.toList()));
+        System.out.println(lists2.stream().collect(Collectors.toList()));
+        System.out.println(zigzagLevelOrder(t1).stream().collect(Collectors.toList()));
 
 //        TreeNode t1 = new TreeNode(3);
 //        TreeNode t2 = new TreeNode(5);
@@ -443,15 +482,16 @@ public class BinaryTree {
 //        System.out.println(res.val);
 
 
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(1);
-        TreeNode t3 = new TreeNode(4);
-        TreeNode t4 = new TreeNode(2);
-        t1.left = t2;
-        t1.right = t3;
-        t3.right = t2;
-        int kthSmallestBST = kthSmallestBST(t1, 1);
-        System.out.println(kthSmallestBST);
+//        TreeNode t1 = new TreeNode(3);
+//        TreeNode t2 = new TreeNode(1);
+//        TreeNode t3 = new TreeNode(4);
+//        TreeNode t4 = new TreeNode(2);
+//        t1.left = t2;
+//        t1.right = t3;
+//        t3.right = t2;
+//        int kthSmallestBST = kthSmallestBST(t1, 1);
+//        System.out.println(kthSmallestBST);
+
 
     }
 }
