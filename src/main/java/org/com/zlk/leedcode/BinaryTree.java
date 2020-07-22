@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 /**
  * 二叉树
@@ -311,6 +310,36 @@ public class BinaryTree {
         }
     }
 
+    // 236. 二叉树中两个指定节点的最近公共祖先,最近公共祖先节点可以为节点本身,所有节点的值都是唯一的。
+    // 时间复杂度：O(N)空间复杂度：O(N)，其中 N 是二叉树的节点数。递归调用的栈深度取决于二叉树的高度
+    // 二叉树最坏情况下为一条链，此时高度为 N，因此空间复杂度为 O(N)
+    // 递归方式
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode res = new TreeNode(0);
+        lcaDFS(root, p, q, res);
+        return res;
+    }
+
+    private static boolean lcaDFS(TreeNode root, TreeNode p, TreeNode q, TreeNode res) {
+        // 当遍历到叶结点后就会返回null
+        if (root == null) {
+            return false;
+        }
+        // 递归遍历左子树和右子树是否包含p或q
+        boolean lson = lcaDFS(root.left, p, q, res);
+        boolean rson = lcaDFS(root.right, p, q, res);
+        // root是 p, q的最近公共祖先
+        // 1.p和q在root的子树中，且分列root的异侧
+        // 2.p=root ，且 q在root的左或右子树中；
+        // 3.q=root ，且 p在root的左或右子树中；
+        if ((lson && rson) || (root.val == p.val || root.val == q.val) && (lson || rson)) {
+            // 记录公共祖先
+            res.val = root.val;
+        }
+        // 自底向上从叶子节点开始更新的，判断子树是否包含p或q
+        // 祖先的定义：一个节点p在root的左（右）子树中，或p=root ，则称root是p的祖先
+        return lson || rson || root.val == p.val || root.val == q.val;
+    }
 
     public static void main(String[] args) {
 //        TreeNode treeNode1 = new TreeNode(1);
@@ -345,19 +374,39 @@ public class BinaryTree {
 //        }
 
 
+//        TreeNode t1 = new TreeNode(3);
+//        TreeNode t2 = new TreeNode(9);
+//        TreeNode t3 = new TreeNode(20);
+//        TreeNode t4 = new TreeNode(15);
+//        TreeNode t5 = new TreeNode(7);
+//        t1.left=t2;
+//        t1.right=t3;
+//        t3.left=t4;
+//        t3.right=t5;
+//        List<List<Integer>> lists = levelOrder(t1);
+//        List<List<Integer>> lists2 = levelOrder2(t1);
+//        System.out.println(lists.stream().collect(Collectors.toList()));
+//        System.out.println(lists2.stream().collect(Collectors.toList()));
+
         TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(9);
-        TreeNode t3 = new TreeNode(20);
-        TreeNode t4 = new TreeNode(15);
-        TreeNode t5 = new TreeNode(7);
+        TreeNode t2 = new TreeNode(5);
+        TreeNode t3 = new TreeNode(1);
+        TreeNode t4 = new TreeNode(6);
+        TreeNode t5 = new TreeNode(2);
+        TreeNode t6 = new TreeNode(0);
+        TreeNode t7 = new TreeNode(8);
+        TreeNode t8 = new TreeNode(7);
+        TreeNode t9 = new TreeNode(4);
         t1.left=t2;
         t1.right=t3;
-        t3.left=t4;
-        t3.right=t5;
-        List<List<Integer>> lists = levelOrder(t1);
-        List<List<Integer>> lists2 = levelOrder2(t1);
-        System.out.println(lists.stream().collect(Collectors.toList()));
-        System.out.println(lists2.stream().collect(Collectors.toList()));
+        t2.left=t4;
+        t2.right=t5;
+        t3.left=t6;
+        t3.right=t7;
+        t5.left=t8;
+        t5.right=t9;
+        TreeNode res = lowestCommonAncestor(t1, t7, t9);
+        System.out.println(res.val);
 
 
     }

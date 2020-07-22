@@ -6,7 +6,7 @@ import java.util.Stack;
 public class BasicOperationTree {
 
     /**
-     * 先序遍历递归
+     * 先序遍历递归（DFS)
      */
     public static void preOrder(TreeNode root) {
         if (root != null) {
@@ -40,7 +40,7 @@ public class BasicOperationTree {
 
 
     /**
-     * 先序遍历非递归（ DFS)  需要使用栈
+     * 先序遍历非递归需要使用栈
      */
     public static void preOrder2(TreeNode root) {
         // LinkedList是一个双向链表
@@ -142,7 +142,7 @@ public class BasicOperationTree {
 
 
     /**
-     * 深度遍历 DFS 事实上就是前序遍历  非递归
+     * 深度遍历 事实上就是前序遍历
      */
     public static void depthOrderTraverse(TreeNode root) {
         if (root == null) {
