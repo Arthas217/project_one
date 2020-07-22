@@ -79,8 +79,8 @@ public class StrSolution {
         return result;
     }
 
-    // 5. 最长回文子串 暴力
-    //动态规划https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
+    // 5. 最长回文子串 动态规划
+    // https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
     public static String longestPalindrome2(String s) {
         int len = s.length();
         // 单字符 || null
