@@ -118,17 +118,81 @@ public class ArraySolution {
     }
 
 
+    //  小米面试：数组(类似队列）取和最大的k个连续元素
+    public static int maxSumQueue4K(int[] arr, int k) {
+        int max = 0;
+        int len = arr.length;
+        for (int i = 0; i < len; i++) {
+            int sum = 0;
+            for (int j = 0; j < k; j++) {
+                sum += arr[(i + j) % len];
+            }
+            if (sum > max) {
+                max = sum;
+            }
+        }
+        return max;
+    }
+
+    // 普通版：数组中取最大的k个连续元素的和
+    public static int maxSumArray4K(int[] arr, int k) {
+        int max = 0;
+        int len = arr.length;
+        for (int i = 0; i < len - k + 1; i++) {
+            int sum = 0;
+            for (int j = 0; j < k; j++) {
+                sum += arr[i + j];
+            }
+            if (sum > max) {
+                max = sum;
+            }
+        }
+        return max;
+    }
+
+    // 1. 两数之和
+    public static int[] twoSum(int[] nums, int target) {
+        // key:num[i]元素值  value:i元素的位置
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int key = target - nums[i];
+            if (map.containsKey(key)) {
+                return new int[]{map.get(key), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+
+
+
+
+
 
     public static void main(String[] args) {
-        int[] arr = {4, 1, 2, 1, 2, 4, 3, 7, 3};
-        int[] arr2 = {1, 2, -6, 1, 1, 2, 2, 3, 3, 3};
-        int[] arr3 = {1, 2, 1, 3, 2, 5};
+//        int[] arr = {4, 1, 2, 1, 2, 4, 3, 7, 3};
+//        int[] arr2 = {1, 2, -6, 1, 1, 2, 2, 3, 3, 3};
+//        int[] arr3 = {1, 2, 1, 3, 2, 5};
 //        System.out.println(singleNumber(arr));
 //        System.out.println(singleNumberOfHashtable(arr));
 //        System.out.println(singleNumber2(arr2));
-        int[] res = singleNumber3(arr3);
-        for (int n: res) {
-            System.out.println(n);
+//        int[] res = singleNumber3(arr3);
+//        for (int n: res) {
+//            System.out.println(n);
+//        }
+
+//        int[] arr4 = {3, 1, 6, 2, 1, 2};
+//        int[] arr5 = {3, 1, 4, 2, 2, 4};
+//        System.out.println(maxSumArray4K(arr4, 3));
+//        System.out.println(maxSumArray4K(arr5, 3));
+//        System.out.println(maxSumQueue4K(arr4, 3));
+//        System.out.println(maxSumQueue4K(arr5, 3));
+
+        int[] arr = {2, 7, -11, 15};
+        int target = -9;
+        int[] twoSum = twoSum(arr, target);
+        for (int value : twoSum) {
+            System.out.print(value + "\t");
         }
     }
 }
