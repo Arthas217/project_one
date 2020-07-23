@@ -9,6 +9,25 @@ import java.util.Map;
  */
 public class StrSolution {
 
+    // 剑指 Offer 05. 替换空格
+    public static String replaceSpace(String s) {
+        int len = s.length();
+        char[] chars = new char[len * 3];
+        int size = 0;
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (c == ' ') {
+                chars[size++] = '%';
+                chars[size++] = '2';
+                chars[size++] = '0';
+            } else {
+                chars[size++] = c;
+            }
+        }
+        // size 记录真实的位置
+        return new String(chars, 0, size);
+    }
+
     // 3. 无重复字符的最长子串
     public static int lengthOfLongestSubstring(String s) {
         // 滑动窗口最大值
@@ -128,8 +147,11 @@ public class StrSolution {
 //        String st = "A man, a plan, a canal: Panama";
 //        System.out.println(isPalindrome(st));
 
-        String str = "amanaplanacanalpanama";
-        System.out.println(longestPalindrome(str));
-        System.out.println(longestPalindrome2(str));
+//        String str = "amanaplanacanalpanama";
+//        System.out.println(longestPalindrome(str));
+//        System.out.println(longestPalindrome2(str));
+
+        String s = "abc de ";
+        System.out.println(replaceSpace(s));
     }
 }
