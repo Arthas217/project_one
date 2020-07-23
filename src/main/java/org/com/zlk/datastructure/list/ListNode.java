@@ -2,17 +2,14 @@ package org.com.zlk.datastructure.list;
 
 public class ListNode {
 
-    /**
-     * 单链表
-     */
-    int value; //节点值
+    public int val; //节点值
 
-    ListNode next; //指向节点指针
+    public ListNode next; //指向节点指针
 
     public ListNode() {
     }
 
     public ListNode(int value) {
-        this.value = value;
+        this.val = val;
     }
 }

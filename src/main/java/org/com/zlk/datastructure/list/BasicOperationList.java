@@ -17,7 +17,7 @@ public class BasicOperationList {
 
         for (int i = 1; i < 6; i++) {
             p = new ListNode();
-            p.value = i;
+            p.val = i;
             r.next = p;
             r = p;
         }
@@ -33,7 +33,7 @@ public class BasicOperationList {
     public void printHeadList(ListNode head) {
         ListNode r = head.next;
         while (r != null) {
-            System.out.println(r.value + " ");
+            System.out.println(r.val + " ");
             r = r.next;
         }
     }
@@ -43,7 +43,7 @@ public class BasicOperationList {
      */
     public void printList(ListNode head) {
         while (head != null) {
-            System.out.println(head.value + " ");
+            System.out.println(head.val + " ");
             head = head.next;
         }
     }

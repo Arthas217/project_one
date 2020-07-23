@@ -185,4 +185,10 @@ public class BasicOperationTree {
         }
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
+
+    public static void swap(TreeNode root) {
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+    }
 }

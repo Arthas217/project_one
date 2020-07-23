@@ -1,5 +1,6 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.datastructure.tree.BasicOperationTree;
 import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.ArrayList;
@@ -15,6 +16,19 @@ import java.util.stream.Collectors;
  * @Date 2020/7/16
  */
 public class BinaryTreeSolution {
+
+    // 剑指 Offer 27. 二叉树的镜像
+    public static TreeNode mirrorBinaryTree(TreeNode root) {
+        if (null == root) {
+            return null;
+        }
+        // 交换父节点的左右孩子
+        BasicOperationTree.swap(root);
+        mirrorBinaryTree(root.left);
+        mirrorBinaryTree(root.right);
+        return root;
+    }
+
 
     // 94-中序遍历-递归
     public static List<Integer> inorderTraversal(TreeNode root) {

@@ -114,6 +114,30 @@ public class MatrixSolution {
         }
     }
 
+
+    // 剑指 Offer 04. 二维数组中的查找
+    // 数组每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
+    public static boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        // 右上角元素
+        int row = 0, column = columns - 1;
+        while (row < rows && column >= 0) {
+            int num = matrix[row][column];
+            if (num == target) {
+                return true;
+            } else if (num > target) {
+                column--;
+            } else {
+                row++;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
 //        int[] value = printMatrix(a);
@@ -121,5 +145,8 @@ public class MatrixSolution {
         for (int num : value) {
             System.out.println(num);
         }
+
+        int[][] matrix = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
+        System.out.println(findNumberIn2DArray(matrix, 7));
     }
 }
