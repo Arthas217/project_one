@@ -3,11 +3,10 @@ package org.com.zlk.leedcode;
 import org.com.zlk.datastructure.tree.BasicOperationTree;
 import org.com.zlk.datastructure.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.com.zlk.datastructure.tree.BasicOperationTree.maxDepth;
 
 /**
  * LeetCode 二叉树专题
@@ -16,6 +15,63 @@ import java.util.stream.Collectors;
  * @Date 2020/7/16
  */
 public class BinaryTreeSolution {
+
+    // 226. 翻转二叉树
+    public TreeNode invertTree(TreeNode root) {
+        // 递归函数的终止条件，节点为空时返回
+        if (root == null) {
+            return root;
+        }
+        //下面三句是将当前节点的左右子树交换
+        TreeNode tmp = root.right;
+        root.right = root.left;
+        root.left = tmp;
+        //递归交换当前节点的 左子树
+        invertTree(root.left);
+        //递归交换当前节点的 右子树
+        invertTree(root.right);
+        //函数返回时就表示当前这个节点，以及它的左右子树都已经交换完了
+        return root;
+    }
+
+    // 637. 二叉树的层平均值
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            double sum = 0;
+            int qsize = queue.size();
+            for (int i = 0; i < qsize; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+                sum += node.val;
+            }
+            result.add(sum / qsize);
+        }
+        return result;
+    }
+
+    // 110. 平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        // 分别获取左右子树最大深度值
+        int leftChildDepth = maxDepth(root.left);
+        int rightChildDepth = maxDepth(root.right);
+        // 平衡树左右子树高度差都小于等于1
+        boolean match = Math.abs(leftChildDepth - rightChildDepth) < 2;
+        return match && isBalanced(root.left) && isBalanced(root.right);
+    }
 
     // 剑指 Offer 27. 二叉树的镜像
     public static TreeNode mirrorBinaryTree(TreeNode root) {
@@ -426,6 +482,52 @@ public class BinaryTreeSolution {
             zigzagLevelOrderDFS(root.right, index + 1, res);
         }
     }
+
+    // 513. 找树左下角的值(二叉树，在树的最后一行找到最左边的值)
+    int left_value = 0;
+    int max_level = 0;
+
+    public int findBottomLeftValue(TreeNode root) {
+        // 最后一行 可以用DFS遍历，记录最深层level
+        bottomLeftDFS(root, 1);
+        return left_value;
+    }
+
+    public void bottomLeftDFS(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level > max_level) {
+            max_level = level;
+            left_value = root.val;
+        }
+        bottomLeftDFS(root.left, level + 1);
+        bottomLeftDFS(root.right, level + 1);
+    }
+
+    // 513. 找树左下角的值
+    public int findBottomLeftValue2(TreeNode root){
+        if (root ==null) {
+            return -1;
+        }
+        // BFS遍历.队列保存每层对应节点子节点
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            // 注意这里没有用临时节点
+            root = queue.poll();
+            // 注意这里先走右子树，如果最后一层有两个节点，应该最后一个弹出的元素是符合条件的。
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+        }
+        return root.val;
+    }
+
+
 
 
     public static void main(String[] args) {
