@@ -16,6 +16,21 @@ import static org.com.zlk.datastructure.tree.BasicOperationTree.maxDepth;
  */
 public class BinaryTreeSolution {
 
+    // 617. 合并二叉树
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        // 递归 时间复杂度：O(N) 空间复杂度O(N) 栈空间
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
+    }
+
     // 226. 翻转二叉树
     public TreeNode invertTree(TreeNode root) {
         // 递归函数的终止条件，节点为空时返回
