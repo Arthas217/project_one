@@ -16,6 +16,27 @@ import static org.com.zlk.datastructure.tree.BasicOperationTree.maxDepth;
  */
 public class BinaryTreeSolution {
 
+    // 剑指 Offer 28. 对称的二叉树
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return symmetricHelp(root.left, root.right);
+    }
+
+    public boolean symmetricHelp(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return symmetricHelp(left.left, right.right) && symmetricHelp(left.right, right.left);
+    }
+
     // 617. 合并二叉树
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         // 递归 时间复杂度：O(N) 空间复杂度O(N) 栈空间
@@ -98,6 +119,45 @@ public class BinaryTreeSolution {
         }
         return (a.val == b.val) && recur(a.left, b.left) && recur(a.right, b.right);
     }
+
+    // 404. 左叶子之和
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        // 判断节点是否是左叶子节点
+        if (root.left!= null && root.left.left == null && root.left.right == null) {
+            // 递归找其他的左孩子
+            return root.left.val + sumOfLeftLeaves(root.right);
+        }
+        // 非叶子节点 左子树和柚子树都要递归处理。
+        return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+    }
+
+    // 404. 左叶子之和
+    public int sumOfLeftLeaves2(TreeNode root) {
+        return sumOfLeftLeaves2Help(root, false);
+    }
+
+    public int sumOfLeftLeaves2Help(TreeNode root, boolean flag) {
+        if (root == null) {
+            return 0;
+        }
+        int leave = 0;
+        // 左叶子节点
+        if (flag && root.left == null && root.right == null) {
+            leave = root.val;
+        }
+        // 标志位节点一定是左孩子
+        int left = sumOfLeftLeaves2Help(root.left, true);
+        int right = sumOfLeftLeaves2Help(root.right, false);
+        return leave + left + right;
+    }
+
+
+
+
+
 
     // 110. 平衡二叉树
     public boolean isBalanced(TreeNode root) {
