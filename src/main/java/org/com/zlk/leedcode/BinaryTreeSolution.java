@@ -582,31 +582,10 @@ public class BinaryTreeSolution {
         }
     }
 
-    // 513. 找树左下角的值(二叉树，在树的最后一行找到最左边的值)
-    int left_value = 0;
-    int max_level = 0;
 
-    public int findBottomLeftValue(TreeNode root) {
-        // 最后一行 可以用DFS遍历，记录最深层level
-        bottomLeftDFS(root, 1);
-        return left_value;
-    }
-
-    public void bottomLeftDFS(TreeNode root, int level) {
+    // 513. 找树左下角的值 (二叉树，在树的最后一行找到最左边的值)  *****
+    public int findBottomLeftValue(TreeNode root){
         if (root == null) {
-            return;
-        }
-        if (level > max_level) {
-            max_level = level;
-            left_value = root.val;
-        }
-        bottomLeftDFS(root.left, level + 1);
-        bottomLeftDFS(root.right, level + 1);
-    }
-
-    // 513. 找树左下角的值
-    public int findBottomLeftValue2(TreeNode root){
-        if (root ==null) {
             return -1;
         }
         // BFS遍历.队列保存每层对应节点子节点
@@ -624,6 +603,27 @@ public class BinaryTreeSolution {
             }
         }
         return root.val;
+    }
+
+    // 513. 找树左下角的值
+    int left_value = 0;
+    int max_level = 0;
+    public int findBottomLeftValue2(TreeNode root) {
+        // 最后一行 可以用DFS遍历，记录最深层level
+        bottomLeftDFS(root, 1);
+        return left_value;
+    }
+
+    public void bottomLeftDFS(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level > max_level) {
+            max_level = level;
+            left_value = root.val;
+        }
+        bottomLeftDFS(root.left, level + 1);
+        bottomLeftDFS(root.right, level + 1);
     }
 
 
