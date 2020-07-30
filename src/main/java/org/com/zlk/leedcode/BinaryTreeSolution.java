@@ -3,8 +3,10 @@ package org.com.zlk.leedcode;
 import org.com.zlk.datastructure.tree.BasicOperationTree;
 import org.com.zlk.datastructure.tree.TreeNode;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 import static org.com.zlk.datastructure.tree.BasicOperationTree.maxDepth;
 
@@ -626,7 +628,102 @@ public class BinaryTreeSolution {
         bottomLeftDFS(root.right, level + 1);
     }
 
+    // 257. 二叉树的所有路径 (递归）
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths = new ArrayList<>();
+        construct_path(root, "", paths);
+        return paths;
+    }
 
+    private void construct_path(TreeNode root, String s, List<String> paths) {
+        if (root != null) {
+            s += Integer.toString(root.val);
+            // 当前节点是叶子节点
+            if ((root.left == null) && (root.right == null)) {
+                // 把路径加入到集合
+                paths.add(s);
+            } else {
+                s += "->";
+                // 递归
+                construct_path(root.left, s, paths);
+                construct_path(root.right, s, paths);
+            }
+        }
+    }
+
+    // 257. 二叉树的所有路径 (迭代）
+    public List<String> binaryTreePaths2(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        LinkedList<String> pathQueue = new LinkedList();
+        LinkedList<TreeNode> nodeQueue = new LinkedList<>();
+        pathQueue.add(Integer.toString(root.val)); // 1
+        nodeQueue.add(root);
+        TreeNode node;
+        String path;
+        while (!nodeQueue.isEmpty()) {
+            // 保存每次得到的节点和路径
+            node = nodeQueue.poll();
+            path = pathQueue.poll();
+            // 叶子节点
+            if (node.left == null && node.right == null) {
+                res.add(path);
+            }
+            // 将root左右孩子加入到nodeQueue中
+            if (node.left != null) {
+                nodeQueue.add(node.left);
+                pathQueue.add(path + "->" + node.left.val);
+            }
+            if (node.right != null) {
+                nodeQueue.add(node.right);
+                pathQueue.add(path + "->" + node.right.val);
+            }
+        }
+        return res;
+    }
+
+    // 112. 路径总和(判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和)
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
+        // dfs 递归
+        if (root.left == null && root.right == null) {
+            return sum == root.val;
+        }
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+
+
+    // 113. 路径总和 II
+    // 剑指 Offer 34.二叉树中和为某一值的所有路径 (树的根节点开始往下一直到叶节点所经过的节点形成一条路径)
+    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<>();
+        pathSumDFS(root, new ArrayList<>(), res, sum);
+        return res;
+    }
+
+    private static void pathSumDFS(TreeNode root, List<Integer> path, List<List<Integer>> res, int sum) {
+        if (root == null) {
+            return;
+        }
+        path.add(root.val);
+        int remain = sum - root.val;
+        if (root.left == null && root.right == null) {
+            // 注意else别忘记了
+            if (remain == 0) {
+                res.add(path);
+                return;
+            } else {
+                return;
+            }
+        }
+        // 注意新建一个ArrayList
+        pathSumDFS(root.left, new ArrayList<>(path), res, remain);
+        pathSumDFS(root.right, new ArrayList<>(path), res, remain);
+    }
 
 
     public static void main(String[] args) {
@@ -662,20 +759,20 @@ public class BinaryTreeSolution {
 //        }
 
 
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(9);
-        TreeNode t3 = new TreeNode(20);
-        TreeNode t4 = new TreeNode(15);
-        TreeNode t5 = new TreeNode(7);
-        t1.left=t2;
-        t1.right=t3;
-        t3.left=t4;
-        t3.right=t5;
-        List<List<Integer>> lists = levelOrder(t1);
-        List<List<Integer>> lists2 = levelOrder2(t1);
-        System.out.println(lists.stream().collect(Collectors.toList()));
-        System.out.println(lists2.stream().collect(Collectors.toList()));
-        System.out.println(zigzagLevelOrder(t1).stream().collect(Collectors.toList()));
+//        TreeNode t1 = new TreeNode(3);
+//        TreeNode t2 = new TreeNode(9);
+//        TreeNode t3 = new TreeNode(20);
+//        TreeNode t4 = new TreeNode(15);
+//        TreeNode t5 = new TreeNode(7);
+//        t1.left=t2;
+//        t1.right=t3;
+//        t3.left=t4;
+//        t3.right=t5;
+//        List<List<Integer>> lists = levelOrder(t1);
+//        List<List<Integer>> lists2 = levelOrder2(t1);
+//        System.out.println(lists.stream().collect(Collectors.toList()));
+//        System.out.println(lists2.stream().collect(Collectors.toList()));
+//        System.out.println(zigzagLevelOrder(t1).stream().collect(Collectors.toList()));
 
 //        TreeNode t1 = new TreeNode(3);
 //        TreeNode t2 = new TreeNode(5);
@@ -707,6 +804,28 @@ public class BinaryTreeSolution {
 //        t3.right = t2;
 //        int kthSmallestBST = kthSmallestBST(t1, 1);
 //        System.out.println(kthSmallestBST);
+
+        TreeNode t1 = new TreeNode(5);
+        TreeNode t2 = new TreeNode(4);
+        TreeNode t3 = new TreeNode(8);
+        TreeNode t4 = new TreeNode(11);
+        TreeNode t5 = new TreeNode(13);
+        TreeNode t6 = new TreeNode(4);
+        TreeNode t7 = new TreeNode(7);
+        TreeNode t8 = new TreeNode(2);
+        TreeNode t9 = new TreeNode(5);
+        TreeNode t10 = new TreeNode(1);
+        t1.left = t2;
+        t1.right = t3;
+        t2.left =t4;
+        t3.left = t5;
+        t3.right = t6;
+        t4.left = t7;
+        t4.right = t8;
+        t6.left = t9 ;
+        t6.right = t10;
+        List<List<Integer>> res = pathSum(t1, 22);
+        System.out.println(res);
 
 
     }
