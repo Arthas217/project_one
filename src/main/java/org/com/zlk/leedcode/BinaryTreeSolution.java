@@ -75,6 +75,30 @@ public class BinaryTreeSolution {
         return result;
     }
 
+    // 剑指 Offer 26. 树的子结构 (约定空树不是任意一个树的子结构)B是A的子结构
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        // 如果A或B都走完了还没找到，那应该就是找不到了
+        if (A == null || B == null) {
+            return false;
+        }
+        // DFS 看看当前节点/看看左边/看看右边
+        return recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+
+    }
+
+    // 递归
+    private boolean recur(TreeNode a, TreeNode b) {
+        // b这边都看完了，还没挑出不同？那就是了吧！
+        if (b == null) {
+            return true;
+        }
+        // b这边还没看完了，a那边就null了
+        if (a == null) {
+            return false;
+        }
+        return (a.val == b.val) && recur(a.left, b.left) && recur(a.right, b.right);
+    }
+
     // 110. 平衡二叉树
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
