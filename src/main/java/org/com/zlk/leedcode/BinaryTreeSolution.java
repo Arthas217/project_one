@@ -782,7 +782,7 @@ public class BinaryTreeSolution {
 
     // 437. 路径总和 III  DFS加回溯  别人做法
     // https://leetcode-cn.com/problems/path-sum-iii/solution/liang-chong-fang-fa-jian-dan-yi-dong-ban-ben-by-a3/
-    public static int pathSum(TreeNode root, int sum) {
+    public static int pathSum333(TreeNode root, int sum) {
         HashMap<Integer, Integer> map = new HashMap<>();
         // key 路径和 value 次数
         map.put(0, 1);
@@ -806,8 +806,29 @@ public class BinaryTreeSolution {
         return res;
     }
 
+    // 124. 二叉树中的最大路径和(一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。)hard
+    static int maxSum = Integer.MIN_VALUE;
+    public static int maxPathSum(TreeNode root) {
+        // 根节点递归得到每个节点的最大贡献值
+        maxGain(root);
+        return maxSum;
+    }
 
-
+    public static int maxGain(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        // 递归计算左右子节点的最大贡献值
+        // 只有在最大贡献值大于0时，才会选取对应子节点
+        int leftGain = Math.max(maxGain(node.left), 0);
+        int rightGain = Math.max(maxGain(node.right), 0);
+        // 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+        int priceNewPath = node.val + leftGain + rightGain;
+        // 更新最大路径长度
+        maxSum = Math.max(maxSum, priceNewPath);
+        // 最大贡献值
+        return node.val + Math.max(leftGain, rightGain);
+    }
 
 
     public static void main(String[] args) {
@@ -919,24 +940,37 @@ public class BinaryTreeSolution {
 //        System.out.println(hasPathSum2);
 
 
-        TreeNode t1 = new TreeNode(10);
-        TreeNode t2 = new TreeNode(5);
-        TreeNode t3 = new TreeNode(-3);
-        TreeNode t4 = new TreeNode(3);
-        TreeNode t5 = new TreeNode(2);
-        TreeNode t6 = new TreeNode(11);
-        TreeNode t7 = new TreeNode(3);
-        TreeNode t8 = new TreeNode(-2);
-        TreeNode t9 = new TreeNode(1);
+//        TreeNode t1 = new TreeNode(10);
+//        TreeNode t2 = new TreeNode(5);
+//        TreeNode t3 = new TreeNode(-3);
+//        TreeNode t4 = new TreeNode(3);
+//        TreeNode t5 = new TreeNode(2);
+//        TreeNode t6 = new TreeNode(11);
+//        TreeNode t7 = new TreeNode(3);
+//        TreeNode t8 = new TreeNode(-2);
+//        TreeNode t9 = new TreeNode(1);
+//        t1.left =t2;
+//        t1.right =t3;
+//        t2.left=t4;
+//        t2.right=t5;
+//        t3.right=t6;
+//        t4.left=t7;
+//        t4.right=t8;
+//        t5.right =t9;
+//        int sum3 = pathSum333(t1, 8);
+//        System.out.println(sum3);
+
+
+        TreeNode t1 = new TreeNode(-10);
+        TreeNode t2 = new TreeNode(9);
+        TreeNode t3 = new TreeNode(20);
+        TreeNode t4 = new TreeNode(15);
+        TreeNode t5 = new TreeNode(7);
         t1.left =t2;
-        t1.right =t3;
-        t2.left=t4;
-        t2.right=t5;
-        t3.right=t6;
-        t4.left=t7;
-        t4.right=t8;
-        t5.right =t9;
-        int sum3 = pathSum(t1, 8);
-        System.out.println(sum3);
+        t1.right=t3;
+        t3.left=t4;
+        t3.right=t5;
+        int maxPathSum = maxPathSum(t1);
+        System.out.println(maxPathSum);
     }
 }
