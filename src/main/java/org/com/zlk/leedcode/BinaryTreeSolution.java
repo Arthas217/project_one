@@ -1,13 +1,9 @@
 package org.com.zlk.leedcode;
 
 import org.com.zlk.datastructure.tree.BasicOperationTree;
-import org.com.zlk.datastructure.tree.InitTreeNoe;
 import org.com.zlk.datastructure.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 import static org.com.zlk.datastructure.tree.BasicOperationTree.maxDepth;
 
@@ -747,9 +743,71 @@ public class BinaryTreeSolution {
     }
 
     // 437. 路径总和 III (需要从根节点开始，也不需要在叶子节点结束.二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。)
-    public int pathSum3(TreeNode root, int sum) {
-        return 0;
+    static int res = 0;
+    public static int pathSum3(TreeNode root, int sum) {
+        //双重DFS: 先序递归遍历每个节点; 以每个节点作为起始节点DFS寻找满足条件的路径.
+        if (root == null) {
+            return res;
+        }
+        // 注意这里的res不能作为dfs函数的参数。因为不是以根节点为起始点。
+        pathSum3DFS(root, sum);
+        pathSum3(root.left, sum);
+        pathSum3(root.right, sum);
+        return res;
     }
+
+    private static void pathSum3DFS(TreeNode root, int sum) {
+        if (root == null) {
+            return;
+        }
+        sum -= root.val;
+        if (sum == 0) {
+            res++;
+        }
+        pathSum3DFS(root.left, sum);
+        pathSum3DFS(root.right, sum);
+    }
+
+    // 437. 路径总和 III  同pathSum3方法
+    public static int pathSum33(TreeNode root, int sum) {
+        if (root == null) return 0;
+        return helper(root, sum) + pathSum33(root.left, sum) + pathSum33(root.right, sum);
+    }
+
+    private static int helper(TreeNode root, int sum) {
+        if (root == null) return 0;
+        sum -= root.val;
+        return (sum == 0 ? 1 : 0) + helper(root.left, sum) + helper(root.right, sum);
+    }
+
+    // 437. 路径总和 III  DFS加回溯  别人做法
+    // https://leetcode-cn.com/problems/path-sum-iii/solution/liang-chong-fang-fa-jian-dan-yi-dong-ban-ben-by-a3/
+    public static int pathSum(TreeNode root, int sum) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        // key 路径和 value 次数
+        map.put(0, 1);
+        return helper(root, map, sum, 0);
+    }
+
+    public static int helper(TreeNode root, HashMap<Integer, Integer> map, int sum, int pathSum) {
+        int res = 0;
+        if (root == null) {
+            return 0;
+        }
+        pathSum += root.val;
+        // 满足条件的路径
+        res += map.getOrDefault(pathSum - sum, 0);
+
+        map.put(pathSum, map.getOrDefault(pathSum, 0) + 1);
+        // dfs
+        res = helper(root.left, map, sum, pathSum) + helper(root.right, map, sum, pathSum) + res;
+        // 回溯
+        map.put(pathSum, map.get(pathSum) - 1);
+        return res;
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -831,34 +889,54 @@ public class BinaryTreeSolution {
 //        int kthSmallestBST = kthSmallestBST(t1, 1);
 //        System.out.println(kthSmallestBST);
 
-        TreeNode t1 = new TreeNode(5);
-        TreeNode t2 = new TreeNode(4);
-        TreeNode t3 = new TreeNode(8);
-        TreeNode t4 = new TreeNode(11);
-        TreeNode t5 = new TreeNode(13);
-        TreeNode t6 = new TreeNode(4);
-        TreeNode t7 = new TreeNode(7);
-        TreeNode t8 = new TreeNode(2);
-        TreeNode t9 = new TreeNode(5);
-        TreeNode t10 = new TreeNode(1);
-        t1.left = t2;
-        t1.right = t3;
-        t2.left =t4;
-        t3.left = t5;
-        t3.right = t6;
-        t4.left = t7;
-        t4.right = t8;
-        t6.left = t9 ;
-        t6.right = t10;
-        List<List<Integer>> res = pathSum2(t1, 22);
+//        TreeNode t1 = new TreeNode(5);
+//        TreeNode t2 = new TreeNode(4);
+//        TreeNode t3 = new TreeNode(8);
+//        TreeNode t4 = new TreeNode(11);
+//        TreeNode t5 = new TreeNode(13);
+//        TreeNode t6 = new TreeNode(4);
+//        TreeNode t7 = new TreeNode(7);
+//        TreeNode t8 = new TreeNode(2);
+//        TreeNode t9 = new TreeNode(5);
+//        TreeNode t10 = new TreeNode(1);
+//        t1.left = t2;
+//        t1.right = t3;
+//        t2.left =t4;
+//        t3.left = t5;
+//        t3.right = t6;
+//        t4.left = t7;
+//        t4.right = t8;
+//        t6.left = t9 ;
+//        t6.right = t10;
+//        List<List<Integer>> res = pathSum2(t1, 22);
 //        System.out.println(res);
 
 
-        TreeNode treeNode1 = InitTreeNoe.init1();
-        boolean hasPathSum = hasPathSum(treeNode1, 22);
-        boolean hasPathSum2 = hasPathSum2(treeNode1, 22);
-        System.out.println(hasPathSum);
-        System.out.println(hasPathSum2);
+//        TreeNode treeNode1 = InitTreeNoe.init1();
+//        boolean hasPathSum = hasPathSum(treeNode1, 22);
+//        boolean hasPathSum2 = hasPathSum2(treeNode1, 22);
+//        System.out.println(hasPathSum);
+//        System.out.println(hasPathSum2);
 
+
+        TreeNode t1 = new TreeNode(10);
+        TreeNode t2 = new TreeNode(5);
+        TreeNode t3 = new TreeNode(-3);
+        TreeNode t4 = new TreeNode(3);
+        TreeNode t5 = new TreeNode(2);
+        TreeNode t6 = new TreeNode(11);
+        TreeNode t7 = new TreeNode(3);
+        TreeNode t8 = new TreeNode(-2);
+        TreeNode t9 = new TreeNode(1);
+        t1.left =t2;
+        t1.right =t3;
+        t2.left=t4;
+        t2.right=t5;
+        t3.right=t6;
+        t4.left=t7;
+        t4.right=t8;
+        t5.right =t9;
+        int sum3 = pathSum(t1, 8);
+        System.out.println(sum3);
     }
 }
