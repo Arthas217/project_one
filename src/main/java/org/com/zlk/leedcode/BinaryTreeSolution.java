@@ -1,6 +1,7 @@
 package org.com.zlk.leedcode;
 
 import org.com.zlk.datastructure.tree.BasicOperationTree;
+import org.com.zlk.datastructure.tree.InitTreeNoe;
 import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.ArrayList;
@@ -685,22 +686,42 @@ public class BinaryTreeSolution {
     }
 
     // 112. 路径总和(判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和)
-    public boolean hasPathSum(TreeNode root, int sum) {
+    public static boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
         }
-        // dfs 递归
+        // dfs
         if (root.left == null && root.right == null) {
             return sum == root.val;
         }
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
+    // 112. 路径总和 (递归）
+    public static boolean hasPathSum2(TreeNode root, int sum) {
+        // 根节点root 、路径值0
+        return helper(root, 0, sum);
+    }
+    private static boolean helper(TreeNode root, int cur, int target) {
+        if (root == null) {
+            return false;
+        }
+        // 累计路径上值
+        cur = root.val + cur;
+        // 遍历到叶子节点
+        if (root.left == null && root.right == null) {
+            return cur == target;
+        } else {
+            // 递归
+            return helper(root.left, cur, target) || helper(root.right, cur, target);
+        }
+    }
 
 
     // 113. 路径总和 II
     // 剑指 Offer 34.二叉树中和为某一值的所有路径 (树的根节点开始往下一直到叶节点所经过的节点形成一条路径)
-    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
+    public static List<List<Integer>> pathSum2(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
+        // 回溯
         pathSumDFS(root, new ArrayList<>(), res, sum);
         return res;
     }
@@ -723,6 +744,11 @@ public class BinaryTreeSolution {
         // 注意新建一个ArrayList
         pathSumDFS(root.left, new ArrayList<>(path), res, remain);
         pathSumDFS(root.right, new ArrayList<>(path), res, remain);
+    }
+
+    // 437. 路径总和 III (需要从根节点开始，也不需要在叶子节点结束.二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。)
+    public int pathSum3(TreeNode root, int sum) {
+        return 0;
     }
 
 
@@ -824,9 +850,15 @@ public class BinaryTreeSolution {
         t4.right = t8;
         t6.left = t9 ;
         t6.right = t10;
-        List<List<Integer>> res = pathSum(t1, 22);
-        System.out.println(res);
+        List<List<Integer>> res = pathSum2(t1, 22);
+//        System.out.println(res);
 
+
+        TreeNode treeNode1 = InitTreeNoe.init1();
+        boolean hasPathSum = hasPathSum(treeNode1, 22);
+        boolean hasPathSum2 = hasPathSum2(treeNode1, 22);
+        System.out.println(hasPathSum);
+        System.out.println(hasPathSum2);
 
     }
 }
