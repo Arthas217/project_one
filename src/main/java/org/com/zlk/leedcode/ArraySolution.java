@@ -20,6 +20,86 @@ import java.util.Map;
  */
 public class ArraySolution {
 
+
+    /**
+     * 1323. 6 和 9 组成的最大数字
+     */
+    public static int maximum69Number(int num) {
+        int index = getIndex(num);
+        int wei;
+        int remain = -1;
+        int[] arr = new int[index];
+        int minIndex = index;
+        while (remain != 0) {
+            wei = num % 10;
+            remain = num / 10;
+            if (wei == 6 && index < minIndex) {
+                minIndex = index;
+            }
+            arr[--index] = wei;
+            num = remain;
+        }
+        if (minIndex != index) {
+            arr[--minIndex] = 9;
+        }
+        if (remain == 6) {
+            arr[index] = 9;
+        }
+        return getResult(arr);
+    }
+
+    private static int getIndex(int num) {
+        int cap = 1;
+        int re = num;
+        while (re > 10) {
+            re = num / 10;
+            cap++;
+            num = re;
+        }
+        return cap;
+    }
+
+    private static int getResult(int[] arr) {
+        int length = arr.length;
+        int total = 0;
+        for (int i = 0; i < length; i++) {
+            int num = arr[i];
+            total = total + calculateWeightNum(num, length - (i + 1));
+        }
+        return total;
+    }
+
+    private static int calculateWeightNum(int num, int numOfTen) {
+        int result = num;
+        for (int i = 0; numOfTen > 0 && i < numOfTen; i++) {
+            result = result * 10;
+        }
+        return result;
+    }
+
+    public static int maximum69Number2(int num) {
+        String str = String.valueOf(num);
+        String newStr = str.replaceFirst("6", "9");
+        return Integer.valueOf(newStr);
+    }
+
+
+    /**
+     * 1491. 去掉最低工资和最高工资后的工资平均值
+     */
+    public static double average(int[] salary) {
+        int len = salary.length;
+        int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+        int sum = 0;
+        for (int n : salary) {
+            max = Math.max(n, max);
+            min = Math.min(n, min);
+            sum += n;
+        }
+        return (sum - max - min) / (len - 2);
+    }
+
+
     /**
      * 136. 只出现一次的数字  (一个非空整数数组,其余每个元素均出现两次)
      */
@@ -102,7 +182,7 @@ public class ArraySolution {
         }
         // 保留某个数的最高位的 1
         diff = Integer.highestOneBit(diff);
-        int[] result = { 0, 0 };
+        int[] result = {0, 0};
         // 将原数组分成两组,组内分别进行异或,两组分别异或的结果。
         for (int n : nums) {
             //当前位是 0 的组   (1,2,1,3,2)
@@ -170,10 +250,6 @@ public class ArraySolution {
     }
 
 
-
-
-
-
     public static void main(String[] args) {
 //        int[] arr = {4, 1, 2, 1, 2, 4, 3, 7, 3};
 //        int[] arr2 = {1, 2, -6, 1, 1, 2, 2, 3, 3, 3};
@@ -193,11 +269,24 @@ public class ArraySolution {
 //        System.out.println(maxSumQueue4K(arr4, 3));
 //        System.out.println(maxSumQueue4K(arr5, 3));
 
-        int[] arr = {2, 7, -11, 15};
-        int target = -9;
-        int[] twoSum = twoSum(arr, target);
-        for (int value : twoSum) {
-            System.out.print(value + "\t");
-        }
+//        int[] arr = {2, 7, -11, 15};
+//        int target = -9;
+//        int[] twoSum = twoSum(arr, target);
+//        for (int value : twoSum) {
+//            System.out.print(value + "\t");
+//        }
+
+
+//        int num = 9996;
+//        // 整数num转为整数数组，用/和%来判断6数字位置，然后还得需要转回整数（好复杂）
+//        int i = maximum69Number(num);
+//        System.out.println(i);
+//        // 整数num转为字符串
+//        int i1 = maximum69Number2(num);
+//        System.out.println(i1);
+
+        int[] salary = {4000, 3000, 1000, 2000};
+        double average = average(salary);
+        System.out.println(average);
     }
 }
