@@ -139,19 +139,4 @@ public class StrSolution {
         return s.substring(begin, begin + maxLen);
     }
 
-
-    public static void main(String[] args) {
-//        String str = "abcbcbb";
-//        System.out.println(lengthOfLongestSubstring(str));
-
-//        String st = "A man, a plan, a canal: Panama";
-//        System.out.println(isPalindrome(st));
-
-//        String str = "amanaplanacanalpanama";
-//        System.out.println(longestPalindrome(str));
-//        System.out.println(longestPalindrome2(str));
-
-        String s = "abc de ";
-        System.out.println(replaceSpace(s));
-    }
 }

@@ -6,9 +6,12 @@ package org.com.zlk.leedcode;
  */
 public class MatrixSolution {
 
+    public static int num = 0;
+    public static int index = 0;
+
     // 剑指 Offer 29. 顺时针打印矩阵
     // 参考左程云思路
-    private static int[] printMatrixZLK(int[][] matrix) {
+    public static int[] printMatrixZLK(int[][] matrix) {
         if (matrix.length == 0 || matrix[0].length == 0) {
             return new int[0];
         }
@@ -30,12 +33,12 @@ public class MatrixSolution {
         if (lx == rx) {
             //子矩阵只有一行
             for (int j = ly; j <= ry; j++) {
-                result[num++] = matrix[lx][j];
+                result[index++] = matrix[lx][j];
             }
         } else if (ly == ry) {
             //子矩阵只有一列
             for (int i = lx; i <= rx; i++) {
-                result[num++] = matrix[i][ly];
+                result[index++] = matrix[i][ly];
             }
         } else {
             // 一般情况
@@ -44,22 +47,22 @@ public class MatrixSolution {
 
             // 打印一圈矩阵的上行
             while (tempy != ry) {
-                result[num++] = matrix[lx][tempy];
+                result[index++] = matrix[lx][tempy];
                 tempy++;
             }
             // 打印一圈矩阵的右列
             while (tempx != rx) {
-                result[num++] = matrix[tempx][ry];
+                result[index++] = matrix[tempx][ry];
                 tempx++;
             }
             // 打印一圈矩阵的下行
             while (tempy != lx) {
-                result[num++] = matrix[rx][tempy];
+                result[index++] = matrix[rx][tempy];
                 tempy--;
             }
             // 打印一圈矩阵的左列
             while (tempx != lx) {
-                result[num++] = matrix[tempx][ly];
+                result[index++] = matrix[tempx][ly];
                 tempx--;
             }
         }
@@ -74,7 +77,6 @@ public class MatrixSolution {
     public static int dr[] = {0, 1, 0, -1};
     // 列方向
     public static int dc[] = {1, 0, -1, 0};
-    public static int num = 0;
     // 自己参考的一个视频 dfs回溯方法
     public static int[] printMatrix(int[][] array) {
         if (array.length == 0 || array[0].length == 0) {
@@ -138,15 +140,4 @@ public class MatrixSolution {
         return false;
     }
 
-    public static void main(String[] args) {
-        int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-//        int[] value = printMatrix(a);
-        int[] value = printMatrixZLK(a);
-        for (int num : value) {
-            System.out.println(num);
-        }
-
-        int[][] matrix = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
-        System.out.println(findNumberIn2DArray(matrix, 7));
-    }
 }

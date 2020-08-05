@@ -7,7 +7,7 @@ public class BasicOperationList {
      * 尾插创建链表  带头节点
      * 打印链表顺序和插入元素顺序一致
      */
-    public ListNode createListSort() {
+    public static ListNode createListSort() {
         ListNode h;
         ListNode r;
         ListNode p;
