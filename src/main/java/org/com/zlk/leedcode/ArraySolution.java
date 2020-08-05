@@ -90,7 +90,7 @@ public class ArraySolution {
     public static double average(int[] salary) {
         int len = salary.length;
         int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-        int sum = 0;
+        double sum = 0;
         for (int n : salary) {
             max = Math.max(n, max);
             min = Math.min(n, min);
@@ -249,44 +249,4 @@ public class ArraySolution {
         return 0d;
     }
 
-
-    public static void main(String[] args) {
-//        int[] arr = {4, 1, 2, 1, 2, 4, 3, 7, 3};
-//        int[] arr2 = {1, 2, -6, 1, 1, 2, 2, 3, 3, 3};
-//        int[] arr3 = {1, 2, 1, 3, 2, 5};
-//        System.out.println(singleNumber(arr));
-//        System.out.println(singleNumberOfHashtable(arr));
-//        System.out.println(singleNumber2(arr2));
-//        int[] res = singleNumber3(arr3);
-//        for (int n: res) {
-//            System.out.println(n);
-//        }
-
-//        int[] arr4 = {3, 1, 6, 2, 1, 2};
-//        int[] arr5 = {3, 1, 4, 2, 2, 4};
-//        System.out.println(maxSumArray4K(arr4, 3));
-//        System.out.println(maxSumArray4K(arr5, 3));
-//        System.out.println(maxSumQueue4K(arr4, 3));
-//        System.out.println(maxSumQueue4K(arr5, 3));
-
-//        int[] arr = {2, 7, -11, 15};
-//        int target = -9;
-//        int[] twoSum = twoSum(arr, target);
-//        for (int value : twoSum) {
-//            System.out.print(value + "\t");
-//        }
-
-
-//        int num = 9996;
-//        // 整数num转为整数数组，用/和%来判断6数字位置，然后还得需要转回整数（好复杂）
-//        int i = maximum69Number(num);
-//        System.out.println(i);
-//        // 整数num转为字符串
-//        int i1 = maximum69Number2(num);
-//        System.out.println(i1);
-
-        int[] salary = {4000, 3000, 1000, 2000};
-        double average = average(salary);
-        System.out.println(average);
-    }
 }
