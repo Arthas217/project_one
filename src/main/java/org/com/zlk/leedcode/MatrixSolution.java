@@ -163,9 +163,6 @@ public class MatrixSolution {
         return res;
     }
 
-    /**
-     * 对该过程进行判断
-     */
     private static boolean closedIslandDFS(int[][] grid, int i, int j) {
         int r = grid.length;
         int c = grid[0].length;
@@ -173,6 +170,7 @@ public class MatrixSolution {
         if (i < 0 || j < 0 || i >= r || j >= c) {
             return false;
         }
+        // dfs退出条件 已经着色过
         if (grid[i][j] == 1) {
             return true;
         }
@@ -182,10 +180,10 @@ public class MatrixSolution {
         boolean down = closedIslandDFS(grid, i + 1, j);
         boolean left = closedIslandDFS(grid, i, j - 1);
         boolean right = closedIslandDFS(grid, i, j + 1);
+        // 注意这里不能写成return up && down && left && right
         if( up && down && left && right){
             return true;
         }
         return false;
     }
-
 }
