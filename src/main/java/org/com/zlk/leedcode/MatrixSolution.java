@@ -29,6 +29,7 @@ public class MatrixSolution {
         }
         return result;
     }
+
     private static void printCircleValue(int[][] matrix, int lx, int ly, int rx, int ry, int[] result) {
         if (lx == rx) {
             //子矩阵只有一行
@@ -69,14 +70,12 @@ public class MatrixSolution {
     }
 
 
-
-
-
     // dr和dc可以确定移动方向顺序
     // 行方向
     public static int dr[] = {0, 1, 0, -1};
     // 列方向
     public static int dc[] = {1, 0, -1, 0};
+
     // 自己参考的一个视频 dfs回溯方法
     public static int[] printMatrix(int[][] array) {
         if (array.length == 0 || array[0].length == 0) {
@@ -94,6 +93,7 @@ public class MatrixSolution {
         direct(array, row, col, visited, i, j, result, 0);
         return result;
     }
+
     public static void direct(int[][] array, int row, int col, int[][] visited, int i, int j, int[] result, int priority) {
         // 优先以priority值为基本方向
         for (int d = priority; d < 4; d++) {
@@ -136,6 +136,54 @@ public class MatrixSolution {
             } else {
                 row++;
             }
+        }
+        return false;
+    }
+
+    // 1254. 统计封闭岛屿的数目   回溯dfs 着色法
+    public static int closedIsland(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+        int row = grid.length;
+        int col = grid[0].length;
+        int res = 0;
+        // 因为边界不是封闭的所以i和j都从1开始判断
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                // 每次遇到陆地（0）则DFS。访问过的元素都由0变成1（着色）
+                if (grid[i][j] == 0) {
+                    if (closedIslandDFS(grid, i, j)) {
+                        // 如果途中grid[i][j]深度遍历的过程中丝毫不经过“边界”，则就算作1个封闭岛屿；
+                        res++;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 对该过程进行判断
+     */
+    private static boolean closedIslandDFS(int[][] grid, int i, int j) {
+        int r = grid.length;
+        int c = grid[0].length;
+        // 如果经过“边界”，则不算。
+        if (i < 0 || j < 0 || i >= r || j >= c) {
+            return false;
+        }
+        if (grid[i][j] == 1) {
+            return true;
+        }
+        // 着色
+        grid[i][j] = 1;
+        boolean up = closedIslandDFS(grid, i - 1, j);
+        boolean down = closedIslandDFS(grid, i + 1, j);
+        boolean left = closedIslandDFS(grid, i, j - 1);
+        boolean right = closedIslandDFS(grid, i, j + 1);
+        if( up && down && left && right){
+            return true;
         }
         return false;
     }

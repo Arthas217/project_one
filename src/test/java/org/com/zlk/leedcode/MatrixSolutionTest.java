@@ -3,7 +3,6 @@ package org.com.zlk.leedcode;
 import org.junit.Test;
 
 import static org.com.zlk.leedcode.MatrixSolution.*;
-import static org.junit.Assert.*;
 
 /**
  * @Author zc217
@@ -34,5 +33,12 @@ public class MatrixSolutionTest {
     public void testFindNumberIn2DArray() {
         int[][] matrix = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
         System.out.println(findNumberIn2DArray(matrix, 7));
+    }
+
+    @Test
+    public void testClosedIsland() {
+        int[][] grid = {{1, 1, 1, 1, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 1, 1, 0}, {1, 0, 1, 0, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 1, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 0}};
+        int num = closedIsland(grid);
+        System.out.println(num);
     }
 }

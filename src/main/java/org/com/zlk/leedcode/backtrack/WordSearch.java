@@ -49,6 +49,7 @@ public class WordSearch {
             }
             // 位置合法字符、标记
             visited[d_row][d_col] = 1;
+            // 一定满足符合的结果就返回
             if (dfs(board, word, d_row, d_col, row, col, pos + 1, visited)) {
                 return true;
             }
