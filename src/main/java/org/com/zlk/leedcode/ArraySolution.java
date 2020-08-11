@@ -1,8 +1,6 @@
 package org.com.zlk.leedcode;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 /**
  * ∼x    位运算 NOT
@@ -19,6 +17,60 @@ import java.util.Map;
  * @Date 2020/7/22
  */
 public class ArraySolution {
+
+    // company2个有序数组，找出其中的交集
+    public static int[] retainAll(int[] array1, int[] array2) {
+        List<Integer> res = new ArrayList();
+        if (array1.length < 1 || array2.length < 1) {
+            return res.stream().mapToInt(Integer::intValue).toArray();
+        }
+        int i = 0, j = 0;
+        while (i < array1.length && j < array1.length) {
+            if (array1[i] == array2[j]) {
+                res.add(array1[i]);
+                i++;
+                j++;
+            } else if (array1[i] > array2[j]) {
+                j++;
+            } else {
+                i++;
+            }
+        }
+        return res.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    // 两个字符数组中，除了一个字符不同，其他字符的值和顺序都相同（假设char1字符数组长度长，且不同的那个字符在char2中）
+    public static char find(char[] char1, char[] char2) {
+        int index = char1.length;
+        for (int i = char2.length - 1; i >= 0; i--) {
+            index = bs(char1, char2[i], index - 1);
+            if (index < 0 || index > char1.length - 1) {
+                return char2[i];
+            }
+            if (char2[i] == char1[index]) {
+                continue;
+            }
+        }
+        return ' ';
+    }
+
+    public static int bs(char[] chars, char c, int index) {
+        if (index < 0) {
+            return -1;
+        }
+        int l = 0, r = index;
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (chars[m] == c) {
+                return m;
+            } else if (chars[m] > c) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return -1;
+    }
 
 
     /**

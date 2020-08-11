@@ -3,7 +3,6 @@ package org.com.zlk.leedcode;
 import org.junit.Test;
 
 import static org.com.zlk.leedcode.ArraySolution.*;
-import static org.junit.Assert.*;
 
 /**
  * @Author zc217
@@ -102,5 +101,28 @@ public class ArraySolutionTest {
 
     @Test
     public void findMedianSortedArrays() {
+    }
+
+    @Test
+    public void testRetainAll() {
+        int[] a = {0, 1, 2, 3, 4, 5};
+        int[] b = {1, 3, 5, 7, 9};
+        int[] ints = retainAll(a, b);
+        for (int num : ints) {
+            System.out.print(num + "\t");
+        }
+    }
+
+    @Test
+    public void b(){
+        char[] char1={'a','b','d','e'};
+        char[] char2={'d','e','f'};
+//        char[] char1={'a','b','d','e','f'};
+//        char[] char2={'c','d','e','f'};
+//        char[] char1={'a','b','d','f','g'};
+//        char[] char2={'d','e','f','g'};
+
+        char c = find(char1,char2);
+        System.out.println(c);
     }
 }
