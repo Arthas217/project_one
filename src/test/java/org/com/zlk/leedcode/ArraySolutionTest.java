@@ -122,7 +122,8 @@ public class ArraySolutionTest {
 //        char[] char1={'a','b','d','f','g'};
 //        char[] char2={'d','e','f','g'};
 
-        char c = find(char1,char2);
-        System.out.println(c);
+//        char c = find(char1,char2);
+        char c2 = find2(char1,char2);
+        System.out.println(c2);
     }
 }

@@ -72,6 +72,34 @@ public class ArraySolution {
         return -1;
     }
 
+    public static char find2(char[] char1, char[] char2) {
+        int index1 = bs2(char1, char2);
+        return char2[index1];
+    }
+
+    public static int bs2(char[] chars1, char[] chars2) {
+        int l1 = 0, r1 = chars1.length - 1;
+        int l2 = 0, r2 = chars2.length - 1;
+        int n = 0;
+        int m = 0;
+        while (l1 <= r1 && l2 <= r2) {
+            m = (l1 + r1) / 2;
+            n = (l2 + r2) / 2;
+            if (chars1[m] < chars2[n]) {
+                l1 = m + 1;
+            } else if (chars1[m] > chars2[n]) {
+                r1 = m - 1;
+            } else if (chars1[m] == chars2[n] && chars2[r2] > chars1[m]) {
+                l1 = m + 1;
+                l2 = n + 1;
+            } else if (chars1[m] == chars2[n] && chars2[r2] ==chars1[m]) {
+                r1 = m - 1;
+                r2 = n - 1;
+            }
+        }
+        return n;
+    }
+
 
     /**
      * 1323. 6 和 9 组成的最大数字
