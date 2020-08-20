@@ -41,4 +41,11 @@ public class MatrixSolutionTest {
         int num = closedIsland(grid);
         System.out.println(num);
     }
+
+    @Test
+    public void testSumNum() {
+        int[][] matrix = {{1, 0, 0, 0, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 1}, {1, 0, 0, 0, 1, 0, 0}, {1, 0, 0, 0, 0, 1, 1}};
+//        int num = sumNum(matrix);
+//        System.out.println(num);
+    }
 }

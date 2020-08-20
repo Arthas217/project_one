@@ -82,4 +82,16 @@ public class BasicOperationList {
         }
         return false;
     }
+
+    /**
+     * 获取链表长度
+     */
+    public static int getListLen(ListNode l) {
+        int sum = 0;
+        while (l != null) {
+            l = l.next;
+            sum++;
+        }
+        return sum;
+    }
 }

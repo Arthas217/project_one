@@ -181,9 +181,46 @@ public class MatrixSolution {
         boolean left = closedIslandDFS(grid, i, j - 1);
         boolean right = closedIslandDFS(grid, i, j + 1);
         // 注意这里不能写成return up && down && left && right
-        if( up && down && left && right){
+        if (up && down && left && right) {
             return true;
         }
         return false;
     }
+//    private static int[] dr2 = {-1, 0, 1, 0};
+//    private static int[] dc2 = {0, 1, 0, -1};
+//    public static int sumNum(int[][] matrix){
+//        if (matrix == null || matrix[0] == null) {
+//            return 0;
+//        }
+//        int row = matrix.length;
+//        int col = matrix[0].length;
+//        int[][] visit = new int[row][col];
+//        if (matrix[0][0] == 1) {
+//            visit[0][0] = 1;
+//        }
+//        int res = 0;
+//        for (int i = 0; i < row; i++) {
+//            for (int j = 0; j < col; j++) {
+//                maxdfs(matrix, visit, i, j, res);
+//            }
+//        }
+//        return res;
+//    }
+//
+//    public static void maxdfs(int[][] matrix, int[][] visit, int row, int col, int res) {
+//        if (matrix[row][col] == 1 && visit[row][col] == 1) {
+//            res++;
+//            for (int d = 0; d < 4; d++) {
+//                int r = row + dr2[d];
+//                int c = col + dc2[d];
+//                if (r < 0 || c < 0 || r > row || c > col) {
+//                    continue;
+//                }
+//                if (matrix[r][c] == 1 && visit[r][c] == 0) {
+//                    visit[r][c] = 1;
+//                    maxdfs(matrix, visit, r, c, res);
+//                }
+//            }
+//        }
+//    }
 }
