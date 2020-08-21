@@ -18,7 +18,35 @@ import java.util.*;
  */
 public class ArraySolution {
 
-    // company2个有序数组，找出其中的交集
+
+    /**
+     * 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+     */
+    public static int[] exchangeArrayElement(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            // 当找到一个偶数时，就跳出循环。
+            while (left < right && (arr[left] & 1) == 1) {
+                left++;
+            }
+            // 当找到一个奇数时，就跳出循环
+            while (left < right && (arr[right] & 1) == 0) {
+                right--;
+            }
+            // 如果两个指针还没有碰到一起时，说明找到了需要交换的位置
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * company 2个有序数组，找出其中的交集
+     */
     public static int[] retainAll(int[] array1, int[] array2) {
         List<Integer> res = new ArrayList();
         if (array1.length < 1 || array2.length < 1) {
@@ -39,7 +67,10 @@ public class ArraySolution {
         return res.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    // 两个字符数组中，除了一个字符不同，其他字符的值和顺序都相同（假设char1字符数组长度长，且不同的那个字符在char2中）
+
+    /**
+     * 两个字符数组中，除了一个字符不同，其他字符的值和顺序都相同（假设char1字符数组长度长，且不同的那个字符在char2中）
+     */
     public static char find(char[] char1, char[] char2) {
         int index = char1.length;
         for (int i = char2.length - 1; i >= 0; i--) {
@@ -92,7 +123,7 @@ public class ArraySolution {
             } else if (chars1[m] == chars2[n] && chars2[r2] > chars1[m]) {
                 l1 = m + 1;
                 l2 = n + 1;
-            } else if (chars1[m] == chars2[n] && chars2[r2] ==chars1[m]) {
+            } else if (chars1[m] == chars2[n] && chars2[r2] == chars1[m]) {
                 r1 = m - 1;
                 r2 = n - 1;
             }

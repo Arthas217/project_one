@@ -114,16 +114,25 @@ public class ArraySolutionTest {
     }
 
     @Test
-    public void b(){
-        char[] char1={'a','b','d','e'};
-        char[] char2={'d','e','f'};
+    public void testFind() {
+        char[] char1 = {'a', 'b', 'd', 'e'};
+        char[] char2 = {'d', 'e', 'f'};
 //        char[] char1={'a','b','d','e','f'};
 //        char[] char2={'c','d','e','f'};
 //        char[] char1={'a','b','d','f','g'};
 //        char[] char2={'d','e','f','g'};
 
-//        char c = find(char1,char2);
-        char c2 = find2(char1,char2);
+        char c = find(char1, char2);
+        char c2 = find2(char1, char2);
         System.out.println(c2);
+    }
+
+    @Test
+    public void testExchangeArrayElement() {
+        int[] arr = {2, 1, 3, 4};
+        int[] ints = exchangeArrayElement(arr);
+        for (int value : ints) {
+            System.out.print(value + "\t");
+        }
     }
 }
