@@ -618,7 +618,7 @@ public class BinaryTreeSolution {
         bottomLeftDFS(root.right, level + 1);
     }
 
-    // 257. 二叉树的所有路径 (递归）
+    // 257. 二叉树的所有路径 (递归）返回所有从根节点到叶子节点的路径
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> paths = new ArrayList<>();
         construct_path(root, "", paths);
@@ -649,7 +649,7 @@ public class BinaryTreeSolution {
         }
         LinkedList<String> pathQueue = new LinkedList();
         LinkedList<TreeNode> nodeQueue = new LinkedList<>();
-        pathQueue.add(Integer.toString(root.val)); // 1
+        pathQueue.add(Integer.toString(root.val));
         nodeQueue.add(root);
         TreeNode node;
         String path;
@@ -679,15 +679,14 @@ public class BinaryTreeSolution {
         if (root == null) {
             return false;
         }
-        // dfs
         if (root.left == null && root.right == null) {
             return sum == root.val;
         }
+        // 递归
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
-    // 112. 路径总和 (递归）
+    // 112. 路径总和 (dfs）
     public static boolean hasPathSum2(TreeNode root, int sum) {
-        // 根节点root 、路径值0
         return helper(root, 0, sum);
     }
     private static boolean helper(TreeNode root, int cur, int target) {
@@ -700,17 +699,14 @@ public class BinaryTreeSolution {
         if (root.left == null && root.right == null) {
             return cur == target;
         } else {
-            // 递归
             return helper(root.left, cur, target) || helper(root.right, cur, target);
         }
     }
 
 
-    // 113. 路径总和 II
-    // 剑指 Offer 34.二叉树中和为某一值的所有路径 (树的根节点开始往下一直到叶节点所经过的节点形成一条路径)
+    // 113. 路径总和 II （剑指 Offer 34） 二叉树中和为某一值的所有路径 (树的根节点开始往下一直到叶节点所经过的节点形成一条路径)
     public static List<List<Integer>> pathSum2(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
-        // 回溯
         pathSumDFS(root, new ArrayList<>(), res, sum);
         return res;
     }
@@ -722,40 +718,39 @@ public class BinaryTreeSolution {
         path.add(root.val);
         int remain = sum - root.val;
         if (root.left == null && root.right == null) {
-            // 注意else别忘记了
             if (remain == 0) {
                 res.add(path);
                 return;
-            } else {
+            } else { // 注意else别忘记了
                 return;
             }
         }
-        // 注意新建一个ArrayList
-        pathSumDFS(root.left, new ArrayList<>(path), res, remain);
+        pathSumDFS(root.left, new ArrayList<>(path), res, remain); // 注意新建一个ArrayList
         pathSumDFS(root.right, new ArrayList<>(path), res, remain);
     }
 
-    // 437. 路径总和 III (需要从根节点开始，也不需要在叶子节点结束.二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。)
-    static int res = 0;
+    // 437. 路径总和 III  路径方向必须是向下的（只能从父节点到子节点）找出路径和等于给定数值的路径总数
+    // 注意res不能作为dfs函数参数。因为不是以根节点为起始点。
+    private static int count = 0;
     public static int pathSum3(TreeNode root, int sum) {
-        //双重DFS: 先序递归遍历每个节点; 以每个节点作为起始节点DFS寻找满足条件的路径.
+        // 双重DFS: 先序递归遍历每个节点;
         if (root == null) {
-            return res;
+            return count;
         }
-        // 注意这里的res不能作为dfs函数的参数。因为不是以根节点为起始点。
         pathSum3DFS(root, sum);
         pathSum3(root.left, sum);
         pathSum3(root.right, sum);
-        return res;
+        return count;
     }
 
+    // 以每个节点作为起始节点DFS寻找满足条件的路径.
     private static void pathSum3DFS(TreeNode root, int sum) {
         if (root == null) {
             return;
         }
         sum -= root.val;
         if (sum == 0) {
-            res++;
+            count++;
         }
         pathSum3DFS(root.left, sum);
         pathSum3DFS(root.right, sum);
@@ -799,28 +794,24 @@ public class BinaryTreeSolution {
         return res;
     }
 
-    // 124. 二叉树中的最大路径和(一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。)hard
-    static int maxSum = Integer.MIN_VALUE;
+    // 124. 二叉树中最大路径和 (一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点)
+    private static int maxSum = Integer.MIN_VALUE;
     public static int maxPathSum(TreeNode root) {
-        // 根节点递归得到每个节点的最大贡献值
-        maxGain(root);
+        maxGain(root);// 根节点递归得到每个节点的最大贡献值
         return maxSum;
     }
 
-    public static int maxGain(TreeNode node) {
-        if (node == null) {
+    public static int maxGain(TreeNode root) {
+        if (root == null) {
             return 0;
         }
-        // 递归计算左右子节点的最大贡献值
-        // 只有在最大贡献值大于0时，才会选取对应子节点
-        int leftGain = Math.max(maxGain(node.left), 0);
-        int rightGain = Math.max(maxGain(node.right), 0);
-        // 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
-        int priceNewPath = node.val + leftGain + rightGain;
-        // 更新最大路径长度
-        maxSum = Math.max(maxSum, priceNewPath);
-        // 最大贡献值
-        return node.val + Math.max(leftGain, rightGain);
+        // 递归计算左右子节点的最大贡献值,只有在最大贡献值大于0时，才会选取对应子节点
+        int leftGain = Math.max(maxGain(root.left), 0);
+        int rightGain = Math.max(maxGain(root.right), 0);
+        // 计算该节点最大路径和为该节点值+该节点左节点最大贡献值+右子节点最大贡献值
+        int priceNewPath = root.val + leftGain + rightGain;
+        maxSum = Math.max(maxSum, priceNewPath);// 更新最大路径和长度
+        return root.val + Math.max(leftGain, rightGain);// 计算该节点最大贡献值
     }
 
 }
