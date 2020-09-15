@@ -32,15 +32,16 @@ public class ListSolution {
 
 
     /**
-     * 160. 相交链表  面试题 02.07. 链表相交
+     * 160. 相交链表（找到两个单链表相交的起始节点）  面试题 02.07. 链表相交
      */
     public static boolean getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return false;
         }
+        // 相交点之后的长度是相同的,
         int l1_len = BasicOperationList.getListLen(headA);
         int l2_len = BasicOperationList.getListLen(headB);
-        // 注意两个链表长度相同情况
+        // 消除两个链表的长度差。注意两个链表长度相同情况
         ListNode m1 = l1_len - l2_len >= 0 ? headA : headB;
         ListNode m2 = l1_len - l2_len < 0 ? headA : headB;
         int d = Math.abs(l1_len - l2_len);
@@ -58,4 +59,24 @@ public class ListSolution {
         }
         return false;
     }
+
+    /**
+     * 160.相交链表值
+     * 参考https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/
+     * 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历
+     * 如果 pA 到了末尾，则 pA = headB 继续遍历
+     * 如果 pB 到了末尾，则 pB = headA 继续遍历
+     * 比较长的链表指针指向较短链表head时，长度差就消除了
+     * 如此，只需要将最短链表遍历两次即可找到位置
+     */
+    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode pA = headA, pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
+    }
+
 }

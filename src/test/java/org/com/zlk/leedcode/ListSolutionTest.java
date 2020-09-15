@@ -3,8 +3,7 @@ package org.com.zlk.leedcode;
 import org.com.zlk.datastructure.list.ListNode;
 import org.junit.Test;
 
-import static org.com.zlk.leedcode.ListSolution.getIntersectionNode;
-import static org.com.zlk.leedcode.ListSolution.reversePrint;
+import static org.com.zlk.leedcode.ListSolution.*;
 
 /**
  * @Author zc217
@@ -46,6 +45,8 @@ public class ListSolutionTest {
         l1234.next = l12345;
 
         boolean commonNode = getIntersectionNode(l1, l2);
+        ListNode value = getIntersectionNode2(l1, l2);
         System.out.println(commonNode);
+        System.out.println(value.val);
     }
 }
