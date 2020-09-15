@@ -52,7 +52,6 @@ public class BasicOperationList {
      * 反转链表
      */
     public ListNode reverseList(ListNode head) {
-        //申请节点，pre和 cur，pre指向null
         ListNode cur = head;
         ListNode pre = null;
         ListNode next = null;
