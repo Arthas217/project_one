@@ -90,7 +90,7 @@ public class BasicOperationList {
      * 环入口的位置
      * 参考https://blog.csdn.net/sinat_35261315/article/details/79205157
      */
-    public ListNode cycleLocation(ListNode head){
+    public ListNode cycleLocation(ListNode head) {
         ListNode walk = head;
         ListNode runner = head;
         while (runner != null && runner.next != null) {
@@ -111,6 +111,20 @@ public class BasicOperationList {
             corss = corss.next;
         }
         return cycle;
+    }
+
+    /**
+     * 环的长度
+     */
+    public int cycleLen(ListNode head) {
+        ListNode cycle = cycleLocation(head);
+        int len = 1;
+        ListNode l = cycle;
+        while (l.next != cycle) {
+            len++;
+            l = l.next;
+        }
+        return len;
     }
 
     /**
