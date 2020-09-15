@@ -48,10 +48,13 @@ public class BasicOperationList {
         }
     }
 
+    /**
+     * 反转链表
+     */
     public ListNode reverseList(ListNode head) {
         //申请节点，pre和 cur，pre指向null
-        ListNode pre = null;
         ListNode cur = head;
+        ListNode pre = null;
         ListNode tmp = null;
         while (cur != null) {
             //记录当前节点的下一个节点
