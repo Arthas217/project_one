@@ -419,14 +419,14 @@ public class BinaryTreeSolution {
     }
 
 
-    // 102. 二叉树的层序遍历 BFS  迭代实现
-    // 时间复杂度： O(n) 空间复杂度：O(n)
+    // 102. 二叉树的层序遍历 BFS 迭代实现
+    // 时间复杂度：O(n)  空间复杂度：O(n)
     public static List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
         // 结果集合
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
         // 使用队列
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         // 根节点入队
@@ -444,9 +444,9 @@ public class BinaryTreeSolution {
                     queue.add(treeNode.right);
                 }
             }
-            res.add(temp);
+            result.add(temp);
         }
-        return res;
+        return result;
     }
 
     // 102. 二叉树的层序遍历-DFS递归
@@ -477,13 +477,11 @@ public class BinaryTreeSolution {
     }
 
     // 236. 二叉树中两个指定节点的最近公共祖先,最近公共祖先节点可以为节点本身,所有节点的值都是唯一的。
-    // 时间复杂度：O(N)空间复杂度：O(N)，其中 N 是二叉树的节点数。递归调用的栈深度取决于二叉树的高度
-    // 二叉树最坏情况下为一条链，此时高度为 N，因此空间复杂度为 O(N)
-    // 递归方式
+    // 时间复杂度：O(N)空间复杂度：O(N)，二叉树最坏情况下为一条链，此时高度为 N，因此空间复杂度为 O(N)。
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        TreeNode res = new TreeNode(0);
-        lcaDFS(root, p, q, res);
-        return res;
+        TreeNode result = new TreeNode(0);
+        lcaDFS(root, p, q, result);   // 递归调用的栈深度取决于二叉树的高度
+        return result;
     }
 
     private static boolean lcaDFS(TreeNode root, TreeNode p, TreeNode q, TreeNode res) {
@@ -491,24 +489,23 @@ public class BinaryTreeSolution {
         if (root == null) {
             return false;
         }
-        // 递归遍历左子树和右子树是否包含p或q
+        // 递归遍历左右子树是否包含p或q
         boolean lson = lcaDFS(root.left, p, q, res);
         boolean rson = lcaDFS(root.right, p, q, res);
-        // root是 p, q的最近公共祖先
+        // 祖先定义：一个节点p在root的左(右)子树中，或p=root，则称root是p的祖先
+        // root是p, q最近公共祖先(三种情况）
         // 1.p和q在root的子树中，且分列root的异侧
         // 2.p=root ，且 q在root的左或右子树中；
         // 3.q=root ，且 p在root的左或右子树中；
         if ((lson && rson) || (root.val == p.val || root.val == q.val) && (lson || rson)) {
-            // 记录公共祖先
-            res.val = root.val;
+            res.val = root.val;  // 记录公共祖先
         }
         // 自底向上从叶子节点开始更新的，判断子树是否包含p或q
-        // 祖先的定义：一个节点p在root的左（右）子树中，或p=root ，则称root是p的祖先
         return lson || rson || root.val == p.val || root.val == q.val;
     }
 
 
-    // 235. 二叉搜索树的最近公共祖先
+    // 235. 二叉搜索树的最近公共祖先  找到该树中两个指定节点的最近公共祖先。所有节点的值都是唯一的。
     public TreeNode lowestCommonAncestorBST(TreeNode root, TreeNode p, TreeNode q) {
         //根结点比两个结点都大 就在左子树找
         //根结点比两个结点都小 就在右子树找
@@ -519,8 +516,8 @@ public class BinaryTreeSolution {
     }
 
     // 230. 二叉搜索树中第K小的元素，假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数
+    // 中序遍历  时间复杂度：O(N) 空间复杂度：O(N)
     public static int kthSmallestBST(TreeNode root, int k) {
-        // 中序遍历 时间复杂度：O(N) 空间复杂度：O(N)
         Stack<TreeNode> stack = new Stack<>();
         List<Integer> list = new ArrayList<>();
         TreeNode temp = root;
@@ -547,7 +544,7 @@ public class BinaryTreeSolution {
         }
         // 结果集合
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        //递归实现DFS ，双端队列保存同一层的所有节点，并交替插入方向（从首部插入或从尾部插入）得到需要的输出顺序。
+        // 递归实现DFS 双端队列保存同一层的所有节点，并交替插入（从首部插入或从尾部插入）得到需要的输出顺序。
         zigzagLevelOrderDFS(root, 1, res);
         return res;
     }
