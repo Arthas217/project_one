@@ -9,8 +9,7 @@ public class MatrixSolution {
     public static int num = 0;
     public static int index = 0;
 
-    // 剑指 Offer 29. 顺时针打印矩阵
-    // 参考左程云思路
+    // 剑指 Offer 29. 顺时针打印矩阵  参考左程云思路
     public static int[] printMatrixZLK(int[][] matrix) {
         if (matrix.length == 0 || matrix[0].length == 0) {
             return new int[0];
@@ -32,37 +31,29 @@ public class MatrixSolution {
 
     private static void printCircleValue(int[][] matrix, int lx, int ly, int rx, int ry, int[] result) {
         if (lx == rx) {
-            //子矩阵只有一行
-            for (int j = ly; j <= ry; j++) {
+            for (int j = ly; j <= ry; j++) {  //子矩阵只有一行
                 result[index++] = matrix[lx][j];
             }
         } else if (ly == ry) {
-            //子矩阵只有一列
-            for (int i = lx; i <= rx; i++) {
+            for (int i = lx; i <= rx; i++) {  //子矩阵只有一列
                 result[index++] = matrix[i][ly];
             }
-        } else {
-            // 一般情况
+        } else {  // 一般情况
             int tempx = lx;
             int tempy = ly;
-
-            // 打印一圈矩阵的上行
-            while (tempy != ry) {
+            while (tempy != ry) {  // 打印一圈矩阵的上行
                 result[index++] = matrix[lx][tempy];
                 tempy++;
             }
-            // 打印一圈矩阵的右列
-            while (tempx != rx) {
+            while (tempx != rx) { // 打印一圈矩阵的右列
                 result[index++] = matrix[tempx][ry];
                 tempx++;
             }
-            // 打印一圈矩阵的下行
-            while (tempy != lx) {
+            while (tempy != lx) { // 打印一圈矩阵的下行
                 result[index++] = matrix[rx][tempy];
                 tempy--;
             }
-            // 打印一圈矩阵的左列
-            while (tempx != lx) {
+            while (tempx != lx) { // 打印一圈矩阵的左列
                 result[index++] = matrix[tempx][ly];
                 tempx--;
             }
@@ -71,12 +62,10 @@ public class MatrixSolution {
 
 
     // dr和dc可以确定移动方向顺序
-    // 行方向
-    public static int dr[] = {0, 1, 0, -1};
-    // 列方向
-    public static int dc[] = {1, 0, -1, 0};
+    public static int dr[] = {0, 1, 0, -1}; // 行方向
+    public static int dc[] = {1, 0, -1, 0}; // 列方向
 
-    // 自己参考的一个视频 dfs回溯方法
+    // 自己参考视频 dfs回溯方法
     public static int[] printMatrix(int[][] array) {
         if (array.length == 0 || array[0].length == 0) {
             return new int[0];
@@ -140,7 +129,7 @@ public class MatrixSolution {
         return false;
     }
 
-    // 1254. 统计封闭岛屿的数目   回溯dfs 着色法
+    // 1254. 统计封闭岛屿的数目 回溯dfs 着色法
     public static int closedIsland(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) {
             return 0;
@@ -186,41 +175,4 @@ public class MatrixSolution {
         }
         return false;
     }
-//    private static int[] dr2 = {-1, 0, 1, 0};
-//    private static int[] dc2 = {0, 1, 0, -1};
-//    public static int sumNum(int[][] matrix){
-//        if (matrix == null || matrix[0] == null) {
-//            return 0;
-//        }
-//        int row = matrix.length;
-//        int col = matrix[0].length;
-//        int[][] visit = new int[row][col];
-//        if (matrix[0][0] == 1) {
-//            visit[0][0] = 1;
-//        }
-//        int res = 0;
-//        for (int i = 0; i < row; i++) {
-//            for (int j = 0; j < col; j++) {
-//                maxdfs(matrix, visit, i, j, res);
-//            }
-//        }
-//        return res;
-//    }
-//
-//    public static void maxdfs(int[][] matrix, int[][] visit, int row, int col, int res) {
-//        if (matrix[row][col] == 1 && visit[row][col] == 1) {
-//            res++;
-//            for (int d = 0; d < 4; d++) {
-//                int r = row + dr2[d];
-//                int c = col + dc2[d];
-//                if (r < 0 || c < 0 || r > row || c > col) {
-//                    continue;
-//                }
-//                if (matrix[r][c] == 1 && visit[r][c] == 0) {
-//                    visit[r][c] = 1;
-//                    maxdfs(matrix, visit, r, c, res);
-//                }
-//            }
-//        }
-//    }
 }
