@@ -55,15 +55,15 @@ public class BasicOperationList {
         //申请节点，pre和 cur，pre指向null
         ListNode cur = head;
         ListNode pre = null;
-        ListNode tmp = null;
+        ListNode next = null;
         while (cur != null) {
             //记录当前节点的下一个节点
-            tmp = cur.next;
+            next = cur.next;
             //然后将当前节点指向pre
             cur.next = pre;
             //pre和cur节点都前进一位
             pre = cur;
-            cur = tmp;
+            cur = next;
         }
         return pre;
     }
