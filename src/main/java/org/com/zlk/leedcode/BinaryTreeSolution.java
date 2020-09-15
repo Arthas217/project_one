@@ -351,7 +351,7 @@ public class BinaryTreeSolution {
         return help(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private static boolean help(TreeNode root, long upper, long lower) {
+    private static boolean help(TreeNode root, long lower, long upper) {
         if (root == null) {
             return true;
         }
@@ -361,12 +361,12 @@ public class BinaryTreeSolution {
         return help(root.left, lower, root.val) && help(root.right, root.val, upper);
     }
 
-    // 98.二叉搜索树「中序遍历」得到的值构成的序列一定是升序的，实时检查当前节点的值是否大于前一个中序遍历到的节点的值即可
+    // 98.二叉搜索树、也称为二叉查找树（英语：Binary Search Tree）、有序二叉树（ordered binary tree）或排序二叉树（sorted binary tree）
     public static boolean isValidBST1(TreeNode root) {
         if (root == null) {
             return true;
         }
-        // 中序遍历
+        // 「中序遍历」得到的值构成的序列一定是升序的
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode treeNode = root;
         long min = Long.MIN_VALUE;
@@ -379,16 +379,15 @@ public class BinaryTreeSolution {
                 if (node.val <= min) {
                     return false;
                 }
-                min = node.val;
-                // 别忘记遍历右孩子
-                treeNode = node.right;
+                min = node.val; // 实时检查当前节点的值是否大于前一个中序遍历到的节点的值即可
+                treeNode = node.right;// 别忘记遍历右孩子
             }
         }
         return true;
     }
 
 
-    // 173. 二叉搜索树迭代器 二叉搜索树特点参见  98.验证二叉搜索树 中序遍历是有序的
+    // 173. 二叉搜索树迭代器  二叉搜索树的中序遍历是有序
     // next()和hasNext()操作的时间复杂度是O(1)，并使用O(h) 内存，其中h是树的高度。
     // 构造函数名称主要体现了BSTIterator二叉搜索树迭代器含义，名称为了和类名一致
     public static Stack<TreeNode> nodeStack = null;
