@@ -74,15 +74,43 @@ public class BasicOperationList {
         if (head == null) {
             return false;
         }
-        ListNode l1 = head, l2 = head.next;
-        while (l1 != null && l2 != null && l2.next != null) {
-            if (l1 == l2) {
+        ListNode slow = head, fast = head.next;
+        while (slow != null && fast != null && fast.next != null) {
+            if (slow == fast) {
                 return true;
             }
-            l1 = l1.next;
-            l2 = l2.next.next;
+            slow = slow.next;
+            // 2步
+            fast = fast.next.next;
         }
         return false;
+    }
+
+    /**
+     * 环入口的位置
+     * 参考https://blog.csdn.net/sinat_35261315/article/details/79205157
+     */
+    public ListNode cycleLocation(ListNode head){
+        ListNode walk = head;
+        ListNode runner = head;
+        while (runner != null && runner.next != null) {
+            walk = walk.next;
+            runner = runner.next.next;
+            if (walk == runner) {
+                System.out.println("此链表有环");
+                break;
+            }
+        }
+        if (runner == null || runner.next == null) {
+            return null;
+        }
+        ListNode cycle = head;
+        ListNode corss = walk;
+        while (cycle != corss) {
+            cycle = cycle.next;
+            corss = corss.next;
+        }
+        return cycle;
     }
 
     /**
