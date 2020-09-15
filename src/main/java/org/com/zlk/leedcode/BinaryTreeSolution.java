@@ -154,10 +154,6 @@ public class BinaryTreeSolution {
     }
 
 
-
-
-
-
     // 110. 平衡二叉树
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -203,7 +199,9 @@ public class BinaryTreeSolution {
         }
     }
 
-    // 94-中序遍历-非递归
+    /**
+     * 94-中序遍历-非递归
+     */
     public static List<Integer> inorder(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         // 利用栈
@@ -292,12 +290,12 @@ public class BinaryTreeSolution {
         }
         Stack<TreeNode> stack1 = new Stack<>();
         Stack<TreeNode> stack2 = new Stack<>();
+        // 栈1 存前序 中左右。
         stack1.push(root);
-        // 前序遍历的过程 是中左右。
         while (!stack1.isEmpty()) {
             TreeNode t = stack1.pop();
             stack2.push(t);
-            // 将其转化成中右左。也就是压栈的过程中优先压入左子树，在压入右子树。
+            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
             if (t.left != null) {
                 stack1.push(t.left);
             }
@@ -305,7 +303,7 @@ public class BinaryTreeSolution {
                 stack1.push(t.right);
             }
         }
-        // 然后将这个结果返回来，这里是利用栈的先进后出倒序打印。
+        // 倒序打印结果  左右中。
         while (!stack2.isEmpty()) {
             ret.add(stack2.pop().val);
         }
@@ -314,36 +312,35 @@ public class BinaryTreeSolution {
 
     // 145. 二叉树的后序遍历 pre指针方法
     public static List<Integer> postorder2(TreeNode root) {
-        List<Integer> ret = new ArrayList<>();
-        Stack<TreeNode> s = new Stack<>();
-        TreeNode cur;  //当前结点
-        TreeNode pre = null; //上一次访问的结点标记
-        s.push(root);
-        while (!s.empty()) {
-            cur = s.peek(); //当前节点始终指向栈顶位置
-            // if这个判断添加leetcode才能通过
-            if (cur == null) {
-                s.pop();
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur;
+        TreeNode pre = null; // 记录上次访问节点标记
+        stack.push(root); // 压栈顺序 根右左
+        while (!stack.empty()) {
+            cur = stack.peek(); // 当前节点始终指向栈顶位置
+            if (cur == null) { // if这个判断添加leetcode才能通过
+                stack.pop();
                 continue;
             }
             boolean leafNode = (cur.left == null && cur.right == null);
             boolean isVisit = (pre != null && (pre == cur.left || pre == cur.right));
             // 如果当前结点没有孩子结点或者孩子节点都已被訪问过
             if (leafNode || isVisit) {
-                ret.add(cur.val);
-                s.pop();
+                result.add(cur.val);
+                stack.pop();
                 pre = cur;
             } else {
                 // 注意入栈顺序
                 if (cur.right != null) {
-                    s.push(cur.right);
+                    stack.push(cur.right);
                 }
                 if (cur.left != null) {
-                    s.push(cur.left);
+                    stack.push(cur.left);
                 }
             }
         }
-        return ret;
+        return result;
     }
 
 

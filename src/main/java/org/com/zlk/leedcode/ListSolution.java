@@ -8,6 +8,7 @@ import java.util.Stack;
 
 /**
  * 链表专题
+ *
  * @Author zc217
  * @Date 2020/7/23
  */
@@ -31,7 +32,7 @@ public class ListSolution {
 
 
     /**
-     * 160. 相交链表    面试题 02.07. 链表相交
+     * 160. 相交链表  面试题 02.07. 链表相交
      */
     public static boolean getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
