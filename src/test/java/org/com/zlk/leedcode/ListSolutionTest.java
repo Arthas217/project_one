@@ -11,6 +11,55 @@ import static org.com.zlk.leedcode.ListSolution.*;
  */
 public class ListSolutionTest {
 
+    private ListNode init() {
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(4);
+        ListNode l5 = new ListNode(5);
+        ListNode l6 = new ListNode(6);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        l5.next = l6;
+        l6.next = l3;
+        return l1;
+    }
+
+    @Test
+    public void testInvertLinkedList() {
+        ListNode l1 = new ListNode(4);
+        ListNode l2 = new ListNode(3);
+        ListNode l3 = new ListNode(2);
+        ListNode l4 = new ListNode(1);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+//        ListNode listNode = invertLinkedList(l1);
+        ListNode listNode2 = reverseList(l1);
+        ListNode.printList(listNode2);
+    }
+
+    @Test
+    public void testHasCycle() {
+        boolean b = ListSolution.hasCycle(init());
+        System.out.println(b);
+    }
+
+    @Test
+    public void testCycleLocation() {
+        ListNode listNode = ListSolution.cycleLocation(init());
+        System.out.println("环所在位置的val：" + listNode.val);
+    }
+
+    @Test
+    public void testCycleLen() {
+        int len = ListSolution.cycleLen(init());
+        System.out.println("环的长度：" + len);
+
+    }
+
     @Test
     public void testReversePrint() {
         ListNode n1 = new ListNode(1);

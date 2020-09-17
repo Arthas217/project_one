@@ -1,6 +1,5 @@
 package org.com.zlk.leedcode;
 
-import org.com.zlk.datastructure.list.BasicOperationList;
 import org.com.zlk.datastructure.list.ListNode;
 
 import java.util.Stack;
@@ -13,6 +12,110 @@ import java.util.Stack;
  * @Date 2020/7/23
  */
 public class ListSolution {
+
+    /**
+     * 判断链表是否存在环
+     */
+    public static boolean hasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
+        ListNode slow = head, fast = head.next;
+        while (slow != null && fast != null && fast.next != null) {
+            if (slow == fast) {
+                return true;
+            }
+            slow = slow.next;
+            // 2步
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
+    /**
+     * 环入口的位置
+     * 参考https://blog.csdn.net/sinat_35261315/article/details/79205157
+     */
+    public static ListNode cycleLocation(ListNode head) {
+        ListNode walk = head;
+        ListNode runner = head;
+        while (runner != null && runner.next != null) {
+            walk = walk.next;
+            runner = runner.next.next;
+            if (walk == runner) {
+                System.out.println("此链表有环");
+                break;
+            }
+        }
+        if (runner == null || runner.next == null) {
+            return null;
+        }
+        ListNode cycle = head;
+        ListNode corss = walk;
+        while (cycle != corss) {
+            cycle = cycle.next;
+            corss = corss.next;
+        }
+        return cycle;
+    }
+
+    /**
+     * 环的长度
+     */
+    public static int cycleLen(ListNode head) {
+        ListNode cycle = cycleLocation(head);
+        int len = 1;
+        ListNode l = cycle;
+        while (l.next != cycle) {
+            len++;
+            l = l.next;
+        }
+        return len;
+    }
+
+    /**
+     * 翻转链表（递归）
+     * 时间复杂度是 O(n)   调用递归函数
+     * 空间复杂度也是 O(n)  压入栈
+     * 4--->3--->2--->1 变成了 4--->3<---2<---1
+     * 4<---3<---2<---1
+     */
+    public static ListNode invertLinkedList(ListNode node) {
+        if (node.next == null) {
+            return node;
+        }
+        // 步骤 1: 先翻转 node 之后的链表
+        ListNode newHead = invertLinkedList(node.next);
+        // 步骤 2: 再把原 node 节点后继结点的后继结点指向 node (4)，node 的后继节点设置为空(防止形成环)
+        node.next.next = node;
+        node.next = null;
+        // 步骤 3: 返回翻转后的头结点
+        return newHead;
+    }
+
+    /**
+     * 反转链表（迭代）
+     */
+    public static ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        ListNode pre = null;
+        ListNode next = null;
+        while (cur != null) {
+            //记录当前节点的下一个节点
+            next = cur.next;
+            //然后将当前节点指向pre
+            cur.next = pre;
+            //pre和cur节点都前进一位
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    // 92. 反转链表 II  (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转)
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        return null;
+    }
 
     // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。
     public static int[] reversePrint(ListNode head) {
@@ -39,8 +142,8 @@ public class ListSolution {
             return false;
         }
         // 相交点之后的长度是相同的,
-        int l1_len = BasicOperationList.getListLen(headA);
-        int l2_len = BasicOperationList.getListLen(headB);
+        int l1_len = ListNode.getListLen(headA);
+        int l2_len = ListNode.getListLen(headB);
         // 消除两个链表的长度差。注意两个链表长度相同情况
         ListNode m1 = l1_len - l2_len >= 0 ? headA : headB;
         ListNode m2 = l1_len - l2_len < 0 ? headA : headB;
