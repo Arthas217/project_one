@@ -177,6 +177,48 @@ public class ListSolution {
         return head;
     }
 
+    // 25. K个一组翻转链表  (k 个节点一组进行翻转,k 是一个正整数，它的值小于或等于链表的长度)
+    public static ListNode reverseHeadKGroup(ListNode head, int k) {
+        ListNode tmp = head.next;
+        ListNode startKPre = head;      // k个一组链表头结点的前置结点
+        ListNode startK = null;         // k个一组链表中的头结点
+        ListNode endK;                  // k个一组链表中的尾结点
+        int step = 0;               // 计数，用来找出首结点和尾结点
+        while (tmp != null) {
+            // tmp的下一个节点,因为由于翻转，tmp 的后继结点会变,要提前保存
+            ListNode tmpNext = tmp.next;
+            if (step == 0) { // 确定头结点位置
+                startK = tmp;
+                step++;
+            } else if (step == k-1) {
+                endK = tmp; // 确定尾结点位置
+                ListNode pre = startK;  // 对链表迭代进行翻转
+                ListNode cur = startK.next;
+                // 如果节点总数不是k的整数倍，将剩余节点保持原有顺序
+                if (cur == null) {
+                    break;
+                }
+                ListNode endKNext = endK.next; // 确定k个一组链表头结点的后置结点
+                while (cur != endKNext) {
+                    ListNode next = cur.next;
+                    cur.next = pre;
+                    pre = cur;
+                    cur = next;
+                }
+                // 翻转后此时endK和startK 分别是是k个一组链表中的首尾结点
+                startKPre.next = endK;
+                startK.next = endKNext;
+                // 确定下一个k个一组翻转的位置
+                startKPre = startK;
+                step = 0;
+            } else {
+                step++;
+            }
+            tmp = tmpNext;
+        }
+        return head;
+    }
+
     // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。
     public static int[] reversePrint(ListNode head) {
         Stack<ListNode> stack = new Stack<>();
