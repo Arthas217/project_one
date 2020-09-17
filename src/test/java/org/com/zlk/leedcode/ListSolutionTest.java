@@ -42,14 +42,18 @@ public class ListSolutionTest {
 //        ListNode listNode2 = reverseList(l1);
 //        ListNode.printList(listNode2);
 
-        head.next = l1;
+//        head.next = l1;
 //        ListNode.printHeadList(head);
 //        ListNode listNode3 = reverseHeadList(head);
 //        ListNode.printHeadList(listNode3);
 
         try {
+            head.next = l1;
             ListNode listNode = reverseBetweenHeadList(head, 2, 4);
             ListNode.printHeadList(listNode);
+            // 不带头指针
+//            ListNode listNode = reverseBetweenHeadList(l1, 2, 4);
+//            ListNode.printList(listNode);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

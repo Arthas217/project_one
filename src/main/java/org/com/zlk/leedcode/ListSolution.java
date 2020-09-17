@@ -139,6 +139,7 @@ public class ListSolution {
         ListNode toNext = null;             // to+1 结点
         // 步骤1：找到  from-1, from, to,  to+1 这四个结点
         ListNode tmp = head.next;
+        //  不带头指针 ListNode tmp = head;
         int curIndex = 1; // 设头结点index为1
         while (tmp != null) {
             if (curIndex == fromIndex-1) { // 从非head后继结点开始翻转
@@ -170,6 +171,7 @@ public class ListSolution {
             fromPre.next = to;
         } else {
             head.next = to; // 如果从head的后继结点开始翻转，则需要重新设置 head 的后继结点
+//            head = to; // 不带头指针
         }
         from.next = toNext;
         return head;
