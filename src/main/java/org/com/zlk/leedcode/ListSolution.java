@@ -132,7 +132,7 @@ public class ListSolution {
 
     // 92. 反转链表 II  (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转)
     // 带头结点参考https://labuladong.gitbook.io/algo/labuladong-he-ta-de-peng-you-men/yi-wen-xue-hui-lian-biao-jie-ti
-    public static ListNode reverseBetweenHeadList(ListNode head, int fromIndex, int toIndex) throws Exception{
+    public static ListNode reverseBetweenHeadList(ListNode head, int fromIndex, int toIndex) throws Exception {
         ListNode fromPre = null;            // from-1结点
         ListNode from = null;               // from 结点
         ListNode to = null;                 // to 结点
@@ -142,13 +142,13 @@ public class ListSolution {
         //  不带头指针 ListNode tmp = head;
         int curIndex = 1; // 设头结点index为1
         while (tmp != null) {
-            if (curIndex == fromIndex-1) { // 从非head后继结点开始翻转
+            if (curIndex == fromIndex - 1) { // 从非head后继结点开始翻转
                 fromPre = tmp;
             } else if (curIndex == fromIndex) {
                 from = tmp;
             } else if (curIndex == toIndex) {
                 to = tmp;
-            } else if (curIndex == toIndex+1) {
+            } else if (curIndex == toIndex + 1) {
                 toNext = tmp; // curIndex>节点个数时 toNext =null
             }
             tmp = tmp.next;
@@ -190,7 +190,7 @@ public class ListSolution {
             if (step == 0) { // 确定头结点位置
                 startK = tmp;
                 step++;
-            } else if (step == k-1) {
+            } else if (step == k - 1) {
                 endK = tmp; // 确定尾结点位置
                 ListNode pre = startK;  // 对链表迭代进行翻转
                 ListNode cur = startK.next;
@@ -218,6 +218,41 @@ public class ListSolution {
         }
         return head;
     }
+
+    // 25. K个一组翻转链表(无链表头，递归）
+    // 步骤：
+    // 1 找到head开始的第k的节点
+    // 2 head到tail前一个结点间翻转，并返回新节点
+    // 3.再以tail为头结点递归
+    // 4.递归结束后，将head.next指向翻转的新节点
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode tail = head;
+        for (int i = 0; i < k; i++) {
+            if (tail == null) {  // 剩余数量小于k的话，则不需要反转。
+                return head;
+            }
+            tail = tail.next;
+        }
+        ListNode newHead = reverseList2(head, tail);// 翻转前k个元素
+        head.next = reverseKGroup(tail, k);
+        return newHead;
+    }
+
+    private static ListNode reverseList2(ListNode head, ListNode tail) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != tail) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
 
     // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。
     public static int[] reversePrint(ListNode head) {

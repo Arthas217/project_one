@@ -58,11 +58,16 @@ public class ListSolutionTest {
 //            exception.printStackTrace();
 //        }
 
-        head.next = l1;
+//        head.next = l1;
+//        ListNode l5 = new ListNode(5);
+//        l4.next = l5;
+//        ListNode listNode = reverseHeadKGroup(head, 2);
+//        ListNode.printHeadList(listNode);
+
         ListNode l5 = new ListNode(5);
         l4.next = l5;
-        ListNode listNode = reverseHeadKGroup(head, 2);
-        ListNode.printHeadList(listNode);
+        ListNode listNode = reverseKGroup(l1,2);
+        ListNode.printList(listNode);
     }
 
     @Test
