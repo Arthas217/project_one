@@ -29,6 +29,7 @@ public class ListSolutionTest {
 
     @Test
     public void testInvertLinkedList() {
+        ListNode head = new ListNode();
         ListNode l1 = new ListNode(4);
         ListNode l2 = new ListNode(3);
         ListNode l3 = new ListNode(2);
@@ -37,8 +38,21 @@ public class ListSolutionTest {
         l2.next = l3;
         l3.next = l4;
 //        ListNode listNode = invertLinkedList(l1);
-        ListNode listNode2 = reverseList(l1);
-        ListNode.printList(listNode2);
+
+//        ListNode listNode2 = reverseList(l1);
+//        ListNode.printList(listNode2);
+
+        head.next = l1;
+//        ListNode.printHeadList(head);
+//        ListNode listNode3 = reverseHeadList(head);
+//        ListNode.printHeadList(listNode3);
+
+        try {
+            ListNode listNode = reverseBetweenHeadList(head, 2, 4);
+            ListNode.printHeadList(listNode);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     @Test

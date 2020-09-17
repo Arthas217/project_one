@@ -86,7 +86,7 @@ public class ListSolution {
         }
         // 步骤 1: 先翻转 node 之后的链表
         ListNode newHead = invertLinkedList(node.next);
-        // 步骤 2: 再把原 node 节点后继结点的后继结点指向 node (4)，node 的后继节点设置为空(防止形成环)
+        // 步骤 2: 再把原 node节点后继结点的后继结点指向 node(4)，node的后继节点设置为空(防止形成环)
         node.next.next = node;
         node.next = null;
         // 步骤 3: 返回翻转后的头结点
@@ -96,10 +96,10 @@ public class ListSolution {
     /**
      * 反转链表（迭代）
      */
-    public static ListNode reverseList(ListNode head) {
-        ListNode cur = head;
+    public static ListNode reverseList(ListNode node) {
         ListNode pre = null;
-        ListNode next = null;
+        ListNode cur = node;
+        ListNode next;
         while (cur != null) {
             //记录当前节点的下一个节点
             next = cur.next;
@@ -112,9 +112,67 @@ public class ListSolution {
         return pre;
     }
 
+    /**
+     * 反转链表带头结点（迭代）
+     */
+    public static ListNode reverseHeadList(ListNode head) {
+        ListNode pre = head.next;
+        ListNode cur = pre.next;
+        pre.next = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        // 此时 pre 为头结点的后继结点
+        head.next = pre;
+        return head;
+    }
+
     // 92. 反转链表 II  (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转)
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-        return null;
+    // 带头结点参考https://labuladong.gitbook.io/algo/labuladong-he-ta-de-peng-you-men/yi-wen-xue-hui-lian-biao-jie-ti
+    public static ListNode reverseBetweenHeadList(ListNode head, int fromIndex, int toIndex) throws Exception{
+        ListNode fromPre = null;            // from-1结点
+        ListNode from = null;               // from 结点
+        ListNode to = null;                 // to 结点
+        ListNode toNext = null;             // to+1 结点
+        // 步骤1：找到  from-1, from, to,  to+1 这四个结点
+        ListNode tmp = head.next;
+        int curIndex = 1; // 设头结点index为1
+        while (tmp != null) {
+            if (curIndex == fromIndex-1) { // 从非head后继结点开始翻转
+                fromPre = tmp;
+            } else if (curIndex == fromIndex) {
+                from = tmp;
+            } else if (curIndex == toIndex) {
+                to = tmp;
+            } else if (curIndex == toIndex+1) {
+                toNext = tmp; // curIndex>节点个数时 toNext =null
+            }
+            tmp = tmp.next;
+            curIndex++;
+        }
+        if (from == null || to == null) {
+            throw new Exception("不符合条件");
+        }
+        // 步骤2：循环迭代法翻转从from到to的结点
+        ListNode pre = from;
+        ListNode cur = pre.next;
+        while (cur != toNext) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        // 步骤3：将 from-1 节点指向 to 结点，将 from 结点指向 to + 1 结点
+        if (fromPre != null) {
+            fromPre.next = to;
+        } else {
+            head.next = to; // 如果从head的后继结点开始翻转，则需要重新设置 head 的后继结点
+        }
+        from.next = toNext;
+        return head;
     }
 
     // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。

@@ -28,10 +28,10 @@ public class ListNode {
     /**
      * 打印链表（无头结点）
      */
-    public static void printList(ListNode head) {
-        while (head != null) {
-            System.out.println(head.val + " ");
-            head = head.next;
+    public static void printList(ListNode node) {
+        while (node != null) {
+            System.out.println(node.val + " ");
+            node = node.next;
         }
     }
 
