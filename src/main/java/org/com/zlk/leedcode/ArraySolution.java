@@ -18,7 +18,6 @@ import java.util.*;
  */
 public class ArraySolution {
 
-
     /**
      * 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
      */
@@ -45,20 +44,20 @@ public class ArraySolution {
     }
 
     /**
-     * company 2个有序数组，找出其中的交集
+     * 2个有序数组，找出其中的交集
      */
-    public static int[] retainAll(int[] array1, int[] array2) {
+    public static int[] retainAll(int[] arr1, int[] arr2) {
         List<Integer> res = new ArrayList();
-        if (array1.length < 1 || array2.length < 1) {
+        if (arr1.length < 1 || arr2.length < 1) {
             return res.stream().mapToInt(Integer::intValue).toArray();
         }
         int i = 0, j = 0;
-        while (i < array1.length && j < array1.length) {
-            if (array1[i] == array2[j]) {
-                res.add(array1[i]);
+        while (i < arr1.length && j < arr1.length) {
+            if (arr1[i] == arr2[j]) {
+                res.add(arr1[i]);
                 i++;
                 j++;
-            } else if (array1[i] > array2[j]) {
+            } else if (arr1[i] > arr2[j]) {
                 j++;
             } else {
                 i++;
