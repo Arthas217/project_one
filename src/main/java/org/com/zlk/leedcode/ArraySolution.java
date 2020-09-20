@@ -215,11 +215,11 @@ public class ArraySolution {
      */
     public static int singleNumber(int[] arr) {
         // 每个元素进行异或运算  a⊕0=a  a⊕a=0
-        int xor = 0;
+        int num = 0;
         for (int e : arr) {
-            xor ^= e;
+            num ^= e;
         }
-        return xor;
+        return num;
     }
 
     /**
@@ -264,13 +264,13 @@ public class ArraySolution {
 
     // 260. 只出现一次的数字 III(一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次)
     // 输出的顺序并不重要 具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？
-    public static int[] singleNumber3(int[] nums) {
+    public static int[] singleNumber3(int[] arr) {
         HashSet<Integer> set = new HashSet();
-        for (int i = 0; i < nums.length; i++) {
-            if (set.contains(nums[i])) {
-                set.remove(nums[i]);
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(arr[i])) {
+                set.remove(arr[i]);
             } else {
-                set.add(nums[i]);
+                set.add(arr[i]);
             }
         }
         int[] result = new int[2];
@@ -308,7 +308,7 @@ public class ArraySolution {
     }
 
 
-    //  小米面试：数组(类似队列）取和最大的k个连续元素
+    //  小米面试：数组类似环操作，取和最大的k个连续元素
     public static int maxSumQueue4K(int[] arr, int k) {
         int max = 0;
         int len = arr.length;
@@ -324,7 +324,7 @@ public class ArraySolution {
         return max;
     }
 
-    // 普通版：数组中取最大的k个连续元素的和
+    // 数组中取最大的k个连续元素的和
     public static int maxSumArray4K(int[] arr, int k) {
         int max = 0;
         int len = arr.length;
@@ -358,5 +358,7 @@ public class ArraySolution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         return 0d;
     }
+
+
 
 }
