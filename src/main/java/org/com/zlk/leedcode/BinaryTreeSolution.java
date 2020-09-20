@@ -707,6 +707,7 @@ public class BinaryTreeSolution {
     // 113. 路径总和 II （剑指 Offer 34） 二叉树中和为某一值的所有路径 (树的根节点开始往下一直到叶节点所经过的节点形成一条路径)
     public static List<List<Integer>> pathSum2(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
+        // 第二个参数是数组对象 传的是引用
         pathSumDFS(root, new ArrayList<>(), res, sum);
         return res;
     }
@@ -725,12 +726,12 @@ public class BinaryTreeSolution {
                 return;
             }
         }
-        pathSumDFS(root.left, new ArrayList<>(path), res, remain); // 注意新建一个ArrayList
+        pathSumDFS(root.left, new ArrayList<>(path), res, remain); // 新建一个ArrayList对象然后拷贝path值
         pathSumDFS(root.right, new ArrayList<>(path), res, remain);
     }
 
     // 437. 路径总和 III  路径方向必须是向下的（只能从父节点到子节点）找出路径和等于给定数值的路径总数
-    // 注意res不能作为dfs函数参数。因为不是以根节点为起始点。
+    // 注意count不能作为dfs函数参数。因为不是以根节点为起始点。
     private static int count = 0;
     public static int pathSum3(TreeNode root, int sum) {
         // 双重DFS: 先序递归遍历每个节点;
