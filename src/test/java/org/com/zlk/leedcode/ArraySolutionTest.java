@@ -135,4 +135,21 @@ public class ArraySolutionTest {
             System.out.print(value + "\t");
         }
     }
+
+    @Test
+    public void testGetLose() {
+        int[] arr = {3, 1, 4, 5};
+        int lose = getLose(arr, 5);
+        System.out.println(lose);
+
+        int[] arr1 = {1, 2, 4, 5, 6};
+        int[] arr2 = {1, 3, 4, 5, 6};
+        int[] arr3 = {1, 2, 3, 4, 6};
+        int loseNum = getLoseNum(arr1, 0, 4);
+        int loseNum2 = getLoseNum(arr2, 0, 4);
+        int loseNum3 = getLoseNum(arr3, 0, 4);
+        System.out.println(loseNum);
+        System.out.println(loseNum2);
+        System.out.println(loseNum3);
+    }
 }

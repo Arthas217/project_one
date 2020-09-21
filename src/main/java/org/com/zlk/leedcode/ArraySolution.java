@@ -359,6 +359,31 @@ public class ArraySolution {
         return 0d;
     }
 
-
+    // 找1到n中缺失的数字(给定一个长度为n-1的整形数组，数字的范围在1到n（无重复），其中有一个缺失的数字) https://blog.csdn.net/qq_24336773/article/details/81709343
+    public static int getLose(int[] a, int n) {
+        int t = 0;
+        for (int i = 1; i <= n; i++) {// 异或运算
+            t = t ^ i;
+        }
+        for (int i = 0; i < n - 1; i++) {
+            t = t ^ a[i];
+        }
+        return t;
+    }
+    // 有序数组 二分思路
+    // 如果中间元素的值和下标相等，只需要查找右半边；
+    // 如果中间元素的值和下标不相等，并且它前面一个元素和它的下标相等，中间的数字下标就是不存在的数字；
+    // 如果中间元素的值和下标不相等，并且它前面一个元素和它的下标不相等，只需要查找左半边
+    public static int getLoseNum(int[] arr, int left, int right){
+        int mid;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (arr[mid] == mid + 2) //缺失的数据在前半部分
+                right = mid - 1;
+            else if (arr[mid] == mid + 1)  //缺失的数据在后半部分
+                left = mid + 1;
+        }
+        return left + 1;
+    }
 
 }
