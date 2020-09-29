@@ -1,6 +1,7 @@
 package org.com.zlk.leedcode;
 
 import org.com.zlk.datastructure.list.ListNode;
+import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.Stack;
 
@@ -317,6 +318,13 @@ public class ListSolution {
             pB = pB == null ? headA : pB.next;
         }
         return pA;
+    }
+
+
+    // 501. 二叉搜索树中的众数 （出现频率最高的元素）答案可能有多个值出现的次数一样多。
+    public int[] findMode(TreeNode root) {
+        return null;
+
     }
 
 }
