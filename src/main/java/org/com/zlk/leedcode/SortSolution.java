@@ -97,4 +97,39 @@ public class SortSolution {
         }
     }
 
+    // 快排 时间复杂度o(n*n) o(n*logn)
+    // 参考https://wiki.jikexueyuan.com/project/easy-learn-algorithm/fast-sort.html
+    public static void quickSort(int[] arr) {
+        helpSort(arr, 0, arr.length - 1);
+    }
+
+    private static void helpSort(int[] arr, int left, int right) {
+        if (left > right) {
+            return;
+        }
+        //枢轴
+        int temp = arr[left];
+        int i = left, j = right;
+        int t;
+        while (i != j) {
+            while (arr[j] >= temp && i < j) {
+                j--;
+            }
+            while (arr[i] <= temp && i < j) {
+                i++;
+            }
+            if (i < j) {
+                t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            }
+        }
+        //最终将基准数归位
+        arr[left] = arr[i];
+        arr[i] = temp;
+        // 以上是一趟排序，左右递归
+        helpSort(arr, left, i - 1);
+        helpSort(arr, i + 1, right);
+    }
+
 }

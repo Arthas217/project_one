@@ -354,7 +354,7 @@ public class ArraySolution {
         return new int[]{};
     }
 
-    // 4. 寻找两个正序数组的中位数
+    // 4. 寻找两个正序数组的中位数（数组长度不大于1000  -10的6次幂 <= nums1[i], nums2[i] <= 10的6次幂）
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         return 0d;
     }
