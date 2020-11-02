@@ -355,9 +355,43 @@ public class ArraySolution {
     }
 
     // 4. 寻找两个正序数组的中位数（数组长度不大于1000  -10的6次幂 <= nums1[i], nums2[i] <= 10的6次幂）
+    // 数组合并（归并）时间复杂度O(m+n)，空间复杂度O(m+n)
+    // 如果总长度为奇数的话，那么合并后中间的那个数就是结果;如果总长度为偶数的话，那合并后中间两个数的平均数就是结果
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        return 0d;
+        int length = nums1.length + nums2.length;
+        double result = 0;
+        if(length % 2 != 0){
+            return getNum(nums1, nums2, length / 2);
+        }else{
+            result = getNum(nums1, nums2, length / 2 - 1) / 2 + getNum(nums1, nums2, length / 2) / 2;
+        }
+        return result;
     }
+
+    // 数组归并到中位数的位置就可以
+    private double getNum(int[] nums1, int[] nums2, int k) {
+        int[] result = new int[nums1.length + nums2.length];
+        int i = 0, j = 0;
+        int cur = 0;
+        while (i < nums1.length && j < nums2.length && cur <= k) {
+            if (nums1[i] < nums2[j]) {
+                result[cur++] = nums1[i++];
+            } else {
+                result[cur++] = nums2[j++];
+            }
+        }
+        while (i < nums1.length && cur <= k) {
+            result[cur++] = nums1[i++];
+        }
+        while (j < nums2.length && cur <= k) {
+            result[cur++] = nums2[j++];
+        }
+        return result[cur - 1];
+
+    }
+    // 4. 寻找两个正序数组的中位数  二分查找
+    // 参考https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-zheng-xu-shu-zu-de-zhong-we-15/
+
 
     // 找1到n中缺失的数字(给定一个长度为n-1的整形数组，数字的范围在1到n（无重复），其中有一个缺失的数字) https://blog.csdn.net/qq_24336773/article/details/81709343
     public static int getLose(int[] a, int n) {
