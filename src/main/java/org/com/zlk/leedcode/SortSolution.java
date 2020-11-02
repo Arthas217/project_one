@@ -10,7 +10,7 @@ import org.com.zlk.leedcode.zcy.ZcyUtil;
  */
 public class SortSolution {
 
-    //归并排序
+    //归并排序 时间复杂度o(n*logn)
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -26,26 +26,27 @@ public class SortSolution {
         int[] temp = new int[right - left + 1];
         int i = left;
         int j = mid + 1;
-        int k = 0;// 新数组位置
+        int loc = 0;// 新数组位置
         // 把较小的数先移到新数组中
         while (i <= mid && j <= right) {
             if (arr[i] < arr[j]) {
-                temp[k++] = arr[i++];
+                temp[loc++] = arr[i++];
             } else {
-                temp[k++] = arr[j++];
+                temp[loc++] = arr[j++];
             }
         }
         // 右边到边界，把左边剩余的数移入数组
         while (i <= mid) {
-            temp[k++] = arr[i++];
+            temp[loc++] = arr[i++];
         }
+        // 左边到边界，把右边剩余的数移入数组
         while (j <= right) {
-            temp[k++] = arr[j++];
+            temp[loc++] = arr[j++];
         }
         // 把数组temp中的数覆盖arr数组
-        for (int k1 = 0; k1 < temp.length; k1++) {
+        for (int m = 0; m < temp.length; m++) {
             // 注意arr数组下标以left为基准
-            arr[left + k1] = temp[k1];
+            arr[left + m] = temp[m];
         }
     }
 
