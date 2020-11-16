@@ -34,6 +34,21 @@ public class SortSolutionTest {
     }
 
     @Test
+    public void testInsertionSort2() {
+        int[] arr = {12, 1, 3, 46, 5, 0, -3, 12, 35, 16};
+        insertionSort2(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testShellSort() {
+        int[] array = {5, 3, 9, 12, 6, 1, 7, 2, 4, 11, 8, 10};
+        shellSort(array);
+        System.out.println(Arrays.toString(array));
+    }
+
+
+    @Test
     public void testInsertionSort() {
         // 通过对数器验证算法的正确性
         int testTime = 500000;

@@ -57,8 +57,6 @@ public class SortSolution {
     // 冒泡排序 : 一次排序后最大的放在最后一个位置
     // 时间复杂的o(n*n)
     public static void bubbleSort(int[] arr) {
-        // 合法性判断
-        ZcyUtil.arrValid(arr);
         // 排序总趟数
         for (int end = arr.length - 1; end > 0; end--) {
             // 一趟中比较两个相邻位置数大小，如果i>i+1 就交换，i++
@@ -111,11 +109,11 @@ public class SortSolution {
     }
 
 
-    // 插入排序
-    // 类似调整有序的扑克牌，抓拍后找到插入位置
-    // 时间复杂度 最好：有序数组 o(n)  最坏：逆序 o(n*n)
+    // 插入排序 ：类似调整有序扑克牌，抓牌后找到插入位置
+    // 时间复杂度: 最好有序数组 o(n) 最坏逆序 o(n*n) 平均时间复杂度是O（n^2） 空间复杂度:o(1)
+    // 1.在大多数元素已经有序的情况下，插入排序的工作量较小
+    // 2.在元素数量较少的情况下，插入排序的工作量较小
     public static void insertionSort(int[] arr) {
-        ZcyUtil.arrValid(arr);
         // 默认第0的位置是已经排好序的元素
         for (int i = 1; i < arr.length; i++) {
             for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
@@ -123,6 +121,39 @@ public class SortSolution {
             }
         }
     }
+
+    public static void insertionSort2(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int insertVal = arr[i];
+            int j = i - 1;
+            // 从右向左比较元素的同时，进行元素复制
+            for (; j >= 0 && arr[j] > insertVal; j--) {
+                arr[j + 1] = arr[j];
+            }
+            // 遍历循环后还有j--操作
+            arr[j + 1] = insertVal;
+        }
+    }
+
+    // 希尔排序（对原始数组进行预处理，逐步分组进行粗调--希尔排序的增量--常用逐步折半的增量方法，再进行直接插入排序的思想）
+    // https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653199674&idx=1&sn=9ab7bb7e465104c67a3d8590ebd0fe6c&chksm=8c99efe0bbee66f69c07e5f423d7751c9667fa82beb6dcaef4c0e96dac9545d2277c8179c765&scene=21#wechat_redirect
+    public static void shellSort(int[] arr) {
+        int d = arr.length;
+        while (d > 1) {
+            d = d / 2;  //折半
+            for (int x = 0; x < d; x++) {
+                for (int i = x + d; i < arr.length; i = i + d) {
+                    int insertVal = arr[i];
+                    int j = i - d;
+                    for (; j >= 0 && arr[j] > insertVal; j = j - d) {
+                        arr[j + d] = arr[j];
+                    }
+                    arr[j + d] = insertVal;
+                }
+            }
+        }
+    }
+
 
     // 选择排序 时间复杂度o(n*n)
     // * 第一次 0到n-1上选择一个最小的值，放到第0的位置
