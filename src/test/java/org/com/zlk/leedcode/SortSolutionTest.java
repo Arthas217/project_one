@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.com.zlk.leedcode.SortSolution.insertionSort;
-import static org.com.zlk.leedcode.SortSolution.mergeSort;
+import static org.com.zlk.leedcode.SortSolution.*;
 
 /**
  * @Author zc217
@@ -22,7 +21,16 @@ public class SortSolutionTest {
     }
 
     @Test
-    public void bubbleSort() {
+    public void testBubbleSort() {
+        int[] array = new int[]{5, 8, 6, 3, 9, 2, 1, 7};
+        bubbleSort(array);
+        System.out.println(Arrays.toString(array));
+        int[] array2 = new int[]{5, 8, 6, 3, 9, 2, 1, 7};
+        bubbleSort2(array2);
+        System.out.println(Arrays.toString(array2));
+        int[] array3 = new int[]{3, 4, 2, 1, 5, 6, 7, 8};
+        bubbleSort3(array3);
+        System.out.println(Arrays.toString(array2));
     }
 
     @Test
@@ -56,7 +64,7 @@ public class SortSolutionTest {
         int[] arr = {49, 38, 65, 97, 76, 13, 27, 49};
         SortSolution.quickSort(arr);
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]+"\t");
+            System.out.print(arr[i] + "\t");
         }
     }
 }

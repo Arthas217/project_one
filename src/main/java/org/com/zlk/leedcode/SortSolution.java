@@ -11,6 +11,7 @@ import org.com.zlk.leedcode.zcy.ZcyUtil;
 public class SortSolution {
 
     // 归并排序 时间复杂度o(n*logn) 空间复杂度o(n)
+    // 参考：https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653200029&idx=1&sn=51ecebafb9ff77baf3de71bdc4f67b78&chksm=8c99ec47bbee6551b0377b97e26670c4895d0c934051e4aa927e62bf9b64996b6e1f7459edfe&scene=21#wechat_redirect
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -58,7 +59,7 @@ public class SortSolution {
     public static void bubbleSort(int[] arr) {
         // 合法性判断
         ZcyUtil.arrValid(arr);
-        // 一趟排序的次数
+        // 排序总趟数
         for (int end = arr.length - 1; end > 0; end--) {
             // 一趟中比较两个相邻位置数大小，如果i>i+1 就交换，i++
             for (int i = 0; i < end; i++) {
@@ -68,6 +69,47 @@ public class SortSolution {
             }
         }
     }
+
+    public static void bubbleSort2(int[] arr) {
+        int temp;
+        // 外部循环控制所有的回合
+        for (int i = 0; i < arr.length; i++) {
+            // 内部循环代表每一轮的冒泡处理，先进行元素比较，再进行元素交换。
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void bubbleSort3(int[] arr) {
+        int temp;
+        //记录最后一次交换的位置
+        int lastExchangeIndex = 0;
+        // 无序数列的边界，每次比较只需要比到这里为止
+        int sortBorder = arr.length - 1;
+        for (int i = 0; i < arr.length; i++) {
+            //有序标记，每一轮的初始是true
+            boolean isSorted = true;
+            for (int j = 0; j < sortBorder; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    isSorted = false;
+                    lastExchangeIndex = j;
+                }
+            }
+            sortBorder = lastExchangeIndex;
+            if (isSorted) {
+                break;
+            }
+        }
+    }
+
 
     // 插入排序
     // 类似调整有序的扑克牌，抓拍后找到插入位置
