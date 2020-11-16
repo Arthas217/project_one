@@ -10,43 +10,45 @@ import org.com.zlk.leedcode.zcy.ZcyUtil;
  */
 public class SortSolution {
 
-    //归并排序 时间复杂度o(n*logn)
+    // 归并排序 时间复杂度o(n*logn) 空间复杂度o(n)
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
-            // 递归处理分治思想  把问题都拆分为一个元素，或者是二个元素的子数组
+            // 递归处理把问题都拆分为一个元素，或者是二个元素的子数组
+            // 折半成两个小集合，分别进行递归
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
-            // 对各个拆分完的子数组进行归并
+            // 对各个拆分完的子数组进行归并成一个大集合
             merge(arr, left, mid, right);
         }
     }
 
     private static void merge(int[] arr, int left, int mid, int right) {
-        int[] temp = new int[right - left + 1];
-        int i = left;
-        int j = mid + 1;
-        int loc = 0;// 新数组位置
-        // 把较小的数先移到新数组中
-        while (i <= mid && j <= right) {
-            if (arr[i] < arr[j]) {
-                temp[loc++] = arr[i++];
+        int[] tempArray = new int[right - left + 1];
+        int p1 = left;
+        int p2 = mid + 1;
+        int p = 0;// 新数组位置
+        // 比较两个小集合的元素，把较小的数先移到新数组中(依次放入大集合)
+        while (p1 <= mid && p2 <= right) {
+            if (arr[p1] < arr[p2]) {
+                tempArray[p++] = arr[p1++];
             } else {
-                temp[loc++] = arr[j++];
+                tempArray[p++] = arr[p2++];
             }
         }
         // 右边到边界，把左边剩余的数移入数组
-        while (i <= mid) {
-            temp[loc++] = arr[i++];
+        // 左侧小集合还有剩余，依次放入大集合尾部
+        while (p1 <= mid) {
+            tempArray[p++] = arr[p1++];
         }
         // 左边到边界，把右边剩余的数移入数组
-        while (j <= right) {
-            temp[loc++] = arr[j++];
+        while (p2 <= right) {
+            tempArray[p++] = arr[p2++];
         }
-        // 把数组temp中的数覆盖arr数组
-        for (int m = 0; m < temp.length; m++) {
+        // 把大集合tempArray的元素复制回原数组
+        for (int i = 0; i < tempArray.length; i++) {
             // 注意arr数组下标以left为基准
-            arr[left + m] = temp[m];
+            arr[left + i] = tempArray[i];
         }
     }
 
