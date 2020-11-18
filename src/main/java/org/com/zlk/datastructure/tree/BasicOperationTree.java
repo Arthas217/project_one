@@ -189,7 +189,7 @@ public class BasicOperationTree {
     /**
      * 交换树的左右孩子
      */
-    public static void swap(TreeNode root) {
+    public static void swapLRnode(TreeNode root) {
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;

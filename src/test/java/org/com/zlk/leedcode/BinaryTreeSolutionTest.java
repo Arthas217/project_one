@@ -1,12 +1,14 @@
 package org.com.zlk.leedcode;
 
-import org.com.zlk.datastructure.tree.InitTreeNoe;
+import org.com.zlk.datastructure.tree.BasicOperationTree;
+import org.com.zlk.datastructure.tree.InitTreeNode;
 import org.com.zlk.datastructure.tree.TreeNode;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.com.zlk.datastructure.tree.InitTreeNode.init2;
 import static org.com.zlk.leedcode.BinaryTreeSolution.*;
 
 /**
@@ -138,7 +140,7 @@ public class BinaryTreeSolutionTest {
 
     @Test
     public void testHasPathSum() {
-        TreeNode treeNode1 = InitTreeNoe.init1();
+        TreeNode treeNode1 = InitTreeNode.init1();
         boolean hasPathSum = hasPathSum(treeNode1, 22);
         boolean hasPathSum2 = hasPathSum2(treeNode1, 22);
         System.out.println(hasPathSum);
@@ -182,6 +184,17 @@ public class BinaryTreeSolutionTest {
         t5.right = t9;
         int sum3 = pathSum333(t1, 8);
         System.out.println(sum3);
+    }
+
+
+    @Test
+    public void testInvertTree(){
+        BasicOperationTree.preOrder(invertTree(init2()));
+    }
+
+    @Test
+    public void testSumOfLeftLeaves(){
+        System.out.println(sumOfLeftLeaves(init2()));
     }
 
 

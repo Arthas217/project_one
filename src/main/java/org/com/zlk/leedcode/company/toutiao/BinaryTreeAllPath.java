@@ -1,6 +1,6 @@
 package org.com.zlk.leedcode.company.toutiao;
 
-import org.com.zlk.datastructure.tree.InitTreeNoe;
+import org.com.zlk.datastructure.tree.InitTreeNode;
 import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ public class BinaryTreeAllPath {
     }
 
     public static void main(String[] args) {
-        TreeNode treeNode = InitTreeNoe.init1();
+        TreeNode treeNode = InitTreeNode.init1();
         List<String> paths = binaryTreeAllPathsTarget(treeNode, 22);
         for (String value : paths) {
             System.out.println(value);

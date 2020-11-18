@@ -52,15 +52,12 @@ public class BinaryTreeSolution {
     }
 
     // 226. 翻转二叉树
-    public TreeNode invertTree(TreeNode root) {
+    public static TreeNode invertTree(TreeNode root) {
         // 递归函数的终止条件，节点为空时返回
         if (root == null) {
             return root;
         }
-        //下面三句是将当前节点的左右子树交换
-        TreeNode tmp = root.right;
-        root.right = root.left;
-        root.left = tmp;
+        BasicOperationTree.swapLRnode(root);
         //递归交换当前节点的 左子树
         invertTree(root.left);
         //递归交换当前节点的 右子树
@@ -69,7 +66,7 @@ public class BinaryTreeSolution {
         return root;
     }
 
-    // 637. 二叉树的层平均值
+    // 637. 二叉树的层平均值  层次遍历的进化
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> result = new ArrayList<>();
         if (root == null) {
@@ -120,12 +117,12 @@ public class BinaryTreeSolution {
     }
 
     // 404. 左叶子之和
-    public int sumOfLeftLeaves(TreeNode root) {
+    public static int sumOfLeftLeaves(TreeNode root) {
         if (root == null) {
             return 0;
         }
         // 判断节点是否是左叶子节点
-        if (root.left!= null && root.left.left == null && root.left.right == null) {
+        if (root.left != null && root.left.left == null && root.left.right == null) {
             // 递归找其他的左孩子
             return root.left.val + sumOfLeftLeaves(root.right);
         }
@@ -173,7 +170,7 @@ public class BinaryTreeSolution {
             return null;
         }
         // 交换父节点的左右孩子
-        BasicOperationTree.swap(root);
+        BasicOperationTree.swapLRnode(root);
         mirrorBinaryTree(root.left);
         mirrorBinaryTree(root.right);
         return root;
