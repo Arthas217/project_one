@@ -6,7 +6,7 @@ import java.util.Stack;
 public class BasicOperationTree {
 
     /**
-     * 先序遍历递归（DFS)
+     * 先序遍历 递归（DFS深度优先遍历)
      */
     public static void preOrder(TreeNode root) {
         if (root != null) {
@@ -17,7 +17,7 @@ public class BasicOperationTree {
     }
 
     /**
-     * 中序遍历递归
+     * 中序遍历 递归
      */
     public static void inOrder(TreeNode root) {
         if (root != null) {
@@ -28,7 +28,7 @@ public class BasicOperationTree {
     }
 
     /**
-     * 后序遍历递归
+     * 后序遍历 递归
      */
     public static void postOrder(TreeNode root) {
         if (root != null) {
@@ -40,7 +40,7 @@ public class BasicOperationTree {
 
 
     /**
-     * 先序遍历非递归需要使用栈
+     * 先序遍历 非递归 需要使用栈
      */
     public static void preOrder2(TreeNode root) {
         // LinkedList是一个双向链表
@@ -116,10 +116,10 @@ public class BasicOperationTree {
 
 
     /**
-     * 层次遍历 BFS
+     * 层次遍历 BFS（广度优先遍历）
      * https://www.cnblogs.com/rever/p/7109572.html
      */
-    public static void laywerTraversal(TreeNode root) {
+    public static void layerTraversal(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -142,7 +142,7 @@ public class BasicOperationTree {
 
 
     /**
-     * 深度遍历 事实上就是前序遍历
+     * 深度遍历 前序遍历递归版
      */
     public static void depthOrderTraverse(TreeNode root) {
         if (root == null) {
@@ -164,7 +164,7 @@ public class BasicOperationTree {
     }
 
     /**
-     * 深度遍历DFS 递归
+     * 深度遍历-DFS
      */
     public static void depthOrderTraverse1(TreeNode root) {
         if (root == null) {
@@ -186,6 +186,9 @@ public class BasicOperationTree {
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
+    /**
+     * 交换树的左右孩子
+     */
     public static void swap(TreeNode root) {
         TreeNode temp = root.left;
         root.left = root.right;

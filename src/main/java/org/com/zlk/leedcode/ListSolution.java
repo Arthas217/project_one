@@ -8,12 +8,11 @@ import java.util.Stack;
 
 /**
  * 链表专题
- *
+ * https://lucifer.ren/blog/2020/11/08/linked-list/
  * @Author zc217
  * @Date 2020/7/23
  */
 public class ListSolution {
-
     /**
      * 判断链表是否存在环
      */

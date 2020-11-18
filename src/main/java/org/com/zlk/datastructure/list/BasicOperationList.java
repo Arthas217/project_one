@@ -8,6 +8,7 @@ public class BasicOperationList {
      * 打印链表顺序和插入元素顺序一致
      */
     public static ListNode createListSort() {
+
         ListNode h;
         ListNode r;
         ListNode p;
@@ -21,7 +22,6 @@ public class BasicOperationList {
             r.next = p;
             r = p;
         }
-
         r.next = null;
         return h;
     }

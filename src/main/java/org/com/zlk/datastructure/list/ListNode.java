@@ -36,7 +36,7 @@ public class ListNode {
     }
 
     /**
-     * 获取链表长度
+     * 获取链表长度(无头结点）
      */
     public static int getListLen(ListNode l) {
         int sum = 0;
