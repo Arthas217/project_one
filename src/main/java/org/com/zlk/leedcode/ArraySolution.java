@@ -360,9 +360,9 @@ public class ArraySolution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int length = nums1.length + nums2.length;
         double result = 0;
-        if(length % 2 != 0){
+        if (length % 2 != 0) {
             return getNum(nums1, nums2, length / 2);
-        }else{
+        } else {
             result = getNum(nums1, nums2, length / 2 - 1) / 2 + getNum(nums1, nums2, length / 2) / 2;
         }
         return result;
@@ -404,11 +404,12 @@ public class ArraySolution {
         }
         return t;
     }
+
     // 有序数组 二分思路
     // 如果中间元素的值和下标相等，只需要查找右半边；
     // 如果中间元素的值和下标不相等，并且它前面一个元素和它的下标相等，中间的数字下标就是不存在的数字；
     // 如果中间元素的值和下标不相等，并且它前面一个元素和它的下标不相等，只需要查找左半边
-    public static int getLoseNum(int[] arr, int left, int right){
+    public static int getLoseNum(int[] arr, int left, int right) {
         int mid;
         while (left <= right) {
             mid = (left + right) / 2;
@@ -418,6 +419,56 @@ public class ArraySolution {
                 left = mid + 1;
         }
         return left + 1;
+    }
+
+
+    /**
+     * 两个升序数组
+     * {1,2,5,7,9}
+     * {2,2,3,4,6}
+     * 合并数组输出第偶数个值到新数组。
+     */
+    public static int[] printEvenLocationOfMergeArray(int[] arr1, int[] arr2) {
+        int m = arr1.length;
+        int n = arr2.length;
+        int cap = (m + n) / 2; //新数组大小
+        int p1 = 0, p2 = 0;
+        int[] nums = new int[cap];
+        int location = 1;//偶数位置下标
+        int index = 0;// 新数组元素下标
+        while (p1 < m && p2 < n) {
+            if (arr1[p1] < arr2[p2]) {
+                if (location % 2 == 0) {
+                    nums[index] = arr1[p1];
+                    index++;
+                }
+                p1++;
+            } else {
+                if (location % 2 == 0) {
+                    nums[index] = arr2[p2];
+                    index++;
+                }
+                p2++;
+            }
+            location++;
+        }
+        while (p1 < m) {
+            if (location % 2 == 0) {
+                nums[index] = arr1[p1];
+                index++;
+            }
+            p1++;
+            location++;
+        }
+        while (p2 < n) {
+            if (location % 2 == 0) {
+                nums[index] = arr2[p2];
+                index++;
+            }
+            p2++;
+            location++;
+        }
+        return nums;
     }
 
 }
