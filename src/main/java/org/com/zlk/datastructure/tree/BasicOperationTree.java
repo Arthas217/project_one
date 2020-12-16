@@ -140,9 +140,19 @@ public class BasicOperationTree {
         }
     }
 
-
     /**
-     * 深度遍历 前序遍历递归版
+     * 深度遍历-递归
+     */
+    public static void depthOrderTraverse1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.val + "  ");
+        depthOrderTraverse1(root.left);
+        depthOrderTraverse1(root.right);
+    }
+    /**
+     * 深度遍历-非递归
      */
     public static void depthOrderTraverse(TreeNode root) {
         if (root == null) {
@@ -163,17 +173,7 @@ public class BasicOperationTree {
         }
     }
 
-    /**
-     * 深度遍历-DFS
-     */
-    public static void depthOrderTraverse1(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        System.out.print(root.val + "  ");
-        depthOrderTraverse1(root.left);
-        depthOrderTraverse1(root.right);
-    }
+
 
 
     /**

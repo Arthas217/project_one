@@ -157,4 +157,22 @@ public class ArraySolutionTest {
         int[] result = printEvenLocationOfMergeArray(arr1, arr2);
         printArrayValue(result);
     }
+
+    @Test
+    public void testfindCommonNum4Array() {
+        int[] arr1 = {1, 3, 5, 7, 9};
+        int[] arr2 = {2, 4, 6, 9, 10};
+        boolean result = findCommonNum4Array(arr1, arr2);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testdistinctAndSort() {
+        int[] arr1 = {4, 1, 3, 9, 6, 2};
+        int[] arr2 = {8, 5, 3, 2, 1, 4, 7};
+        int[] result = distinctAndSort(arr1, arr2);
+        printArrayValue(result);
+
+    }
+
 }

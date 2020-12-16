@@ -471,4 +471,59 @@ public class ArraySolution {
         return nums;
     }
 
+
+    /**
+     * O(N) 给定两个排好序的数组，怎样高效地判断这两个数组中是否存在相同的数字
+     */
+    public static boolean findCommonNum4Array(int a[], int b[]) {
+        boolean res = false;
+        int size_a = a.length;
+        int size_b = b.length;
+        if (size_a <= 0 || size_b <= 0) {
+            return res;
+        }
+        int i = 0, j = 0;
+        while (i < size_a && j < size_b) {
+            if (a[i] == b[j]) {
+                res = true;
+                break;
+            }
+            if (a[i] < b[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        return res;
+    }
+
+
+    //合并数组[4,1,3,9,6,2]和[8,5,3,2,1,4,7]，然后去重，取出偶数并倒排输出（可使用容器）
+    public static int[] distinctAndSort(int[] arr1,int[] arr2) {
+        TreeSet<Integer> set = new TreeSet(new MyCompare());
+        for (int i : arr1) {
+            set.add(i);
+        }
+        for (int i : arr2) {
+            set.add(i);
+        }
+        Iterator<Integer> it = set.iterator();
+        int[] arr = new int[set.size()/2];
+        int i = 0;
+        while (it.hasNext()) {
+            Integer value = it.next();
+            if (value % 2 == 0) {
+                arr[i++] = value;
+            }
+        }
+        return arr;
+    }
+
+    static class MyCompare implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2.compareTo(o1);
+        }
+    }
+
 }
