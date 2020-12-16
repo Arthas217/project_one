@@ -20,7 +20,7 @@ public class TreeNode {
     /**
      * 指向父结点的指针（test12 use）
      */
-    public TreeNode next;
+    public TreeNode parent;
 
 
     public TreeNode(int value) {

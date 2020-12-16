@@ -197,5 +197,9 @@ public class BinaryTreeSolutionTest {
         System.out.println(sumOfLeftLeaves(init2()));
     }
 
+    @Test
+    public void testflatten(){
+        BasicOperationTree.inOrder(flatten(init2()));
+    }
 
 }

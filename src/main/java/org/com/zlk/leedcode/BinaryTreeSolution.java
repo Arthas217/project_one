@@ -74,7 +74,7 @@ public class BinaryTreeSolution {
         }
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             double sum = 0;
             int qsize = queue.size();
             for (int i = 0; i < qsize; i++) {
@@ -388,6 +388,7 @@ public class BinaryTreeSolution {
     // next()和hasNext()操作的时间复杂度是O(1)，并使用O(h) 内存，其中h是树的高度。
     // 构造函数名称主要体现了BSTIterator二叉搜索树迭代器含义，名称为了和类名一致
     public static Stack<TreeNode> nodeStack = null;
+
     public BinaryTreeSolution(TreeNode root) {
         nodeStack = new Stack<>();
         while (root != null) {
@@ -397,7 +398,10 @@ public class BinaryTreeSolution {
     }
     // 用一个栈缓存从根节点到叶子节点的路径上所经过的且还没有输出的节点，相当于保存了上下文环境
     // 调用next()将返回二叉搜索树中的下一个最小的数
-    /** @return the next smallest number */
+
+    /**
+     * @return the next smallest number
+     */
     public static int next() {
         // 左下部分子树全部访问之后,根据栈内的节点继续访问右上部分的子树
         TreeNode peek = nodeStack.peek();
@@ -410,7 +414,10 @@ public class BinaryTreeSolution {
         return peek.val;
 
     }
-    /** @return whether we have a next smallest number */
+
+    /**
+     * @return whether we have a next smallest number
+     */
     public static boolean hasNext() {
         return !nodeStack.isEmpty();
     }
@@ -552,14 +559,14 @@ public class BinaryTreeSolution {
             LinkedList<Integer> queue = new LinkedList<Integer>();
             queue.add(root.val);
             res.add(queue);
-        }else {
+        } else {
             // 将遍历的节点值加入到对应queue中
             if (index % 2 != 0) {
                 // 尾插入
-                res.get(index-1).add(root.val);
+                res.get(index - 1).add(root.val);
             } else {
                 // 头插入
-                res.get(index-1).add(0, root.val);
+                res.get(index - 1).add(0, root.val);
             }
         }
         // 递归DFS
@@ -573,7 +580,7 @@ public class BinaryTreeSolution {
 
 
     // 513. 找树左下角的值 (二叉树，在树的最后一行找到最左边的值)  *****
-    public int findBottomLeftValue(TreeNode root){
+    public int findBottomLeftValue(TreeNode root) {
         if (root == null) {
             return -1;
         }
@@ -597,6 +604,7 @@ public class BinaryTreeSolution {
     // 513. 找树左下角的值
     int left_value = 0;
     int max_level = 0;
+
     public int findBottomLeftValue2(TreeNode root) {
         // 最后一行 可以用DFS遍历，记录最深层level
         bottomLeftDFS(root, 1);
@@ -682,10 +690,12 @@ public class BinaryTreeSolution {
         // 递归
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
+
     // 112. 路径总和 (dfs）
     public static boolean hasPathSum2(TreeNode root, int sum) {
         return helper(root, 0, sum);
     }
+
     private static boolean helper(TreeNode root, int cur, int target) {
         if (root == null) {
             return false;
@@ -730,6 +740,7 @@ public class BinaryTreeSolution {
     // 437. 路径总和 III  路径方向必须是向下的（只能从父节点到子节点）找出路径和等于给定数值的路径总数
     // 注意count不能作为dfs函数参数。因为不是以根节点为起始点。
     private static int count = 0;
+
     public static int pathSum3(TreeNode root, int sum) {
         // 双重DFS: 先序递归遍历每个节点;
         if (root == null) {
@@ -794,6 +805,7 @@ public class BinaryTreeSolution {
 
     // 124. 二叉树中最大路径和 (一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点)
     private static int maxSum = Integer.MIN_VALUE;
+
     public static int maxPathSum(TreeNode root) {
         maxGain(root);// 根节点递归得到每个节点的最大贡献值
         return maxSum;
@@ -810,6 +822,30 @@ public class BinaryTreeSolution {
         int priceNewPath = root.val + leftGain + rightGain;
         maxSum = Math.max(maxSum, priceNewPath);// 更新最大路径和长度
         return root.val + Math.max(leftGain, rightGain);// 计算该节点最大贡献值
+    }
+
+    // 114. 将二叉树展开为链表--递归
+    public static TreeNode flatten(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        // flatten函数：输入一个节点root，那么以root为根的二叉树就会被拉平为一条链表。
+        // 1、将root的左子树和右子树拉平
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        // 2、将左子树作为右子树
+        root.left = null;
+        root.right = left;
+        // 3、将原先的右子树接到当前右子树的末端
+        TreeNode p = root;
+        while (p.right != null) {
+            p = p.right;
+        }
+        p.right = right;
+        return root;
     }
 
 }
