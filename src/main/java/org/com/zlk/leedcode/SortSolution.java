@@ -180,7 +180,7 @@ public class SortSolution {
     }
 
     private static void helpSort(int[] arr, int left, int right) {
-        //一趟排序通过交换元素构建分界点p
+        //一趟排序通过交换元素构建分界点p   类似前序遍历位置
         int p = partition(arr, left, right);
         if (p < 0) {
             return;
