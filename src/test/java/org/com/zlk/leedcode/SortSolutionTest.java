@@ -1,5 +1,6 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.leedcode.company.toutiao.TestUtil;
 import org.com.zlk.leedcode.zcy.ZcyUtil;
 import org.junit.Test;
 
@@ -78,8 +79,6 @@ public class SortSolutionTest {
     public void testQuickSort() {
         int[] arr = {49, 38, 65, 97, 76, 13, 27, 49};
         SortSolution.quickSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + "\t");
-        }
+        TestUtil.printArrayValue(arr);
     }
 }

@@ -1,5 +1,6 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.leedcode.company.toutiao.TestUtil;
 import org.junit.Test;
 
 import static org.com.zlk.leedcode.ArraySolution.*;
@@ -10,11 +11,6 @@ import static org.com.zlk.leedcode.ArraySolution.*;
  */
 public class ArraySolutionTest {
 
-    private void printArrayValue(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + "\t");
-        }
-    }
 
     @Test
     public void testMaximum69Number() {
@@ -64,14 +60,14 @@ public class ArraySolutionTest {
     public void testSingleNumber3() {
         int[] arr3 = {1, 2, 1, 3, 2, 5};
         int[] res = singleNumber3(arr3);
-        printArrayValue(res);
+        TestUtil.printArrayValue(res);
     }
 
     @Test
     public void singleNumber33() {
         int[] arr3 = {1, 2, 1, 3, 2, 5};
         int[] res = singleNumber3(arr3);
-        printArrayValue(res);
+        TestUtil.printArrayValue(res);
     }
 
     @Test
@@ -96,7 +92,7 @@ public class ArraySolutionTest {
         int[] arr = {2, 7, -11, 15};
         int target = -9;
         int[] twoSum = twoSum(arr, target);
-        printArrayValue(twoSum);
+        TestUtil.printArrayValue(twoSum);
     }
 
     @Test
@@ -108,7 +104,7 @@ public class ArraySolutionTest {
         int[] a = {0, 1, 2, 3, 4, 5};
         int[] b = {1, 3, 5, 7, 9};
         int[] ints = retainAll(a, b);
-        printArrayValue(ints);
+        TestUtil.printArrayValue(ints);
     }
 
     @Test
@@ -129,7 +125,7 @@ public class ArraySolutionTest {
     public void testExchangeArrayElement() {
         int[] arr = {2, 1, 3, 4};
         int[] ints = exchangeArrayElement(arr);
-        printArrayValue(ints);
+        TestUtil.printArrayValue(ints);
     }
 
     @Test
@@ -155,7 +151,7 @@ public class ArraySolutionTest {
         int[] arr1 = {1, 2, 5, 7, 9};
         int[] arr2 = {2, 2, 3, 4, 6};
         int[] result = printEvenLocationOfMergeArray(arr1, arr2);
-        printArrayValue(result);
+        TestUtil.printArrayValue(result);
     }
 
     @Test
@@ -171,7 +167,7 @@ public class ArraySolutionTest {
         int[] arr1 = {4, 1, 3, 9, 6, 2};
         int[] arr2 = {8, 5, 3, 2, 1, 4, 7};
         int[] result = distinctAndSort(arr1, arr2);
-        printArrayValue(result);
+        TestUtil.printArrayValue(result);
 
     }
 

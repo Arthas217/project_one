@@ -21,7 +21,7 @@ public class SortSolution {
             mergeSort(arr, mid + 1, right);
             // 对各个拆分完的子数组进行归并成一个大集合
             merge(arr, left, mid, right);
-        }
+        }// 类似后序遍历位置
     }
 
     private static void merge(int[] arr, int left, int mid, int right) {
@@ -180,18 +180,29 @@ public class SortSolution {
     }
 
     private static void helpSort(int[] arr, int left, int right) {
-        if (left > right) {
+        //一趟排序通过交换元素构建分界点p
+        int p = partition(arr, left, right);
+        if (p < 0) {
             return;
         }
-        //枢轴
-        int temp = arr[left];
+        //左右递归
+        helpSort(arr, left, p - 1);
+        helpSort(arr, p + 1, right);
+    }
+
+    private static int partition(int[] arr, int left, int right) {
+        if (left > right) {
+            return -1;
+        }
+        //哨兵
+        int sentinel = arr[left];
         int i = left, j = right;
         int t;
         while (i != j) {
-            while (arr[j] >= temp && i < j) {
+            while (arr[j] >= sentinel && i < j) {
                 j--;
             }
-            while (arr[i] <= temp && i < j) {
+            while (arr[i] <= sentinel && i < j) {
                 i++;
             }
             if (i < j) {
@@ -200,12 +211,10 @@ public class SortSolution {
                 arr[j] = t;
             }
         }
-        //最终将基准数归位
+        // i和j重合，最终将基准数归位
         arr[left] = arr[i];
-        arr[i] = temp;
-        // 以上是一趟排序，左右递归
-        helpSort(arr, left, i - 1);
-        helpSort(arr, i + 1, right);
+        arr[i] = sentinel;
+        return i;
     }
 
 }

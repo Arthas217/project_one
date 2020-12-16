@@ -431,22 +431,19 @@ public class ArraySolution {
     public static int[] printEvenLocationOfMergeArray(int[] arr1, int[] arr2) {
         int m = arr1.length;
         int n = arr2.length;
-        int cap = (m + n) / 2; //新数组大小
         int p1 = 0, p2 = 0;
-        int[] nums = new int[cap];
+        int[] nums = new int[(m + n) / 2];//新数组大小
         int location = 1;//偶数位置下标
         int index = 0;// 新数组元素下标
         while (p1 < m && p2 < n) {
             if (arr1[p1] < arr2[p2]) {
                 if (location % 2 == 0) {
-                    nums[index] = arr1[p1];
-                    index++;
+                    nums[index++] = arr1[p1];
                 }
                 p1++;
             } else {
                 if (location % 2 == 0) {
-                    nums[index] = arr2[p2];
-                    index++;
+                    nums[index++] = arr2[p2];
                 }
                 p2++;
             }
@@ -454,16 +451,14 @@ public class ArraySolution {
         }
         while (p1 < m) {
             if (location % 2 == 0) {
-                nums[index] = arr1[p1];
-                index++;
+                nums[index++] = arr1[p1];
             }
             p1++;
             location++;
         }
         while (p2 < n) {
             if (location % 2 == 0) {
-                nums[index] = arr2[p2];
-                index++;
+                nums[index++] = arr2[p2];
             }
             p2++;
             location++;
