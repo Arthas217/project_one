@@ -11,7 +11,6 @@ import static org.com.zlk.leedcode.ArraySolution.*;
  */
 public class ArraySolutionTest {
 
-
     @Test
     public void testMaximum69Number() {
         int num = 9996;

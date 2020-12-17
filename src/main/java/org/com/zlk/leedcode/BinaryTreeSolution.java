@@ -27,6 +27,24 @@ public class BinaryTreeSolution {
             preOrder(root.right);
         }
     }
+    // 144. 二叉树的前序遍历
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        preorderHelp(list, root);
+        return list;
+    }
+
+    private void preorderHelp(List<Integer> list, TreeNode root) {
+        if (root != null) {
+            list.add(root.val);
+            if (root.left != null) {
+                preorderHelp(list, root.left);
+            }
+            if (root.right != null) {
+                preorderHelp(list, root.right);
+            }
+        }
+    }
 
     /**
      * 中序遍历 递归
@@ -38,6 +56,24 @@ public class BinaryTreeSolution {
             inOrder(root.right);
         }
     }
+    // 94-中序遍历-递归
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inorderHelp(list, root);
+        return list;
+    }
+
+    private static void inorderHelp(List<Integer> list, TreeNode root) {
+        if (root != null) {
+            if (root.left != null) {
+                inorderHelp(list, root.left);
+            }
+            list.add(root.val);
+            if (root.right != null) {
+                inorderHelp(list, root.right);
+            }
+        }
+    }
 
     /**
      * 后序遍历 递归
@@ -47,6 +83,25 @@ public class BinaryTreeSolution {
             postOrder(root.left);
             postOrder(root.right);
             System.out.print(root.val + "  ");
+        }
+    }
+
+    // 145. 二叉树的后序遍历
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        postorderHelp(list, root);
+        return list;
+    }
+
+    private void postorderHelp(List<Integer> list, TreeNode root) {
+        if (root != null) {
+            if (root.left != null) {
+                postorderHelp(list, root.left);
+            }
+            if (root.right != null) {
+                postorderHelp(list, root.right);
+            }
+            list.add(root.val);
         }
     }
 
@@ -74,6 +129,28 @@ public class BinaryTreeSolution {
         }
     }
 
+    // 144. 二叉树的前序遍历-非递归
+    public List<Integer> preorder(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode treeNode = root;
+        // 循环结束条件是节点为空 && 栈中无元素
+        while (treeNode != null || !stack.isEmpty()) {
+            if (treeNode != null) {
+                list.add(treeNode.val);
+                stack.push(treeNode);
+                treeNode = treeNode.left;
+            } else {
+                // 如果左孩子为空，元素出栈、访问右孩子
+                TreeNode node = stack.pop();
+                treeNode = node.right;
+            }
+        }
+        return list;
+
+    }
+
+
 
     /**
      * 中序遍历非递归
@@ -94,6 +171,30 @@ public class BinaryTreeSolution {
                 pNode = node.right;
             }
         }
+    }
+
+    /**
+     * 94-中序遍历-非递归
+     */
+    public static List<Integer> inorder(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        // 利用栈
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode treeNode = root;
+        // 循环结束条件是节点为空 && 栈中无元素
+        while (treeNode != null || !stack.isEmpty()) {
+            if (treeNode != null) {
+                // 压入栈，如果左孩子非空，继续执行
+                stack.push(treeNode);
+                treeNode = treeNode.left;
+            } else {
+                // 如果左孩子为空，元素出栈、访问右孩子
+                TreeNode node = stack.pop();
+                list.add(node.val);
+                treeNode = node.right;
+            }
+        }
+        return list;
     }
 
     /**
@@ -126,6 +227,67 @@ public class BinaryTreeSolution {
         }
     }
 
+    // 145. 二叉树的后序遍历 双栈方法
+    public static List<Integer> postorder(TreeNode root) {
+        List<Integer> ret = new ArrayList<>();
+        if (root == null) {
+            return ret;
+        }
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        // 栈1 存前序 中左右。
+        stack1.push(root);
+        while (!stack1.isEmpty()) {
+            TreeNode t = stack1.pop();
+            stack2.push(t);
+            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
+            if (t.left != null) {
+                stack1.push(t.left);
+            }
+            if (t.right != null) {
+                stack1.push(t.right);
+            }
+        }
+        // 倒序打印结果  左右中。
+        while (!stack2.isEmpty()) {
+            ret.add(stack2.pop().val);
+        }
+        return ret;
+    }
+
+    // 145. 二叉树的后序遍历 pre指针方法
+    public static List<Integer> postorder2(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur;
+        TreeNode pre = null; // 记录上次访问节点标记
+        stack.push(root); // 压栈顺序 根右左
+        while (!stack.empty()) {
+            cur = stack.peek(); // 当前节点始终指向栈顶位置
+            if (cur == null) { // if这个判断添加leetcode才能通过
+                stack.pop();
+                continue;
+            }
+            boolean leafNode = (cur.left == null && cur.right == null);
+            boolean isVisit = (pre != null && (pre == cur.left || pre == cur.right));
+            // 如果当前结点没有孩子结点或者孩子节点都已被訪问过
+            if (leafNode || isVisit) {
+                result.add(cur.val);
+                stack.pop();
+                pre = cur;
+            } else {
+                // 注意入栈顺序
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                }
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
+            }
+        }
+        return result;
+    }
+
 
     /**
      * 层次遍历 BFS（广度优先遍历）
@@ -137,17 +299,17 @@ public class BinaryTreeSolution {
         }
         LinkedList<TreeNode> queue = new LinkedList();
         queue.add(root);
-        TreeNode currentNode;
+        TreeNode p;
         while (!queue.isEmpty()) {
             // 元素出队、打印
-            currentNode = queue.poll();
-            System.out.print(currentNode.val + "  ");
+            p = queue.poll();
+            System.out.print(p.val + "  ");
             // 该元素如果有孩子，那么依次进入队列
-            if (currentNode.left != null) {
-                queue.add(currentNode.left);
+            if (p.left != null) {
+                queue.add(p.left);
             }
-            if (currentNode.right != null) {
-                queue.add(currentNode.right);
+            if (p.right != null) {
+                queue.add(p.right);
             }
         }
     }
@@ -155,18 +317,18 @@ public class BinaryTreeSolution {
     /**
      * 深度遍历-递归
      */
-    public static void depthOrderTraverse1(TreeNode root) {
+    public static void depthOrder1(TreeNode root) {
         if (root == null) {
             return;
         }
         System.out.print(root.val + "  ");
-        depthOrderTraverse1(root.left);
-        depthOrderTraverse1(root.right);
+        depthOrder1(root.left);
+        depthOrder1(root.right);
     }
     /**
      * 深度遍历-非递归
      */
-    public static void depthOrderTraverse(TreeNode root) {
+    public static void depthOrder2(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -364,170 +526,6 @@ public class BinaryTreeSolution {
         mirrorBinaryTree(root.left);
         mirrorBinaryTree(root.right);
         return root;
-    }
-
-
-    // 94-中序遍历-递归
-    public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        inorderHelp(list, root);
-        return list;
-    }
-
-    private static void inorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            if (root.left != null) {
-                inorderHelp(list, root.left);
-            }
-            list.add(root.val);
-            if (root.right != null) {
-                inorderHelp(list, root.right);
-            }
-        }
-    }
-
-    /**
-     * 94-中序遍历-非递归
-     */
-    public static List<Integer> inorder(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        // 利用栈
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode treeNode = root;
-        // 循环结束条件是节点为空 && 栈中无元素
-        while (treeNode != null || !stack.isEmpty()) {
-            if (treeNode != null) {
-                // 压入栈，如果左孩子非空，继续执行
-                stack.push(treeNode);
-                treeNode = treeNode.left;
-            } else {
-                // 如果左孩子为空，元素出栈、访问右孩子
-                TreeNode node = stack.pop();
-                list.add(node.val);
-                treeNode = node.right;
-            }
-        }
-        return list;
-    }
-
-    // 144. 二叉树的前序遍历
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        preorderHelp(list, root);
-        return list;
-    }
-
-    private void preorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            list.add(root.val);
-            if (root.left != null) {
-                preorderHelp(list, root.left);
-            }
-            if (root.right != null) {
-                preorderHelp(list, root.right);
-            }
-        }
-    }
-
-    // 144. 二叉树的前序遍历-非递归
-    public List<Integer> preorder(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode treeNode = root;
-        // 循环结束条件是节点为空 && 栈中无元素
-        while (treeNode != null || !stack.isEmpty()) {
-            if (treeNode != null) {
-                list.add(treeNode.val);
-                stack.push(treeNode);
-                treeNode = treeNode.left;
-            } else {
-                // 如果左孩子为空，元素出栈、访问右孩子
-                TreeNode node = stack.pop();
-                treeNode = node.right;
-            }
-        }
-        return list;
-
-    }
-
-    // 145. 二叉树的后序遍历
-    public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        postorderHelp(list, root);
-        return list;
-    }
-
-    private void postorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            if (root.left != null) {
-                postorderHelp(list, root.left);
-            }
-            if (root.right != null) {
-                postorderHelp(list, root.right);
-            }
-            list.add(root.val);
-        }
-    }
-
-    // 145. 二叉树的后序遍历 双栈方法
-    public static List<Integer> postorder(TreeNode root) {
-        List<Integer> ret = new ArrayList<>();
-        if (root == null) {
-            return ret;
-        }
-        Stack<TreeNode> stack1 = new Stack<>();
-        Stack<TreeNode> stack2 = new Stack<>();
-        // 栈1 存前序 中左右。
-        stack1.push(root);
-        while (!stack1.isEmpty()) {
-            TreeNode t = stack1.pop();
-            stack2.push(t);
-            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
-            if (t.left != null) {
-                stack1.push(t.left);
-            }
-            if (t.right != null) {
-                stack1.push(t.right);
-            }
-        }
-        // 倒序打印结果  左右中。
-        while (!stack2.isEmpty()) {
-            ret.add(stack2.pop().val);
-        }
-        return ret;
-    }
-
-    // 145. 二叉树的后序遍历 pre指针方法
-    public static List<Integer> postorder2(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur;
-        TreeNode pre = null; // 记录上次访问节点标记
-        stack.push(root); // 压栈顺序 根右左
-        while (!stack.empty()) {
-            cur = stack.peek(); // 当前节点始终指向栈顶位置
-            if (cur == null) { // if这个判断添加leetcode才能通过
-                stack.pop();
-                continue;
-            }
-            boolean leafNode = (cur.left == null && cur.right == null);
-            boolean isVisit = (pre != null && (pre == cur.left || pre == cur.right));
-            // 如果当前结点没有孩子结点或者孩子节点都已被訪问过
-            if (leafNode || isVisit) {
-                result.add(cur.val);
-                stack.pop();
-                pre = cur;
-            } else {
-                // 注意入栈顺序
-                if (cur.right != null) {
-                    stack.push(cur.right);
-                }
-                if (cur.left != null) {
-                    stack.push(cur.left);
-                }
-            }
-        }
-        return result;
     }
 
 
