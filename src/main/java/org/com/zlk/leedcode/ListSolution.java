@@ -205,39 +205,42 @@ public class ListSolution {
         return head;
     }
 
-
-    //K个一组翻转链表 迭代
-    public static ListNode reverseKGroup2(ListNode head, int k) {
-        if (head == null) return null;
-        // 区间 [a, b) 包含 k 个待反转元素
-        ListNode a, b;
-        a = b = head;
-        for (int i = 0; i < k; i++) {
-            // 不足 k 个，不需要反转，base case
-            if (b == null) return head;
-            b = b.next;
+    // 25. K个一组翻转链表(无链表头，迭代）
+    // 步骤：
+    // 1 找到head开始的第k的节点
+    // 2 head到tail前一个结点间翻转，并返回新节点
+    // 3.再以tail为头结点递归
+    // 4.递归结束后，将head.next指向翻转的新节点
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
         }
-        // 反转前 k 个元素
-        ListNode newHead = reverse(a, b);
+        ListNode tail = head;
+        for (int i = 0; i < k; i++) {
+            if (tail == null) {  // 剩余数量小于k的话，则不需要反转。
+                return head;
+            }
+            tail = tail.next;
+        }
+        ListNode newHead = reverseList2(head, tail);// 翻转前k个元素
         // 递归反转后续链表并连接起来
-        a.next = reverseKGroup2(b, k);
+        head.next = reverseKGroup(tail, k);
         return newHead;
     }
-    /** 反转区间 [a, b) 的元素，注意是左闭右开 */
-    private static ListNode reverse(ListNode a, ListNode b) {
-        ListNode pre, cur, nxt;
-        pre = null;
-        cur = a;
-        // while 终止的条件改一下就行了
-        while (cur != b) {
-            nxt = cur.next;
+
+    //反转区间 [head, tail) ，注意是左闭右开   和反转链表很相似
+    private static ListNode reverseList2(ListNode head, ListNode tail) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != tail) {
+            ListNode next = cur.next;
             cur.next = pre;
             pre = cur;
-            cur = nxt;
+            cur = next;
         }
-        // 返回反转后的头结点
         return pre;
     }
+
 
     // 25. K个一组翻转链表  (k 个节点一组进行翻转,k 是一个正整数，它的值小于或等于链表的长度)
     public static ListNode reverseHeadKGroup(ListNode head, int k) {
@@ -281,40 +284,6 @@ public class ListSolution {
         return head;
     }
 
-    // 25. K个一组翻转链表(无链表头，递归）
-    // 步骤：
-    // 1 找到head开始的第k的节点
-    // 2 head到tail前一个结点间翻转，并返回新节点
-    // 3.再以tail为头结点递归
-    // 4.递归结束后，将head.next指向翻转的新节点
-    public static ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode tail = head;
-        for (int i = 0; i < k; i++) {
-            if (tail == null) {  // 剩余数量小于k的话，则不需要反转。
-                return head;
-            }
-            tail = tail.next;
-        }
-        ListNode newHead = reverseList2(head, tail);// 翻转前k个元素
-        head.next = reverseKGroup(tail, k);
-        return newHead;
-    }
-
-    private static ListNode reverseList2(ListNode head, ListNode tail) {
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != tail) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        return pre;
-    }
-
 
     // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。
     public static int[] reversePrint(ListNode head) {
@@ -334,7 +303,8 @@ public class ListSolution {
 
 
     /**
-     * 160. 相交链表（找到两个单链表相交的起始节点）  面试题 02.07. 链表相交
+     * 160. 相交链表（找到两个单链表相交的起始节点）
+     * 面试题 02.07. 链表相交
      */
     public static boolean getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
@@ -385,7 +355,6 @@ public class ListSolution {
     // 501. 二叉搜索树中的众数 （出现频率最高的元素）答案可能有多个值出现的次数一样多。
     public int[] findMode(TreeNode root) {
         return null;
-
     }
 
 }
