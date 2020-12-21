@@ -17,17 +17,8 @@ public class BinaryTreeSolution {
 
     }
 
-    /**
-     * 先序遍历 递归（DFS深度优先遍历)
-     */
-    public static void preOrder(TreeNode root) {
-        if (root != null) {
-            System.out.print(root.val + "  ");
-            preOrder(root.left);
-            preOrder(root.right);
-        }
-    }
-    // 144. 二叉树的前序遍历
+
+    // 144. 二叉树的前序遍历-递归
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         preorderHelp(list, root);
@@ -45,17 +36,16 @@ public class BinaryTreeSolution {
             }
         }
     }
-
-    /**
-     * 中序遍历 递归
-     */
-    public static void inOrder(TreeNode root) {
+    //前序遍历-递归
+    public static void preOrder(TreeNode root) {
         if (root != null) {
-            inOrder(root.left);
             System.out.print(root.val + "  ");
-            inOrder(root.right);
+            preOrder(root.left);
+            preOrder(root.right);
         }
     }
+
+
     // 94-中序遍历-递归
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
@@ -75,16 +65,15 @@ public class BinaryTreeSolution {
         }
     }
 
-    /**
-     * 后序遍历 递归
-     */
-    public static void postOrder(TreeNode root) {
+    // 中序遍历 递归
+    public static void inOrder(TreeNode root) {
         if (root != null) {
-            postOrder(root.left);
-            postOrder(root.right);
+            inOrder(root.left);
             System.out.print(root.val + "  ");
+            inOrder(root.right);
         }
     }
+
 
     // 145. 二叉树的后序遍历
     public List<Integer> postorderTraversal(TreeNode root) {
@@ -105,9 +94,18 @@ public class BinaryTreeSolution {
         }
     }
 
+    // 后序遍历 递归
+    public static void postOrder(TreeNode root) {
+        if (root != null) {
+            postOrder(root.left);
+            postOrder(root.right);
+            System.out.print(root.val + "  ");
+        }
+    }
+
 
     /**
-     * 先序遍历 非递归 需要使用栈
+     * 先序遍历 非递归
      */
     public static void preOrder2(TreeNode root) {
         // LinkedList是一个双向链表
@@ -134,20 +132,17 @@ public class BinaryTreeSolution {
         List<Integer> list = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode treeNode = root;
-        // 循环结束条件是节点为空 && 栈中无元素
         while (treeNode != null || !stack.isEmpty()) {
             if (treeNode != null) {
                 list.add(treeNode.val);
                 stack.push(treeNode);
                 treeNode = treeNode.left;
             } else {
-                // 如果左孩子为空，元素出栈、访问右孩子
                 TreeNode node = stack.pop();
                 treeNode = node.right;
             }
         }
         return list;
-
     }
 
 
@@ -289,6 +284,7 @@ public class BinaryTreeSolution {
     }
 
 
+
     /**
      * 层次遍历 BFS（广度优先遍历）
      * https://www.cnblogs.com/rever/p/7109572.html
@@ -317,18 +313,18 @@ public class BinaryTreeSolution {
     /**
      * 深度遍历-递归
      */
-    public static void depthOrder1(TreeNode root) {
+    public static void depthOrder(TreeNode root) {
         if (root == null) {
             return;
         }
         System.out.print(root.val + "  ");
-        depthOrder1(root.left);
-        depthOrder1(root.right);
+        depthOrder(root.left);
+        depthOrder(root.right);
     }
     /**
      * 深度遍历-非递归
      */
-    public static void depthOrder2(TreeNode root) {
+    public static void depthOrder1(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -359,13 +355,15 @@ public class BinaryTreeSolution {
     }
 
     /**
-     * 交换树的左右孩子
+     * 交换树左右孩子
      */
     public static void swapLRnode(TreeNode root) {
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // 剑指 Offer 28. 对称的二叉树
     public boolean isSymmetric(TreeNode root) {

@@ -43,9 +43,9 @@ public class BinaryTreeSolutionTest {
         System.out.println();
         bts.layerTraversal(root);
         System.out.println();
-        bts.depthOrder1(root);
+        bts.depthOrder(root);
         System.out.println();
-        bts.depthOrder2(root);
+        bts.depthOrder1(root);
         System.out.println();
         int depth = bts.maxDepth(root);
         System.out.println("树高度：" + depth);
