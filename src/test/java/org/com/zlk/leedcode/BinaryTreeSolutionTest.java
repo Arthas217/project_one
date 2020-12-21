@@ -51,6 +51,35 @@ public class BinaryTreeSolutionTest {
     }
 
     @Test
+    public void testisSymmetric(){
+        TreeNode root = initTreeNode.init3();
+        boolean result = bts.isSymmetric(root);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testisSubStructure(){
+        TreeNode root1 = initTreeNode.init2();
+        TreeNode root2 = initTreeNode.init3();
+        boolean subStructure = bts.isSubStructure(root1, root2);
+        System.out.println(subStructure);
+    }
+
+    @Test
+    public void testmergeTrees(){
+        TreeNode t1 = initTreeNode.init22();
+        TreeNode t2 = initTreeNode.init33();
+        TreeNode treeNode = bts.mergeTrees(t1,t2);
+        System.out.println(bts.levelOrder(treeNode));
+    }
+
+    @Test
+    public void testaverageOfLevels(){
+        TreeNode t = initTreeNode.init2();
+        System.out.println(bts.averageOfLevels(t));
+    }
+
+    @Test
     public void testOrder() {
         TreeNode treeNode = initTreeNode.init3();
         List<Integer> inorder = bts.inorderTraversal(treeNode);
