@@ -3,6 +3,7 @@ package org.com.zlk.leedcode;
 import org.com.zlk.datastructure.list.ListNode;
 import org.junit.Test;
 
+import static org.com.zlk.datastructure.list.ListNode.*;
 import static org.com.zlk.leedcode.ListSolution.*;
 
 /**
@@ -24,6 +25,22 @@ public class ListSolutionTest {
         l4.next = l5;
         l5.next = l6;
         l6.next = l3;
+        return l1;
+    }
+
+    private ListNode init2(){
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(4);
+        ListNode l5 = new ListNode(5);
+        ListNode l6 = new ListNode(6);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        l5.next = l6;
+        l6.next = null;
         return l1;
     }
 
@@ -67,7 +84,7 @@ public class ListSolutionTest {
         ListNode l5 = new ListNode(5);
         l4.next = l5;
         ListNode listNode = reverseKGroup(l1,2);
-        ListNode.printList(listNode);
+        printList(listNode);
     }
 
     @Test
@@ -126,5 +143,13 @@ public class ListSolutionTest {
         ListNode value = getIntersectionNode2(l1, l2);
         System.out.println(commonNode);
         System.out.println(value.val);
+    }
+
+
+    @Test
+    public void testreverseBetween(){
+        ListNode init = init2();
+        ListNode head = reverseBetween(init, 2, 3);
+        ListNode.printList(head);
     }
 }
