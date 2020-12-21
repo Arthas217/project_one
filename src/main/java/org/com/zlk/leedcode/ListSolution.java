@@ -9,6 +9,7 @@ import java.util.Stack;
 /**
  * 链表专题
  * https://lucifer.ren/blog/2020/11/08/linked-list/
+ *
  * @Author zc217
  * @Date 2020/7/23
  */
@@ -133,6 +134,7 @@ public class ListSolution {
     // 反转链表前 N 个节点
     // https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/2.2-shou-ba-shou-shua-lian-biao-ti-mu-xun-lian-di-gui-si-wei/di-gui-fan-zhuan-lian-biao-de-yi-bu-fen
     static ListNode successor = null; // 后驱节点
+
     public static ListNode reverseN(ListNode head, int n) {
         if (n == 1) {
             // 记录第 n + 1 个节点
@@ -323,7 +325,7 @@ public class ListSolution {
         }
         while (m1 != null && m2 != null) {
             if (m1.val == m2.val && m1 == m2) {
-                System.out.println(m1.val);
+                //System.out.println(m1.val);
                 return true;
             }
             m1 = m1.next;
