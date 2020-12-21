@@ -361,6 +361,32 @@ public class BinaryTreeSolution {
         }
     }
 
+    // 637. 二叉树的层平均值 层次遍历的进化
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            double sum = 0;
+            int qsize = queue.size();
+            for (int i = 0; i < qsize; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+                sum += node.val;
+            }
+            result.add(sum / qsize);
+        }
+        return result;
+    }
+
     /**
      * 深度遍历-递归
      */
@@ -496,32 +522,6 @@ public class BinaryTreeSolution {
         return t1;
     }
 
-    // 637. 二叉树的层平均值 层次遍历的进化
-    public List<Double> averageOfLevels(TreeNode root) {
-        List<Double> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            double sum = 0;
-            int qsize = queue.size();
-            for (int i = 0; i < qsize; i++) {
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-                sum += node.val;
-            }
-            result.add(sum / qsize);
-        }
-        return result;
-    }
-
 
     // 404. 左叶子之和
     public static int sumOfLeftLeaves(TreeNode root) {
@@ -533,7 +533,7 @@ public class BinaryTreeSolution {
             // 递归找其他的左孩子
             return root.left.val + sumOfLeftLeaves(root.right);
         }
-        // 非叶子节点 左子树和柚子树都要递归处理。
+        // 非叶子节点 左子树和右子树都要递归处理。
         return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
     }
 
@@ -570,6 +570,51 @@ public class BinaryTreeSolution {
         boolean match = Math.abs(leftChildDepth - rightChildDepth) < 2;
         return match && isBalanced(root.left) && isBalanced(root.right);
     }
+
+    // 114. 将二叉树展开为链表
+    public static TreeNode flatten(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        // flatten函数：输入一个节点root，那么以root为根的二叉树就会被拉平为一条链表。
+        // 1、将root的左子树和右子树拉平
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        // 2、将左子树作为右子树
+        root.left = null;
+        root.right = left;
+        // 3、将原先的右子树接到当前右子树的末端
+        TreeNode p = root;
+        while (p.right != null) {
+            p = p.right;
+        }
+        p.right = right;
+        return root;
+    }
+
+    // 116. 填充二叉树节点的右侧指针
+    public TreeNode connect(TreeNode root) {
+        if(root == null)
+            return root;
+        connectTwoNode(root.left,root.right);
+        return root;
+    }
+
+    public void connectTwoNode(TreeNode n1,TreeNode n2){
+        if(n1==null || n2 ==null){
+            return;
+        }
+        n1.next = n2;
+        connectTwoNode(n1.left, n1.right);
+        connectTwoNode(n2.left, n2.right);
+        connectTwoNode(n1.right,n2.left);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+
 
 
     // 98.验证二叉搜索树   面试题 04.05. 合法二叉搜索树
@@ -996,30 +1041,6 @@ public class BinaryTreeSolution {
         int priceNewPath = root.val + leftGain + rightGain;
         maxSum = Math.max(maxSum, priceNewPath);// 更新最大路径和长度
         return root.val + Math.max(leftGain, rightGain);// 计算该节点最大贡献值
-    }
-
-    // 114. 将二叉树展开为链表--递归
-    public static TreeNode flatten(TreeNode root) {
-        if (root == null) {
-            return root;
-        }
-        // flatten函数：输入一个节点root，那么以root为根的二叉树就会被拉平为一条链表。
-        // 1、将root的左子树和右子树拉平
-        flatten(root.left);
-        flatten(root.right);
-
-        TreeNode left = root.left;
-        TreeNode right = root.right;
-        // 2、将左子树作为右子树
-        root.left = null;
-        root.right = left;
-        // 3、将原先的右子树接到当前右子树的末端
-        TreeNode p = root;
-        while (p.right != null) {
-            p = p.right;
-        }
-        p.right = right;
-        return root;
     }
 
 }

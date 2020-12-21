@@ -2,6 +2,7 @@ package org.com.zlk.leedcode;
 
 import org.com.zlk.datastructure.tree.InitTreeNode;
 import org.com.zlk.datastructure.tree.TreeNode;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -172,7 +173,17 @@ public class BinaryTreeSolutionTest {
 
     @Test
     public void testSumOfLeftLeaves() {
-        System.out.println(bts.sumOfLeftLeaves(initTreeNode.init2()));
+        int sumOfLeftLeaves = bts.sumOfLeftLeaves(initTreeNode.init2());
+        int sumOfLeftLeaves2 = bts.sumOfLeftLeaves2(initTreeNode.init2());
+        Assert.assertEquals(10,sumOfLeftLeaves);
+        Assert.assertEquals(10,sumOfLeftLeaves2);
+    }
+
+    @Test
+    public void testisBalanced(){
+        TreeNode treeNode = initTreeNode.init2();
+        boolean balanced = bts.isBalanced(treeNode);
+        Assert.assertEquals(true,balanced);
     }
 
     @Test

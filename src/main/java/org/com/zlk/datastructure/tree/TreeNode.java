@@ -22,6 +22,8 @@ public class TreeNode {
      */
     public TreeNode parent;
 
+    public TreeNode next;
+
 
     public TreeNode(int value) {
         this.val = value;
