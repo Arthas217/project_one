@@ -192,6 +192,34 @@ public class BinaryTreeSolution {
         return list;
     }
 
+    // 145. 二叉树的后序遍历 双栈方法(最容易理解）
+    public static List<Integer> postorder(TreeNode root) {
+        List<Integer> ret = new ArrayList<>();
+        if (root == null) {
+            return ret;
+        }
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        // 栈1 存前序 中左右。
+        stack1.push(root);
+        while (!stack1.isEmpty()) {
+            TreeNode t = stack1.pop();
+            stack2.push(t);
+            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
+            if (t.left != null) {
+                stack1.push(t.left);
+            }
+            if (t.right != null) {
+                stack1.push(t.right);
+            }
+        }
+        // 倒序打印结果  左右中。
+        while (!stack2.isEmpty()) {
+            ret.add(stack2.pop().val);
+        }
+        return ret;
+    }
+
     /**
      * 非递归后序遍历
      */
@@ -220,34 +248,6 @@ public class BinaryTreeSolution {
                 }
             }
         }
-    }
-
-    // 145. 二叉树的后序遍历 双栈方法
-    public static List<Integer> postorder(TreeNode root) {
-        List<Integer> ret = new ArrayList<>();
-        if (root == null) {
-            return ret;
-        }
-        Stack<TreeNode> stack1 = new Stack<>();
-        Stack<TreeNode> stack2 = new Stack<>();
-        // 栈1 存前序 中左右。
-        stack1.push(root);
-        while (!stack1.isEmpty()) {
-            TreeNode t = stack1.pop();
-            stack2.push(t);
-            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
-            if (t.left != null) {
-                stack1.push(t.left);
-            }
-            if (t.right != null) {
-                stack1.push(t.right);
-            }
-        }
-        // 倒序打印结果  左右中。
-        while (!stack2.isEmpty()) {
-            ret.add(stack2.pop().val);
-        }
-        return ret;
     }
 
     // 145. 二叉树的后序遍历 pre指针方法
@@ -284,22 +284,19 @@ public class BinaryTreeSolution {
     }
 
 
-
-    /**
-     * 层次遍历 BFS（广度优先遍历）
-     * https://www.cnblogs.com/rever/p/7109572.html
-     */
-    public static void layerTraversal(TreeNode root) {
+    //层次遍历 BFS（广度优先遍历）https://www.cnblogs.com/rever/p/7109572.html
+    public static List<Integer> layerTraversal(TreeNode root) {
         if (root == null) {
-            return;
+            return new ArrayList<>();
         }
+        List<Integer> result = new ArrayList<>();
         LinkedList<TreeNode> queue = new LinkedList();
         queue.add(root);
         TreeNode p;
         while (!queue.isEmpty()) {
             // 元素出队、打印
             p = queue.poll();
-            System.out.print(p.val + "  ");
+            result.add(p.val);
             // 该元素如果有孩子，那么依次进入队列
             if (p.left != null) {
                 queue.add(p.left);
@@ -308,31 +305,35 @@ public class BinaryTreeSolution {
                 queue.add(p.right);
             }
         }
+        return result;
     }
 
     /**
      * 深度遍历-递归
      */
-    public static void depthOrder(TreeNode root) {
+    static List<Integer> depResult = new ArrayList<>();
+    public static List<Integer> depthOrder(TreeNode root) {
         if (root == null) {
-            return;
+            return depResult;
         }
-        System.out.print(root.val + "  ");
+        depResult.add(root.val);
         depthOrder(root.left);
         depthOrder(root.right);
+        return depResult;
     }
     /**
      * 深度遍历-非递归
      */
-    public static void depthOrder1(TreeNode root) {
+    public static List<Integer> depthOrder1(TreeNode root) {
         if (root == null) {
-            return;
+            return new ArrayList<>();
         }
+        List<Integer> result = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
-            System.out.print(node.val + "  ");
+            result.add(node.val);
             // 注意入栈顺序和前序顺序
             if (node.right != null) {
                 stack.push(node.right);
@@ -341,6 +342,7 @@ public class BinaryTreeSolution {
                 stack.push(node.left);
             }
         }
+        return result;
     }
 
 

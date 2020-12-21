@@ -41,14 +41,13 @@ public class BinaryTreeSolutionTest {
         System.out.println();
         bts.postOrder2(root);
         System.out.println();
-        bts.layerTraversal(root);
-        System.out.println();
-        bts.depthOrder(root);
-        System.out.println();
-        bts.depthOrder1(root);
-        System.out.println();
-        int depth = bts.maxDepth(root);
-        System.out.println("树高度：" + depth);
+        List<Integer> list = bts.layerTraversal(root);
+        System.out.println(list);
+        List<Integer> dep = bts.depthOrder(root);
+        System.out.println(dep);
+        List<Integer> dep1 = bts.depthOrder1(root);
+        System.out.println(dep1);
+        System.out.println("树高度：" + bts.maxDepth(root));
     }
 
     @Test
