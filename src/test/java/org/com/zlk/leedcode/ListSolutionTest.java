@@ -3,7 +3,7 @@ package org.com.zlk.leedcode;
 import org.com.zlk.datastructure.list.ListNode;
 import org.junit.Test;
 
-import static org.com.zlk.datastructure.list.ListNode.*;
+import static org.com.zlk.datastructure.list.ListNode.printList;
 import static org.com.zlk.leedcode.ListSolution.*;
 
 /**
@@ -151,5 +151,20 @@ public class ListSolutionTest {
         ListNode init = init2();
         ListNode head = reverseBetween(init, 2, 3);
         ListNode.printList(head);
+    }
+
+    @Test
+    public void testreverse(){
+        ListNode init = init2();
+        ListNode head = new ListNode();
+        head.next= init;
+        ListNode listNode = reverseHeadKGroup(head, 2);
+        ListNode.printHeadList(listNode);
+
+        ListNode init2 = init2();
+        ListNode listNode2 = reverseKGroup2(init2, 2);
+        ListNode.printList(listNode2);
+
+
     }
 }

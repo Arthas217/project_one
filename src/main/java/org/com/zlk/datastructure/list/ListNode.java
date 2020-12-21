@@ -1,5 +1,8 @@
 package org.com.zlk.datastructure.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListNode {
 
     public int val; //节点值
@@ -18,21 +21,25 @@ public class ListNode {
      * 打印链表(头结点)
      */
     public static void printHeadList(ListNode head) {
+        List<Integer> result = new ArrayList<>();
         ListNode r = head.next;
         while (r != null) {
-            System.out.println(r.val + " ");
+            result.add(r.val);
             r = r.next;
         }
+        System.out.println(result);
     }
 
     /**
      * 打印链表（无头结点）
      */
     public static void printList(ListNode node) {
+        List<Integer> result = new ArrayList<>();
         while (node != null) {
-            System.out.println(node.val + " ");
+            result.add(node.val);
             node = node.next;
         }
+        System.out.println(result);
     }
 
     /**

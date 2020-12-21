@@ -113,7 +113,7 @@ public class ListSolution {
     }
 
     /**
-     * 反转链表带头结点（迭代）
+     * 反转链表 带头结点（迭代）
      */
     public static ListNode reverseHeadList(ListNode head) {
         ListNode pre = head.next;
@@ -131,6 +131,7 @@ public class ListSolution {
     }
 
     // 反转链表前 N 个节点
+    // https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/2.2-shou-ba-shou-shua-lian-biao-ti-mu-xun-lian-di-gui-si-wei/di-gui-fan-zhuan-lian-biao-de-yi-bu-fen
     static ListNode successor = null; // 后驱节点
     public static ListNode reverseN(ListNode head, int n) {
         if (n == 1) {
@@ -158,8 +159,7 @@ public class ListSolution {
         return head;
     }
 
-    // 92. 反转链表 II  (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转) 反转链表的一部分
-    // 带头结点参考https://labuladong.gitbook.io/algo/labuladong-he-ta-de-peng-you-men/yi-wen-xue-hui-lian-biao-jie-ti
+    // 92. 反转链表 II 带头结点 (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转) 反转链表的一部分
     public static ListNode reverseBetweenHeadList(ListNode head, int fromIndex, int toIndex) throws Exception {
         ListNode fromPre = null;            // from-1结点
         ListNode from = null;               // from 结点
@@ -203,6 +203,40 @@ public class ListSolution {
         }
         from.next = toNext;
         return head;
+    }
+
+
+    //K个一组翻转链表 迭代
+    public static ListNode reverseKGroup2(ListNode head, int k) {
+        if (head == null) return null;
+        // 区间 [a, b) 包含 k 个待反转元素
+        ListNode a, b;
+        a = b = head;
+        for (int i = 0; i < k; i++) {
+            // 不足 k 个，不需要反转，base case
+            if (b == null) return head;
+            b = b.next;
+        }
+        // 反转前 k 个元素
+        ListNode newHead = reverse(a, b);
+        // 递归反转后续链表并连接起来
+        a.next = reverseKGroup2(b, k);
+        return newHead;
+    }
+    /** 反转区间 [a, b) 的元素，注意是左闭右开 */
+    private static ListNode reverse(ListNode a, ListNode b) {
+        ListNode pre, cur, nxt;
+        pre = null;
+        cur = a;
+        // while 终止的条件改一下就行了
+        while (cur != b) {
+            nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        // 返回反转后的头结点
+        return pre;
     }
 
     // 25. K个一组翻转链表  (k 个节点一组进行翻转,k 是一个正整数，它的值小于或等于链表的长度)
