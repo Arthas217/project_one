@@ -191,4 +191,11 @@ public class BinaryTreeSolutionTest {
         bts.inOrder(bts.flatten(initTreeNode.init2()));
     }
 
+    @Test
+    public void testkthSmallest(){
+        TreeNode treeNode = initTreeNode.init11();
+        System.out.println(bts.kthSmallest(treeNode, 3));
+        System.out.println(bts.kthSmallest1(treeNode, 3));
+    }
+
 }

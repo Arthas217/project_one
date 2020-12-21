@@ -615,6 +615,51 @@ public class BinaryTreeSolution {
 
     /////////////////////////////////////////////////////////////////////////////////////
 
+    // 230. 二叉搜索树中第K小的元素 (中序遍历有序）
+    public static int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        TreeNode temp = root;
+        while (temp != null || !stack.isEmpty()) {
+            if (temp != null) {
+                stack.push(temp);
+                temp = temp.left;
+            } else {
+                TreeNode node = stack.pop();
+                list.add(node.val);
+                temp = node.right;
+            }
+            if (list.size() == k) {
+                return list.get(k - 1);
+            }
+        }
+        return -1;
+    }
+
+    // 记录结果
+    static int res = 0;
+    // 记录当前元素的排名
+    static int rank = 0;
+    public static int kthSmallest1(TreeNode root, int k) {
+        // 利用 BST 的中序遍历特性
+        traverse(root, k);
+        return res;
+    }
+    private static void traverse(TreeNode root, int k) {
+        if (root == null) {
+            return;
+        }
+        traverse(root.left, k);
+        /* 中序遍历代码位置 */
+        rank++;
+        if (k == rank) {
+            // 找到第 k 小的元素
+            res = root.val;
+            return;
+        }
+        /*****************/
+        traverse(root.right, k);
+    }
 
 
     // 98.验证二叉搜索树   面试题 04.05. 合法二叉搜索树

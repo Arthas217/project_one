@@ -24,6 +24,9 @@ public class TreeNode {
 
     public TreeNode next;
 
+    //以该节点为根的树的节点总数
+    int size;
+
 
     public TreeNode(int value) {
         this.val = value;
