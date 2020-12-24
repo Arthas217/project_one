@@ -13,11 +13,11 @@ import java.util.PriorityQueue;
 public class PriorityQueueDemo {
 
     public static void main(String[] args) {
-//        PriorityQueueMethod();
-        MinHeapMethod();
+        PriorityQueueTopK();
+        MinHeapTopK();
     }
 
-    private static void MinHeapMethod() {
+    private static void MinHeapTopK() {
         // 源数据
         int[] data = {56, 275, 12, 6, 45, 478, 41, 1236, 456, 12, 546, 45};
         // 获取Top5
@@ -27,7 +27,7 @@ public class PriorityQueueDemo {
         }
     }
 
-    private static void PriorityQueueMethod() {
+    private static void PriorityQueueTopK() {
         PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(49);
         priorityQueue.add(38);
