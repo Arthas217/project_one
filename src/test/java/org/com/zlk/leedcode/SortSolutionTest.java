@@ -1,12 +1,13 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.datastructure.SortSolution;
 import org.com.zlk.leedcode.company.toutiao.TestUtil;
 import org.com.zlk.leedcode.zcy.ZcyUtil;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.com.zlk.leedcode.SortSolution.*;
+import static org.com.zlk.datastructure.SortSolution.*;
 
 /**
  * @Author zc217
@@ -80,5 +81,14 @@ public class SortSolutionTest {
         int[] arr = {49, 38, 65, 97, 76, 13, 27, 49};
         SortSolution.quickSort(arr);
         TestUtil.printArrayValue(arr);
+    }
+
+    @Test
+    public void testarrayIndexOf(){
+        int[] a = {1,4,6,7,10,11,15};
+        int index = arrayIndexOf(a, 7);
+        int location = arrayIndexOf(a, 9);
+        System.out.println(index);
+        System.out.println(location);
     }
 }

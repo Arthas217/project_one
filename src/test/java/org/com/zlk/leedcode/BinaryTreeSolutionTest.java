@@ -1,5 +1,6 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.datastructure.BinaryTreeSolution;
 import org.com.zlk.datastructure.tree.InitTreeNode;
 import org.com.zlk.datastructure.tree.TreeNode;
 import org.junit.Assert;

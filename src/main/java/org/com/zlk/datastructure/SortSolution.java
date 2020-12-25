@@ -1,4 +1,4 @@
-package org.com.zlk.leedcode;
+package org.com.zlk.datastructure;
 
 import org.com.zlk.leedcode.zcy.ZcyUtil;
 
@@ -9,6 +9,29 @@ import org.com.zlk.leedcode.zcy.ZcyUtil;
  * @Date 2020/7/23
  */
 public class SortSolution {
+
+
+    /**
+     * 折半查找法找一个元素在数组中的下标
+     * key 要查找的元素
+     * 找到则返回元素在数组中的下标，如果没找到，则返回这个元素在有序数组中的位置
+     * 如：[1,4,6,7,10,11,15]，查找8在数组中的位置，不存在则返回10所在位置的下标 查找6存在则返回该数位置下标，
+     */
+    public static int arrayIndexOf(int[] array, int key) {
+        int min = 0, max = array.length - 1;
+        int mid;
+        while (min <= max) {
+            mid = (min + max) >> 1;
+            if (key > array[mid]) {
+                min = mid + 1;
+            } else if (key < array[mid]) {
+                max = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return min;
+    }
 
     // 归并排序 时间复杂度o(n*logn) 空间复杂度o(n)
     // 参考：https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653200029&idx=1&sn=51ecebafb9ff77baf3de71bdc4f67b78&chksm=8c99ec47bbee6551b0377b97e26670c4895d0c934051e4aa927e62bf9b64996b6e1f7459edfe&scene=21#wechat_redirect

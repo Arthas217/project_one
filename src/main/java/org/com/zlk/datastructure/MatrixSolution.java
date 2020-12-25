@@ -1,4 +1,4 @@
-package org.com.zlk.leedcode;
+package org.com.zlk.datastructure;
 
 /**
  * @Author zc217

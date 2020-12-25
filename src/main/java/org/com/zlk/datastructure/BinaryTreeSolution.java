@@ -1,4 +1,4 @@
-package org.com.zlk.leedcode;
+package org.com.zlk.datastructure;
 
 import org.com.zlk.datastructure.tree.TreeNode;
 

@@ -2,7 +2,7 @@ package org.com.zlk.leedcode;
 
 import org.junit.Test;
 
-import static org.com.zlk.leedcode.MatrixSolution.*;
+import static org.com.zlk.datastructure.MatrixSolution.*;
 
 /**
  * @Author zc217

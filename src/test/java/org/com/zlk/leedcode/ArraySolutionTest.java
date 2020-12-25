@@ -3,7 +3,7 @@ package org.com.zlk.leedcode;
 import org.com.zlk.leedcode.company.toutiao.TestUtil;
 import org.junit.Test;
 
-import static org.com.zlk.leedcode.ArraySolution.*;
+import static org.com.zlk.datastructure.ArraySolution.*;
 
 /**
  * @Author zc217

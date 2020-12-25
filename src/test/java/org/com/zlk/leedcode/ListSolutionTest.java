@@ -1,5 +1,6 @@
 package org.com.zlk.leedcode;
 
+import org.com.zlk.datastructure.ListSolution;
 import org.com.zlk.datastructure.list.InitListNode;
 import org.com.zlk.datastructure.list.ListNode;
 import org.junit.Before;

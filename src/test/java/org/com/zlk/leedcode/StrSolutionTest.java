@@ -2,8 +2,7 @@ package org.com.zlk.leedcode;
 
 import org.junit.Test;
 
-import static org.com.zlk.leedcode.StrSolution.*;
-import static org.junit.Assert.*;
+import static org.com.zlk.datastructure.StrSolution.*;
 
 /**
  * @Author zc217

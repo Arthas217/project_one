@@ -53,4 +53,34 @@ public class ListNode {
         }
         return sum;
     }
+
+
+    /**
+     * 折半查找法找到一个元素在数组中的下标
+     * 如：[1,4,6,7,10,11,15]，查找8在数组中的位置，如果存在则返1，不存在则返回在7这个下标+1的这个位置上，也就是说在返回10所在位置上的下标
+     */
+    public static int arrayIndexOf(int[] array,int key) {
+        int min,max,mid;
+        min = 0;
+        max = array.length - 1;
+
+        while(min <= max) {
+
+            mid = (min + max) >> 1;
+
+            if (key > array[mid]) {
+                min = mid + 1;
+            } else if (key < array[mid]) {
+                max = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return min;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1,4,6,7,10,11};
+        System.out.println(arrayIndexOf(a, 8));
+    }
 }
