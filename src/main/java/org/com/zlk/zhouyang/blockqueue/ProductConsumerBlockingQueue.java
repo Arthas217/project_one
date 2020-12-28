@@ -35,7 +35,6 @@ public class ProductConsumerBlockingQueue {
             }
         }, "consumer").start();
 
-
         try {
             // 开关打开5s秒钟时间
             TimeUnit.SECONDS.sleep(5);

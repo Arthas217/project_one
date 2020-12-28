@@ -50,16 +50,17 @@ public class MyResource {
         while (FLAG) {
             // 生产消费匹配1-1
             // timeout时间太小的话，不能保证生产的data消费掉
-            result = blockingQueue.poll(2, TimeUnit.SECONDS);
+            String peek = blockingQueue.peek();
+            result = blockingQueue.poll(1, TimeUnit.SECONDS);
             if (result == null || result.equalsIgnoreCase("")) {
                 // 无消费时，保证停止消费
                 FLAG = false;
                 System.out.println(Thread.currentThread().getName() + "\t  2s钟没有取到消息值，停止消费");
                 System.out.println();
-                System.out.println();
                 return;
             }
-            System.out.println(Thread.currentThread().getName() + "\t 消费队列" + result + "成功");
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println(Thread.currentThread().getName() + "\t 消费队列" + peek + "成功");
         }
     }
 
