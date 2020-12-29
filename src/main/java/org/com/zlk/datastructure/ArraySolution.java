@@ -494,7 +494,7 @@ public class ArraySolution {
 
 
     //合并数组[4,1,3,9,6,2]和[8,5,3,2,1,4,7]，然后去重，取出偶数并倒排输出（可使用容器）
-    public static int[] distinctAndSort(int[] arr1,int[] arr2) {
+    public static int[] distinctAndSort(int[] arr1, int[] arr2) {
         TreeSet<Integer> set = new TreeSet(new MyCompare());
         for (int i : arr1) {
             set.add(i);
@@ -503,7 +503,7 @@ public class ArraySolution {
             set.add(i);
         }
         Iterator<Integer> it = set.iterator();
-        int[] arr = new int[set.size()/2];
+        int[] arr = new int[set.size() / 2];
         int i = 0;
         while (it.hasNext()) {
             Integer value = it.next();
@@ -518,6 +518,37 @@ public class ArraySolution {
         @Override
         public int compare(Integer o1, Integer o2) {
             return o2.compareTo(o1);
+        }
+    }
+
+    // 两个长度为N的数组A，B，已分别按升序排列，求第N/第N+1个数（要求时间复杂度尽可能低）
+    public static int getN(int[] arr1, int[] arr2) {
+        if (arr1.length != arr2.length) {
+            return -1;
+        }
+        if (arr1.length == 0 && arr2.length == 0) {
+            return -1;
+        }
+        return helpGetN(arr1, 0, arr1.length - 1, arr2, 0, arr1.length - 1);
+    }
+
+    private static int helpGetN(int[] arr1, int start1, int end1, int[] arr2, int start2, int end2) {
+        if (start1 == end1) {
+            return Math.min(arr1[start1], arr2[start2]);
+        }
+        int size = end1 - start1 + 1;
+        int halfSize;
+        if (size % 2 != 0) {
+            halfSize = (size + 1) / 2;
+        } else {
+            halfSize = size / 2;
+        }
+        if (arr1[start1 + halfSize - 1] == arr2[start2 + halfSize - 1]) {
+            return arr1[start1 + halfSize - 1];
+        } else if (arr1[start1 + halfSize - 1] > arr2[start2 + halfSize - 1]) {
+            return helpGetN(arr1, start1, start1 + halfSize - 1, arr2, end2 - (halfSize - 1), end2);
+        } else {
+            return helpGetN(arr1, end1 - (halfSize - 1), end1, arr2, start2, start2 + halfSize - 1);
         }
     }
 

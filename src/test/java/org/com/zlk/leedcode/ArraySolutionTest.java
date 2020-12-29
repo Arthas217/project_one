@@ -167,7 +167,15 @@ public class ArraySolutionTest {
         int[] arr2 = {8, 5, 3, 2, 1, 4, 7};
         int[] result = distinctAndSort(arr1, arr2);
         TestUtil.printArrayValue(result);
+    }
 
+    @Test
+    public void testgetN(){
+        int[] arr1 = {1, 2, 5, 7, 9};
+        int[] arr2 = {2, 2, 3, 4, 6};
+//        int[] arr2 = {1, 2, 5, 7, 9};
+        int n = getN(arr1, arr2);
+        System.out.println(n);
     }
 
 }
