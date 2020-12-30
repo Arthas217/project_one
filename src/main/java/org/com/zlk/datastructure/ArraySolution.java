@@ -522,6 +522,7 @@ public class ArraySolution {
     }
 
     // 两个长度为N的数组A，B，已分别按升序排列，求第N/第N+1个数（要求时间复杂度尽可能低）
+    // https://www.cnblogs.com/diegodu/p/4589847.html
     public static int getN(int[] arr1, int[] arr2) {
         if (arr1.length != arr2.length) {
             return -1;
