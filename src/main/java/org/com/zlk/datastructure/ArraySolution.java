@@ -396,7 +396,8 @@ public class ArraySolution {
     // 找1到n中缺失的数字(给定一个长度为n-1的整形数组，数字的范围在1到n（无重复），其中有一个缺失的数字) https://blog.csdn.net/qq_24336773/article/details/81709343
     public static int getLose(int[] a, int n) {
         int t = 0;
-        for (int i = 1; i <= n; i++) {// 异或运算
+        // 异或运算
+        for (int i = 1; i <= n; i++) {
             t = t ^ i;
         }
         for (int i = 0; i < n - 1; i++) {
@@ -413,10 +414,11 @@ public class ArraySolution {
         int mid;
         while (left <= right) {
             mid = (left + right) / 2;
-            if (arr[mid] == mid + 2) //缺失的数据在前半部分
+            if (arr[mid] == mid + 2) {
                 right = mid - 1;
-            else if (arr[mid] == mid + 1)  //缺失的数据在后半部分
+            } else if (arr[mid] == mid + 1) {
                 left = mid + 1;
+            }
         }
         return left + 1;
     }
@@ -432,9 +434,12 @@ public class ArraySolution {
         int m = arr1.length;
         int n = arr2.length;
         int p1 = 0, p2 = 0;
-        int[] nums = new int[(m + n) / 2];//新数组大小
-        int location = 1;//偶数位置下标
-        int index = 0;// 新数组元素下标
+        //新数组大小
+        int[] nums = new int[(m + n) / 2];
+        //偶数位置下标
+        int location = 1;
+        // 新数组元素下标
+        int index = 0;
         while (p1 < m && p2 < n) {
             if (arr1[p1] < arr2[p2]) {
                 if (location % 2 == 0) {
@@ -470,15 +475,15 @@ public class ArraySolution {
     /**
      * O(N) 给定两个排好序的数组，怎样高效地判断这两个数组中是否存在相同的数字
      */
-    public static boolean findCommonNum4Array(int a[], int b[]) {
+    public static boolean findCommonNum4Array(int[] a, int[] b) {
         boolean res = false;
-        int size_a = a.length;
-        int size_b = b.length;
-        if (size_a <= 0 || size_b <= 0) {
+        int sizeA = a.length;
+        int sizeB = b.length;
+        if (sizeA <= 0 || sizeB <= 0) {
             return res;
         }
         int i = 0, j = 0;
-        while (i < size_a && j < size_b) {
+        while (i < sizeA && j < sizeB) {
             if (a[i] == b[j]) {
                 res = true;
                 break;
