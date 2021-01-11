@@ -92,8 +92,8 @@ public class GroupChatServer {
         System.out.println("服务器转发消息中...");
         for (SelectionKey key : selector.keys()) {
             Channel targetChannel = key.channel();
-//            if (targetChannel instanceof SocketChannel && targetChannel != self) {
-            if (targetChannel instanceof SocketChannel ) {
+            if (targetChannel instanceof SocketChannel && targetChannel != self) {
+//            if (targetChannel instanceof SocketChannel ) {
                 SocketChannel dest = (SocketChannel) targetChannel;
                 ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
                 //将 buffer的数据写入通道
