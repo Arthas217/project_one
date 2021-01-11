@@ -36,7 +36,7 @@ public class GroupChatServer {
         //循环处理
         while (true) {
             try {
-                int count = selector.select();
+                int count = selector.select(2000);
                 if (count > 0) {//有事件处理
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
@@ -76,14 +76,16 @@ public class GroupChatServer {
                 //向其它的客户端转发消息(去掉自己), 专门写一个方法来处理
                 sendInfoToOtherClients(msg, channel);
             }
-        } catch (IOException e) {
-            try {
-                System.out.println(channel.getRemoteAddress() + " 离线了..");
-                key.cancel();
-                channel.close();
-            } catch (IOException e2) {
-                e2.printStackTrace();
+            if (count < 0) {
+                try {
+                    System.out.println(channel.getRemoteAddress() + " 离线了..");
+                    key.cancel();
+                    channel.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
