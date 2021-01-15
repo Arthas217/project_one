@@ -12,14 +12,14 @@ import io.netty.util.CharsetUtil;
  * @Date 2021/1/13 12:31
  */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
-    //当通道就绪就会触发该方法
+    //当通道就绪就会触发该方法，发送到服务端
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("client " + ctx);
         ctx.writeAndFlush(Unpooled.copiedBuffer("hello, server: (>^ω^<)喵", CharsetUtil.UTF_8));
     }
 
-    //当通道有读取事件时，会触发
+    //当通道有读取事件时会触发，接收服务端信息
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;

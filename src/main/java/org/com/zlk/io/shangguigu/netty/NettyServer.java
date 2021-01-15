@@ -35,7 +35,10 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() { //创建一个通道测试对象(匿名对象),给pipeline设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new NettyServerHandler());// 自定义Handler
+//                            ch.pipeline().addLast(new NettyServerHandler());// 自定义Handler
+                            // 有3种典型使用场景
+                            ch.pipeline().addLast(new NettyServerHandlerTask1());
+//                            ch.pipeline().addLast(new NettyServerHandlerTask2());
                         }
                     });// 给我们的 workerGroup 的 EventLoop 对应的管道设置处理器
             System.out.println(".....服务器 is ready...");
