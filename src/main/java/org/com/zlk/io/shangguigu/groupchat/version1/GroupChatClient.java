@@ -1,4 +1,4 @@
-package org.com.zlk.io.shangguigu.groupchat;
+package org.com.zlk.io.shangguigu.groupchat.version1;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
