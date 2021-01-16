@@ -21,5 +21,6 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("MyHttpServerCodec", new HttpServerCodec());
         // 增加一个自定义的handler
         pipeline.addLast(new HttpServerHandler());
+        System.out.println("OK ……");
     }
 }
