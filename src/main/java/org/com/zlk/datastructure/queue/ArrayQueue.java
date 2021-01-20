@@ -1,13 +1,19 @@
 package org.com.zlk.datastructure.queue;
 
+import java.lang.reflect.Array;
+
 /**
+ * 数组实现队列
+ *
  * @Author zc217
  * @Date 2020/7/31
  */
-public class ArrayQueue {
+public class ArrayQueue<T> {
 
-    private int[] arr;
-    private int capacity;
+    // 队列底层arr数组
+    private T[] arr;
+    // 队列容量
+    private final int capacity;
     // 进队列使用的索引
     private int tail;
     // 出队列使用的索引
@@ -15,51 +21,52 @@ public class ArrayQueue {
     // 队列中元素的个数
     private int len;
 
-    public ArrayQueue(int size) {
-        arr = new int[size];
-        capacity = arr.length;
+    public ArrayQueue(Class<T> type,int size) {
+        arr = (T[]) Array.newInstance(type, size);
+        capacity = size;
         tail = 0;
         head = 0;
         len = 0;
     }
 
-    public int inQueue(int e) {
+    public T inQueue(T e) {
         if (!isFull(arr)) {
             arr[tail++ % capacity] = e;
             len++;
             return e;
         } else {
             System.out.print("队列已满");
-            return -1;
+            return null;
         }
     }
 
-    public int outQueue() {
+    public T outQueue() {
         if (!isEmpty(arr)) {
-            int outElement = arr[head % capacity];
-            arr[head++ % capacity] = 0;
+            //获取此位置值
+            T curValue = arr[head % capacity];
+            arr[head++ % capacity] = null;
             len--;
-            return outElement;
+            return curValue;
         } else {
             System.out.println("队列无元素");
-            return -1;
+            return null;
         }
     }
 
-    public int showHead() {
+    public T showHead() {
         if (len == 0) {
             System.out.print("队列为空 ");
-            return -1;
+            return null;
         }
         return arr[head % capacity];
     }
 
 
-    public boolean isEmpty(int[] arr) {
+    public boolean isEmpty(T[] arr) {
         return arr.length == 0;
     }
 
-    public boolean isFull(int[] arr) {
+    public boolean isFull(T[] arr) {
         return len == capacity;
     }
 

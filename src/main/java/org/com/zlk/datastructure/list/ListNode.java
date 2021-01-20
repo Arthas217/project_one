@@ -7,7 +7,7 @@ public class ListNode {
 
     public int val; //节点值
 
-    public ListNode next; //指向节点指针
+    public ListNode next; //指向下一节点指针
 
     public ListNode() {
     }
@@ -59,12 +59,12 @@ public class ListNode {
      * 折半查找法找到一个元素在数组中的下标
      * 如：[1,4,6,7,10,11,15]，查找8在数组中的位置，如果存在则返1，不存在则返回在7这个下标+1的这个位置上，也就是说在返回10所在位置上的下标
      */
-    public static int arrayIndexOf(int[] array,int key) {
-        int min,max,mid;
+    public static int arrayIndexOf(int[] array, int key) {
+        int min, max, mid;
         min = 0;
         max = array.length - 1;
 
-        while(min <= max) {
+        while (min <= max) {
 
             mid = (min + max) >> 1;
 
@@ -80,7 +80,7 @@ public class ListNode {
     }
 
     public static void main(String[] args) {
-        int[] a = {1,4,6,7,10,11};
+        int[] a = {1, 4, 6, 7, 10, 11};
         System.out.println(arrayIndexOf(a, 8));
     }
 }

@@ -39,7 +39,6 @@ public class LinkedListDemo {
         System.out.println(queue.poll());
         /*返回队首元素 但是不移除*/
         System.out.println(queue.peek());
-
         System.out.println(queue.poll());
         System.out.println(queue.poll());
     }
