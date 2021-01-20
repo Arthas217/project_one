@@ -38,7 +38,6 @@ public class CountDownDemo {
             }, NameEnum.getName(i).getMessage()).start();   //这里使用枚举的方式来解决映射值（值很多）
         }
         try {
-
             countDownLatch.await();// 保证在上面的6个线程都执行完之后，主线程在执行的动作
         } catch (Exception e) {
             e.printStackTrace();
