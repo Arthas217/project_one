@@ -1,7 +1,9 @@
 package org.com.zlk.pool;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -91,17 +93,27 @@ public class MyThreadPool {
         System.out.println("任务队列已满，无法继续添加，请扩大您的初始化线程池！" + count);
     }
 
+    private static volatile AtomicInteger count = new AtomicInteger(0);
+
     //测试
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         MyThreadPool myThreadPool = new MyThreadPool(5);
-        AtomicInteger count = new AtomicInteger(1);
+        Set<Integer> set = new HashSet<>();
         //创建任务
         for (int i = 0; i < 50; i++) {
             Runnable task = () -> {
-                System.out.println(Thread.currentThread().getName() + "执行中" + count.getAndIncrement());
+                int num = count.incrementAndGet();
+                if (set.contains(num)) {
+                    System.out.println("----" + num);
+                } else {
+                    set.add(num);
+                }
+                System.out.println(Thread.currentThread().getName() + "执行中" + num);
             };
             myThreadPool.execute(task, count);
         }
+        Thread.sleep(2000);
+        System.out.println("set大小：" + set.size());
     }
 
 }

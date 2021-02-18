@@ -10,7 +10,7 @@ import io.netty.handler.codec.string.StringEncoder;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description: 群聊系统
+ * @Description: 群聊系统服务端
  * @Date 2021/1/16 21:23
  */
 public class GroupChatServer {
@@ -56,6 +56,6 @@ public class GroupChatServer {
     }
 
     public static void main(String[] args) throws Exception {
-        new GroupChatServer(7000).run();
+        new GroupChatServer(7001).run();
     }
 }

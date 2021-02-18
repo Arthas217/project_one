@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description:
+ * @Description: 群聊系统客户端
  * @Date 2021/1/16 21:32
  */
 public class GroupChatClient {
@@ -58,6 +58,6 @@ public class GroupChatClient {
     }
 
     public static void main(String[] args) throws Exception {
-        new GroupChatClient("127.0.0.1", 7000).run();
+        new GroupChatClient("127.0.0.1", 7001).run();
     }
 }
