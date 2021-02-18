@@ -59,7 +59,7 @@ public class StrSolution {
         return windowMax;
     }
 
-    // 125. 验证回文串 递归实现 时间复杂度：O(s) 空间复杂度O(1)
+    // 125. 验证回文串 递归实现
     public static boolean isPalindrome(String s) {
         return isPalindromeHelper(s, 0, s.length() - 1);
     }
@@ -211,36 +211,6 @@ public class StrSolution {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
         System.out.println(tar(s));
-    }
-
-    /**
-     * @return java.lang.String
-     * @Author 会游泳的蚂蚁
-     * @Description 415. 字符串相加
-     * 非负整数字符串 str1 和str2 ，计算它们的和。
-     * 时间复杂度O(max(str1.len,str2.len))  Java解法使用了StringBuffer，它的空间复杂度为 O(n)
-     * @Date 2021/1/25 20:51
-     * @Param [str1, str2]
-     */
-    public static String addStrings(String str1, String str2) {
-        StringBuffer sb = new StringBuffer("");
-        int i = str1.length() - 1;
-        int j = str2.length() - 1;
-        int carry = 0;// 保存进制值
-        while (i >= 0 || j >= 0) {
-            int n1 = str1.charAt(i) - '0';
-            int n2 = str2.charAt(i) - '0';
-            int tmp = n1 + n2 + carry;
-            carry = tmp / 10;
-            sb.append(tmp % 10);
-            i--;
-            j--;
-        }
-        //处理最高位
-        if (carry == 1) {
-            sb.append(1);
-        }
-        return sb.reverse().toString();
     }
 
 

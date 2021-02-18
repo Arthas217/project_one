@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -35,7 +36,7 @@ public class MyThreadPool {
         //该线程一直启动着，不断从任务队列取出任务执行
         @Override
         public void run() {
-            while (true) {
+            while (true) {//问题，导致空闲线程拼命空转消耗系统资源
                 //如果初始化任务不为空，则执行初始化任务
                 if (task != null) {
                     task.run();
@@ -56,7 +57,7 @@ public class MyThreadPool {
         threadNum = cap;
         threads = new ArrayList<>(cap);
         //任务队列大小为线程池线程数的四倍
-        taskQueue = new ArrayBlockingQueue<>(1 * cap);
+        taskQueue = new ArrayBlockingQueue<>(4 * cap);
         workThreadNum = 0;
     }
 
@@ -64,7 +65,7 @@ public class MyThreadPool {
     private final ReentrantLock lock = new ReentrantLock();
 
     // 提交任务给线程池
-    public void execute(Runnable runnable) {
+    public void execute(Runnable runnable, AtomicInteger count) {
         lock.lock();
         try {
             //线程池未满，每加入一个任务则开启一个线程
@@ -77,7 +78,7 @@ public class MyThreadPool {
             } else {
                 //线程池已满，放入任务队列，等待有空闲线程时执行
                 if (!taskQueue.offer(runnable)) {
-                    rejectTask();
+                    rejectTask(count);
                 }
             }
         } finally {
@@ -86,19 +87,20 @@ public class MyThreadPool {
     }
 
     //拒绝策略id
-    private void rejectTask() {
-        System.out.println("任务队列已满，无法继续添加，请扩大您的初始化线程池！");
+    private void rejectTask(AtomicInteger count) {
+        System.out.println("任务队列已满，无法继续添加，请扩大您的初始化线程池！" + count);
     }
 
     //测试
     public static void main(String[] args) {
         MyThreadPool myThreadPool = new MyThreadPool(5);
+        AtomicInteger count = new AtomicInteger(1);
         //创建任务
-        Runnable task = () -> {
-            System.out.println(Thread.currentThread().getName() + "执行中");
-        };
-        for (int i = 0; i < 100; i++) {
-            myThreadPool.execute(task);
+        for (int i = 0; i < 50; i++) {
+            Runnable task = () -> {
+                System.out.println(Thread.currentThread().getName() + "执行中" + count.getAndIncrement());
+            };
+            myThreadPool.execute(task, count);
         }
     }
 
