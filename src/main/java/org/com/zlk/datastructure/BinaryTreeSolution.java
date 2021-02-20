@@ -107,33 +107,6 @@ public class BinaryTreeSolution {
 
 
 
-    // 637. 二叉树的层平均值 层次遍历的进化
-    public List<Double> averageOfLevels(TreeNode root) {
-        List<Double> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            double sum = 0;
-            int qsize = queue.size();
-            for (int i = 0; i < qsize; i++) {
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-                sum += node.val;
-            }
-            result.add(sum / qsize);
-        }
-        return result;
-    }
-
-
     /**
      * 递归-树的高度（深度）
      */
@@ -197,40 +170,6 @@ public class BinaryTreeSolution {
 
 
 
-
-    // 404. 左叶子之和
-    public int sumOfLeftLeaves2(TreeNode root) {
-        return sumOfLeftLeaves2Help(root, false);
-    }
-
-    public int sumOfLeftLeaves2Help(TreeNode root, boolean flag) {
-        if (root == null) {
-            return 0;
-        }
-        int leave = 0;
-        // 左叶子节点
-        if (flag && root.left == null && root.right == null) {
-            leave = root.val;
-        }
-        // 标志位节点一定是左孩子
-        int left = sumOfLeftLeaves2Help(root.left, true);
-        int right = sumOfLeftLeaves2Help(root.right, false);
-        return leave + left + right;
-    }
-
-
-    // 110. 平衡二叉树
-    public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        // 分别获取左右子树最大深度值
-        int leftChildDepth = maxDepth(root.left);
-        int rightChildDepth = maxDepth(root.right);
-        // 平衡树左右子树高度差都小于等于1
-        boolean match = Math.abs(leftChildDepth - rightChildDepth) < 2;
-        return match && isBalanced(root.left) && isBalanced(root.right);
-    }
 
     // 114. 将二叉树展开为链表
     public static TreeNode flatten(TreeNode root) {

@@ -2,8 +2,6 @@ package org.com.zlk.datastructure;
 
 import org.com.zlk.datastructure.list.ListNode;
 
-import java.util.Stack;
-
 
 /**
  * 链表专题
@@ -55,44 +53,6 @@ public class ListSolution {
         return len;
     }
 
-    /**
-     * 翻转链表（递归）
-     * 时间复杂度是 O(n)   调用递归函数
-     * 空间复杂度也是 O(n)  压入栈
-     * 4--->3--->2--->1 变成了 4--->3<---2<---1
-     * 4<---3<---2<---1
-     */
-    public static ListNode invertLinkedList(ListNode node) {
-        if (node.next == null) {
-            return node;
-        }
-        // 步骤 1: 先翻转 node 之后的链表
-        ListNode newHead = invertLinkedList(node.next);
-        // 步骤 2: 再把原 node节点后继结点的后继结点指向 node(4)，node的后继节点设置为空(防止形成环)
-        node.next.next = node;
-        node.next = null;
-        // 步骤 3: 返回翻转后的头结点
-        return newHead;
-    }
-
-    /**
-     * 反转链表（迭代）
-     */
-    public static ListNode reverseList(ListNode node) {
-        ListNode pre = null;
-        ListNode cur = node;
-        ListNode next;
-        while (cur != null) {
-            //记录当前节点的下一个节点
-            next = cur.next;
-            //然后将当前节点指向pre
-            cur.next = pre;
-            //pre和cur节点都前进一位
-            pre = cur;
-            cur = next;
-        }
-        return pre;
-    }
 
     /**
      * 反转链表 带头结点（迭代）
@@ -112,35 +72,6 @@ public class ListSolution {
         return head;
     }
 
-    // 反转链表前 N 个节点
-    // https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/2.2-shou-ba-shou-shua-lian-biao-ti-mu-xun-lian-di-gui-si-wei/di-gui-fan-zhuan-lian-biao-de-yi-bu-fen
-    static ListNode successor = null; // 后驱节点
-
-    public static ListNode reverseN(ListNode head, int n) {
-        if (n == 1) {
-            // 记录第 n + 1 个节点
-            successor = head.next;
-            return head;
-        }
-        // 以 head.next 为起点，需要反转前 n - 1 个节点(普通的链表反转）
-        ListNode last = reverseN(head.next, n - 1);
-        head.next.next = head;
-        // 让反转之后的 head 节点和后面的节点连起来
-        head.next = successor;
-        return last;
-    }
-
-    // 反转链表的一部分[m,n]区间
-    public static ListNode reverseBetween(ListNode head, int m, int n) {
-        // base case
-        if (m == 1) {
-            return reverseN(head, n);
-        }
-        // 前进到反转的起点触发 base case
-        head.next = reverseBetween(head.next, m - 1, n - 1);
-        // n之后的值是reverseN所完成的
-        return head;
-    }
 
     // 92. 反转链表 II 带头结点 (反转从位置 m 到 n 的链表。请使用一趟扫描完成反转) 反转链表的一部分
     public static ListNode reverseBetweenHeadList(ListNode head, int fromIndex, int toIndex) throws Exception {
@@ -232,24 +163,5 @@ public class ListSolution {
         }
         return head;
     }
-
-
-    // 剑指 Offer 06. 从尾到头打印链表（用数组返回）。
-    public static int[] reversePrint(ListNode head) {
-        Stack<ListNode> stack = new Stack<>();
-        ListNode temp = head;
-        while (temp != null) {
-            stack.push(temp);
-            temp = temp.next;
-        }
-        int size = stack.size();
-        int[] result = new int[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = stack.pop().val;
-        }
-        return result;
-    }
-
-
 
 }

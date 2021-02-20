@@ -24,8 +24,6 @@ public class ListSolutionTest {
 
     @Test
     public void testInvertLinkedList() {
-        ListNode.printList(listSolution.invertLinkedList(initListNode.init0()));
-        ListNode.printList(listSolution.reverseList(initListNode.init0()));
         ListNode.printHeadList(listSolution.reverseHeadList(initListNode.init00()));
     }
 
@@ -41,20 +39,9 @@ public class ListSolutionTest {
 
     }
 
-    @Test
-    public void testReversePrint() {
-        int[] res = listSolution.reversePrint(initListNode.init0());
-        for (int n : res) {
-            System.out.print(n + "\t");
-        }
-    }
 
 
 
-    @Test
-    public void testreverseBetween() {
-        ListNode.printList(listSolution.reverseBetween(initListNode.init2(), 2, 3));
-    }
 
     @Test
     public void testreverse() {
