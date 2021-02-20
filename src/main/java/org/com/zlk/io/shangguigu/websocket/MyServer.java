@@ -45,8 +45,7 @@ public class MyServer {
                     // websocket的数据是以帧(frame) 形式传递;
                     // WebSocketFrame有六个子类
                     // 请求 ws://localhost:7000/hello2
-                    // WebSocketServerProtocolHandler核心功能是将http协议升级为ws协议,保持长连接
-                    // 是通过一个状态码101
+                    // WebSocketServerProtocolHandler核心功能是将http协议升级为ws协议(状态码101),保持长连接
                     pipeline.addLast(new WebSocketServerProtocolHandler("/hello"));
 
                     //自定义handler，处理业务逻辑

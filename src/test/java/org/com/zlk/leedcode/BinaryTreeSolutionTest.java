@@ -29,34 +29,12 @@ public class BinaryTreeSolutionTest {
     @Test
     public void testBasicOrder() {
         TreeNode root = initTreeNode.init2();
-        // 前中后遍历--递归
-        bts.preOrder(root);
-        System.out.println();
-        bts.inOrder(root);
-        System.out.println();
-        bts.postOrder(root);
-        // 前中后遍历--非递归
-        System.out.println();
-        bts.preOrder2(root);
-        System.out.println();
-        bts.inOrder2(root);
-        System.out.println();
-        bts.postOrder2(root);
-        System.out.println();
-        List<Integer> list = bts.layerTraversal(root);
-        System.out.println(list);
-        List<Integer> dep = bts.depthOrder(root);
-        System.out.println(dep);
-        List<Integer> dep1 = bts.depthOrder1(root);
-        System.out.println(dep1);
         System.out.println("树高度：" + bts.maxDepth(root));
     }
 
     @Test
     public void testisSymmetric(){
         TreeNode root = initTreeNode.init3();
-        boolean result = bts.isSymmetric(root);
-        System.out.println(result);
     }
 
     @Test
@@ -71,8 +49,6 @@ public class BinaryTreeSolutionTest {
     public void testmergeTrees(){
         TreeNode t1 = initTreeNode.init22();
         TreeNode t2 = initTreeNode.init33();
-        TreeNode treeNode = bts.mergeTrees(t1,t2);
-        System.out.println(bts.levelOrder(treeNode));
     }
 
     @Test
@@ -84,9 +60,7 @@ public class BinaryTreeSolutionTest {
     @Test
     public void testOrder() {
         TreeNode treeNode = initTreeNode.init3();
-        List<Integer> inorder = bts.inorderTraversal(treeNode);
-        List<Integer> inorder2 = bts.inorder(treeNode);
-        List<Integer> postorder = bts.postorder(treeNode);
+
         List<Integer> postorder2 = bts.postorder2(treeNode);
         for (Integer num : postorder2) {
             System.out.print(num + "\t");
@@ -112,10 +86,6 @@ public class BinaryTreeSolutionTest {
     @Test
     public void testLevelOrder() {
         TreeNode treeNode = initTreeNode.init5();
-        List<List<Integer>> lists = bts.levelOrder(treeNode);
-        List<List<Integer>> lists2 = bts.levelOrder2(treeNode);
-        System.out.println(lists.stream().collect(Collectors.toList()));
-        System.out.println(lists2.stream().collect(Collectors.toList()));
         System.out.println(bts.zigzagLevelOrder(treeNode).stream().collect(Collectors.toList()));
     }
 
@@ -167,16 +137,10 @@ public class BinaryTreeSolutionTest {
     }
 
 
-    @Test
-    public void testInvertTree() {
-        bts.preOrder(bts.invertTree(initTreeNode.init2()));
-    }
 
     @Test
     public void testSumOfLeftLeaves() {
-        int sumOfLeftLeaves = bts.sumOfLeftLeaves(initTreeNode.init2());
         int sumOfLeftLeaves2 = bts.sumOfLeftLeaves2(initTreeNode.init2());
-        Assert.assertEquals(10,sumOfLeftLeaves);
         Assert.assertEquals(10,sumOfLeftLeaves2);
     }
 
@@ -187,10 +151,6 @@ public class BinaryTreeSolutionTest {
         Assert.assertEquals(true,balanced);
     }
 
-    @Test
-    public void testflatten() {
-        bts.inOrder(bts.flatten(initTreeNode.init2()));
-    }
 
     @Test
     public void testkthSmallest(){

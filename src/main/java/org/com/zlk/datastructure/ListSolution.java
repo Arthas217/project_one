@@ -1,7 +1,6 @@
 package org.com.zlk.datastructure;
 
 import org.com.zlk.datastructure.list.ListNode;
-import org.com.zlk.datastructure.tree.TreeNode;
 
 import java.util.Stack;
 
@@ -14,28 +13,10 @@ import java.util.Stack;
  * @Date 2020/7/23
  */
 public class ListSolution {
-    /**
-     * 判断链表是否存在环
-     */
-    public static boolean hasCycle(ListNode head) {
-        if (head == null) {
-            return false;
-        }
-        ListNode slow = head, fast = head.next;
-        while (slow != null && fast != null && fast.next != null) {
-            if (slow == fast) {
-                return true;
-            }
-            slow = slow.next;
-            // 2步
-            fast = fast.next.next;
-        }
-        return false;
-    }
 
     /**
      * 环入口的位置
-     * 参考https://blog.csdn.net/sinat_35261315/article/details/79205157
+     * https://blog.csdn.net/sinat_35261315/article/details/79205157
      */
     public static ListNode cycleLocation(ListNode head) {
         ListNode walk = head;
@@ -207,41 +188,7 @@ public class ListSolution {
         return head;
     }
 
-    // 25. K个一组翻转链表(无链表头，迭代）
-    // 步骤：
-    // 1 找到head开始的第k的节点
-    // 2 head到tail前一个结点间翻转，并返回新节点
-    // 3.再以tail为头结点递归
-    // 4.递归结束后，将head.next指向翻转的新节点
-    public static ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode tail = head;
-        for (int i = 0; i < k; i++) {
-            if (tail == null) {  // 剩余数量小于k的话，则不需要反转。
-                return head;
-            }
-            tail = tail.next;
-        }
-        ListNode newHead = reverseList2(head, tail);// 翻转前k个元素
-        // 递归反转后续链表并连接起来
-        head.next = reverseKGroup(tail, k);
-        return newHead;
-    }
 
-    //反转区间 [head, tail) ，注意是左闭右开   和反转链表很相似
-    private static ListNode reverseList2(ListNode head, ListNode tail) {
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != tail) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        return pre;
-    }
 
 
     // 25. K个一组翻转链表  (k 个节点一组进行翻转,k 是一个正整数，它的值小于或等于链表的长度)
@@ -304,59 +251,5 @@ public class ListSolution {
     }
 
 
-    /**
-     * 160. 相交链表（找到两个单链表相交的起始节点）
-     * 面试题 02.07. 链表相交
-     */
-    public static boolean getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) {
-            return false;
-        }
-        // 相交点之后的长度是相同的,
-        int l1_len = ListNode.getListLen(headA);
-        int l2_len = ListNode.getListLen(headB);
-        // 消除两个链表的长度差。注意两个链表长度相同情况
-        ListNode m1 = l1_len - l2_len >= 0 ? headA : headB;
-        ListNode m2 = l1_len - l2_len < 0 ? headA : headB;
-        int d = Math.abs(l1_len - l2_len);
-        while (m1.next != null && d > 0) {
-            m1 = m1.next;
-            d--;
-        }
-        while (m1 != null && m2 != null) {
-            if (m1.val == m2.val && m1 == m2) {
-                //System.out.println(m1.val);
-                return true;
-            }
-            m1 = m1.next;
-            m2 = m2.next;
-        }
-        return false;
-    }
-
-    /**
-     * 160.相交链表值
-     * 参考https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/
-     * 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历
-     * 如果 pA 到了末尾，则 pA = headB 继续遍历
-     * 如果 pB 到了末尾，则 pB = headA 继续遍历
-     * 比较长的链表指针指向较短链表head时，长度差就消除了
-     * 如此，只需要将最短链表遍历两次即可找到位置
-     */
-    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
-        ListNode pA = headA, pB = headB;
-        while (pA != pB) {
-            pA = pA == null ? headB : pA.next;
-            pB = pB == null ? headA : pB.next;
-        }
-        return pA;
-    }
-
-
-    // 501. 二叉搜索树中的众数 （出现频率最高的元素）答案可能有多个值出现的次数一样多。
-    public int[] findMode(TreeNode root) {
-        return null;
-    }
 
 }

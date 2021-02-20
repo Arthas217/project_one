@@ -17,209 +17,6 @@ public class BinaryTreeSolution {
 
     }
 
-
-    // 144. 二叉树的前序遍历-递归
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        preorderHelp(list, root);
-        return list;
-    }
-
-    private void preorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            list.add(root.val);
-            if (root.left != null) {
-                preorderHelp(list, root.left);
-            }
-            if (root.right != null) {
-                preorderHelp(list, root.right);
-            }
-        }
-    }
-
-    //前序遍历-递归
-    public static void preOrder(TreeNode root) {
-        if (root != null) {
-            System.out.print(root.val + "  ");
-            preOrder(root.left);
-            preOrder(root.right);
-        }
-    }
-
-
-    // 94-中序遍历-递归
-    public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        inorderHelp(list, root);
-        return list;
-    }
-
-    private static void inorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            if (root.left != null) {
-                inorderHelp(list, root.left);
-            }
-            list.add(root.val);
-            if (root.right != null) {
-                inorderHelp(list, root.right);
-            }
-        }
-    }
-
-    // 中序遍历 递归
-    public static void inOrder(TreeNode root) {
-        if (root != null) {
-            inOrder(root.left);
-            System.out.print(root.val + "  ");
-            inOrder(root.right);
-        }
-    }
-
-
-    // 145. 二叉树的后序遍历
-    public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        postorderHelp(list, root);
-        return list;
-    }
-
-    private void postorderHelp(List<Integer> list, TreeNode root) {
-        if (root != null) {
-            if (root.left != null) {
-                postorderHelp(list, root.left);
-            }
-            if (root.right != null) {
-                postorderHelp(list, root.right);
-            }
-            list.add(root.val);
-        }
-    }
-
-    // 后序遍历 递归
-    public static void postOrder(TreeNode root) {
-        if (root != null) {
-            postOrder(root.left);
-            postOrder(root.right);
-            System.out.print(root.val + "  ");
-        }
-    }
-
-
-    /**
-     * 先序遍历 非递归
-     */
-    public static void preOrder2(TreeNode root) {
-        // LinkedList是一个双向链表
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode pNode = root;
-        // 终止条件 节点为null && 栈为空
-        while (pNode != null || !stack.isEmpty()) {
-            // 1 当前节点非空，打印值，元素进栈，访问左孩子
-            // 2 如果左孩子非空，继续执行 1
-            // 3 如果左孩子为空，元素出栈、访问右孩子 继续执行 1
-            if (pNode != null) {
-                System.out.print(pNode.val + "  ");
-                stack.push(pNode);
-                pNode = pNode.left;
-            } else { //pNode == null && !stack.isEmpty()
-                TreeNode node = stack.pop();
-                pNode = node.right;
-            }
-        }
-    }
-
-    // 144. 二叉树的前序遍历-非递归
-    public List<Integer> preorder(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode treeNode = root;
-        while (treeNode != null || !stack.isEmpty()) {
-            if (treeNode != null) {
-                list.add(treeNode.val);
-                stack.push(treeNode);
-                treeNode = treeNode.left;
-            } else {
-                TreeNode node = stack.pop();
-                treeNode = node.right;
-            }
-        }
-        return list;
-    }
-
-
-    /**
-     * 中序遍历非递归
-     */
-    public static void inOrder2(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode pNode = root;
-        while (pNode != null || !stack.isEmpty()) {
-            // 1 当前节点非空，元素进栈，访问左孩子
-            // 2 如果左孩子非空，继续执行 1
-            // 3 如果左孩子为空，元素出栈、打印值、访问右孩子 继续执行 1
-            if (pNode != null) {
-                stack.push(pNode);
-                pNode = pNode.left;
-            } else { //pNode == null && !stack.isEmpty()
-                TreeNode node = stack.pop();
-                System.out.print(node.val + "  ");
-                pNode = node.right;
-            }
-        }
-    }
-
-    /**
-     * 94-中序遍历-非递归
-     */
-    public static List<Integer> inorder(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        // 利用栈
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode treeNode = root;
-        // 循环结束条件是节点为空 && 栈中无元素
-        while (treeNode != null || !stack.isEmpty()) {
-            if (treeNode != null) {
-                // 压入栈，如果左孩子非空，继续执行
-                stack.push(treeNode);
-                treeNode = treeNode.left;
-            } else {
-                // 如果左孩子为空，元素出栈、访问右孩子
-                TreeNode node = stack.pop();
-                list.add(node.val);
-                treeNode = node.right;
-            }
-        }
-        return list;
-    }
-
-    // 145. 二叉树的后序遍历 双栈方法(最容易理解）
-    public static List<Integer> postorder(TreeNode root) {
-        List<Integer> ret = new ArrayList<>();
-        if (root == null) {
-            return ret;
-        }
-        Stack<TreeNode> stack1 = new Stack<>();
-        Stack<TreeNode> stack2 = new Stack<>();
-        // 栈1 存前序 中左右。
-        stack1.push(root);
-        while (!stack1.isEmpty()) {
-            TreeNode t = stack1.pop();
-            stack2.push(t);
-            //栈2存顺序将其转化成中右左。压栈优先压入左子树。
-            if (t.left != null) {
-                stack1.push(t.left);
-            }
-            if (t.right != null) {
-                stack1.push(t.right);
-            }
-        }
-        // 倒序打印结果  左右中。
-        while (!stack2.isEmpty()) {
-            ret.add(stack2.pop().val);
-        }
-        return ret;
-    }
-
     /**
      * 非递归后序遍历
      */
@@ -308,58 +105,7 @@ public class BinaryTreeSolution {
         return result;
     }
 
-    // 102. 二叉树的层序遍历 BFS 迭代实现  时间复杂度：O(n)  空间复杂度：O(n)
-    public static List<List<Integer>> levelOrder(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            List<Integer> temp = new LinkedList<>();
-            int len = queue.size();
-            for (int i = 0; i < len; i++) {
-                TreeNode treeNode = queue.poll();
-                temp.add(treeNode.val);
-                if (treeNode.left != null) {
-                    queue.add(treeNode.left);
-                }
-                if (treeNode.right != null) {
-                    queue.add(treeNode.right);
-                }
-            }
-            result.add(temp);
-        }
-        return result;
-    }
 
-    // 102. 二叉树的层序遍历-DFS递归
-    public static List<List<Integer>> levelOrder2(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        //用来存放最终结果
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        levelOrderDFS(root, res, 1);
-        return res;
-    }
-
-    private static void levelOrderDFS(TreeNode root, List<List<Integer>> res, int index) {
-        // 插入一个空list放到res中
-        if (index > res.size()) {
-            res.add(new ArrayList<>());
-        }
-        // 将当前节点的值加入到res中,index代表当前层
-        res.get(index - 1).add(root.val);
-        // 递归的处理左子树，右子树，同时将层数index+1
-        if (root.left != null) {
-            levelOrderDFS(root.left, res, index + 1);
-        }
-        if (root.right != null) {
-            levelOrderDFS(root.right, res, index + 1);
-        }
-    }
 
     // 637. 二叉树的层平均值 层次遍历的进化
     public List<Double> averageOfLevels(TreeNode root) {
@@ -387,45 +133,6 @@ public class BinaryTreeSolution {
         return result;
     }
 
-    /**
-     * 深度遍历-递归
-     */
-    static List<Integer> depResult = new ArrayList<>();
-
-    public static List<Integer> depthOrder(TreeNode root) {
-        if (root == null) {
-            return depResult;
-        }
-        depResult.add(root.val);
-        depthOrder(root.left);
-        depthOrder(root.right);
-        return depResult;
-    }
-
-    /**
-     * 深度遍历-非递归
-     */
-    public static List<Integer> depthOrder1(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> result = new ArrayList<>();
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            result.add(node.val);
-            // 注意入栈顺序和前序顺序
-            if (node.right != null) {
-                stack.push(node.right);
-            }
-            if (node.left != null) {
-                stack.push(node.left);
-            }
-        }
-        return result;
-    }
-
 
     /**
      * 递归-树的高度（深度）
@@ -448,26 +155,7 @@ public class BinaryTreeSolution {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // 剑指 Offer 28. 对称的二叉树
-    public static boolean isSymmetric(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        return symmetricHelp(root.left, root.right);
-    }
 
-    public static boolean symmetricHelp(TreeNode left, TreeNode right) {
-        if (left == null && right == null) {
-            return true;
-        }
-        if (left == null || right == null) {
-            return false;
-        }
-        if (left.val != right.val) {
-            return false;
-        }
-        return symmetricHelp(left.left, right.right) && symmetricHelp(left.right, right.left);
-    }
 
     // 226. 翻转二叉树/二叉树的镜像
     public static TreeNode invertTree(TreeNode root) {
@@ -508,34 +196,7 @@ public class BinaryTreeSolution {
     }
 
 
-    // 617. 合并二叉树 时间复杂度：O(N) 空间复杂度O(N)
-    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-        if (t1 == null) {
-            return t2;
-        }
-        if (t2 == null) {
-            return t1;
-        }
-        t1.val += t2.val;
-        t1.left = mergeTrees(t1.left, t2.left);
-        t1.right = mergeTrees(t1.right, t2.right);
-        return t1;
-    }
 
-
-    // 404. 左叶子之和
-    public static int sumOfLeftLeaves(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        // 判断节点是否是左叶子节点
-        if (root.left != null && root.left.left == null && root.left.right == null) {
-            // 递归找其他的左孩子
-            return root.left.val + sumOfLeftLeaves(root.right);
-        }
-        // 非叶子节点 左子树和右子树都要递归处理。
-        return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
-    }
 
     // 404. 左叶子之和
     public int sumOfLeftLeaves2(TreeNode root) {
@@ -1001,33 +662,7 @@ public class BinaryTreeSolution {
         pathSumDFS(root.right, new ArrayList<>(path), res, remain);
     }
 
-    // 437. 路径总和 III  路径方向必须是向下的（只能从父节点到子节点）找出路径和等于给定数值的路径总数
-    // 注意count不能作为dfs函数参数。因为不是以根节点为起始点。
-    private static int count = 0;
 
-    public static int pathSum3(TreeNode root, int sum) {
-        // 双重DFS: 先序递归遍历每个节点;
-        if (root == null) {
-            return count;
-        }
-        pathSum3DFS(root, sum);
-        pathSum3(root.left, sum);
-        pathSum3(root.right, sum);
-        return count;
-    }
-
-    // 以每个节点作为起始节点DFS寻找满足条件的路径.
-    private static void pathSum3DFS(TreeNode root, int sum) {
-        if (root == null) {
-            return;
-        }
-        sum -= root.val;
-        if (sum == 0) {
-            count++;
-        }
-        pathSum3DFS(root.left, sum);
-        pathSum3DFS(root.right, sum);
-    }
 
     // 437. 路径总和 III  同pathSum3方法
     public static int pathSum33(TreeNode root, int sum) {

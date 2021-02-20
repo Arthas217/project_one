@@ -6,8 +6,6 @@ import org.com.zlk.datastructure.list.ListNode;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 
 /**
  * @Author zc217
@@ -31,10 +29,6 @@ public class ListSolutionTest {
         ListNode.printHeadList(listSolution.reverseHeadList(initListNode.init00()));
     }
 
-    @Test
-    public void testHasCycle() {
-        System.out.println(ListSolution.hasCycle(initListNode.init()));
-    }
 
     @Test
     public void testCycleLocation() {
@@ -55,14 +49,6 @@ public class ListSolutionTest {
         }
     }
 
-    @Test
-    public void test() {
-        List<ListNode> listNodes = initListNode.init3();
-        boolean commonNode = listSolution.getIntersectionNode(listNodes.get(0), listNodes.get(1));
-        ListNode value = listSolution.getIntersectionNode2(listNodes.get(0), listNodes.get(1));
-        System.out.println(commonNode);
-        System.out.println(value.val);
-    }
 
 
     @Test
@@ -76,7 +62,6 @@ public class ListSolutionTest {
         head.next = initListNode.init2();
         ListNode.printHeadList(listSolution.reverseHeadKGroup(head, 2));
 
-        ListNode.printList(listSolution.reverseKGroup(initListNode.init2(), 2));
 
     }
 }
