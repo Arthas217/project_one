@@ -7,31 +7,25 @@ package org.com.zlk.zhouyang;
 public class Singleton {
 
     /**
-     * new Singleton()指令重排序存在
+     * https://www.jianshu.com/p/45885e50d1c4
+     * new Singleton() 顺序：分配对象的内存空间、初始化对象、设置instance指向刚分配内存地址
      * volatile保证禁止指令重排序
      */
-    private static volatile Singleton instance;
+    private volatile Singleton instance;
 
     private Singleton() {
-        System.out.println(Thread.currentThread()+ "----------");
+        System.out.println(Thread.currentThread() + "----------");
     }
 
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton();
+    public Singleton getInstance() {
+        if (instance == null) { // 功能性不会丢失，只是降低synchronized带来的性能开销
+            synchronized (Singleton.class) { // 加锁和初始化操作
+                if (instance == null) {  // 如果不加，会创建多个实例化对象
+                    instance = new Singleton(); // 非原子操作
                 }
             }
         }
         return instance;
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 100000; i++) {
-            new Thread(() -> {
-                getInstance();
-            }, String.valueOf(i)).start();
-        }
-    }
 }

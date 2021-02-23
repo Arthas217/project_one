@@ -1,4 +1,4 @@
-package org.com.zlk.cache;
+package org.com.zlk.jedis;
 
 import redis.clients.jedis.Jedis;
 

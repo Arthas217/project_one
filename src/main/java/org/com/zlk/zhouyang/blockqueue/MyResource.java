@@ -17,6 +17,7 @@ public class MyResource {
     AtomicInteger atomicInteger = new AtomicInteger();
     // 阻塞队列
     BlockingQueue<String> blockingQueue;
+
     // 参数传接口
     public MyResource(BlockingQueue<String> blockingQueue) {
         System.out.println(blockingQueue.getClass().getName() + "------------------");
@@ -33,7 +34,7 @@ public class MyResource {
             key = atomicInteger.incrementAndGet() + "";
             result = blockingQueue.offer(key, 1, TimeUnit.SECONDS);
             if (result) {
-                System.out.println(Thread.currentThread().getName() + "\t 插入队列" + key + "成功");
+                System.out.println(Thread.currentThread().getName() + "\t 插入队列" + key + "成功" + "   队列大小：" + blockingQueue.size());
             } else {
                 System.out.println(Thread.currentThread().getName() + "\t 插入队列" + key + "失败");
             }
@@ -60,7 +61,7 @@ public class MyResource {
                 return;
             }
             TimeUnit.SECONDS.sleep(1);
-            System.out.println(Thread.currentThread().getName() + "\t 消费队列" + peek + "成功");
+            System.out.println(Thread.currentThread().getName() + "\t 消费队列" + peek + "成功" + "    队列大小：" + blockingQueue.size());
         }
     }
 
