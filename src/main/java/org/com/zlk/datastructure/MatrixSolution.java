@@ -16,14 +16,16 @@ public class MatrixSolution {
         }
         int row = matrix.length;
         int col = matrix[0].length;
+        int[] result = new int[row * col];
         // 左上角
         int lx = 0;
         int ly = 0;
         // 右下角
         int rx = row - 1;
         int ry = col - 1;
-        int[] result = new int[row * col];
         while (lx <= rx && ly <= ry) {
+            // 左上角->右下角位置
+            // 右下角-> 左上角位置
             printCircleValue(matrix, lx++, ly++, rx--, ry--, result);
         }
         return result;
@@ -49,7 +51,7 @@ public class MatrixSolution {
                 result[index++] = matrix[tempx][ry];
                 tempx++;
             }
-            while (tempy != lx) { // 打印一圈矩阵的下行
+            while (tempy != ly) { // 打印一圈矩阵的下行
                 result[index++] = matrix[rx][tempy];
                 tempy--;
             }
