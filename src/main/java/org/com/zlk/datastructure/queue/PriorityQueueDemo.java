@@ -13,7 +13,8 @@ import java.util.PriorityQueue;
 public class PriorityQueueDemo {
 
     public static void main(String[] args) {
-        PriorityQueueTopK();
+
+//        PriorityQueueEg();
         MinHeapTopK();
     }
 
@@ -27,7 +28,10 @@ public class PriorityQueueDemo {
         }
     }
 
-    private static void PriorityQueueTopK() {
+    /**
+     * 自动成为一个小根堆
+     */
+    private static void PriorityQueueEg() {
         PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(49);
         priorityQueue.add(38);
@@ -45,19 +49,22 @@ public class PriorityQueueDemo {
         }
     }
 
-    // 从data数组中获取最大的k个数
+    /**
+     * 从数组中获取最大的k个数
+     */
     private static int[] topK(int[] data, int k) {
-        // 先取K个元素放入一个数组topk中
+        // 先取K个元素放入数组topk中
         int[] topk = new int[k];
         for (int i = 0; i < k; i++) {
             topk[i] = data[i];
         }
         // 转换成最小堆
         MinHeap heap = new MinHeap(topk);
-        // 从k开始，遍历data
+        // 从k开始遍历剩余元素
         for (int i = k; i < data.length; i++) {
             int root = heap.getRoot();
-            // 当数据大于堆中最小的数（根节点）时，替换堆中的根节点，再转换成堆
+            // 当数据大于堆中最小的数（根节点）时，替换堆中根节点，再转换成堆
+            // 目的是始终保持已经遍历过的数组中前k大的元素
             if (data[i] > root) {
                 heap.setRoot(data[i]);
             }

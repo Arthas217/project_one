@@ -3,6 +3,7 @@ package org.com.zlk.datastructure.queue;
 /**
  * 数组存储实现最小堆
  * https://blog.csdn.net/zhaohong_bo/article/details/90368401
+ *
  * @Author zc217
  * @Date 2020/12/24
  */
@@ -16,12 +17,13 @@ public class MinHeap {
         this.data = data;
         buildHeap();
     }
+
     // 获取对中的最小的元素，根元素
     public int getRoot() {
         return data[0];
     }
 
-    // 替换根元素，并重新调整堆下标是i=0  （数据结构书中P281 图10.12）
+    // 替换根元素，并重新调整堆下标是i=0 (数据结构书中P281 图10.12)
     public void setRoot(int root) {
         data[0] = root;
         heapify(0);
