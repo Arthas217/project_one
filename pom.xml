@@ -22,7 +22,7 @@
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
         <redission.version>3.12.0</redission.version>
-        <log.verison>2.15.0</log.verison>
+        <log.verison>2.17.0</log.verison>
         <test.version>4.11</test.version>
     </properties>
 
