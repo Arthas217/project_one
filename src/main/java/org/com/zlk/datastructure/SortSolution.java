@@ -90,6 +90,34 @@ public class SortSolution {
     }
 
 
+    /**
+     * 好、坏、平均   O(n) 、O(n2)、O(n2)
+     * @param arr
+     * @param n
+     */
+    public void bubbleSort4JIKE(int[] arr,int n){
+        if (n <= 1) {
+            return;
+        }
+        // 遍历次数
+        for (int i = 0; i < n; i++) {
+            boolean flag = false;
+            for (int j = 0; j < n - 1 - j; j++) {
+                if (arr[j] > arr[j + 1]) { // 比较
+                    // 交换
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    flag = true; // 标识有数据交换
+                }
+            }
+            if (!flag) {  //没有数据交换，提前退出
+                break;
+            }
+        }
+    }
+
+
     // 插入排序 ：类似调整有序扑克牌，抓牌后找到插入位置
     // 时间复杂度: 最好有序数组 o(n) 最坏逆序 o(n*n) 平均时间复杂度是O（n^2） 空间复杂度:o(1)
     // 1.在大多数元素已经有序的情况下，插入排序的工作量较小
