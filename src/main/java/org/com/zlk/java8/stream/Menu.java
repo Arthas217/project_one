@@ -8,8 +8,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 /**
- * @Author 会游泳的蚂蚁
- * @Description:
+ * @Description: 菜单类
  * @Date 2021/12/27 10:43
  */
 public class Menu {
