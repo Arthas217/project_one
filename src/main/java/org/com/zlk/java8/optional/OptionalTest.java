@@ -6,6 +6,8 @@ import java.util.function.Function;
 /**
  * @Author 会游泳的蚂蚁
  * @Description:
+ * https://cloud.tencent.com/developer/article/1767915
+ * https://xie.infoq.cn/article/e3d1f0f4f095397c44812a5be
  * @Date 2021/12/28 19:52
  */
 public class OptionalTest {
@@ -55,7 +57,7 @@ public class OptionalTest {
 
 
     /**
-     * 使用Optional重新定义Person/Car/Insurance的数据模型
+     * 使用Optional重新定义Person/Car/Insurance的数据模型（貌似不建议使用，Optional本身并没有实现序列化，现有的 JSON 序列化框架也没有对此提供支持的）
      *
      * @param person
      * @return
