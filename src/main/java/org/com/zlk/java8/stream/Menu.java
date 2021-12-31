@@ -121,7 +121,6 @@ public class Menu {
         List<String> result = active.stream().flatMap(a -> hot.stream().filter(h -> h.contains(a))).collect(toList());
         System.out.println(result);
 
-
         List<String> zresult = active.stream().flatMap(a -> z.stream().filter(h -> h.contains(a))).collect(toList());
         System.out.println(zresult);
     }
