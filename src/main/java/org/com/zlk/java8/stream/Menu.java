@@ -1,5 +1,6 @@
 package org.com.zlk.java8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -95,5 +96,33 @@ public class Menu {
         Optional<Integer> max = numbers.stream().reduce(Integer::max);
         System.out.println(max.get());
 
+        List<String> hot = new ArrayList<>();
+        hot.add("edf 大望路");
+        hot.add("abc 望京");
+        hot.add("wed 阜通");
+        hot.add("hrg 太阳宫");
+        hot.add("UID 王府井");
+        hot.add("ddf 西单");
+        hot.add("sd 上地");
+
+        List<String> z = new ArrayList<>();
+        z.add("edf 大望路");
+        z.add("wed 阜通");
+        z.add("hrg 太阳宫");
+
+        List<String> active = new ArrayList<>();
+        active.add("sd");//上地
+        active.add("hrg");//太阳宫
+        active.add("ddf");//西单
+        active.add("edf");//大望路
+        active.add("abc");//望京
+        active.add("wed");//阜通
+
+        List<String> result = active.stream().flatMap(a -> hot.stream().filter(h -> h.contains(a))).collect(toList());
+        System.out.println(result);
+
+
+        List<String> zresult = active.stream().flatMap(a -> z.stream().filter(h -> h.contains(a))).collect(toList());
+        System.out.println(zresult);
     }
 }
