@@ -98,7 +98,7 @@ public class Menu {
 
         List<String> hot = new ArrayList<>();
         hot.add("edf 大望路");
-        hot.add("abc 望京");
+        hot.add("abc 望京sd");
         hot.add("wed 阜通");
         hot.add("hrg 太阳宫");
         hot.add("UID 王府井");
@@ -118,7 +118,7 @@ public class Menu {
         active.add("abc");//望京
         active.add("wed");//阜通
 
-        List<String> result = active.stream().flatMap(a -> hot.stream().filter(h -> h.contains(a))).collect(toList());
+        List<String> result = active.stream().flatMap(a -> hot.stream().filter(h-> h.substring(0, h.indexOf(" ")).contains(a))).collect(toList());
         System.out.println(result);
 
         List<String> zresult = active.stream().flatMap(a -> z.stream().filter(h -> h.contains(a))).collect(toList());
