@@ -1,9 +1,8 @@
 package org.com.zlk.datastructure.list;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+
+import java.util.*;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -43,5 +42,32 @@ public class ArrayListDemo {
         list.set("f".hashCode() & 8 - 1, "f");
         list.set("g".hashCode() & 8 - 1, "g");
 
+        // add 2021-1-3 使用addAll和immutable
+        List<String> str = new ArrayList<>();
+        str.add("abc");
+        str.add("bcd");
+        str.add("cde");
+        str.add("def");
+        str.add("efg");
+        str.add("fgh");
+
+
+        // 不能修改因为是immutable不可变类  newStr.remove(s) 报错java.lang.UnsupportedOperationException
+        List<String> newStr = ImmutableList.copyOf(str);
+        System.out.println(newStr == str);
+
+        List<String> otherStr = new ArrayList<>();
+        System.out.println(otherStr == str);
+        otherStr.addAll(str);
+        // 不能修改集合 例如otherStr.remove(s)  报错java.util.ConcurrentModificationException
+        Iterator<String> iterator = otherStr.iterator();
+        while (iterator.hasNext()) {
+            String value = iterator.next();
+            if (value.contains("a")) {
+                iterator.remove();
+            } else {
+                System.out.print(value + " ");
+            }
+        }
     }
 }
