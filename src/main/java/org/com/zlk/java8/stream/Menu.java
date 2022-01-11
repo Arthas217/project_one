@@ -23,7 +23,7 @@ public class Menu {
             new Dish("season fruit", true, 120, Dish.Type.OTHER),
             new Dish("pizza", true, 550, Dish.Type.OTHER),
             new Dish("prawns", false, 300, Dish.Type.FISH),
-            new Dish("salmon",false,450,Dish.Type.FISH));
+            new Dish("salmon", false, 450, Dish.Type.FISH));
 
 
     public static void main(String[] args) {
@@ -46,9 +46,9 @@ public class Menu {
 
         // success  使用映射flatmap方式
         List<String> charList = words.stream()
-                 //将每个单词转换为由其字母构成的数组
+                //将每个单词转换为由其字母构成的数组
                 .map(word -> word.split(""))
-                 //将各个生成流扁平化为单个流
+                //将各个生成流扁平化为单个流
                 .flatMap(Arrays::stream)
                 .distinct()
                 .collect(toList());
@@ -76,7 +76,7 @@ public class Menu {
 
 
         Optional<Dish> any = menu.stream().filter(dish -> dish.getName().equals("KFC")).findAny();
-        Dish dish = any.orElse(new Dish("KFC",false,800, Dish.Type.MEAT));
+        Dish dish = any.orElse(new Dish("KFC", false, 800, Dish.Type.MEAT));
         System.out.println(dish.getName());
         if (any.isPresent()) {
             System.out.println(any.get().getName());
@@ -118,10 +118,18 @@ public class Menu {
         active.add("abc");//望京
         active.add("wed");//阜通
 
-        List<String> result = active.stream().flatMap(a -> hot.stream().filter(h-> h.substring(0, h.indexOf(" ")).contains(a))).collect(toList());
+        List<String> result = active.stream().flatMap(a -> hot.stream().filter(h -> h.substring(0, h.indexOf(" ")).contains(a))).collect(toList());
         System.out.println(result);
 
         List<String> zresult = active.stream().flatMap(a -> z.stream().filter(h -> h.contains(a))).collect(toList());
         System.out.println(zresult);
+
+        List<String> business_info = new ArrayList<>();
+        business_info.add("a k");
+        business_info.add("a");
+        business_info.add("b w");
+        business_info.add("c t");
+        List<String> result1 = business_info.stream().filter(str -> str.split(" ").length > 1).collect(toList());
+        System.out.println(result1);
     }
 }
