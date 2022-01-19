@@ -21,12 +21,12 @@ public class Reflect4Annotation {
 
         // 获取student中注解StudentTableAnnotation的属性值
         StudentTableAnnotation studentAnnotation = (StudentTableAnnotation) student.getAnnotation(StudentTableAnnotation.class);
-        System.out.println("student中 表名： " + studentAnnotation.tableName());
+        System.out.println("student中注解@StudentTableAnnotation中属性（表名）： " + studentAnnotation.tableName());
 
         // 获取student中属性
-        Field field = student.getDeclaredField("name");
+        Field field = student.getDeclaredField("age");
         // 获取student中属性的注解StudentFieldAnnotation
         StudentFieldAnnotation fieldAnnotation = field.getAnnotation(StudentFieldAnnotation.class);
-        System.out.println("获取student属性name注解的值(列名称、类型、长度) ：" + fieldAnnotation.columnName() + " | " + fieldAnnotation.type() + " | " + fieldAnnotation.length());
+        System.out.println("student中注解@StudentFieldAnnotation中属性值(列名称、类型、长度) ：" + fieldAnnotation.columnName() + " | " + fieldAnnotation.type() + " | " + fieldAnnotation.length());
     }
 }
