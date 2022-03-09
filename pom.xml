@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 
     <name>project_one</name>
@@ -22,7 +20,7 @@
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
         <redission.version>3.12.0</redission.version>
-        <log.verison>2.15.0</log.verison>
+        <log.verison>2.17.1</log.verison>
         <test.version>4.11</test.version>
     </properties>
 
