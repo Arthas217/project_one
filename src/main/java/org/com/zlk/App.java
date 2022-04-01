@@ -30,9 +30,19 @@ public class App {
 //        SqlSession sqlSession = sqlSessionFactory.openSession();
 //        List list = sqlSession.selectList("com.foo.bean.BlogMapper.queryAllBlogInfo");
 
-        System.out.println(App.VALUE);
-        System.out.println(App.FINAL_VALUE);
-        System.out.println(App.FINAL_VALUE_INT);
+//        System.out.println(App.VALUE);
+//        System.out.println(App.FINAL_VALUE);
+//        System.out.println(App.FINAL_VALUE_INT);
+//
+//
+//        String str1 = "abc";
+//        String str2 = new String("def");
+//        String str3 = "abc";
+//        String str4 = str2.intern();
+//        String str5 = "def";
+//        System.out.println(str1 == str3);//true
+//        System.out.println(str2 == str4);//false
+//        System.out.println(str4 == str5);//true
 
 
         String str1 = "abc";

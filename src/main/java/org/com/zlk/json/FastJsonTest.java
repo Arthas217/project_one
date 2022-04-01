@@ -6,6 +6,7 @@ package org.com.zlk.json;
  * @Date 2022/3/9 16:26
  */
 public class FastJsonTest {
-
-
+    public static void main(String[] args) {
+        String str = "";
+    }
 }
