@@ -23,7 +23,7 @@
         <lombok.verison>1.18.10</lombok.verison>
         <redission.version>3.12.0</redission.version>
         <log.verison>2.17.1</log.verison>
-        <test.version>4.11</test.version>
+        <test.version>4.13.1</test.version>
     </properties>
 
     <dependencies>
