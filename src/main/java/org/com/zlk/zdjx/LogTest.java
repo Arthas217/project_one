@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description:
+ * @Description: https://www.cnblogs.com/lingyejun/p/9366533.html
  * @Date 2022/3/23 17:52
  */
 public class LogTest {
