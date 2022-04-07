@@ -8,14 +8,15 @@ import java.io.Serializable;
  * @Date 2022/4/2 13:04
  */
 //public class People {
-public class People implements Serializable{ // 修复测试一,修复测试三
+public class People implements Serializable{ // 修复测试一,修复测试三,测试四
 
     private Long id;
 
 
     // 测试二，不加空的构造方法会报错java.io.InvalidClassException: org.com.zlk.serializable.Son; no valid constructor
-    public People() {
-    }
+    // 测试四，注释掉
+//    public People() {
+//    }
 
     public People(Long id) {
         this.id = id;
