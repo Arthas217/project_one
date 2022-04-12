@@ -92,6 +92,7 @@ public class SerializableTest {
         System.out.println("111");
         testSerializable();
         System.out.println("222");
+
     }
 
 }
