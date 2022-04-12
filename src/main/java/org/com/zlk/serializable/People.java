@@ -12,7 +12,6 @@ public class People implements Serializable{ // 修复测试一,修复测试三,
 
     private Long id;
 
-
     // 测试二，不加空的构造方法会报错java.io.InvalidClassException: org.com.zlk.serializable.Son; no valid constructor
     // 测试四，注释掉
 //    public People() {
