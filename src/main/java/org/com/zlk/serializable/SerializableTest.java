@@ -87,6 +87,7 @@ public class SerializableTest {
         System.out.println(newObj);
     }
 
+
     public static void main(String[] args) throws Exception {
         testSerializable();
     }
