@@ -89,6 +89,7 @@ public class SerializableTest {
 
 
     public static void main(String[] args) throws Exception {
+        System.out.println("111");
         testSerializable();
         System.out.println("222");
     }
