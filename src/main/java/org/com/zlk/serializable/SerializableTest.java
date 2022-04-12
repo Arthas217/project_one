@@ -90,6 +90,7 @@ public class SerializableTest {
 
     public static void main(String[] args) throws Exception {
         testSerializable();
+        System.out.println("222");
     }
 
 }
