@@ -1,6 +1,7 @@
 package org.com.zlk.java8.api.math;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
@@ -14,7 +15,30 @@ public class BigDecimalDemo {
 //        constructMethod();
 //        compare();
         //格式化的货币值和百分比
-        formatMethod();
+//        formatMethod();
+        //格式化结果保留2为小数，不足则补0
+//        testValue();
+
+        // divide方法进行除法时当不整除，出现无限循环小数.抛异常：java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
+        bug();
+
+    }
+
+    private static void bug() {
+        // divide方法设置精确的小数点，如：divide(xxxxx,2)
+        BigDecimal b1 = new BigDecimal("10");
+        BigDecimal b2 = new BigDecimal("3");
+        BigDecimal divide = b1.divide(b2,2,4);
+        System.out.println(divide);
+    }
+
+    private static void testValue() {
+        System.out.println(formatToNumber(new BigDecimal("3.435")));
+        System.out.println(formatToNumber(new BigDecimal(0)));
+        System.out.println(formatToNumber(new BigDecimal("0.00")));
+        System.out.println(formatToNumber(new BigDecimal("0.001")));
+        System.out.println(formatToNumber(new BigDecimal("0.006")));
+        System.out.println(formatToNumber(new BigDecimal("0.206")));
     }
 
     private static void formatMethod() {
@@ -22,6 +46,7 @@ public class BigDecimalDemo {
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         //建立百分比格式化引用
         NumberFormat percent = NumberFormat.getPercentInstance();
+        // 百分比小数点最多3位
         percent.setMaximumFractionDigits(3);
 
         //贷款金额
@@ -58,5 +83,23 @@ public class BigDecimalDemo {
         System.out.println(b4);
         System.out.println(b5);
         System.out.println(b6);
+    }
+
+
+    /**
+     *  传入的参数等于0，则直接返回字符串"0.00"
+     *  0~1之间的BigDecimal小数，格式化后失去前面的0,则前面直接加上0。
+     *  大于1的小数，直接格式化返回字符串
+     */
+    public static String formatToNumber(BigDecimal obj) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        BigDecimal zero = BigDecimal.ZERO;
+        if (obj.compareTo(zero) == 0) {
+            return "0.00";
+        } else if (obj.compareTo(zero) > 0 && obj.compareTo(new BigDecimal(1)) < 0) {
+            return "0" + df.format(obj);
+        } else {
+            return df.format(obj);
+        }
     }
 }
