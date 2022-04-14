@@ -1,9 +1,9 @@
 package org.com.zlk.java8.stream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -15,7 +15,10 @@ import java.util.stream.Stream;
  */
 public class StreamcDemo {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StreamcDemo.class);
+
     public static List<Employee> personList;
+
     public static void main(String[] args) {
 //        basicMethod();
         basicData();
@@ -23,6 +26,39 @@ public class StreamcDemo {
 //        foeachFind();
         // 筛选，是按照一定的规则校验流中的元素，将符合条件的元素提取到新的流中的操作。
 //        filterCollect();
+        // 聚合统计
+//        maxMinCount();
+
+    }
+
+    private static void maxMinCount() {
+        //获取String集合中最长的元素
+        List<String> list = Arrays.asList("adnm", "admmt", "pot", "xbangd", "weoujgsd");
+        Optional<String> maxLen = list.stream().max(Comparator.comparing(String::length));
+        LOGGER.info("max len string is {} ,len is {}", maxLen.get(), maxLen.get().length());
+
+        //获取Integer集合中的最大值
+        List<Integer> list1 = Arrays.asList(7, 6, 9, 4, 11, 6);
+        // 自然排序
+        Optional<Integer> max = list1.stream().max(Integer::compare);
+        LOGGER.info("integer list max value {}", max.get());
+        // 自定义排序
+        Optional<Integer> max1 = list1.stream().max(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        LOGGER.info("integer list max1 value {}", max1.get());
+
+        // 获取员工工资最高的人(工资这里定义类型为int
+        Optional<Employee> max2 = personList.stream().max(Comparator.comparingInt(Employee::getSalary));
+        LOGGER.info("max2 salary value {}", max2.get().getSalary());
+
+        // 计算Integer集合中大于6的元素的个数
+        List<Integer> list2 = Arrays.asList(7, 6, 4, 8, 2, 11, 9);
+        long count = list2.stream().filter(v -> v > 6).count();
+        LOGGER.info("value above six count {}", count);
 
     }
 
@@ -49,12 +85,12 @@ public class StreamcDemo {
 
     private static void basicData() {
         personList = new ArrayList<>();
-        personList.add(new Employee("Tom", 8900, 23,"male", "New York"));
-        personList.add(new Employee("Jack", 7000, 25,"male", "Washington"));
-        personList.add(new Employee("Lily", 7800, 21,"female", "Washington"));
-        personList.add(new Employee("Anni", 8200, 24,"female", "New York"));
-        personList.add(new Employee("Owen", 9500, 25,"male", "New York"));
-        personList.add(new Employee("Alisa", 7900, 26,"female", "New York"));
+        personList.add(new Employee("Tom", 8900, 23, "male", "New York"));
+        personList.add(new Employee("Jack", 7000, 25, "male", "Washington"));
+        personList.add(new Employee("Lily", 7800, 21, "female", "Washington"));
+        personList.add(new Employee("Anni", 8200, 24, "female", "New York"));
+        personList.add(new Employee("Owen", 9500, 25, "male", "New York"));
+        personList.add(new Employee("Alisa", 7900, 26, "female", "New York"));
     }
 
     private static void basicMethod() {
@@ -67,7 +103,7 @@ public class StreamcDemo {
         Stream<String> parallel = stream.parallel();
 
         // 用数组创建流
-        int[] array={1,3,5,6,8};
+        int[] array = {1, 3, 5, 6, 8};
         IntStream intStream = Arrays.stream(array);
 
         System.out.println(stream);
