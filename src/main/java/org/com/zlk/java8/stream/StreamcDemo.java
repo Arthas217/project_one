@@ -28,7 +28,35 @@ public class StreamcDemo {
 //        filterCollect();
         // 聚合统计
 //        maxMinCount();
+        // 映射 map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。flatMap：接收一个函数作为参数，将流中的每个元素值都换成另一个流(多个元素)，然后把所有流连接成一个流。
+        mapFlatMap();
+    }
 
+    private static void mapFlatMap() {
+        //英文字符串数组的元素全部改为大写。
+        String[] strArr = {"abcd", "bcdd", "defde", "fTr"};
+        List<String> strings = Arrays.stream(strArr).map(String::toUpperCase).collect(Collectors.toList());
+        LOGGER.info("strArr value is  {}", strings);
+        //整数数组每个元素+3
+        List<Integer> intList = Arrays.asList(1, 3, 5, 7, 9, 11);
+        List<Integer> intListNew = intList.stream().map(x -> x + 3).collect(Collectors.toList());
+        LOGGER.info("list  value is {}", intListNew);
+        //将员工的薪资全部增加1000
+        List<Integer> person = personList.stream().map(s -> s.getSalary() + 1000).collect(Collectors.toList());
+        LOGGER.info("map Employee salary is {}  改变了原来员工集合的方式", person);
+        List<Employee> collect = personList.stream().map(employee -> {
+            employee.setSalary(employee.getSalary() + 1000);
+            return employee;
+        }).collect(Collectors.toList());
+        LOGGER.info("map Employee salary is {}  改变了原来员工集合的方式", collect.get(0).getSalary());
+        List<Employee> personListNew = personList.stream().map(p1 -> {
+            Employee personNew = new Employee(p1.getName(), 0, 0, null, null);
+            personNew.setSalary(p1.getSalary() + 10000);
+            return personNew;
+        }).collect(Collectors.toList());
+        LOGGER.info("map Employee salary is {}, 不改变原来员工集合的方式", collect.get(0).getSalary());
+
+        //将两个字符数组合并成一个新的字符数组
     }
 
     private static void maxMinCount() {
