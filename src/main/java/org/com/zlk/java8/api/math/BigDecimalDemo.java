@@ -12,12 +12,12 @@ import java.text.NumberFormat;
 public class BigDecimalDemo {
 
     public static void main(String[] args) {
-//        constructMethod();
-//        compare();
+        constructMethod();
+        compare();
         //格式化的货币值和百分比
-//        formatMethod();
+        formatMethod();
         //格式化结果保留2为小数，不足则补0
-//        testValue();
+        testValue();
 
         // divide方法进行除法时当不整除，出现无限循环小数.抛异常：java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
         bug();
