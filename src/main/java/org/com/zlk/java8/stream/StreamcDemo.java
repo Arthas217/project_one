@@ -23,7 +23,7 @@ public class StreamcDemo {
 //        basicMethod();
         basicData();
         // 遍历、匹配
-//        foeachFind();
+//        foreachFind();
         // 筛选，是按照一定的规则校验流中的元素，将符合条件的元素提取到新的流中的操作。
 //        filterCollect();
         // 聚合统计
@@ -130,7 +130,7 @@ public class StreamcDemo {
         System.out.println(name);
     }
 
-    private static void foeachFind() {
+    private static void foreachFind() {
         List<Integer> list = Arrays.asList(7, 6, 9, 3, 8, 2, 1);
         // 遍历输出符合条件的元素
         list.stream().filter(x -> x > 6).forEach(System.out::println);
