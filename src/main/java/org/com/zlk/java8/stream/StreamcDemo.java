@@ -2,6 +2,7 @@ package org.com.zlk.java8.stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.nio.cs.SingleByte;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +33,11 @@ public class StreamcDemo {
         mapFlatMap();
     }
 
+
+    private static <T> void printCollect(List<T> list) {
+        list.stream().forEach(System.out::print);
+    }
+
     private static void mapFlatMap() {
         //英文字符串数组的元素全部改为大写。
         String[] strArr = {"abcd", "bcdd", "defde", "fTr"};
@@ -42,30 +48,40 @@ public class StreamcDemo {
         List<Integer> intListNew = intList.stream().map(x -> x + 3).collect(Collectors.toList());
         LOGGER.info("list  value is {}", intListNew);
         //将员工的薪资全部增加1000
+        printCollect(personList);
+        System.out.println();
         List<Integer> person = personList.stream().map(s -> s.getSalary() + 1000).collect(Collectors.toList());
-        LOGGER.info("map Employee salary is {}  改变了原来员工集合的方式", person);
+        LOGGER.info("不改变了原来员工集合的方式11111  map Employee salary is {}  ", person);
+        printCollect(personList);
+        System.out.println();
+
         List<Employee> collect = personList.stream().map(employee -> {
             employee.setSalary(employee.getSalary() + 1000);
             return employee;
         }).collect(Collectors.toList());
-        LOGGER.info("map Employee salary is {}  改变了原来员工集合的方式", collect.get(0).getSalary());
+        LOGGER.info("改变了原来员工集合的方式222222  map Employee salary is {}  ", collect.get(0).getSalary());
+        printCollect(personList);
+        System.out.println();
+
         List<Employee> personListNew = personList.stream().map(p1 -> {
             Employee personNew = new Employee(p1.getName(), 0, 0, null, null);
-            personNew.setSalary(p1.getSalary() + 10000);
+            personNew.setSalary(p1.getSalary() + 1000);
             return personNew;
         }).collect(Collectors.toList());
-        LOGGER.info("map Employee salary is {}, 不改变原来员工集合的方式", collect.get(0).getSalary());
+        LOGGER.info("不改变原来员工集合的方式33333   map Employee salary is {} ", personListNew.get(0).getSalary());
+        printCollect(personList);
+        System.out.println();
 
         //将两个字符数组(字符串)合并成一个新的字符数组
         List<String> list = Arrays.asList("m-k-l-a", "1-3-5-7");
         LOGGER.info("flatmap before list is {}", list);
-        List<String> list1 = list.stream().flatMap(str->{
+        List<String> list1 = list.stream().flatMap(str -> {
             //将每个list中的每个元素转换成一个流
             String[] split = str.split("-");
             Stream<String> stream = Arrays.stream(split);
             return stream;
         }).collect(Collectors.toList());
-        LOGGER.info("flatMap after list is {}",list1);
+        LOGGER.info("flatMap after list is {}", list1);
     }
 
     private static void maxMinCount() {
