@@ -2,7 +2,6 @@ package org.com.zlk.java8.stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.nio.cs.SingleByte;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -82,6 +81,16 @@ public class StreamcDemo {
             return stream;
         }).collect(Collectors.toList());
         LOGGER.info("flatMap after list is {}", list1);
+
+        // 从热门活动中筛选满足有效活动的集合
+        List<String> activeList = Arrays.asList("活dong有效1", "活dong有效2");
+        List<String> hotList = Arrays.asList("活dong有效1 url://http", "活dongg url://http2", "活dong2 url://http2");
+        List<String> result = activeList.stream().
+                flatMap(active -> hotList.stream().filter(h -> h.substring(0, h.indexOf(' ')).equals(active)
+                        && h.substring(0, h.indexOf(' ')).length() == active.length()))
+                .collect(Collectors.toList());
+        LOGGER.info("hot and effective active is {}",result);
+
     }
 
     private static void maxMinCount() {
