@@ -56,7 +56,16 @@ public class StreamcDemo {
         }).collect(Collectors.toList());
         LOGGER.info("map Employee salary is {}, 不改变原来员工集合的方式", collect.get(0).getSalary());
 
-        //将两个字符数组合并成一个新的字符数组
+        //将两个字符数组(字符串)合并成一个新的字符数组
+        List<String> list = Arrays.asList("m-k-l-a", "1-3-5-7");
+        LOGGER.info("flatmap before list is {}", list);
+        List<String> list1 = list.stream().flatMap(str->{
+            //将每个list中的每个元素转换成一个流
+            String[] split = str.split("-");
+            Stream<String> stream = Arrays.stream(split);
+            return stream;
+        }).collect(Collectors.toList());
+        LOGGER.info("flatMap after list is {}",list1);
     }
 
     private static void maxMinCount() {
