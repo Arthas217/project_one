@@ -29,7 +29,36 @@ public class StreamcDemo {
         // 聚合统计
 //        maxMinCount();
         // 映射 map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。flatMap：接收一个函数作为参数，将流中的每个元素值都换成另一个流(多个元素)，然后把所有流连接成一个流。
-        mapFlatMap();
+//        mapFlatMap();
+        // 归约，也称缩减,把一个流缩减成一个值，能实现对集合求和、求乘积和求最值操作
+        reduce();
+    }
+
+    private static void reduce() {
+        //求Integer集合的元素之和、乘积和最大值
+        List<Integer> list = Arrays.asList(1, 3, 2, 8, 11, 4);
+        Optional<Integer> sum = list.stream().reduce((x, y) -> x + y);
+        Optional<Integer> sum1 = list.stream().reduce(Integer::sum);
+        Integer sum2 = list.stream().reduce(0, Integer::sum);
+        LOGGER.info("reduce sum  value is  {}", sum.get());
+        LOGGER.info("reduce sum  value is  {}", sum1.get());
+        LOGGER.info("reduce sum  value is  {}", sum2);
+        Optional<Integer> mul = list.stream().reduce((x, y) -> x * y);
+        LOGGER.info("reduce mul  value is  {}", mul.get());
+        Optional<Integer> max = list.stream().reduce((x, y) -> x > y ? x : y);
+        Integer max2 = list.stream().reduce(1, Integer::max);
+        LOGGER.info("reduce max  value is  {}", max.get());
+        LOGGER.info("reduce max  value is  {}", max2);
+
+        //求所有员工的工资之和和最高工资。
+        Optional<Integer> sumSalary = personList.stream().map(Employee::getSalary).reduce(Integer::sum);
+        LOGGER.info("reduce sumSalary value is  {}", sumSalary.get());
+        Integer sumValue = personList.stream().reduce(0, (result, e) -> result += e.getSalary(), (s1, s2) -> s1 + s2);
+        Integer sumValue2 = personList.stream().reduce(0, (result, e) -> result += e.getSalary(), Integer::sum);
+        LOGGER.info("reduce sumValue value is  {}", sumValue);
+        LOGGER.info("reduce sumValue value2 is  {}", sumValue2);
+
+
     }
 
 
@@ -89,7 +118,7 @@ public class StreamcDemo {
                 flatMap(active -> hotList.stream().filter(h -> h.substring(0, h.indexOf(' ')).equals(active)
                         && h.substring(0, h.indexOf(' ')).length() == active.length()))
                 .collect(Collectors.toList());
-        LOGGER.info("hot and effective active is {}",result);
+        LOGGER.info("hot and effective active is {}", result);
 
     }
 
