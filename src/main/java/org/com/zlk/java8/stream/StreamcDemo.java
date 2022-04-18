@@ -31,7 +31,18 @@ public class StreamcDemo {
         // 映射 map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。flatMap：接收一个函数作为参数，将流中的每个元素值都换成另一个流(多个元素)，然后把所有流连接成一个流。
 //        mapFlatMap();
         // 归约，也称缩减,把一个流缩减成一个值，能实现对集合求和、求乘积和求最值操作
-        reduce();
+//        reduce();
+        // 归集(toList/toSet/toMap/toCollection/toConcurrentMap)将流中的数据重新归集到新的集合里
+        collect();
+
+        //统计(count/averaging)
+    }
+
+    private static void collect() {
+        Map<?, Employee> map = personList.stream()
+                .filter(p -> p.getSalary() > 8000)
+                .collect(Collectors.toMap(Employee::getName, p -> p));
+        LOGGER.info("toMap is {}", map);
     }
 
     private static void reduce() {
