@@ -34,8 +34,20 @@ public class StreamcDemo {
 //        reduce();
         // 归集(toList/toSet/toMap/toCollection/toConcurrentMap)将流中的数据重新归集到新的集合里
         collect();
+        //统计(Collectors提供了一系列用于数据统计的静态方法eg,count,averagingInt、averagingLong、averagingDouble,maxBy、minBy,summingInt、summingLong、summingDouble,summarizingInt、summarizingLong、summarizingDouble)
+        statistic();
 
-        //统计(count/averaging)
+    }
+
+    private static void statistic() {
+        // 统计员工人数
+        Long p_num = personList.stream().collect(Collectors.counting());
+        LOGGER.info("统计员工人数 is {}", p_num);
+        // 求平均工资
+        Double averSalary = personList.stream().collect(Collectors.averagingInt(Employee::getSalary));
+        LOGGER.info("平均工资 is {}", averSalary);
+        Optional<Integer> highSalary = personList.stream().map(Employee::getSalary).collect(Collectors.maxBy(Integer::compareTo));
+        LOGGER.info("最高工资 is {}", highSalary.get());
     }
 
     private static void collect() {
