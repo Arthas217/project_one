@@ -1,9 +1,10 @@
-package org.com.zlk.java8.zzzz;
+package org.com.zlk.java8.time;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -94,5 +95,23 @@ public class DateTime {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime parsedDate = LocalDateTime.parse(str, formatter);
         System.out.println(parsedDate);
+
+        // 定时7点 可用于缓存key，设置当天数据过期，定时失效
+        expireTimeClear();
+
+    }
+
+    private static void expireTimeClear() {
+        // 时间间隔
+        long l = Duration.between(LocalTime.now().withNano(0), LocalTime.of(10, 46, 0, 0)).toMillis();
+        if (l < 0) {
+            Calendar ca = Calendar.getInstance();
+            //失效的时间
+            ca.set(Calendar.HOUR_OF_DAY, 7);
+            ca.set(Calendar.MINUTE, 0);
+            ca.set(Calendar.SECOND, 0);
+            l = ca.getTimeInMillis();
+        }
+        System.out.println(l);
     }
 }

@@ -25,7 +25,9 @@ public class LogTest {
             // 使用逗号分隔，调用两个参数的error方法
             LOGGER.error("使用 , 号 使第二个参数作为Throwable : ", e);
             // 尝试使用分隔符,第二个参数为Throwable,会发现分隔符没有起作用，第二个参数的不同据，调用不同的重载方法
-            LOGGER.error("第二个参数为Throwable，使用分隔符打印 {} : ", e);
+            LOGGER.error("第二个参数为Throwable，使用分隔符打印 e {} : ", e);
+            // 第二个参数为Object
+            LOGGER.error("第二个参数为Throwable，使用分隔符打印 e.getMessage(){} : ", e.getMessage());
             // 尝试使用分隔符，第二个参数为Object,会发现分隔符起作用了，根据第二个参数的不同类型，调用不同的重载方法
             LOGGER.error("第二个参数为Object，使用分隔符打印 {} ",123);
         }
