@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 /**
  * @Author 会游泳的蚂蚁
  * @Description: https://mp.weixin.qq.com/s/OIoW4nhCF9Yoyb4wdjG7NA
+ * https://blog.csdn.net/weixin_39973810/article/details/107978246
  * @Date 2022/4/12 15:30
  */
 public class StreamcDemo {
@@ -33,10 +34,21 @@ public class StreamcDemo {
         // 归约，也称缩减,把一个流缩减成一个值，能实现对集合求和、求乘积和求最值操作
 //        reduce();
         // 归集(toList/toSet/toMap/toCollection/toConcurrentMap)将流中的数据重新归集到新的集合里
-        collect();
+//        collect();
         //统计(Collectors提供了一系列用于数据统计的静态方法eg,count,averagingInt、averagingLong、averagingDouble,maxBy、minBy,summingInt、summingLong、summingDouble,summarizingInt、summarizingLong、summarizingDouble)
-        statistic();
+//        statistic();
+        // 分组（partitioningBy---分区：将stream按条件分为两个Map、groupingBy---将集合分为多个Map，有单级分组和多级分组）
+        xxBy();
 
+
+    }
+
+    private static void xxBy() {
+        // 将员工按薪资是否高于8000分组
+        Map<Boolean, List<Employee>> partitioningBySalary = personList.stream().collect(Collectors.partitioningBy(x -> x.getSalary() > 8000));
+        LOGGER.info("员工按薪资是否大于8000分组情况：{}", partitioningBySalary);
+        Map<String, List<Employee>> groupingBySex = personList.stream().collect(Collectors.groupingBy(x -> x.getSex()));
+        LOGGER.info("将员工按性别分组：{}", groupingBySex);
     }
 
     private static void statistic() {
@@ -48,6 +60,10 @@ public class StreamcDemo {
         LOGGER.info("平均工资 is {}", averSalary);
         Optional<Integer> highSalary = personList.stream().map(Employee::getSalary).collect(Collectors.maxBy(Integer::compareTo));
         LOGGER.info("最高工资 is {}", highSalary.get());
+        Integer sum = personList.stream().collect(Collectors.summingInt(Employee::getSalary));
+        LOGGER.info("求工资之和 is {}", sum);
+        DoubleSummaryStatistics statistics = personList.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+        LOGGER.info("一次性统计所有信息 is {}", statistics);
     }
 
     private static void collect() {
