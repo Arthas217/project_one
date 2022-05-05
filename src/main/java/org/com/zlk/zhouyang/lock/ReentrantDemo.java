@@ -14,8 +14,8 @@ public class ReentrantDemo {
         new Thread(()-> phone.sendSMS(),"t2").start();
 
         // 线程操纵资源类   ReentrantLock的可重入锁方式
-        new Thread(()-> phone.ReentrantGet(),"t3").start();
-        new Thread(()-> phone.ReentrantGet(),"t4").start();
+        new Thread(()-> phone.reentrantGet(),"t3").start();
+        new Thread(()-> phone.reentrantGet(),"t4").start();
 
 
 

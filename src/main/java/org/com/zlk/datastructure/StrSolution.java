@@ -153,8 +153,8 @@ public class StrSolution {
             String x[] = s.split("\\|");
             int num = Integer.parseInt(x[0]);
             StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < num; i++)
-                sb.append(x[1]);
+            for (int i = 0; i < num; i++){
+                sb.append(x[1]);}
             return sb.toString();
         }
         // 上面if都不执行，说明既有[又有|，说明没有递归到最里层

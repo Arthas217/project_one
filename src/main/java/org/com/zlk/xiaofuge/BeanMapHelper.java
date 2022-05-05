@@ -38,8 +38,9 @@ public class BeanMapHelper {
     }
 
     public static Object mapToObject(Map<String, Object> map, Class<?> beanClass) throws Exception {
-        if (map == null)
+        if (map == null) {
             return null;
+        }
 
         Object obj = beanClass.newInstance();
 
@@ -56,8 +57,9 @@ public class BeanMapHelper {
     }
 
     public static Map<String, Object> objectToMap(Object obj) throws Exception {
-        if (obj == null)
+        if (obj == null) {
             return null;
+        }
         Map<String, Object> map = new HashMap<>();
         BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();

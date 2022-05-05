@@ -15,9 +15,9 @@ public class WordCount {
 
     public static void incrWordCount(String key) {
         if (map.get(key) == null) {
-            map.put(key, 1l);
+            map.put(key, 1L);
         } else {
-            map.put(key, map.get(key) + 1l);
+            map.put(key, map.get(key) + 1L);
         }
     }
 

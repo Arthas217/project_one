@@ -14,8 +14,8 @@ public class SecondMaxNum {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         for (int val : nums) {
             queue.add(val);
-            if (queue.size() > k)
-                queue.poll();
+            if (queue.size() > k){
+                queue.poll();}
         }
         return queue.peek();
     }

@@ -35,6 +35,7 @@ public class TestImpl {
     public void click(final int params) {
         //匿名内部类，实现的是ActionListener接口
         new ActionListener() {
+            @Override
             public void onAction() {
                 System.out.println(STATIC_INT);
                 System.out.println(noStaticInt);

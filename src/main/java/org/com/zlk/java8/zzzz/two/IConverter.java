@@ -14,5 +14,6 @@ public interface IConverter<F, T> {
 
     }
 
+    @Override
     boolean equals(Object obj);
 }

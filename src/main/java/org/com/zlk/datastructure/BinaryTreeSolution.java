@@ -197,8 +197,9 @@ public class BinaryTreeSolution {
 
     // 116. 填充二叉树节点的右侧指针
     public TreeNode connect(TreeNode root) {
-        if(root == null)
+        if(root == null) {
             return root;
+        }
         connectTwoNode(root.left,root.right);
         return root;
     }
@@ -378,8 +379,8 @@ public class BinaryTreeSolution {
         //根结点比两个结点都大 就在左子树找
         //根结点比两个结点都小 就在右子树找
         //否则就返回根结点
-        if (root.val > p.val && root.val > q.val) return lowestCommonAncestorBST(root.left, p, q);
-        if (root.val < p.val && root.val < q.val) return lowestCommonAncestorBST(root.right, p, q);
+        if (root.val > p.val && root.val > q.val) {return lowestCommonAncestorBST(root.left, p, q);}
+        if (root.val < p.val && root.val < q.val) {return lowestCommonAncestorBST(root.right, p, q);}
         return root;
     }
 
@@ -605,12 +606,12 @@ public class BinaryTreeSolution {
 
     // 437. 路径总和 III  同pathSum3方法
     public static int pathSum33(TreeNode root, int sum) {
-        if (root == null) return 0;
+        if (root == null) {return 0;}
         return helper(root, sum) + pathSum33(root.left, sum) + pathSum33(root.right, sum);
     }
 
     private static int helper(TreeNode root, int sum) {
-        if (root == null) return 0;
+        if (root == null) {return 0;}
         sum -= root.val;
         return (sum == 0 ? 1 : 0) + helper(root.left, sum) + helper(root.right, sum);
     }

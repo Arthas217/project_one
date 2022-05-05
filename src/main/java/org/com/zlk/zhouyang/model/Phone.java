@@ -30,16 +30,22 @@ public class Phone {
 
     Lock lock = new ReentrantLock();
 
-    public void ReentrantGet() {
+    public void reentrantGet() {
         lock.lock();
-        System.out.println(Thread.currentThread().getName() + "threadid " + Thread.currentThread().getId() + "\t ###get()");
-        ReentrantSet();
-        lock.unlock();
+        try {
+            System.out.println(Thread.currentThread().getName() + "threadid " + Thread.currentThread().getId() + "\t ###get()");
+            reentrantSet();
+        } finally {
+            lock.unlock();
+        }
     }
 
-    public void ReentrantSet(){
+    public void reentrantSet(){
         lock.lock();
-        System.out.println(Thread.currentThread().getName() + "threadid " + Thread.currentThread().getId() + "\t ###set()");
-        lock.unlock();
+        try {
+            System.out.println(Thread.currentThread().getName() + "threadid " + Thread.currentThread().getId() + "\t ###set()");
+        } finally {
+            lock.unlock();
+        }
     }
 }

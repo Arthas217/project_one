@@ -25,9 +25,9 @@ public class SolutionSecondMinValueTree {
      * 根节点肯定是值最小的节点，所以这个问题就是找子树中与根节点不相等的最小值。
      */
     public static int findSecondMinimumValue(TreeNode root) {
-        if (root == null) return -1;
+        if (root == null) {return -1;}
         //只有根节点
-        if (root.left == null && root.right == null) return -1;
+        if (root.left == null && root.right == null) {return -1;}
 
         int leftVal = root.left.val;
         int rightVal = root.right.val;
@@ -63,8 +63,8 @@ public class SolutionSecondMinValueTree {
     }
 
     public static void helper(TreeNode root) {
-        if (root == null)
-            return;
+        if (root == null){
+            return;}
         // 如果二叉树只有一个数字的话,意味着second没有被赋值,那么count等于0,输出-1
         if (root.val < first) {
             second = first;

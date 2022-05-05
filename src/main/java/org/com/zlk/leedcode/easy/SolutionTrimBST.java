@@ -31,7 +31,7 @@ public class SolutionTrimBST {
      */
     public TreeNode trimBST(TreeNode root, int L, int R) {
         // 如果结点为空，说明无需修剪，直接返回空即可。
-        if (root == null) return null;
+        if (root == null) {return null;}
         // 如果根结点太小，说明根结点及其左子树都应该剪掉，因此直接返回右子树的修剪结果。
         if (root.val < L) {
             return trimBST(root.right, L, R);

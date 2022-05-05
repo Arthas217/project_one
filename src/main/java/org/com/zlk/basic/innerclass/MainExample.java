@@ -4,6 +4,7 @@ public class MainExample {
 
     // 内部类1
     private class Test1 extends ClassA{
+        @Override
         public String name(){
             System.out.println("Test1 --继承---ClassA");
             return super.name();
@@ -11,6 +12,7 @@ public class MainExample {
     }
     // 内部类2
     private class Test2 extends ClassB{
+        @Override
         public int age(){
             System.out.println("Test2 --继承---ClassB");
             return super.age();

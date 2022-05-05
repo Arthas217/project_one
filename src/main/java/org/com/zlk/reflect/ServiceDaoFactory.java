@@ -21,7 +21,14 @@ public class ServiceDaoFactory {
     }
 
 
-    //需要判断该用户是否有权限
+    /**
+     * 需要判断该用户是否有权限
+     * @param className
+     * @param clazz
+     * @param user
+     * @param <T>
+     * @return
+     */
     public <T> T createDao(String className, Class<T> clazz, final User user) {
         System.out.println("添加分类进来了！");
         try {

@@ -47,7 +47,7 @@ public class LRU {
      */
     public int get(int key) {
         DLinkedNode node = cache.get(key);
-        if (node == null) return -1;
+        if (node == null) {return -1;}
         // move the accessed node to the head;
         moveToHead(node);
         return node.value;
