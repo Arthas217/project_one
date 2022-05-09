@@ -33,14 +33,46 @@ public class StreamcDemo {
 //        mapFlatMap();
         // 归约，也称缩减,把一个流缩减成一个值，能实现对集合求和、求乘积和求最值操作
 //        reduce();
+        // 归约 reducing（Collectors类提供的reducing方法，相比于stream本身的reduce方法，增加了对自定义归约的支持）
+//        reducing();
         // 归集(toList/toSet/toMap/toCollection/toConcurrentMap)将流中的数据重新归集到新的集合里
 //        collect();
         //统计(Collectors提供了一系列用于数据统计的静态方法eg,count,averagingInt、averagingLong、averagingDouble,maxBy、minBy,summingInt、summingLong、summingDouble,summarizingInt、summarizingLong、summarizingDouble)
 //        statistic();
         // 分组（partitioningBy---分区：将stream按条件分为两个Map、groupingBy---将集合分为多个Map，有单级分组和多级分组）
-        xxBy();
+//        xxBy();
+        // 接合joining将stream中的元素用特定的连接符（没有的话，则直接连接）连接成一个字符串。
+//        xxJoining();
+        //排序sorted，中间操作
+        xxSort();
 
+    }
 
+    private static void xxSort() {
+        //sorted()：自然排序，流中元素需实现Comparable接口
+        List<Integer> sorted = personList.stream().sorted(Comparator.comparing(Employee::getSalary)).map(Employee::getSalary).collect(Collectors.toList());
+        LOGGER.info("按工资升序排序（自然排序）{}", sorted);
+        List<Integer> sorted2 = personList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).map(Employee::getSalary).collect(Collectors.toList());
+        LOGGER.info("按工资降序排序: {}", sorted2);
+        List<String> sorted3 = personList.stream().sorted(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getAge)).map(Employee::getName).collect(Collectors.toList());
+        LOGGER.info("先按工资再按年龄升序排序： {}", sorted3);
+
+        //sorted(Comparator com)：Comparator排序器自定义排序
+
+        //先按工资再按年龄自定义排序（降序）
+    }
+
+    private static void reducing() {
+        //每个员工减去起征点后的薪资之和
+        Integer sum = personList.stream().collect(Collectors.reducing(0, Employee::getSalary, (i, j) -> (i + j - 5000)));
+        LOGGER.info("reducing 员工扣税薪资总和:{}", sum);
+        Integer reduce = personList.stream().map(Employee::getSalary).reduce(0, (i, j) -> i + j - 5000);
+        LOGGER.info("reduce 员工扣税薪资总和:{}", reduce);
+    }
+
+    private static void xxJoining() {
+        String name = personList.stream().map(Employee::getName).collect(Collectors.joining(","));
+        LOGGER.info("所有员工的姓名：{}", name);
     }
 
     private static void xxBy() {
@@ -49,6 +81,8 @@ public class StreamcDemo {
         LOGGER.info("员工按薪资是否大于8000分组情况：{}", partitioningBySalary);
         Map<String, List<Employee>> groupingBySex = personList.stream().collect(Collectors.groupingBy(x -> x.getSex()));
         LOGGER.info("将员工按性别分组：{}", groupingBySex);
+        Map<String, Map<String, List<Employee>>> mix = personList.stream().collect(Collectors.groupingBy(Employee::getSex, Collectors.groupingBy(Employee::getArea)));
+        LOGGER.info("员工按性别、地区 : {}", mix);
     }
 
     private static void statistic() {
@@ -216,7 +250,7 @@ public class StreamcDemo {
     private static void basicData() {
         personList = new ArrayList<>();
         personList.add(new Employee("Tom", 8900, 23, "male", "New York"));
-        personList.add(new Employee("Jack", 7000, 25, "male", "Washington"));
+        personList.add(new Employee("Jack", 7800, 25, "male", "Washington"));
         personList.add(new Employee("Lily", 7800, 21, "female", "Washington"));
         personList.add(new Employee("Anni", 8200, 24, "female", "New York"));
         personList.add(new Employee("Owen", 9500, 25, "male", "New York"));
