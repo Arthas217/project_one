@@ -22,7 +22,7 @@ public class StreamcDemo {
 
     public static void main(String[] args) {
 //        basicMethod();
-        basicData();
+//        basicData();
         // 遍历、匹配
 //        foreachFind();
         // 筛选，是按照一定的规则校验流中的元素，将符合条件的元素提取到新的流中的操作。
@@ -284,4 +284,9 @@ public class StreamcDemo {
         System.out.println();
         stream3.forEach(System.out::print);
     }
+
+
+
+
+
 }
