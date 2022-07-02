@@ -65,4 +65,6 @@ public class StoreCouponUtil {
         System.out.println(belongBetweenTime("12:00:00", "08:12:12", "23:00:12"));
     }
 
+    // 1/2/3/5/7/8/10/12/13/15/17/18/20
+
 }
