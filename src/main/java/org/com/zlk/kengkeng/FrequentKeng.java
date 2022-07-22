@@ -1,6 +1,5 @@
 package org.com.zlk.kengkeng;
 
-import javassist.expr.NewArray;
 import org.com.zlk.zhouyang.model.User;
 
 import java.math.BigDecimal;
@@ -25,7 +24,24 @@ public class FrequentKeng {
         // 4. Java8 filter的坑
         method4();
         // 5. 自动拆箱的坑
-        method5();
+//        method5();
+        // 6. replace的坑
+        method6();
+    }
+
+    private static void method6() {
+        // 字符串比如：ATYSDFA*Y中的字符A替换成字符B
+        // replace和replaceAll都能替换所有匹配字符，那么他们有啥区别呢？
+        //1、replace有两个重载的方法。
+        String source ="ATYSDFA*Y";
+        System.out.println(source.replace('A', 'B'));
+        System.out.println(source.replace("A", "B"));
+        //2、replaceAll  对普通字符串进行替换：
+        System.out.println(source.replaceAll("A", "B"));
+        // replaceAll 使用正则表达替换（将*替换成C）：
+        System.out.println(source.replaceAll("\\*", "C"));
+        // 如果我只想替换第一个匹配的字符串该怎么办?
+        System.out.println(source.replaceFirst("A", "B"));
     }
 
     private static void method5() {
@@ -38,12 +54,21 @@ public class FrequentKeng {
         Integer inte = new Integer(2);
         int su = inte.intValue() + 5;
         // 实际工作中，我们在使用自动拆箱时，往往忘记了判空，导致出现NullPointerException异常。
-//        System.out.println(add(null, new Integer(2)));
+        // 情况1、很多时候，我们需要对传入的数据进行计算
+        System.out.println(add(null, new Integer(2)));
+        // 情况2、有时候，我们定义的某个方法是基本类型，但实际上传入了包装类
+        Integer a = new Integer(1);
+        Integer b = null;
+        System.out.println(add2(a, b));
+        // 结论：Integer类型的参数，其实际传入值为null，JDK字段拆箱，调用了它的intValue方法导致的问题。
 
     }
 
     private static Integer add(Integer a, Integer b) {
         //自动拆箱时注意Integer的方法intValue
+        return a + b;
+    }
+    private static Integer add2(int a, int b) {
         return a + b;
     }
 
