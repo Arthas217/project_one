@@ -1,5 +1,8 @@
 package org.com.zlk.util;
 
+import jodd.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @Author 会游泳的蚂蚁
  * @Description:
@@ -16,6 +19,10 @@ public class ZeroUtil {
      * @return
      */
     public static String addZeroForNum(String str, int strLength) {
+        //考虑下如果是空的情况，不做处理
+        if(StringUtils.isBlank(str)){
+            return "";
+        }
         int strLen = str.length();
         if (strLen < strLength) {
             while (strLen < strLength) {
