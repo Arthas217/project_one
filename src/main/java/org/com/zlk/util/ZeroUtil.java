@@ -20,7 +20,7 @@ public class ZeroUtil {
      */
     public static String addZeroForNum(String str, int strLength) {
         //考虑下如果是空的情况，不做处理
-        if(StringUtils.isBlank(str)){
+        if(StringUtils.isBlank(str) || "0".equals(str)){
             return "";
         }
         int strLen = str.length();
@@ -34,5 +34,13 @@ public class ZeroUtil {
             }
         }
         return str;
+    }
+
+    public static void main(String[] args) {
+        // "0" -> "0000"  工具类
+        System.out.println(StringUtils.leftPad("0", 4, "0"));
+        System.out.println(addZeroForNum("4",4));
+        System.out.println(addZeroForNum(null,4));
+        System.out.println(addZeroForNum("0",4));
     }
 }
