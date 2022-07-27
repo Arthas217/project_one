@@ -1,7 +1,8 @@
 package org.com.zlk.util;
 
-import jodd.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -42,5 +43,7 @@ public class ZeroUtil {
         System.out.println(addZeroForNum("4",4));
         System.out.println(addZeroForNum(null,4));
         System.out.println(addZeroForNum("0",4));
+
+        System.out.println("做".getBytes(StandardCharsets.UTF_8).length);
     }
 }
