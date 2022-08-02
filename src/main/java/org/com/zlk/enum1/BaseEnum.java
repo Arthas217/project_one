@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description:
+ * @Description: https://blog.csdn.net/u010838785/article/details/109336047
  * @Date 2022/7/2 10:10
  */
 public interface BaseEnum {
