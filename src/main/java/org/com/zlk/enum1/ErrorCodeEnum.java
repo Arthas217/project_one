@@ -1,11 +1,13 @@
-package org.com.zlk.businessexception;
+package org.com.zlk.enum1;
+
+import org.com.zlk.enum1.BaseEnum;
 
 /**
  * @Author 会游泳的蚂蚁
  * @Description: 异常情况枚举
  * @Date 2022/7/2 10:02
  */
-public enum ErrorCodeEnum implements BaseEnum{
+public enum ErrorCodeEnum implements BaseEnum {
 
     FAIL(-1, "网络异常，请稍后再试"),
 

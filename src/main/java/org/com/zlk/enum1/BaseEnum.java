@@ -1,4 +1,4 @@
-package org.com.zlk.businessexception;
+package org.com.zlk.enum1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,11 +67,5 @@ public interface BaseEnum {
             results.add(map);
         }
         return results;
-    }
-
-
-    static void main(String[] args) {
-        System.out.println(BaseEnum.valueOf(ErrorCodeEnum.class, -1).getMsg());
-        System.out.println(BaseEnum.enum2List(ErrorCodeEnum.class));
     }
 }
