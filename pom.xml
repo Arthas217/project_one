@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.2.20.RELEASE</spring.version>
+        <spring.version>5.2.21.RELEASE</spring.version>
         <servlet.version>2.5</servlet.version>
         <aspectj.version>1.6.11</aspectj.version>
         <cglib.version>2.1</cglib.version>
