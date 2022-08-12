@@ -1,6 +1,5 @@
 package org.com.zlk.enum1;
 
-import org.com.zlk.enum1.BaseEnum;
 
 /**
  * @Author 会游泳的蚂蚁
