@@ -37,6 +37,11 @@ public class ZeroUtil {
         return str;
     }
 
+    public static String delLeftZero(String str){
+//        return str.replaceAll("^(0+)","");
+        return str.replaceAll("^0*","");
+    }
+
     public static void main(String[] args) {
         // "0" -> "0000"  工具类
         System.out.println(StringUtils.leftPad("0", 4, "0"));
@@ -44,6 +49,9 @@ public class ZeroUtil {
         System.out.println(addZeroForNum(null,4));
         System.out.println(addZeroForNum("0",4));
 
-        System.out.println("做".getBytes(StandardCharsets.UTF_8).length);
+        System.out.println(delLeftZero("0001"));
+        System.out.println(delLeftZero("001"));
+        System.out.println(delLeftZero("01"));
+        System.out.println(delLeftZero("010"));
     }
 }
