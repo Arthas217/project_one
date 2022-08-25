@@ -16,18 +16,56 @@ public class GenericsTrapDemo {
         test1();
         test2();
         test3();
+        test4();
     }
 
     /**
-     * <? extends T> 与 <? super T>
+     * <? extends T> a
+     * a 这个变量可以接受 T 及其 T 子类的集合，上界为 T，并且从 a 取出来的类型都会被强制转换为 T
      */
     private static void test3() {
-        // <? extends T> a，a 这个变量可以接受 T 及其 T 子类的集合，上界为 T，并且从 a 取出来的类型都会被强制转换为 T
+        List<Animal> animals = new ArrayList<>();
+        List<Cat> cats = new ArrayList<>();
+        List<? extends Cat> extendsCat1 = cats;
+        List<RedCat> redCats = new ArrayList<>();
+        List<? extends Cat> extendsCat2 = redCats;
+        // 不能通过编译，因为只能接受 Cat 及其子类的集合
+//        List<? extends Cat> extendsCat3 = animals;
+
+        // 重点注意下面三行都不能通过编译
+        // 不能向里面添加除null之外的其他所有元素，这个和 List<?> 有点类似
+//        extendsCat1.add(new Cat());
+//        extendsCat2.add(new RedCat());
+//        extendsCat3.add(new Animal());
+        // 重点注意：可以通过编译，
+        extendsCat1.add(null);
 
     }
 
     /**
-     * List,List<Object>区别
+     * <? super T> a
+     * a 这个变量可以接受 T 及其 T 父类的集合，下界为 T，并且从 a 取出来的类型都会被强制转换为 Object
+     */
+    private static void test4() {
+        List<Animal> animals = new ArrayList<>();
+        List<Cat> cats = new ArrayList<>();
+        List<RedCat> redCats = new ArrayList<>();
+        // 可以通过编译
+        List<? super Cat> superCat1 = animals;
+        List<? super Cat> superCat2 = cats;
+        // 不能通过编译，因为只能接受 Cat 及其父类的集合
+//        List<? super Cat> superCat3 = redCats;
+
+        // 重点注意：不能通过编译,只能添加 Cat 及其 Cat 的子类
+//        superCat1.add(new Animal());
+        // 重点注意，可以通过编译
+        superCat2.add(new Cat());
+//        superCat3.add(new RedCat());
+        superCat1.add(null);
+    }
+
+    /**
+     * List和List<Object>区别
      */
     private static void test1() {
         List<Integer> t1 = new ArrayList<>();
@@ -55,7 +93,6 @@ public class GenericsTrapDemo {
         System.out.println(t1);
         System.out.println(t2);
     }
-
 
 
 }
