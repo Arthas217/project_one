@@ -1,6 +1,7 @@
 package org.com.zlk.genericstype.trap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class GenericsTrapDemo {
         test3();
         test4();
         test5();
-
+        test6();
     }
 
     /**
@@ -41,7 +42,6 @@ public class GenericsTrapDemo {
 //        extendsCat3.add(new Animal());
         // 重点注意：可以通过编译，
         extendsCat1.add(null);
-
     }
 
     /**
@@ -127,6 +127,24 @@ public class GenericsTrapDemo {
      */
     public static void method(List<String> list) {
         System.out.println("List<String> list");
+    }
+
+    /**
+     * 数组转换集合
+     */
+    private static void test6() {
+        String[] arr = {"one", "two", "three"};
+        // 数组转换成集合
+        List<String> list = Arrays.asList(arr);
+        // 向集合添加元素：编译正常，但运行时抛出了异常
+        // 返回的List内部直接引用了原数组arr，原数组长度固定为3，所以不可以再add
+//        list.add("four");
+
+        //建议大家这样转换比较安全
+        List<String> safeList = new ArrayList<>(Arrays.asList(arr));
+        safeList.add("four");
+        System.out.println(safeList);
+
     }
 
 
