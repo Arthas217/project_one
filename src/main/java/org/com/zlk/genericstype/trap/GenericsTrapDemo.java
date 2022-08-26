@@ -1,7 +1,6 @@
 package org.com.zlk.genericstype.trap;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,6 +16,8 @@ public class GenericsTrapDemo {
         test2();
         test3();
         test4();
+        test5();
+
     }
 
     /**
@@ -26,8 +27,9 @@ public class GenericsTrapDemo {
     private static void test3() {
         List<Animal> animals = new ArrayList<>();
         List<Cat> cats = new ArrayList<>();
-        List<? extends Cat> extendsCat1 = cats;
         List<RedCat> redCats = new ArrayList<>();
+
+        List<? extends Cat> extendsCat1 = cats;
         List<? extends Cat> extendsCat2 = redCats;
         // 不能通过编译，因为只能接受 Cat 及其子类的集合
 //        List<? extends Cat> extendsCat3 = animals;
@@ -45,11 +47,13 @@ public class GenericsTrapDemo {
     /**
      * <? super T> a
      * a 这个变量可以接受 T 及其 T 父类的集合，下界为 T，并且从 a 取出来的类型都会被强制转换为 Object
+     * 最需要注意的是，在虽然可以接受 T 及其父类的赋值，但是只能向里面添加 T 及其 T 的子类。
      */
     private static void test4() {
         List<Animal> animals = new ArrayList<>();
         List<Cat> cats = new ArrayList<>();
         List<RedCat> redCats = new ArrayList<>();
+
         // 可以通过编译
         List<? super Cat> superCat1 = animals;
         List<? super Cat> superCat2 = cats;
@@ -92,6 +96,37 @@ public class GenericsTrapDemo {
         t2.clear();
         System.out.println(t1);
         System.out.println(t2);
+    }
+
+
+    /**
+     * List泛型与重载
+     */
+    private static void test5() {
+        List<Integer> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        //泛型只存在于源码中，在编译后的字节码中，泛型已经被替换为原生类型了，并且在相应的地方插入了强制转换的代码。
+        method(list1,1);
+        method(list2);
+    }
+
+    /**
+     * javap -p -s
+     * https://www.zhihu.com/question/38940308
+     * descriptor: (Ljava/util/List;I)V
+     * @param list
+     * @param n
+     */
+    public static void  method(List<Integer> list,int n) {
+        System.out.println("List<Integer> list,int n");
+    }
+
+    /**
+     * descriptor: (Ljava/util/List;)V
+     * @param list
+     */
+    public static void method(List<String> list) {
+        System.out.println("List<String> list");
     }
 
 
