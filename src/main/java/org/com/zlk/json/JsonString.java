@@ -32,13 +32,20 @@ public class JsonString {
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(j1);
         jsonArray.add(j2);
-        System.out.println(jsonArray.toJSONString());
+        System.out.println(jsonArray.toJSONString(jsonArray));
 
-        Map<String,String> map2 = new HashMap<>();
+        Map<String,Object> map2 = new HashMap<>();
         map2.put("colname","party_id");
         map2.put("value","2");
-        List<Map<String,String>> list1 = new ArrayList<>();
+        List<Map<String,Object>> list1 = new ArrayList<>();
         list1.add(map2);
         System.out.println(JSONObject.toJSONString(list1));
+
+
+        Map<String,String> map3 = new HashMap<>();
+        map3.put("value","3");
+        map2.put("new",map3);
+        System.out.println(JSONObject.toJSONString(map2));
+
     }
 }
