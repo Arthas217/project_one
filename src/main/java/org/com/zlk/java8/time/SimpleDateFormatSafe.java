@@ -13,9 +13,10 @@ import java.util.concurrent.TimeUnit;
  * @Description: https://mp.weixin.qq.com/s/qeB2Mf_aH0ln1sUnZri7rA
  * @Date 2022/8/29 12:57
  */
-public class SimpleDateDormatSafe {
+public class SimpleDateFormatSafe {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Integer> num = new ThreadLocal<>();
 
     public static DateFormat getDateFormat() {
         DateFormat df = threadLocal.get();
@@ -36,15 +37,16 @@ public class SimpleDateDormatSafe {
 
     public static void main(String[] args) {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 100,
-                1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000));
+                1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(500),
+                new ThreadPoolExecutor.CallerRunsPolicy());
         while (true) {
             threadPoolExecutor.execute(() -> {
                 try {
                     String dateString = formatDate(new Date());
                     Date parseDate = parse(dateString);
                     String dateString2 = formatDate(parseDate);
-                    System.out.println(dateString.equals(dateString2));
-                } catch (ParseException e) {
+                    System.out.println(dateString.equals(dateString2) + String.valueOf(num.get()));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });

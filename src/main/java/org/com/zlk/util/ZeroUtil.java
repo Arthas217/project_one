@@ -36,8 +36,12 @@ public class ZeroUtil {
     }
 
     public static String delLeftZero(String str){
-//        return str.replaceAll("^(0+)","");
-        return str.replaceAll("^0*","");
+        return String.valueOf(Integer.valueOf(str));
+    }
+
+    public static String delAllZero(String str){
+        return str.replaceAll("^(0+)","");
+//        return str.replaceAll("^0*","");
     }
 
     public static void main(String[] args) {
@@ -51,5 +55,6 @@ public class ZeroUtil {
         System.out.println(delLeftZero("001"));
         System.out.println(delLeftZero("01"));
         System.out.println(delLeftZero("010"));
+        System.out.println(delLeftZero("000"));
     }
 }
