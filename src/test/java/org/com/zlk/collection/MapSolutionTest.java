@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.com.zlk.collection.MapSolution.getHighLevel;
 
@@ -18,15 +19,15 @@ public class MapSolutionTest {
 
     @Test
     public void testRankMapByValue() {
-        Map<String, Integer> hashMap = new HashMap<>();
-        hashMap.put("D", 1);
-        hashMap.put("C", 2);
-        hashMap.put("A", 3);
-        hashMap.put("B", 2);
-        hashMap.put("F", 1);
-        hashMap.put("E", 0);
-        MapSolution.rankMapByValue(hashMap, Integer::compare);
-        System.out.println();
+//        Map<String, Integer> hashMap = new HashMap<>();
+//        hashMap.put("D", 1);
+//        hashMap.put("C", 2);
+//        hashMap.put("A", 3);
+//        hashMap.put("B", 2);
+//        hashMap.put("F", 1);
+//        hashMap.put("E", 0);
+//        MapSolution.rankMapByValue(hashMap, Integer::compare);
+//        System.out.println();
 
 
         List<Map<String, Object>> list = buildList();
@@ -71,11 +72,15 @@ public class MapSolutionTest {
         Map<String, Object> m5 = new HashMap<>();
         m5.put("allyNo", "5");
         m5.put("cardLevel", "2");
+        Map<String, Object> m6 = new HashMap<>();
+        m6.put("allyNo", "5");
+        m6.put("cardLevel", "2");
         list.add(m1);
         list.add(m2);
         list.add(m3);
         list.add(m4);
         list.add(m5);
+        list.add(m6);
         return list;
     }
 
