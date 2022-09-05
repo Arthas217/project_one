@@ -1,5 +1,6 @@
 package org.com.zlk.datastructure.queue;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -15,6 +16,7 @@ public class PriorityQueueDemo {
     public static void main(String[] args) {
 
         PriorityQueueEg();
+        PriorityQueueMaxHeapEg();
         MinHeapTopK();
     }
 
@@ -47,6 +49,28 @@ public class PriorityQueueDemo {
             System.out.println("输出堆顶元素" + poll + "重新调整堆");
             System.out.println("最小堆大小" + priorityQueue.size());
         }
+    }
+
+    /**
+     * 自定义大顶堆测试
+     */
+    private static void PriorityQueueMaxHeapEg(){
+        PriorityQueue<Integer> maxHeap = MaxHeap4PriorityQueue.getMaxHeap();
+        maxHeap.add(49);
+        maxHeap.add(38);
+        maxHeap.add(65);
+        maxHeap.add(97);
+        maxHeap.add(76);
+        maxHeap.add(13);
+        maxHeap.add(27);
+        maxHeap.add(49);
+        System.out.println("将无序元素建立最小堆的大小" + maxHeap.size());
+        while (maxHeap.size() > 0) {
+            Object poll = maxHeap.poll();
+            System.out.println("输出堆顶元素" + poll + "重新调整堆");
+            System.out.println("最小堆大小" + maxHeap.size());
+        }
+
     }
 
     /**
