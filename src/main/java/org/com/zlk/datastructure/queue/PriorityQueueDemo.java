@@ -1,6 +1,5 @@
 package org.com.zlk.datastructure.queue;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -14,7 +13,6 @@ import java.util.PriorityQueue;
 public class PriorityQueueDemo {
 
     public static void main(String[] args) {
-
         PriorityQueueEg();
         PriorityQueueMaxHeapEg();
         MinHeapTopK();
