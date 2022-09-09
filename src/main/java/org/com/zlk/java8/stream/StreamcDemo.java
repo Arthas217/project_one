@@ -18,11 +18,23 @@ public class StreamcDemo {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StreamcDemo.class);
 
-    public static List<Employee> personList;
+    public static List<Employee> personList = new ArrayList<>();
+
+    private static void basicData() {
+        personList.add(new Employee("Tom", 8900, 23, "male", "New York"));
+        personList.add(new Employee("Jack", 7800, 25, "male", "Washington"));
+        personList.add(new Employee("Lily", 7800, 21, "female", "Washington"));
+        personList.add(new Employee("Anni", 8200, 24, "female", "New York"));
+        personList.add(new Employee("Owen", 9500, 25, "male", "New York"));
+        personList.add(new Employee("Alisa", 7900, 26, "female", "New York"));
+    }
 
     public static void main(String[] args) {
+        //获取部分属性
+        getPartFiled();
+        //=============================
 //        basicMethod();
-//        basicData();
+        basicData();
         // 遍历、匹配
 //        foreachFind();
         // 筛选，是按照一定的规则校验流中的元素，将符合条件的元素提取到新的流中的操作。
@@ -44,22 +56,53 @@ public class StreamcDemo {
         // 接合joining将stream中的元素用特定的连接符（没有的话，则直接连接）连接成一个字符串。
 //        xxJoining();
         //排序sorted，中间操作
-        xxSort();
+//        xxSort();
+        //提取/组合  流也可以进行合并、去重、限制、跳过等操作。
+        extractCombination();
 
+    }
+
+    private static void extractCombination() {
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "d", "e", "f", "g" };
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+        // concat:合并两个流 distinct：去重
+        List<String> newList = Stream.concat(stream1, stream2).distinct().collect(Collectors.toList());
+        LOGGER.info("流合并去重：" + newList);
+        // limit：限制从流中获得前n个数据
+        List<Integer> collect = Stream.iterate(1, x -> x + 2).limit(10).collect(Collectors.toList());
+        LOGGER.info("限制：" + collect);
+        // skip：跳过前n个数据
+        List<Integer> collect2 = Stream.iterate(1, x -> x + 2).skip(1).limit(5).collect(Collectors.toList());
+        LOGGER.info("跳过限制：" + collect2);
     }
 
     private static void xxSort() {
         //sorted()：自然排序，流中元素需实现Comparable接口
+        //sorted(Comparator com)：Comparator排序器自定义排序
+
+        // 按工资升序排序（自然排序）
         List<Integer> sorted = personList.stream().sorted(Comparator.comparing(Employee::getSalary)).map(Employee::getSalary).collect(Collectors.toList());
         LOGGER.info("按工资升序排序（自然排序）{}", sorted);
         List<Integer> sorted2 = personList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).map(Employee::getSalary).collect(Collectors.toList());
         LOGGER.info("按工资降序排序: {}", sorted2);
+
+        //先按工资再按年龄自定义排序（降序）
         List<String> sorted3 = personList.stream().sorted(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getAge)).map(Employee::getName).collect(Collectors.toList());
         LOGGER.info("先按工资再按年龄升序排序： {}", sorted3);
 
-        //sorted(Comparator com)：Comparator排序器自定义排序
+        // 先按工资再按年龄自定义排序（）
+        List<String> sorted4 = personList.stream().sorted((p1, p2) -> {
+            if (p1.getSalary() == p2.getSalary()) {
+                return p2.getAge() - p1.getAge();
+            } else {
+                return p2.getSalary() - p1.getSalary();
+            }
+        }).map(Employee::getName).collect(Collectors.toList());
+        LOGGER.info("先按工资再按年龄(降序)： {}", sorted4);
 
-        //先按工资再按年龄自定义排序（降序）
+
     }
 
     private static void reducing() {
@@ -247,15 +290,6 @@ public class StreamcDemo {
         System.out.println("是否存在大于6的值：" + anyMatch);
     }
 
-    private static void basicData() {
-        personList = new ArrayList<>();
-        personList.add(new Employee("Tom", 8900, 23, "male", "New York"));
-        personList.add(new Employee("Jack", 7800, 25, "male", "Washington"));
-        personList.add(new Employee("Lily", 7800, 21, "female", "Washington"));
-        personList.add(new Employee("Anni", 8200, 24, "female", "New York"));
-        personList.add(new Employee("Owen", 9500, 25, "male", "New York"));
-        personList.add(new Employee("Alisa", 7900, 26, "female", "New York"));
-    }
 
     private static void basicMethod() {
         // 用集合创建流
@@ -286,7 +320,51 @@ public class StreamcDemo {
     }
 
 
+    private static void getPartFiled() {
+        List<Map<String, Object>> listMap = new ArrayList<>();
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("ally_no", "1");
+        map1.put("card_level", "1");
+        map1.put("a", "1");
+        Map<String, Object> map2 = new HashMap<>();
+        map2.put("ally_no", "2");
+        map2.put("card_level", "2");
+        map2.put("a", "2");
+        Map<String, Object> map3 = new HashMap<>();
+        map3.put("ally_no", "3");
+        map3.put("card_level", "");
+        map3.put("a", "");
+        Map<String, Object> map4 = new HashMap<>();
+        map4.put("ally_no", "");
+        map4.put("card_level", "");
+        map4.put("a", "");
+        Map<String, Object> map5 = new HashMap<>();
+        map5.put("ally_no", "");
+        map5.put("card_level", "5");
+        map5.put("a", "5");
+        listMap.add(map1);
+        listMap.add(map2);
+        listMap.add(map3);
+        listMap.add(map4);
+        listMap.add(map5);
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        listMap.forEach(lMap -> {
+            Map<String, Object> result = new HashMap<>();
+            result.put("ally_no", lMap.get("ally_no"));
+            result.put("card_level", lMap.get("card_level"));
+            mapList.add(result);
+        });
+        System.out.println(mapList);
 
+        List<Map<String, Object>> partField = listMap.stream().map(part -> {
+            Map<String, Object> result = new HashMap<>();
+            result.put("ally_no", part.get("ally_no"));
+            result.put("card_level", part.get("card_level"));
+            return result;
+        }).collect(Collectors.toList());
+        System.out.println(partField);
+
+    }
 
 
 }
