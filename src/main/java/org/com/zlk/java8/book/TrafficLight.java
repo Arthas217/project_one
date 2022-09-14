@@ -18,6 +18,8 @@ public class TrafficLight {
                 break;
             case YELLOW: color = SignalEnum.RED;
                 break;
+            default:
+                color = SignalEnum.UNDEFINE;
         }
     }
 

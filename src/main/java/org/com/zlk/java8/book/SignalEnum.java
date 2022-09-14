@@ -6,5 +6,5 @@ package org.com.zlk.java8.book;
  * @Date 2022/9/14 16:35
  */
 public enum SignalEnum {
-    GREEN, YELLOW, RED;
+    GREEN, YELLOW, RED,UNDEFINE;
 }
