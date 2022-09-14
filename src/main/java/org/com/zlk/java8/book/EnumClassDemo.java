@@ -1,5 +1,7 @@
 package org.com.zlk.java8.book;
 
+import java.util.stream.Stream;
+
 /**
  * @Author 会游泳的蚂蚁
  * @Description: 对于枚举类型来说，无法继承它，基本可以将它看作一个普通的类
@@ -11,6 +13,25 @@ public class EnumClassDemo {
         method1();
         method2();
         method3();
+        method4();
+        method5();
+    }
+
+    /**
+     * 通常要使用枚举实例，就必须用枚举的类型名来限定它，但在switch case语句中你无须这么做
+     */
+    private static void method5() {
+        //请看TrafficLight
+    }
+
+
+
+    /**
+     * 重载枚举类型中的方法,和重载任何普通类的方法相同
+     */
+    private static void method4() {
+        //重写toString方法，英文单词仅首字母为大写
+        Stream.of(SpaceShipEnum.values()).forEach(System.out::println);
     }
 
     /**
