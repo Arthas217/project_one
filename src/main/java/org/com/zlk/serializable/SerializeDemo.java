@@ -1,4 +1,4 @@
-package org.com.zlk.basic.serialize;
+package org.com.zlk.serializable;
 
 /**
  * @Author 会游泳的蚂蚁

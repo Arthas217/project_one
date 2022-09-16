@@ -1,4 +1,4 @@
-package org.com.zlk.basic.serialize;
+package org.com.zlk.serializable;
 
 import org.apache.ibatis.cache.CacheException;
 
