@@ -108,12 +108,12 @@ public class GlobalExceptionHandler {
         return ResponseBean.error(ApiCode.SERVICE_ERROR.getValue(), e.getMessage());
     }
 
-//    @ExceptionHandler(value = WebException.class)
-//    @ResponseBody
-//    public ResponseBean exceptionHandler(WebException e) {
-//        ResponseBean response = new ResponseBean(e.getIsSuccess(), e.getResponseCode(), e.getResponseMsg(), null);
-//        log.error(e.getResponseCode() + "", e);
-//        return response;
-//    }
+    @ExceptionHandler(value = WebException.class)
+    @ResponseBody
+    public ResponseBean exceptionHandler(WebException e) {
+        ResponseBean response = new ResponseBean(e.getIsSuccess(), e.getResponseCode(), e.getResponseMsg(), null);
+        log.error(e.getResponseCode() + "", e);
+        return response;
+    }
 
 }
