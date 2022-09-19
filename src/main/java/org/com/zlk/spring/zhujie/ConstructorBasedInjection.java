@@ -1,5 +1,6 @@
 package org.com.zlk.spring.zhujie;
 
+import org.com.zlk.zhouyang.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,14 +16,14 @@ public class ConstructorBasedInjection {
     /**
      * 这里也可以是引用对象
      */
-    private final String injectedBean;
+    private final User injectedBean;
 
     /**
-     * 类构造函数被标注为@Autowired，并包含了许多与要注入的对象相关的参数。
+     * 类构造函数被标注为@Autowired（可省略），并包含了许多与要注入的对象相关的参数。
      * @param injectedBean
      */
     @Autowired
-    public ConstructorBasedInjection(String injectedBean) {
+    public ConstructorBasedInjection(User injectedBean) {
         this.injectedBean = injectedBean;
     }
 }
