@@ -27,9 +27,17 @@ public class ApiResult<T> implements Serializable {
     private boolean isSuccess;
     private T data;
 
-    // add 1.1 version
+    // 以下 add 1.1 version  增加一些公用的处理方法
     public static ApiResult<String> success() {
         return success("success");
+    }
+
+    public static <T> ApiResult<T> success(T data) {
+        return (new ApiResult()).setResponseCode(0).setResponseMsg("操作成功").setSuccess(true).setData(data);
+    }
+
+    public static <T> ApiResult<T> success(int code, String message, T data) {
+        return (new ApiResult()).setResponseCode(code).setResponseMsg(message).setSuccess(true).setData(data);
     }
 
     public static ApiResult<String> fail() {
@@ -42,14 +50,6 @@ public class ApiResult<T> implements Serializable {
 
     public static <T> ApiResult<T> fail(T data) {
         return fail(-1, data);
-    }
-
-    public static <T> ApiResult<T> success(T data) {
-        return (new ApiResult()).setResponseCode(0).setResponseMsg("操作成功").setSuccess(true).setData(data);
-    }
-
-    public static <T> ApiResult<T> success(int code, String message, T data) {
-        return (new ApiResult()).setResponseCode(code).setResponseMsg(message).setSuccess(true).setData(data);
     }
 
     public static <T> ApiResult<T> fail(int code, T data) {

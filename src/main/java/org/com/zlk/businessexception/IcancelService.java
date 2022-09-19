@@ -2,7 +2,7 @@ package org.com.zlk.businessexception;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description: 取消服务
+ * @Description: 取消服务 https://mp.weixin.qq.com/s/PGGOR263SZV9ILCDMpT9OA
  * @Date 2022/7/2 09:51
  */
 public interface IcancelService {
