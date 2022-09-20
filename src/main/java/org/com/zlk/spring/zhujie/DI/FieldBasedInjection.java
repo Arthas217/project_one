@@ -1,4 +1,4 @@
-package org.com.zlk.spring.zhujie;
+package org.com.zlk.spring.zhujie.DI;
 
 import org.com.zlk.zhouyang.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
