@@ -1,5 +1,7 @@
 package org.com.zlk.java8.book;
 
+import com.google.common.base.Enums;
+
 import java.util.stream.Stream;
 
 /**
@@ -10,11 +12,42 @@ import java.util.stream.Stream;
 public class EnumClassDemo {
 
     public static void main(String[] args) {
-        method1();
-        method2();
-        method3();
-        method4();
-        method5();
+//        method1();
+//        method2();
+//        method3();
+//        method4();
+//        method5();
+//        method6();
+//        method7();
+        method8();
+    }
+
+    private static void method8() {
+        for (int i = 0; i < 20; i++) {
+            System.out.print(EnumUtil.random(Activity.class) + " ");
+        }
+    }
+
+    private static void method7() {
+        //实现，而不是继承, 可以创建实现了一个或多个接口的枚举类型：
+        //enum NotPossible extends Pet { ... // 无法执行,
+        System.out.println(CartoonCharacter.BOB.get());
+    }
+
+    private static void method6() {
+        //参考Reflection
+        //Explore枚举被编译器限定为final类，所以你无法继承一个枚举类。此外还有一个static的初始化子句，你稍后会看到它可以被重定义。
+        //values()方法是由编译器在枚举类的定义中插入的一个静态方法,values()方法是由编译器在枚举类的定义中插入的一个静态方法
+
+
+        //如果向上转型枚举，便会丢失values()方法
+        Explore[] vals = Explore.values();
+        Enum e = Explore.HERE; // 向上转型,Enum中没有values()方法,但可以通过Class中有个getEnumConstants()方法获得实例
+        for (Enum en : e.getClass().getEnumConstants()){
+            System.out.println(en);
+        }
+
+        System.out.println(EnumClassDemo.class.getEnumConstants());
     }
 
     /**
