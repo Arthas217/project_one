@@ -19,7 +19,47 @@ public class EnumClassDemo {
 //        method5();
 //        method6();
 //        method7();
-        method8();
+//        method8();
+//        method9();
+//        method10();
+        method11();
+    }
+
+    private static void method11() {
+        //另一种更简洁的分类方法是在枚举内嵌套枚举,参见SecurityCategory
+        for (int i = 0; i < 10; i++) {
+            SecurityCategory category = EnumUtil.random(SecurityCategory.class);
+            System.out.println(category + ": " + category.randomSelection());
+        }
+    }
+
+    private static void method10() {
+        //当你要处理一组类型时，接口往往就不如枚举有用
+        //创建“由枚举组成的枚举”，你可以为Food中的每个枚举类型都创建一个外部枚举类型：
+        // 参考 Course
+        for (int i = 0; i < 5; i++) {
+            for (Course course : Course.values()) {
+                Food food = course.randomSelection();
+                System.out.println(food);
+            }
+            System.out.println("***");
+        }
+
+
+    }
+
+    private static void method9() {
+        //可以在一个接口内对元素进行分组，然后基于这个接口生成一个枚举，通过这样的方式来实现元素的分类
+        //参考Food接口
+        //对于每个实现了Food接口的枚举类型，都可以向上转型为Food，因此它们全都是Food类型。
+        Food food = Food.Appetizer.SALAD;
+        System.out.println(food);
+        food = Food.MainCourse.LASAGNE;
+        System.out.println(food);
+        food = Food.Dessert.GELATO;
+        System.out.println(food);
+        food = Food.Coffee.CAPPUCCINO;
+        System.out.println(food);
     }
 
     private static void method8() {
