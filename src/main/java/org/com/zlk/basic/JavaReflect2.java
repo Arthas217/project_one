@@ -25,6 +25,7 @@ public class JavaReflect2 {
             // methodMain.invoke(null, new Object[]{new String[]{"a","b","c"}});//方式二
 
 
+
             //通过反射越过泛型检查
             ArrayList<String> strList = new ArrayList<>();
             strList.add("aaa");
