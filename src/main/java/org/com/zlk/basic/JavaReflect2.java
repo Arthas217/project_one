@@ -1,6 +1,7 @@
 package org.com.zlk.basic;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -16,11 +17,59 @@ public class JavaReflect2 {
     public static void main(String[] args) {
         try {
 
-            testConstructReflect();
-//            testMethodReflect();
+//            testConstructReflect();
+//            testFieldReflect();
+            testMethodReflect();
 //            testFXReflect();
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testFieldReflect() {
+        //1.加载Class对象
+        try {
+            Class<?> stuClass = Class.forName("org.com.zlk.basic.Student");
+            //2.获取字段
+            System.out.println("************获取所有公有的字段********************");
+            Field[] fieldArray = stuClass.getFields();
+            for(Field f : fieldArray){
+                System.out.println(f);
+            }
+            System.out.println("************获取所有的字段(包括私有、受保护、默认的)********************");
+            fieldArray = stuClass.getDeclaredFields();
+            for(Field f : fieldArray){
+                System.out.println(f);
+            }
+            System.out.println("*************获取公有字段**并调用***********************************");
+            Field f = stuClass.getField("name");
+            System.out.println(f);
+            //获取一个对象
+            Object obj = stuClass.getConstructor().newInstance();//调用了公有、无参构造方法》Student stu = new Student();
+            //为字段设置值
+            f.set(obj, "刘德华");//为Student对象中的name属性赋值--》stu.name = "刘德华"
+            //验证
+            Student stu = (Student)obj;
+            System.out.println("验证姓名：" + stu.name);
+            System.out.println("**************获取私有字段****并调用********************************");
+            f = stuClass.getDeclaredField("phoneNum");
+            System.out.println(f);
+            f.setAccessible(true);//暴力反射，解除私有限定
+            f.set(obj, "18888889999");
+            System.out.println("验证电话：" + stu);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
@@ -81,7 +130,36 @@ public class JavaReflect2 {
         System.out.println(strList);
     }
 
-    private static void testMethodReflect() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    private static void testMethodReflect() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        //1.加载Class对象
+        Class<?> stuClass = Class.forName("org.com.zlk.basic.Student");
+        //2.获取所有公有方法
+        System.out.println("***************获取所有的”公有“方法*******************");
+        stuClass.getMethods();
+        Method[] methodArray = stuClass.getMethods();
+        for(Method m : methodArray){
+            System.out.println(m);
+        }
+        System.out.println("***************获取所有的方法，包括私有的*******************");
+        methodArray = stuClass.getDeclaredMethods();
+        for(Method m : methodArray){
+            System.out.println(m);
+        }
+        System.out.println("***************获取公有的show1()方法*******************");
+        Method m = stuClass.getMethod("show1", String.class);
+        System.out.println(m);
+        //实例化一个Student对象
+        Object obj = stuClass.getConstructor().newInstance();
+        m.invoke(obj, "刘德华");
+
+        System.out.println("***************获取私有的show4()方法******************");
+        m = stuClass.getDeclaredMethod("show4", int.class);
+        System.out.println(m);
+        m.setAccessible(true);//解除私有限定
+        Object result = m.invoke(obj, 20);//需要两个参数，一个是要调用的对象（获取有反射），一个是实参
+        System.out.println("返回值：" + result);
+
+        //测试主方法main
         //1、获取JavaReflect对象的字节码
         Class clazz = Class.forName("org.com.zlk.basic.JavaReflect");
         //2、获取main方法
