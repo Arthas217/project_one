@@ -1,4 +1,6 @@
-package org.com.zlk.basic;
+package org.com.zlk.basic.reflect;
+
+import org.com.zlk.basic.Student;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -162,7 +164,7 @@ public class JavaReflect2 {
 
         //测试主方法main
         //1、获取JavaReflect对象的字节码
-        Class clazz = Class.forName("org.com.zlk.basic.JavaReflect");
+        Class clazz = Class.forName("org.com.zlk.basic.reflect.JavaReflect");
         //2、获取main方法
         Method methodMain = clazz.getMethod("main", String[].class);//第一个参数：方法名称，第二个参数：方法形参的类型，
         //3、调用main方法

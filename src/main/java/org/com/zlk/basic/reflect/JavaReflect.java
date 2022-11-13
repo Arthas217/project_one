@@ -1,4 +1,4 @@
-package org.com.zlk.basic;
+package org.com.zlk.basic.reflect;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,7 +14,7 @@ public class JavaReflect {
     public static void main(String[] args) {
         try {
             // 1. 使用外部配置的实现，进行动态加载类
-            JavaReflect test = (JavaReflect)Class.forName("org.com.zlk.basic.JavaReflect").newInstance();
+            JavaReflect test = (JavaReflect)Class.forName("org.com.zlk.basic.reflect.JavaReflect").newInstance();
             test.sayHello("call directly");
 
             // 2. 根据配置的函数名，进行方法调用（不需要通用的接口抽象）
