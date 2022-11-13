@@ -18,7 +18,7 @@
         <spring.version>5.2.20.RELEASE</spring.version>
         <servlet.version>2.5</servlet.version>
         <aspectj.version>1.6.11</aspectj.version>
-        <cglib.version>2.1</cglib.version>
+        <cglib.version>3.3.0</cglib.version>
         <google.guave.version>23.0</google.guave.version>
         <lombok.verison>1.18.10</lombok.verison>
         <redission.version>3.12.0</redission.version>
