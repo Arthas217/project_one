@@ -19,6 +19,14 @@ public class MyInvocationHandler implements InvocationHandler {
         this.target = target;
     }
 
+    /**
+     * 实例化时，会调用invoke方法
+     * @param proxy 代理类，代理的类这里是HelloImpl
+     * @param method
+     * @param args
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //代理proxy为应用插入额外逻辑（这里是 println）提供了便利的入口。

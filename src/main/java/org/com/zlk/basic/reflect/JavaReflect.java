@@ -20,7 +20,7 @@ public class JavaReflect {
             // 2. 根据配置的函数名，进行方法调用（不需要通用的接口抽象）
             Object t2 = new JavaReflect();
             Method method = t2.getClass().getDeclaredMethod("sayHello", String.class);
-            method.invoke(test, "method invoke");
+            method.invoke(t2, "method invoke");
 
             for (String arg : args) {
                 System.out.println("打印JavaReflect类main函数的参数"+arg);

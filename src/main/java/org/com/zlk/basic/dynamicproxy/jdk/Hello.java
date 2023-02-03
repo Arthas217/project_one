@@ -7,5 +7,5 @@ package org.com.zlk.basic.dynamicproxy.jdk;
  */
 public interface Hello {
 
-    void sayHello(int a,String b);
+    void sayHello(int a, String b);
 }

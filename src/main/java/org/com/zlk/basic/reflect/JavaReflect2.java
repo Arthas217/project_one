@@ -18,10 +18,10 @@ public class JavaReflect2 {
 
     public static void main(String[] args) {
         try {
-            testConstructReflect();
-            testFieldReflect();
+//            testConstructReflect();
+//            testFieldReflect();
             testMethodReflect();
-            testFXReflect();
+//            testFXReflect();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,6 +43,8 @@ public class JavaReflect2 {
             for (Field f : fieldArray) {
                 System.out.println(f);
             }
+
+
             System.out.println("*************获取公有字段**并调用***********************************");
             Field f = stuClass.getField("name");
             System.out.println(f);
@@ -53,6 +55,8 @@ public class JavaReflect2 {
             //验证
             Student stu = (Student) obj;
             System.out.println("验证姓名：" + stu.name);
+
+
             System.out.println("**************获取私有字段****并调用********************************");
             f = stuClass.getDeclaredField("phoneNum");
             System.out.println(f);
@@ -90,6 +94,7 @@ public class JavaReflect2 {
             for (Constructor r : constructors) {
                 System.out.println(r);
             }
+
             System.out.println("*****************获取公有、无参的构造方法*******************************");
 //            Constructor con = c.getConstructor(null);
             Constructor con = c.getConstructor();
@@ -99,9 +104,11 @@ public class JavaReflect2 {
             System.out.println("obj = " + obj);
             Student stu = (Student) obj;
             System.out.println(stu);
-            System.out.println("******************获取私有构造方法，并调用*******************************");
-            con = c.getDeclaredConstructor(char.class);//这个构造时哪里的？
+
+            System.out.println("---------------------------------");
+            con = c.getDeclaredConstructor(char.class);
             System.out.println(con);
+            System.out.println("******************获取私有构造方法，并调用*******************************");
             //调用构造方法
             con.setAccessible(true);//暴力访问(忽略掉访问修饰符)
             obj = con.newInstance('男');
@@ -143,11 +150,14 @@ public class JavaReflect2 {
         for (Method m : methodArray) {
             System.out.println(m);
         }
+
         System.out.println("***************获取所有的方法，包括私有的*******************");
         methodArray = stuClass.getDeclaredMethods();
         for (Method m : methodArray) {
             System.out.println(m);
         }
+
+
         System.out.println("***************获取公有的show1()方法*******************");
         Method m = stuClass.getMethod("show1", String.class);
         System.out.println(m);
@@ -169,7 +179,9 @@ public class JavaReflect2 {
         Method methodMain = clazz.getMethod("main", String[].class);//第一个参数：方法名称，第二个参数：方法形参的类型，
         //3、调用main方法
         // methodMain.invoke(null, new String[]{"a","b","c"});
-        //第一个参数，对象类型，因为方法是static静态的，所以为null可以，第二个参数是String数组，这里要注意在jdk1.4时是数组，jdk1.5之后是可变参数
+        //第一个参数，对象类型，因为方法是static静态的，所以为null可以
+        //第二个参数是String数组，这里要注意在jdk1.4时是数组，jdk1.5之后是可变参数
+
         //这里拆的时候将  new String[]{"a","b","c"} 拆成3个对象。。。所以需要将它强转。
         methodMain.invoke(null, (Object) new String[]{"a", "b", "c"});//方式一
         // methodMain.invoke(null, new Object[]{new String[]{"a","b","c"}});//方式二
