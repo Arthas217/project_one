@@ -20,7 +20,7 @@ public class JavaReflect2 {
         try {
 //            testConstructReflect();
 //            testFieldReflect();
-            testMethodReflect();
+            testMethodReflect();//对概念理解
 //            testFXReflect();
 
         } catch (Exception e) {
@@ -163,7 +163,8 @@ public class JavaReflect2 {
         System.out.println(m);
         //实例化一个Student对象
         Object obj = stuClass.getConstructor().newInstance();
-        m.invoke(obj, "刘德华");
+        Object o = m.invoke(obj, "刘德华");
+        System.out.println(o);
 
         System.out.println("***************获取私有的show4()方法******************");
         m = stuClass.getDeclaredMethod("show4", int.class);

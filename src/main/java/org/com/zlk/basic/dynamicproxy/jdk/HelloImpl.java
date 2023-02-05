@@ -8,6 +8,6 @@ package org.com.zlk.basic.dynamicproxy.jdk;
 public class HelloImpl implements Hello {
     @Override
     public void sayHello(int a, String b) {
-        System.out.println("HelloImpl类 sayHello方法输出 Hello World" + a + b);
+        System.out.println("HelloImpl类 sayHello方法输出 Hello World " + a +" "+ b);
     }
 }

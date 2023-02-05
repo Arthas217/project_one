@@ -10,18 +10,22 @@ import java.lang.reflect.Proxy;
 public class JDKDynamicProxyTest {
 
     public static void main(String[] args) {
+
+        Class<?>[] interfaces = HelloImpl.class.getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+            System.out.println(interfaces[i]);
+        }
+//        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+//        System.out.println(contextClassLoader);
+
         // 被调用者以接口为中心
-        Hello hello = new HelloImpl();
+        HelloImpl hello = new HelloImpl();
         MyInvocationHandler handler = new MyInvocationHandler(hello);
         // 构造代码实例
-        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
         ClassLoader classLoader = HelloImpl.class.getClassLoader();
-        System.out.println(contextClassLoader);
-        System.out.println(classLoader);
-        Hello proxyHello = (Hello) Proxy.newProxyInstance(HelloImpl.class.getClassLoader(),
-                HelloImpl.class.getInterfaces(), handler);
+        Hello proxyHello = (Hello) Proxy.newProxyInstance(classLoader, interfaces, handler);
         // 调用代理方法
         System.out.println("------------------调用invoke--------------");
-        proxyHello.sayHello(1,"zlk");
+        proxyHello.sayHello(123, "zlk");
     }
 }
