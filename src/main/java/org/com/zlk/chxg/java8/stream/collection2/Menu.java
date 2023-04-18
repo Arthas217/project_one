@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream.collection2;
+package org.com.zlk.chxg.java8.stream.collection2;
 
 import java.util.ArrayList;
 import java.util.Arrays;

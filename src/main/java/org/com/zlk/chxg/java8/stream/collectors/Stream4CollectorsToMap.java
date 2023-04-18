@@ -1,10 +1,9 @@
-package org.com.zlk.java8.stream.collectors;
+package org.com.zlk.chxg.java8.stream.collectors;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.com.zlk.zhouyang.model.User;
 
-import java.awt.print.Book;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;

@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream.collection;
+package org.com.zlk.chxg.java8.stream.collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

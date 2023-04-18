@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream.collection;
+package org.com.zlk.chxg.java8.stream.collection;
 
 /**
  * @Author 会游泳的蚂蚁
