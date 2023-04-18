@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description: List转Map  涉及到stream流方式
+ * @Description: List转Map
  * https://blog.csdn.net/u010046908/article/details/100580093
  * @Date 2022/8/18 10:40
  */
 public class Stream4CollectorsToMap {
 
     public static void main(String[] args) {
+        //涉及到stream流方式
         listToMap();
         ListToOtherMap();
     }
