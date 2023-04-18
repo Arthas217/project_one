@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream;
+package org.com.zlk.java8.stream.collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description: https://mp.weixin.qq.com/s/OIoW4nhCF9Yoyb4wdjG7NA
+ * @Description: strean流API
+ * https://mp.weixin.qq.com/s/OIoW4nhCF9Yoyb4wdjG7NA
  * https://blog.csdn.net/weixin_39973810/article/details/107978246
  * @Date 2022/4/12 15:30
  */

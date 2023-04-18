@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream;
+package org.com.zlk.java8.stream.collectors;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
