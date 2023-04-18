@@ -3,7 +3,6 @@ package org.com.zlk.json;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.com.zlk.basic.dynamicproxy.cglib.demo2.User;
-import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
