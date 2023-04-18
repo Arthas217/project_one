@@ -1,4 +1,4 @@
-package org.com.zlk.java8.stream;
+package org.com.zlk.java8.stream.functioninterface;
 
 import java.util.Arrays;
 import java.util.List;
