@@ -23,7 +23,7 @@ public class JsonArray {
         method2(array);
     }
 
-    //1、for循环
+    //for循环
     public static void method1(JSONArray jsonArr) {
         System.out.println("-----for循环方法遍历JSONArray-----");
         Set<String> set = new HashSet<>();
@@ -35,7 +35,7 @@ public class JsonArray {
         System.out.println(set);
     }
 
-    //2、JSONArray遍历stream流
+    //JSONArray遍历stream流
     public static void method2(JSONArray jsonArray) {
         System.out.println("-----stream方式遍历JSONArray---------");
         Set<String> set = new HashSet<>();
