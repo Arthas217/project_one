@@ -91,7 +91,7 @@ public class Student {
     //---------------成员方法-------------------
 
     public void show1(String s) {
-        System.out.println("调用了公有的，参数类型为String类型的show1()方法  参数s= " + s);
+        System.out.println("调用了公有的，参数类型为String类型的show1()方法  参数=" + s);
     }
 
     protected void show2() {
