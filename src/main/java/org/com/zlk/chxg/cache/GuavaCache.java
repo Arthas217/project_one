@@ -1,14 +1,17 @@
-package org.com.zlk.basic.cache;
+package org.com.zlk.chxg.cache;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.Date;
-import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ */
 public class GuavaCache {
 
     private static ThreadPoolExecutor poolExecutor = (ThreadPoolExecutor) Executors.newSingleThreadExecutor();

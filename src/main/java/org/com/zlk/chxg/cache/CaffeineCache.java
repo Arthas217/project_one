@@ -1,4 +1,4 @@
-package org.com.zlk.basic.cache;
+package org.com.zlk.chxg.cache;
 
 
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
