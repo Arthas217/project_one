@@ -32,7 +32,7 @@ public class StreamcDemo {
 
     public static void main(String[] args) {
         //获取部分属性
-        getPartFiled();
+//        getPartFiled();
         //=============================
 //        basicMethod();
         basicData();
@@ -43,7 +43,7 @@ public class StreamcDemo {
         // 聚合统计
 //        maxMinCount();
         // 映射 map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。flatMap：接收一个函数作为参数，将流中的每个元素值都换成另一个流(多个元素)，然后把所有流连接成一个流。
-//        mapFlatMap();
+        mapFlatMap();
         // 归约，也称缩减,把一个流缩减成一个值，能实现对集合求和、求乘积和求最值操作
 //        reduce();
         // 归约 reducing（Collectors类提供的reducing方法，相比于stream本身的reduce方法，增加了对自定义归约的支持）

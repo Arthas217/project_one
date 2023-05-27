@@ -1,5 +1,8 @@
 package org.com.zlk.basic.innerclass;
 
+/**
+ * 内部类测试
+ */
 public class Test {
     public static void main(String[] args) {
         TestImpl t = new TestImpl();
