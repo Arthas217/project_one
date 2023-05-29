@@ -1,0 +1,30 @@
+{
+  "realName": "chxg",
+  "paramList": [
+    {
+      "creditCardName": "name",
+      "creditCardNo": "1",
+      "cardBin": "1",
+      "org": "1",
+      "cardlevel": "1"
+    },
+    {
+      "creditCardNo": "2",
+      "cardBin": "2",
+      "org": "2",
+      "cardlevel": "2"
+    },
+    {
+      "creditCardNo": "3",
+      "cardBin": "3",
+      "org": "3",
+      "cardlevel": "3"
+    },
+    {
+      "creditCardNo": "4",
+      "cardBin": "4",
+      "org": "4",
+      "cardlevel": "4"
+    }
+  ]
+}

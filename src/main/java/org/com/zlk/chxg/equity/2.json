@@ -1,0 +1,92 @@
+[
+  {
+    "prodNo": [
+      "0",
+      "0"
+    ],
+    "cardBin": [
+      "",
+      "1"
+    ],
+    "cardLevel": [
+      "0",
+      "0"
+    ],
+    "cardOrganization": [
+      "0",
+      "0"
+    ]
+  },
+  {
+    "prodNo": [
+      "2",
+      "0"
+    ],
+    "cardBin": [
+      "0",
+      "0"
+    ],
+    "cardLevel": [
+      "0",
+      "0"
+    ],
+    "cardOrganization": [
+      "0",
+      "0"
+    ]
+  },
+  {
+    "prodNo": [
+      "0",
+      "0"
+    ],
+    "cardBin": [
+      "0",
+      "0"
+    ],
+    "cardLevel": [
+      "3",
+      "0"
+    ],
+    "cardOrganization": [
+      "4",
+      "0"
+    ]
+  },
+  {
+    "prodNo": [
+      "0",
+      "0"
+    ],
+    "cardBin": [
+      "0",
+      "0"
+    ],
+    "cardLevel": [
+      "0",
+      "4"
+    ],
+    "cardOrganization": [
+      "4",
+      "0"
+    ]
+  },
+  {
+    "prodNo": [
+      "0",
+      "0"
+    ],
+    "cardBin": [
+      "0",
+      "0"
+    ],
+    "cardLevel": [
+      "3",
+      "4"
+    ],
+    "cardOrganization": [
+      "4",
+      "3"
+    ]
+  }
+]
