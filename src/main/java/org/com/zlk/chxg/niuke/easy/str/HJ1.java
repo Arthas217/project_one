@@ -1,4 +1,4 @@
-package org.com.zlk.chxg.niuke;
+package org.com.zlk.chxg.niuke.easy.str;
 
 import java.util.Scanner;
 
