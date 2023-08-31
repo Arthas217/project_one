@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author 会游泳的蚂蚁
  * @description: 简易版本的线程池
  * https://bugstack.cn/md/java/interview/2020-12-09-%E9%9D%A2%E7%BB%8F%E6%89%8B%E5%86%8C%20%C2%B7%20%E7%AC%AC21%E7%AF%87%E3%80%8A%E6%89%8B%E5%86%99%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%8C%E5%AF%B9%E7%85%A7%E5%AD%A6%E4%B9%A0ThreadPoolExecutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%81%E3%80%8B.html
+ * 问题：1、没有拒绝策略处理  2、并发没有处理（ReentrantLock未使用）  3、ctl没有线程池状态没有表达出来
  * @date 2023/8/31 16:15
  */
 public class ThreadPoolSimple implements Executor {
@@ -24,6 +25,10 @@ public class ThreadPoolSimple implements Executor {
         this.workQueue = workQueue;
     }
 
+    /**
+     * 当前提交的线程任务是加入到worker、队列还是放弃
+     * @param command
+     */
     @Override
     public void execute(Runnable command) {
         //只获取线程数的个数
@@ -53,7 +58,7 @@ public class ThreadPoolSimple implements Executor {
     }
 
     /**
-     * 把任务添加到包装了线程的worker对象中，并执行任务，增加线程个数
+     * 对worker的具体操作： 把任务添加到包装了线程的worker对象中，并执行任务，增加线程个数
      * @param firstTask
      * @return
      */
@@ -98,7 +103,7 @@ public class ThreadPoolSimple implements Executor {
         }
 
         /**
-         * 从队列中取出任务
+         * 从队列中取出未执行的线程任务
          * @return
          */
         private Runnable getTask() {
