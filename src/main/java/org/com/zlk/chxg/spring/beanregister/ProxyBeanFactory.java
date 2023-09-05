@@ -14,7 +14,7 @@ public class ProxyBeanFactory implements FactoryBean {
 
     /**
      * 把Java代理的对象(代理类)放到FactoryBean#getObject中
-     * 再从Spring中获取到的对象，就是我们的代理对象了。
+     * 用于生成代理类这个Bean的bean，再从Spring中获取到的对象，就是我们的代理对象了。
      *
      * @return 返回bean实例对象
      * @throws Exception
