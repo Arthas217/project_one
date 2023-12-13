@@ -42,6 +42,7 @@ public enum ProtocolTypeEnum {
         return CODE_MAP.get(code);
     }
 
+    /* code方式*/
     public static String parseDesc(int code) {
         return Optional.ofNullable(getByCode(code)).map(ProtocolTypeEnum::getDesc).orElse(null);
     }
@@ -50,20 +51,29 @@ public enum ProtocolTypeEnum {
         return NAME_MAP.get(name);
     }
 
+    /* name方式*/
     public static String parseName(String name) {
         return Optional.ofNullable(getByName(name)).map(ProtocolTypeEnum::getDesc).orElse(null);
     }
 
-    public static void main(String[] args) {
-        String name = ProtocolTypeEnum.HTTP.name();
-        int code = ProtocolTypeEnum.HTTP.getCode();
-        String desc = ProtocolTypeEnum.HTTP.getDesc();
-        System.out.println(String.format("枚举的name=%s,code=%s,desc=%s", name, code, desc));
-        System.out.println(String.format("通过枚举code值，返回desc方式：%s",parseDesc(code)));
-        System.out.println(String.format("通过枚举name值，返回desc方式：%s",parseName(name)));
 
+    /* 策略模式，简单实现方式*/
+    public static String parseProtocolType(int code){
+        ProtocolTypeEnum protocolTypeEnum = ProtocolTypeEnum.getByCode(code);
+        ProtocolTypeParseContext context= new ProtocolTypeParseContext();
+        context.setTypeEnum(protocolTypeEnum);
+        switch (code){
+            case 1:
+                context.setTypeStrategy(new HttpProtocolTypeParseStrategy());
+                break;
+            case 2:
+                context.setTypeStrategy(new HttpsProtocolTypeParseStrategy());
+                break;
+            default:
+                return null;
+        }
+        return context.parse();
     }
-
 
 }
 
