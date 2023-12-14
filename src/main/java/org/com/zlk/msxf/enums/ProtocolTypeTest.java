@@ -29,8 +29,14 @@ public class ProtocolTypeTest {
         container.init();// 模拟bean注入
         ProtocolTypeParseContext context = new ProtocolTypeParseContext();
         context.setTypeEnum(HTTPS);
-        System.out.println(String.format("通过中间层容器工厂解耦一下依赖(调用方，策略实现的路由过程),返回desc方式%s",
-                container.parse(context)));
+        System.out.println(String.format("通过中间层容器工厂解耦一下依赖(调用方，策略实现的路由过程),手动容器方式，返回desc方式%s", container.parse(context)));
+
+
+        ProtocolTypeParseStrategyContainer2 container2 = new ProtocolTypeParseStrategyContainer2();
+        container2.init();
+        ProtocolTypeParseContext2 context2 = new ProtocolTypeParseContext2();
+        context2.setTypeEnum(HTTPS);
+        System.out.println(String.format("容器移动至策略内部，改成由策略实现自身去注册到容器中，返回desc方式%s", container2.parse2(context2)));
 
     }
 
