@@ -60,8 +60,10 @@ public enum ProtocolTypeEnum {
     /* 策略模式，简单实现方式*/
     public static String parseProtocolType(int code){
         ProtocolTypeEnum protocolTypeEnum = ProtocolTypeEnum.getByCode(code);
+        //引入上下文
         ProtocolTypeParseContext context= new ProtocolTypeParseContext();
         context.setTypeEnum(protocolTypeEnum);
+        //借助上文定义的值的枚举做策略路由。
         switch (code){
             case 1:
                 context.setTypeStrategy(new HttpProtocolTypeParseStrategy());
