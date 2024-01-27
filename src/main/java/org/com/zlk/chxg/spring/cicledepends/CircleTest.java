@@ -33,6 +33,8 @@ public class CircleTest {
             field.setAccessible(true);
             Class<?> fieldClass = field.getType();
             String fieldBeanName = fieldClass.getSimpleName().toLowerCase();
+            // 是整个解决循环依赖的核心内容，A 创建后填充属性时依赖 B，那么就去创建 B，在创建 B开始填充时发现依赖于 A，
+            // 但此时 A 这个半成品对象已经存放在缓存到singletonObjects 中了，所以 B 可以正常创建，在通过递归把 A 也创建完整了。
             field.set(obj, singletonObjects.containsKey(fieldBeanName) ? singletonObjects.get(fieldBeanName) : getBean(fieldClass));
             field.setAccessible(false);
         }

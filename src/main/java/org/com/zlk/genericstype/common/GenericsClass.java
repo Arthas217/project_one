@@ -1,4 +1,4 @@
-package org.com.zlk.genericstype;
+package org.com.zlk.genericstype.common;
 
 import lombok.Data;
 

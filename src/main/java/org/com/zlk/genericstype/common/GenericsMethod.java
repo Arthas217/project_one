@@ -1,4 +1,4 @@
-package org.com.zlk.genericstype;
+package org.com.zlk.genericstype.common;
 
 
 /**
@@ -8,6 +8,7 @@ package org.com.zlk.genericstype;
  * 返回值void
  */
 public class GenericsMethod {
+
     public <T> void method(T t) {
         System.out.println(t);
     }

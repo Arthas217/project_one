@@ -1,10 +1,11 @@
-package org.com.zlk.genericstype;
+package org.com.zlk.genericstype.common;
 
 
 /**
  * 类型参数适用于参数之间的类别依赖关系
  */
 public class GenericsClass1<T, E extends T> {
+
     T value1;
     E value2;
 

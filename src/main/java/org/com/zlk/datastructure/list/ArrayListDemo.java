@@ -12,9 +12,9 @@ import java.util.*;
 public class ArrayListDemo {
 
     public static void main(String[] args) {
-//        array_add_remove();
-//        diff_arrayList();
-//        collections_ncopy();
+        array_add_remove();
+        diff_arrayList();
+        collections_ncopy();
         addAll_immutable();
     }
 
